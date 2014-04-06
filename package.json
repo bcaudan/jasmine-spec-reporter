@@ -1,0 +1,24 @@
+{
+  "name": "jasmine-spec-reporter",
+  "version": "0.0.1",
+  "description": "Spec reporter for jasmine behavior-driven development framework",
+  "main": "src/jasmine-spec-reporter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bcaudan/jasmine-spec-reporter"
+  },
+  "keywords": [
+    "jasmine",
+    "reporter",
+    "bdd"
+  ],
+  "author": "Bastien Caudan",
+  "license": "Apache v2",
+  "bugs": {
+    "url": "https://github.com/bcaudan/jasmine-spec-reporter/issues"
+  },
+  "homepage": "https://github.com/bcaudan/jasmine-spec-reporter"
+}
