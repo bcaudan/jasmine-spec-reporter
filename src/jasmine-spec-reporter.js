@@ -18,24 +18,30 @@ SpecReporter.prototype = {
   reportRunnerStarting: function (runner) {
     this.started = true;
     this.startTime = (new Date()).getTime();
-    this.executedSpecs = 0;
+    this.failedSpecs = 0;
     this.passedSpecs = 0;
+    this.skippedSpecs = 0;
     this.currentSuiteId = -1;
     this.indent = "";
   },
 
   reportRunnerResults: function (runner) {
     var dur = (new Date()).getTime() - this.startTime;
-    var failed = this.executedSpecs - this.passedSpecs;
-    var spec_str = "Executed " + this.executedSpecs + (this.executedSpecs === 1 ? " spec " : " specs ");
-    var fail_str = "(" + failed + (failed === 1 ? " failure) " : " failures) ");
-    if (failed > 0) {
+    var totalSpecs = this.failedSpecs + this.passedSpecs + this.skippedSpecs;
+    var executedSpecs = this.failedSpecs + this.passedSpecs;
+    var spec_str = "Executed " + executedSpecs + " of " + totalSpecs + (totalSpecs === 1 ? " spec " : " specs ");
+    var fail_str = "(" + this.failedSpecs + (this.failedSpecs === 1 ? " failure) " : " failures) ");
+    if (this.failedSpecs > 0) {
       fail_str = fail_str.failure;
+    }
+    var skip_str = "";
+    if (this.skippedSpecs > 0) {
+      skip_str += "(skipped " + this.skippedSpecs + ") ";
     }
 
     this.resetIndent();
     this.newLine();
-    this.log(spec_str + fail_str + "in " + (dur / 1000) + " secs.");
+    this.log(spec_str + fail_str + skip_str + "in " + (dur / 1000) + " secs.");
     this.finished = true;
   },
 
@@ -43,7 +49,6 @@ SpecReporter.prototype = {
   },
 
   reportSpecStarting: function (spec) {
-    this.executedSpecs++;
     var suite = spec.suite;
     if (suite.id !== this.currentSuiteId) {
       this.newLine();
@@ -55,10 +60,13 @@ SpecReporter.prototype = {
   },
 
   reportSpecResults: function (spec) {
-    if (spec.results().passed()) {
+    if (spec.results().skipped) {
+      this.skippedSpecs++;
+    } else if (spec.results().passed()) {
       this.passedSpecs++;
       this.log("✓ ".success + spec.results().description.success);
     } else {
+      this.failedSpecs++;
       this.log("✗ ".failure + spec.results().description.failure);
       var items = spec.results().items_;
       this.increaseIndent();
