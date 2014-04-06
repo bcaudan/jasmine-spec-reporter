@@ -21,12 +21,12 @@
         reportRunnerResults: function(runner) {
             var dur = (new Date()).getTime() - this.startTime;
             var failed = this.executedSpecs - this.passedSpecs;
-            var spec_str = this.executedSpecs + (this.executedSpecs === 1 ? " spec, " : " specs, ");
-            var fail_str = failed + (failed === 1 ? " failure in " : " failures in ");
+            var spec_str = "Executed " + this.executedSpecs + (this.executedSpecs === 1 ? " spec " : " specs ");
+            var fail_str = "(" + failed + (failed === 1 ? " failure) " : " failures) ");
 
             this.resetIndent();
             this.newLine();
-            this.log(spec_str + fail_str + (dur/1000) + "s.");
+            this.log(spec_str + fail_str + "in " + (dur/1000) + " secs.");
             this.finished = true;
         },
 
