@@ -13,34 +13,18 @@ var SpecReporter = function () {
   this.started = false;
   this.finished = false;
   this.metrics = new SpecMetrics();
+  this.display = new SpecDisplay();
 };
 
 SpecReporter.prototype = {
   reportRunnerStarting: function () {
     this.started = true;
-    this.currentSuiteId = -1;
     this.metrics.start();
-    this.indent = "";
   },
 
   reportRunnerResults: function () {
     this.metrics.stop();
-    var spec_str = "Executed " + this.metrics.executedSpecs + " of " + this.metrics.totalSpecs + (this.metrics.totalSpecs === 1 ? " spec " : " specs ");
-    var fail_str = "";
-    var succ_str = "";
-    if (this.metrics.failedSpecs > 0) {
-      fail_str += "(" + this.metrics.failedSpecs + " FAILED) ";
-    } else {
-      succ_str += "SUCCESS ";
-    }
-    var skip_str = "";
-    if (this.metrics.skippedSpecs > 0) {
-      skip_str += "(skipped " + this.metrics.skippedSpecs + ") ";
-    }
-
-    this.resetIndent();
-    this.newLine();
-    this.log(spec_str + succ_str.success + fail_str.failure + skip_str + "in " + (this.metrics.duration / 1000) + " secs.");
+    this.display.summary(this.metrics);
     this.finished = true;
   },
 
@@ -48,18 +32,79 @@ SpecReporter.prototype = {
   },
 
   reportSpecStarting: function (spec) {
-    var suite = spec.suite;
+    this.display.ensureSuiteDisplayed(spec.suite);
+  },
+
+  reportSpecResults: function (spec) {
+    if (spec.results().skipped) {
+      this.metrics.skippedSpecs++;
+    } else if (spec.results().passed()) {
+      this.metrics.successfulSpecs++;
+      this.display.successful(spec);
+    } else {
+      this.metrics.failedSpecs++;
+      this.display.failed(spec);
+    }
+  }
+};
+
+var SpecDisplay = function () {
+  this.indent = "  ";
+  this.currentIndent = "";
+  this.currentSuiteId = -1;
+};
+
+SpecDisplay.prototype = {
+  summary: function (metrics) {
+    var execution = "Executed " + metrics.executedSpecs + " of " + metrics.totalSpecs + (metrics.totalSpecs === 1 ? " spec " : " specs ");
+    var successful = (metrics.failedSpecs == 0) ? "SUCCESS " : "";
+    var failed = (metrics.failedSpecs > 0) ? "(" + metrics.failedSpecs + " FAILED) " : "";
+    var skipped = (metrics.skippedSpecs > 0) ? "(skipped " + metrics.skippedSpecs + ") " : "";
+    var duration = "in " + (metrics.duration / 1000) + " secs.";
+
+    this.resetIndent();
+    this.newLine();
+    this.log(execution + successful.success + failed.failure + skipped + duration);
+  },
+
+  successful: function (spec) {
+    var result = "✓ " + spec.results().description;
+    this.log(result.success)
+  },
+
+  failed: function (spec) {
+    var result = "✗ " + spec.results().description;
+    this.log(result.failure);
+    this.displayErrorMessages(spec);
+  },
+
+  displayErrorMessages: function (spec) {
+    this.increaseIndent();
+    this.log("Message:");
+    this.increaseIndent();
+    var expectations = spec.results().items_;
+    for (var i = 0; i < expectations.length; i++) {
+      if (!expectations[i].passed()) {
+        this.log(expectations[i].message.failure);
+      }
+    }
+    this.newLine();
+    this.decreaseIndent();
+    this.decreaseIndent();
+  },
+
+  ensureSuiteDisplayed: function (suite) {
     if (suite.id !== this.currentSuiteId) {
-      this.displaySuite(spec.suite);
+      this.displaySuite(suite);
       this.increaseIndent();
-      this.currentSuiteId = spec.suite.id;
+      this.currentSuiteId = suite.id;
     }
   },
 
   displaySuite: function (suite) {
     this.ensureParentSuiteDisplayed(suite.parentSuite);
     this.newLine();
-    this.computeIndent(suite);
+    this.computeSuiteIndent(suite);
     this.log(suite.description);
   },
 
@@ -69,57 +114,33 @@ SpecReporter.prototype = {
     }
   },
 
-  reportSpecResults: function (spec) {
-    if (spec.results().skipped) {
-      this.metrics.skippedSpecs++;
-    } else if (spec.results().passed()) {
-      this.metrics.successfulSpecs++;
-      this.log("✓ ".success + spec.results().description.success);
-    } else {
-      this.metrics.failedSpecs++;
-      this.log("✗ ".failure + spec.results().description.failure);
-      var items = spec.results().items_;
-      this.increaseIndent();
-      this.log("Message:");
-      this.increaseIndent();
-      for (var i = 0; i < items.length; i++) {
-        if (!items[i].passed()) {
-          this.log(items[i].message.failure);
-        }
-      }
-      this.newLine();
-      this.decreaseIndent();
-      this.decreaseIndent();
-    }
-  },
-
   log: function (stuff) {
-    console.log(this.indent + stuff);
+    console.log(this.currentIndent + stuff);
   },
 
   newLine: function () {
     this.log("");
   },
 
-  computeIndent: function (suite) {
+  computeSuiteIndent: function (suite) {
     this.resetIndent();
     var currentSuite = suite;
     while (currentSuite !== null) {
-      this.indent += "  ";
+      this.increaseIndent();
       currentSuite = currentSuite.parentSuite;
     }
   },
 
   resetIndent: function () {
-    this.indent = "";
+    this.currentIndent = "";
   },
 
   increaseIndent: function () {
-    this.indent += "  ";
+    this.currentIndent += this.indent;
   },
 
   decreaseIndent: function () {
-    this.indent = this.indent.substr(0, this.indent.length - 2);
+    this.currentIndent = this.currentIndent.substr(0, this.currentIndent.length - this.indent.length);
   }
 };
 
