@@ -21,12 +21,12 @@ describe('first suite', function () {
 });
 
 describe('second suite', function () {
-  it('should be ok', function () {
-    expect(true).toBe(true);
-  });
-
   it('should failed', function () {
     expect(true).toBe(false);
+  });
+
+  it('should be ok', function () {
+    expect(true).toBe(true);
   });
 
   describe('first child suite', function () {
@@ -39,6 +39,10 @@ describe('second suite', function () {
 
       it('should failed', function () {
         expect(true).toBe(false);
+      });
+
+      it('should be ok', function () {
+        expect(true).toBe(true);
       });
     });
   });

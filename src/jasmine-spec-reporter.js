@@ -54,11 +54,22 @@ SpecReporter.prototype = {
   reportSpecStarting: function (spec) {
     var suite = spec.suite;
     if (suite.id !== this.currentSuiteId) {
-      this.newLine();
-      this.computeIndent(spec.suite);
-      this.log(spec.suite.description);
+      this.displaySuite(spec.suite);
       this.increaseIndent();
       this.currentSuiteId = spec.suite.id;
+    }
+  },
+
+  displaySuite: function (suite) {
+    this.ensureParentSuiteDisplayed(suite.parentSuite);
+    this.newLine();
+    this.computeIndent(suite);
+    this.log(suite.description);
+  },
+
+  ensureParentSuiteDisplayed: function (parentSuite) {
+    if (parentSuite !== null && parentSuite.id !== this.currentSuiteId) {
+      this.displaySuite(parentSuite);
     }
   },
 
