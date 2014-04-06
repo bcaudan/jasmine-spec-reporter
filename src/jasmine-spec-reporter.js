@@ -95,6 +95,7 @@ SpecDisplay.prototype = {
 
   ensureSuiteDisplayed: function (suite) {
     if (suite.id !== this.currentSuiteId) {
+      this.ensureParentSuiteDisplayed(suite.parentSuite);
       this.displaySuite(suite);
       this.increaseIndent();
       this.currentSuiteId = suite.id;
@@ -102,7 +103,6 @@ SpecDisplay.prototype = {
   },
 
   displaySuite: function (suite) {
-    this.ensureParentSuiteDisplayed(suite.parentSuite);
     this.newLine();
     this.computeSuiteIndent(suite);
     this.log(suite.description);
@@ -110,6 +110,7 @@ SpecDisplay.prototype = {
 
   ensureParentSuiteDisplayed: function (parentSuite) {
     if (parentSuite !== null && parentSuite.id !== this.currentSuiteId) {
+      this.ensureParentSuiteDisplayed(parentSuite.parentSuite);
       this.displaySuite(parentSuite);
     }
   },
