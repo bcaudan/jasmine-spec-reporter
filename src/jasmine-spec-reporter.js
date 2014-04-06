@@ -65,8 +65,11 @@ SpecReporter.prototype = {
       this.log("Message:");
       this.increaseIndent();
       for (var i = 0; i < items.length; i++) {
-        this.log(items[i].message.failure);
+        if (!items[i].passed()) {
+          this.log(items[i].message.failure);
+        }
       }
+      this.newLine();
       this.decreaseIndent();
       this.decreaseIndent();
     }
