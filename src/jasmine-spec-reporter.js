@@ -30,9 +30,12 @@ SpecReporter.prototype = {
     var totalSpecs = this.failedSpecs + this.passedSpecs + this.skippedSpecs;
     var executedSpecs = this.failedSpecs + this.passedSpecs;
     var spec_str = "Executed " + executedSpecs + " of " + totalSpecs + (totalSpecs === 1 ? " spec " : " specs ");
-    var fail_str = "(" + this.failedSpecs + (this.failedSpecs === 1 ? " failure) " : " failures) ");
+    var fail_str = "";
+    var succ_str = "";
     if (this.failedSpecs > 0) {
-      fail_str = fail_str.failure;
+      fail_str += "(" + this.failedSpecs + " FAILED) ";
+    } else {
+      succ_str += "SUCCESS ";
     }
     var skip_str = "";
     if (this.skippedSpecs > 0) {
@@ -41,7 +44,7 @@ SpecReporter.prototype = {
 
     this.resetIndent();
     this.newLine();
-    this.log(spec_str + fail_str + skip_str + "in " + (dur / 1000) + " secs.");
+    this.log(spec_str + succ_str.success + fail_str.failure + skip_str + "in " + (dur / 1000) + " secs.");
     this.finished = true;
   },
 
