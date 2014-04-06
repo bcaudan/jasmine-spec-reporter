@@ -12,39 +12,35 @@ if (!jasmine) {
 var SpecReporter = function () {
   this.started = false;
   this.finished = false;
+  this.metrics = new SpecMetrics();
 };
 
 SpecReporter.prototype = {
-  reportRunnerStarting: function (runner) {
+  reportRunnerStarting: function () {
     this.started = true;
-    this.startTime = (new Date()).getTime();
-    this.failedSpecs = 0;
-    this.passedSpecs = 0;
-    this.skippedSpecs = 0;
     this.currentSuiteId = -1;
+    this.metrics.start();
     this.indent = "";
   },
 
-  reportRunnerResults: function (runner) {
-    var dur = (new Date()).getTime() - this.startTime;
-    var totalSpecs = this.failedSpecs + this.passedSpecs + this.skippedSpecs;
-    var executedSpecs = this.failedSpecs + this.passedSpecs;
-    var spec_str = "Executed " + executedSpecs + " of " + totalSpecs + (totalSpecs === 1 ? " spec " : " specs ");
+  reportRunnerResults: function () {
+    this.metrics.stop();
+    var spec_str = "Executed " + this.metrics.executedSpecs + " of " + this.metrics.totalSpecs + (this.metrics.totalSpecs === 1 ? " spec " : " specs ");
     var fail_str = "";
     var succ_str = "";
-    if (this.failedSpecs > 0) {
-      fail_str += "(" + this.failedSpecs + " FAILED) ";
+    if (this.metrics.failedSpecs > 0) {
+      fail_str += "(" + this.metrics.failedSpecs + " FAILED) ";
     } else {
       succ_str += "SUCCESS ";
     }
     var skip_str = "";
-    if (this.skippedSpecs > 0) {
-      skip_str += "(skipped " + this.skippedSpecs + ") ";
+    if (this.metrics.skippedSpecs > 0) {
+      skip_str += "(skipped " + this.metrics.skippedSpecs + ") ";
     }
 
     this.resetIndent();
     this.newLine();
-    this.log(spec_str + succ_str.success + fail_str.failure + skip_str + "in " + (dur / 1000) + " secs.");
+    this.log(spec_str + succ_str.success + fail_str.failure + skip_str + "in " + (this.metrics.duration / 1000) + " secs.");
     this.finished = true;
   },
 
@@ -75,12 +71,12 @@ SpecReporter.prototype = {
 
   reportSpecResults: function (spec) {
     if (spec.results().skipped) {
-      this.skippedSpecs++;
+      this.metrics.skippedSpecs++;
     } else if (spec.results().passed()) {
-      this.passedSpecs++;
+      this.metrics.successfulSpecs++;
       this.log("✓ ".success + spec.results().description.success);
     } else {
-      this.failedSpecs++;
+      this.metrics.failedSpecs++;
       this.log("✗ ".failure + spec.results().description.failure);
       var items = spec.results().items_;
       this.increaseIndent();
@@ -124,6 +120,28 @@ SpecReporter.prototype = {
 
   decreaseIndent: function () {
     this.indent = this.indent.substr(0, this.indent.length - 2);
+  }
+};
+
+var SpecMetrics = function () {
+  this.startTime = null;
+  this.duration = null;
+  this.successfulSpecs = 0;
+  this.failedSpecs = 0;
+  this.skippedSpecs = 0;
+  this.executedSpecs = 0;
+  this.totalSpecs = 0;
+};
+
+SpecMetrics.prototype = {
+  start: function () {
+    this.startTime = (new Date()).getTime();
+  },
+
+  stop: function () {
+    this.duration = (new Date()).getTime() - this.startTime;
+    this.totalSpecs = this.failedSpecs + this.successfulSpecs + this.skippedSpecs;
+    this.executedSpecs = this.failedSpecs + this.successfulSpecs;
   }
 };
 
