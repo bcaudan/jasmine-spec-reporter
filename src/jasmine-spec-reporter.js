@@ -1,4 +1,11 @@
 (function() {
+    var colors = require('colors');
+
+    colors.setTheme({
+        success: 'green',
+        failure: 'red'
+    });
+
     if (! jasmine) {
         throw new Exception("jasmine library does not exist in global namespace!");
     }
@@ -23,6 +30,9 @@
             var failed = this.executedSpecs - this.passedSpecs;
             var spec_str = "Executed " + this.executedSpecs + (this.executedSpecs === 1 ? " spec " : " specs ");
             var fail_str = "(" + failed + (failed === 1 ? " failure) " : " failures) ");
+            if (failed > 0) {
+                fail_str = fail_str.failure;
+            }
 
             this.resetIndent();
             this.newLine();
@@ -47,15 +57,15 @@
         reportSpecResults: function(spec) {
             if (spec.results().passed()) {
                 this.passedSpecs++;
-                this.log("✓ " + spec.results().description);
+                this.log("✓ ".success + spec.results().description.success);
             } else {
-                this.log("✗ " + spec.results().description);
+                this.log("✗ ".failure + spec.results().description.failure);
                 var items = spec.results().items_;
                 this.increaseIndent();
                 this.log("Message:");
                 this.increaseIndent();
                 for(var i = 0;  i < items.length ; i++ ) {
-                    this.log(items[i].message);
+                    this.log(items[i].message.failure);
                 }
                 this.decreaseIndent();
                 this.decreaseIndent();

@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/bcaudan/jasmine-spec-reporter/issues"
   },
-  "homepage": "https://github.com/bcaudan/jasmine-spec-reporter"
+  "homepage": "https://github.com/bcaudan/jasmine-spec-reporter",
+  "dependencies": {
+    "colors": "~0.6.2"
+  }
 }
