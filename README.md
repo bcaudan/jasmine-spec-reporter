@@ -22,8 +22,6 @@ Use it in your Protractor configuration file:
        // your config here ...
 
        onPrepare: function() {
-          // remove protractor default reporter
-          jasmine.getEnv().reporter.subReporters_ = [];
           // add jasmine spec reporter
           jasmine.getEnv().addReporter(new jasmine.SpecReporter());
        }
