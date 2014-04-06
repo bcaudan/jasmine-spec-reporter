@@ -51,7 +51,7 @@ SpecReporter.prototype = {
 var SpecDisplay = function () {
   this.indent = "  ";
   this.currentIndent = "";
-  this.currentSuiteId = -1;
+  this.displayedSuites = [];
 };
 
 SpecDisplay.prototype = {
@@ -94,11 +94,10 @@ SpecDisplay.prototype = {
   },
 
   ensureSuiteDisplayed: function (suite) {
-    if (suite.id !== this.currentSuiteId) {
-      this.ensureParentSuiteDisplayed(suite.parentSuite);
+    if (!this.hasBeenDisplayed(suite)) {
+      this.ensureSuiteDisplayed(suite.parentSuite);
       this.displaySuite(suite);
       this.increaseIndent();
-      this.currentSuiteId = suite.id;
     }
   },
 
@@ -106,13 +105,11 @@ SpecDisplay.prototype = {
     this.newLine();
     this.computeSuiteIndent(suite);
     this.log(suite.description);
+    this.displayedSuites.push(suite.id);
   },
 
-  ensureParentSuiteDisplayed: function (parentSuite) {
-    if (parentSuite !== null && parentSuite.id !== this.currentSuiteId) {
-      this.ensureParentSuiteDisplayed(parentSuite.parentSuite);
-      this.displaySuite(parentSuite);
-    }
+  hasBeenDisplayed: function (suite) {
+    return suite == null || this.displayedSuites.indexOf(suite.id) != -1;
   },
 
   log: function (stuff) {

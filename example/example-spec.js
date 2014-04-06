@@ -45,15 +45,15 @@ describe('second suite', function () {
         expect(true).toBe(true);
       });
     });
-  });
 
-  describe('second child suite', function () {
-    it('should be ok', function () {
-      expect(true).toBe(true);
-    });
+    describe('second grandchild suite', function () {
+      it('should failed', function () {
+        expect(true).toBe(false);
+      });
 
-    it('should be ok', function () {
-      expect(true).toBe(true);
+      it('should be ok', function () {
+        expect(true).toBe(true);
+      });
     });
   });
 });
