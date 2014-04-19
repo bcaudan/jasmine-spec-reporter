@@ -10,9 +10,9 @@ class Test
     @run()
 
   init: ->
-    @output = ''
+    @outputs = []
     console.log = (stuff) =>
-      @output += "#{stuff}\n"
+      @outputs.push stuff.stripColors.stripTime
     @reporter = new jasmine.SpecReporter()
 
   run: ->
@@ -75,11 +75,11 @@ class Spec
     items_: @items
     skipped: @skipped
 
-  passed: (message) ->
+  passed: (message = '') ->
     @success = true
     @items.push {message, passed: -> true}
 
-  failed: (message) ->
+  failed: (message = '') ->
     @success = false
     @items.push {message, passed: -> false}
 
