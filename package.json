@@ -4,8 +4,8 @@
   "description": "Spec reporter for jasmine behavior-driven development framework",
   "main": "src/jasmine-spec-reporter.js",
   "scripts": {
-    "test": "./node_modules/jasmine-node/bin/jasmine-node spec",
-    "start": "./node_modules/jasmine-node/bin/jasmine-node example"
+    "test": "./node_modules/jasmine-node/bin/jasmine-node --coffee spec",
+    "start": "./node_modules/jasmine-node/bin/jasmine-node --coffee example"
   },
   "repository": {
     "type": "git",
