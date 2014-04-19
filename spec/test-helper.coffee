@@ -4,6 +4,15 @@ require('../src/jasmine-spec-reporter.js')
 String.prototype.__defineGetter__ 'stripTime', ->
   this.replace /(\d+\.?\d*|\.\d+) secs/, '{time}'
 
+addMatchers = ->
+  beforeEach ->
+    @addMatchers
+      toContains: (expected) ->
+        for element in @actual
+          if expected == element || (expected.test && expected.test(element))
+            return true
+        false
+
 class Test
   constructor: (@testFn) ->
     @init()
@@ -84,3 +93,4 @@ class Spec
     @items.push {message, passed: -> false}
 
 global.Test = Test
+global.addMatchers = addMatchers

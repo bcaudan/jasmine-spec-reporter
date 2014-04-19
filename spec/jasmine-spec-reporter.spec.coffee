@@ -1,8 +1,37 @@
 require('./test-helper.coffee')
 
 describe 'spec reporter', ->
+  addMatchers()
 
-  describe 'summary', ->
+  describe 'when spec', ->
+
+    it 'should report success', ->
+      expect(new Test(->
+        @describe "suite", ->
+          @it "successfull spec", ->
+            @passed()
+      ).outputs)
+      .toContains /✓ successfull spec/
+
+
+    it 'should report failure', ->
+      expect(new Test(->
+        @describe "suite", ->
+          @it "failed spec", ->
+            @failed()
+      ).outputs)
+      .toContains /✗ failed spec/
+
+
+    it 'should not report skipped', ->
+      expect(new Test(->
+        @describe "suite", ->
+          @xit "skipped spec", ->
+      ).outputs)
+      .not.toContains /skipped spec/
+
+
+  describe 'when summary', ->
 
     it 'should report success', ->
       expect(new Test(->
