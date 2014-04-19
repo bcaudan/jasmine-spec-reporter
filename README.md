@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/bcaudan/jasmine-spec-reporter.svg?branch=master)](https://travis-ci.org/bcaudan/jasmine-spec-reporter)
 jasmine-spec-reporter
 =====================
 
