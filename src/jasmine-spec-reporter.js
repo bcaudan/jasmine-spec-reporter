@@ -29,7 +29,7 @@ SpecReporter.prototype = {
     this.finished = true;
   },
 
-  reportSuiteResults: function () {
+  reportSuiteResults: function (suite) {
   },
 
   reportSpecStarting: function (spec) {
@@ -118,7 +118,7 @@ SpecDisplay.prototype = {
   },
 
   newLine: function () {
-    this.log("");
+    console.log("");
   },
 
   computeSuiteIndent: function (suite) {
