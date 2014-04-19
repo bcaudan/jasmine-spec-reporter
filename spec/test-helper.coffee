@@ -56,9 +56,15 @@ class Suite
   it: (description, fn) ->
     @queue.push(new Spec(@env, @, description, fn))
 
+  xit: (description, fn) ->
+    spec = new Spec(@env, @, description, fn)
+    spec.skipped = true
+    @queue.push(spec)
+
 class Spec
   constructor: (@env, @suite, @description, fn) ->
     @success = false
+    @skipped = false
     @items = []
     @id = @env.nextId++
     fn.apply(@)
@@ -67,6 +73,7 @@ class Spec
     description: @description
     passed: => @success
     items_: @items
+    skipped: @skipped
 
   passed: (message) ->
     @success = true

@@ -39,3 +39,20 @@ describe 'spec reporter', ->
            Executed 1 of 1 spec (1 FAILED) in {time}.
 
            """
+
+  it 'should report skipped specs', ->
+    expect(new Test(->
+
+      @describe "suite", ->
+        @xit "spec", ->
+
+
+    ).output.stripColors.stripTime)
+    .toBe  """
+           Spec started
+
+             suite
+
+           Executed 0 of 1 spec SUCCESS (skipped 1) in {time}.
+
+           """
