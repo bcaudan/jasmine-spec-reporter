@@ -1,13 +1,22 @@
-require('../src/jasmine-spec-reporter.js')
+require('./test-helper.coffee')
 
-describe 'first suite', ->
-
-  beforeEach ->
-    @log = jasmine.createSpy 'console.log'
-    console.log = @log
-    @reporter = new jasmine.SpecReporter()
-    @reporter.reportRunnerStarting()
+describe 'spec reporter', ->
 
   it 'should be ok', ->
-    @reporter.reportSpecStarting({suite: {parentSuite: null, description: "suite"}})
-    expect(@log).toHaveBeenCalledWith("  suite")
+    expect(new Test(
+      suite:
+        parentSuite: null
+        description: "suite"
+      results: ->
+        description: "spec"
+        passed: -> true
+    ).output.stripColors.stripTime)
+    .toBe  """
+          Spec started
+
+            suite
+              ✓ spec
+
+          Executed 1 of 1 spec SUCCESS in {time}.
+
+          """

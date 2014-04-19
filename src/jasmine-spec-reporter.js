@@ -19,6 +19,7 @@ var SpecReporter = function () {
 SpecReporter.prototype = {
   reportRunnerStarting: function () {
     this.started = true;
+    this.display.log("Spec started");
     this.metrics.start();
   },
 
