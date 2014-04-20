@@ -30,6 +30,7 @@ SpecReporter.prototype = {
   },
 
   reportSuiteResults: function (suite) {
+    this.display.suiteResults(suite);
   },
 
   reportSpecStarting: function (spec) {
@@ -102,6 +103,10 @@ SpecDisplay.prototype = {
     }
   },
 
+  hasBeenDisplayed: function (suite) {
+    return suite == null || this.displayedSuites.indexOf(suite.id) != -1;
+  },
+
   displaySuite: function (suite) {
     this.newLine();
     this.computeSuiteIndent(suite);
@@ -109,8 +114,8 @@ SpecDisplay.prototype = {
     this.displayedSuites.push(suite.id);
   },
 
-  hasBeenDisplayed: function (suite) {
-    return suite == null || this.displayedSuites.indexOf(suite.id) != -1;
+  suiteResults: function (suite) {
+    this.decreaseIndent();
   },
 
   log: function (stuff) {

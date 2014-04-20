@@ -52,6 +52,77 @@ describe 'spec reporter', ->
       ]
 
 
+  describe 'when suite', ->
+
+    it 'should display multiple specs', ->
+      expect(new Test(->
+        @describe 'suite', ->
+          @it 'spec 1', ->
+            @passed()
+          @it 'spec 2', ->
+            @passed()
+      ).outputs).contains [
+        ''
+        '  suite'
+        '    ✓ spec 1'
+        '    ✓ spec 2'
+      ]
+
+      
+    it 'should display multiple suites', ->
+      expect(new Test(->
+        @describe 'suite 1', ->
+          @it 'spec 1', ->
+            @passed()
+        @describe 'suite 2', ->
+          @it 'spec 2', ->
+            @passed()
+      ).outputs).contains [
+        ''
+        '  suite 1'
+        '    ✓ spec 1'
+        ''
+        '  suite 2'
+        '    ✓ spec 2'
+      ]
+
+
+    it 'should display nested suite at first position', ->
+      expect(new Test(->
+        @describe 'suite 1', ->
+          @describe 'suite 2', ->
+            @it 'spec 1', ->
+              @passed()
+          @it 'spec 2', ->
+            @passed()
+      ).outputs).contains [
+        ''
+        '  suite 1'
+        ''
+        '    suite 2'
+        '      ✓ spec 1'
+        '    ✓ spec 2'
+      ]
+
+
+    it 'should display nested suite at last position', ->
+      expect(new Test(->
+        @describe 'suite 1', ->
+          @it 'spec 1', ->
+            @passed()
+          @describe 'suite 2', ->
+            @it 'spec 2', ->
+              @passed()
+      ).outputs).contains [
+        ''
+        '  suite 1'
+        '    ✓ spec 1'
+        ''
+        '    suite 2'
+        '      ✓ spec 2'
+      ]
+
+
   describe 'when summary', ->
 
     it 'should report success', ->
