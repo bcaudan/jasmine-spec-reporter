@@ -11,7 +11,7 @@ Console spec reporter for jasmine behavior-driven development testing framework.
 ## Default options
 
     {
-      displayStacktrace: false  // display stacktrace for each failed assertions
+      displayStacktrace: false  // display stacktrace for each failed assertion
     }
 
 ## Protractor
