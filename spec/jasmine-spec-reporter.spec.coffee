@@ -5,10 +5,13 @@ describe 'spec reporter', ->
 
   describe 'with default options', ->
 
+    beforeEach ->
+      @reporter = new jasmine.SpecReporter()
+
     describe 'when spec', ->
 
       it 'should report success', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite', ->
             @it 'successfull spec', ->
               @passed()
@@ -17,7 +20,7 @@ describe 'spec reporter', ->
 
 
       it 'should report failure', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite', ->
             @it 'failed spec', ->
               @failed()
@@ -26,7 +29,7 @@ describe 'spec reporter', ->
 
 
       it 'should not report skipped', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite', ->
             @xit 'skipped spec', ->
         ).outputs)
@@ -36,7 +39,7 @@ describe 'spec reporter', ->
     describe 'when failed spec', ->
 
       it 'should display with error messages', ->
-        outputs = new Test(->
+        outputs = new Test(@reporter, ->
           @describe 'suite', ->
             @it 'failed spec', ->
               @failed('first failed assertion')
@@ -59,7 +62,7 @@ describe 'spec reporter', ->
     describe 'when suite', ->
 
       it 'should display multiple specs', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite', ->
             @it 'spec 1', ->
               @passed()
@@ -75,7 +78,7 @@ describe 'spec reporter', ->
 
 
       it 'should display multiple suites', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite 1', ->
             @it 'spec 1', ->
               @passed()
@@ -94,7 +97,7 @@ describe 'spec reporter', ->
 
 
       it 'should display nested suite at first position', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite 1', ->
             @describe 'suite 2', ->
               @it 'spec 1', ->
@@ -114,7 +117,7 @@ describe 'spec reporter', ->
 
 
       it 'should display nested suite at last position', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite 1', ->
             @it 'spec 1', ->
               @passed()
@@ -136,7 +139,7 @@ describe 'spec reporter', ->
     describe 'when summary', ->
 
       it 'should report success', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite', ->
             @it 'spec', ->
               @passed()
@@ -145,7 +148,7 @@ describe 'spec reporter', ->
 
 
       it 'should report failure', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite', ->
             @it 'spec', ->
               @failed()
@@ -154,7 +157,7 @@ describe 'spec reporter', ->
 
 
       it 'should report skipped whith success', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite', ->
             @xit 'spec', ->
         ).outputs)
@@ -162,10 +165,36 @@ describe 'spec reporter', ->
 
 
       it 'should report skipped whith failure', ->
-        expect(new Test(->
+        expect(new Test(@reporter, ->
           @describe 'suite', ->
             @xit 'spec', ->
             @it 'spec', ->
               @failed()
         ).outputs)
         .toContain  'Executed 1 of 2 specs (1 FAILED) (skipped 1) in {time}.'
+
+
+  describe 'with stacktrace enabled', ->
+
+    beforeEach ->
+      @reporter = new jasmine.SpecReporter({displayStacktrace: true})
+
+    describe 'when failed spec', ->
+
+      it 'should display with error messages with stacktraces', ->
+        outputs = new Test(@reporter, ->
+          @describe 'suite', ->
+            @it 'failed spec', ->
+              @failed('first failed assertion')
+        ).outputs
+
+        expect(outputs).not.contains /passed assertion/
+        expect(outputs).contains [
+          '    ✗ failed spec'
+          '      Message:'
+          '        first failed assertion'
+          ''
+          '      Stacktrace:'
+          '        {Stacktrace}'
+          ''
+        ]

@@ -24,7 +24,7 @@ addMatchers = ->
         false
 
 class Test
-  constructor: (@testFn) ->
+  constructor: (@reporter, @testFn) ->
     @init()
     @run()
 
@@ -32,7 +32,6 @@ class Test
     @outputs = []
     console.log = (stuff) =>
       @outputs.push stuff.stripColors.stripTime
-    @reporter = new jasmine.SpecReporter()
 
   run: ->
     env = new FakeEnv(@testFn)
@@ -100,7 +99,7 @@ class Spec
 
   failed: (message = '') ->
     @success = false
-    @items.push {message, passed: -> false}
+    @items.push {message, trace: {stack: '{Stacktrace}'}, passed: -> false}
 
 global.Test = Test
 global.addMatchers = addMatchers

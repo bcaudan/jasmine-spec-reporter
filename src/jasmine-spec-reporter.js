@@ -9,11 +9,12 @@ if (!jasmine) {
   throw new Exception('jasmine library does not exist in global namespace!');
 }
 
-var SpecReporter = function () {
+var SpecReporter = function (options) {
   this.started = false;
   this.finished = false;
+  this.options = options || {};
   this.metrics = new SpecMetrics();
-  this.display = new SpecDisplay();
+  this.display = new SpecDisplay(this.options);
 };
 
 SpecReporter.prototype = {
@@ -50,11 +51,12 @@ SpecReporter.prototype = {
   }
 };
 
-var SpecDisplay = function () {
+var SpecDisplay = function (options) {
   this.indent = '  ';
   this.currentIndent = '';
   this.displayedSuites = [];
   this.lastWasNewLine = false;
+  this.displayStacktrace = options.displayStacktrace || false;
 };
 
 SpecDisplay.prototype = {
@@ -91,6 +93,13 @@ SpecDisplay.prototype = {
         this.log(assertions[i].message.failure);
         this.decreaseIndent();
         this.newLine();
+        if (this.displayStacktrace) {
+          this.log('Stacktrace:');
+          this.increaseIndent();
+          this.log(assertions[i].trace.stack);
+          this.decreaseIndent();
+          this.newLine();
+        }
       }
     }
     this.decreaseIndent();

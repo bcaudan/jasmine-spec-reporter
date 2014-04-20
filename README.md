@@ -8,6 +8,12 @@ Console spec reporter for jasmine behavior-driven development testing framework.
 
 # Usage
 
+## Default options
+
+    {
+      displayStacktrace: false  // display stacktrace for each failed assertions
+    }
+
 ## Protractor
 The `jasmine-spec-reporter` can be used to enhance your [Protractor](https://github.com/angular/protractor) tests execution report.
 
@@ -24,18 +30,18 @@ Use it in your Protractor configuration file:
 
        onPrepare: function() {
           // add jasmine spec reporter
-          jasmine.getEnv().addReporter(new jasmine.SpecReporter());
+          jasmine.getEnv().addReporter(new jasmine.SpecReporter({displayStacktrace: true}));
        }
     }
 
-# Developement
+## Developement
 
-## Tests
+### Tests
 To launch all unit tests:
 
     npm test
 
-## Example
+### Example
 To launch an output example:
 
     npm start
