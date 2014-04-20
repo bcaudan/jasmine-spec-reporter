@@ -54,6 +54,7 @@ var SpecDisplay = function () {
   this.indent = '  ';
   this.currentIndent = '';
   this.displayedSuites = [];
+  this.lastWasNewLine = false;
 };
 
 SpecDisplay.prototype = {
@@ -115,15 +116,20 @@ SpecDisplay.prototype = {
   },
 
   suiteResults: function (suite) {
+    this.newLine();
     this.decreaseIndent();
   },
 
   log: function (stuff) {
     console.log(this.currentIndent + stuff);
+    this.lastWasNewLine = false;
   },
 
   newLine: function () {
-    console.log('');
+    if (!this.lastWasNewLine) {
+      console.log('');
+      this.lastWasNewLine = true;
+    }
   },
 
   computeSuiteIndent: function (suite) {

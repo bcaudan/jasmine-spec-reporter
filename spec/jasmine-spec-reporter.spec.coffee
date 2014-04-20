@@ -66,6 +66,7 @@ describe 'spec reporter', ->
         '  suite'
         '    ✓ spec 1'
         '    ✓ spec 2'
+        ''
       ]
 
       
@@ -84,6 +85,7 @@ describe 'spec reporter', ->
         ''
         '  suite 2'
         '    ✓ spec 2'
+        ''
       ]
 
 
@@ -101,7 +103,9 @@ describe 'spec reporter', ->
         ''
         '    suite 2'
         '      ✓ spec 1'
+        ''
         '    ✓ spec 2'
+        ''
       ]
 
 
@@ -120,6 +124,8 @@ describe 'spec reporter', ->
         ''
         '    suite 2'
         '      ✓ spec 2'
+        ''
+        /Executed/
       ]
 
 
