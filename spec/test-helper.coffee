@@ -4,13 +4,23 @@ require('../src/jasmine-spec-reporter.js')
 String.prototype.__defineGetter__ 'stripTime', ->
   this.replace /(\d+\.?\d*|\.\d+) secs/, '{time}'
 
+typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
+
+equalOrMatch = (actual, expected) ->
+  expected == actual || (expected.test && expected.test(actual))
+
 addMatchers = ->
   beforeEach ->
     @addMatchers
-      toContains: (expected) ->
-        for element in @actual
-          if expected == element || (expected.test && expected.test(element))
-            return true
+      contains: (sequence) ->
+        sequence = [sequence] unless typeIsArray sequence
+        i = 0
+        while i < @actual.length - sequence.length + 1
+          j = 0
+          while j < sequence.length && equalOrMatch(@actual[i + j], sequence[j])
+            j++
+          return true if j == sequence.length
+          i++
         false
 
 class Test

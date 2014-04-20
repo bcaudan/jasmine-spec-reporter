@@ -83,10 +83,10 @@ SpecDisplay.prototype = {
     this.increaseIndent();
     this.log("Message:");
     this.increaseIndent();
-    var expectations = spec.results().items_;
-    for (var i = 0; i < expectations.length; i++) {
-      if (!expectations[i].passed()) {
-        this.log(expectations[i].message.failure);
+    var assertions = spec.results().items_;
+    for (var i = 0; i < assertions.length; i++) {
+      if (!assertions[i].passed()) {
+        this.log(assertions[i].message.failure);
       }
     }
     this.newLine();

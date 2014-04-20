@@ -11,7 +11,7 @@ describe 'spec reporter', ->
           @it "successfull spec", ->
             @passed()
       ).outputs)
-      .toContains /✓ successfull spec/
+      .contains /✓ successfull spec/
 
 
     it 'should report failure', ->
@@ -20,7 +20,7 @@ describe 'spec reporter', ->
           @it "failed spec", ->
             @failed()
       ).outputs)
-      .toContains /✗ failed spec/
+      .contains /✗ failed spec/
 
 
     it 'should not report skipped', ->
@@ -28,7 +28,28 @@ describe 'spec reporter', ->
         @describe "suite", ->
           @xit "skipped spec", ->
       ).outputs)
-      .not.toContains /skipped spec/
+      .not.contains /skipped spec/
+
+
+  describe 'when failed spec', ->
+
+    it 'should display with error messages', ->
+      outputs = new Test(->
+        @describe "suite", ->
+          @it "failed spec", ->
+            @failed("first failed assertion")
+            @passed("passed assertion")
+            @failed("second failed assertion")
+      ).outputs
+
+      expect(outputs).not.contains /passed assertion/
+      expect(outputs).contains [
+        "    ✗ failed spec"
+        "      Message:"
+        "        first failed assertion"
+        "        second failed assertion"
+        ""
+      ]
 
 
   describe 'when summary', ->
@@ -39,7 +60,7 @@ describe 'spec reporter', ->
           @it "spec", ->
             @passed()
       ).outputs)
-      .toContain  "Executed 1 of 1 spec SUCCESS in {time}."
+      .contains  "Executed 1 of 1 spec SUCCESS in {time}."
 
 
     it 'should report failure', ->
@@ -48,7 +69,7 @@ describe 'spec reporter', ->
           @it "spec", ->
             @failed()
       ).outputs)
-      .toContain  "Executed 1 of 1 spec (1 FAILED) in {time}."
+      .contains  "Executed 1 of 1 spec (1 FAILED) in {time}."
 
 
     it 'should report skipped whith success', ->
@@ -56,7 +77,7 @@ describe 'spec reporter', ->
         @describe "suite", ->
           @xit "spec", ->
       ).outputs)
-      .toContain  "Executed 0 of 1 spec SUCCESS (skipped 1) in {time}."
+      .contains  "Executed 0 of 1 spec SUCCESS (skipped 1) in {time}."
 
 
     it 'should report skipped whith failure', ->
