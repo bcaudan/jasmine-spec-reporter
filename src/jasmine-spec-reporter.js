@@ -6,7 +6,7 @@ colors.setTheme({
 });
 
 if (!jasmine) {
-  throw new Exception("jasmine library does not exist in global namespace!");
+  throw new Exception('jasmine library does not exist in global namespace!');
 }
 
 var SpecReporter = function () {
@@ -19,7 +19,7 @@ var SpecReporter = function () {
 SpecReporter.prototype = {
   reportRunnerStarting: function () {
     this.started = true;
-    this.display.log("Spec started");
+    this.display.log('Spec started');
     this.metrics.start();
   },
 
@@ -50,18 +50,18 @@ SpecReporter.prototype = {
 };
 
 var SpecDisplay = function () {
-  this.indent = "  ";
-  this.currentIndent = "";
+  this.indent = '  ';
+  this.currentIndent = '';
   this.displayedSuites = [];
 };
 
 SpecDisplay.prototype = {
   summary: function (metrics) {
-    var execution = "Executed " + metrics.executedSpecs + " of " + metrics.totalSpecs + (metrics.totalSpecs === 1 ? " spec " : " specs ");
-    var successful = (metrics.failedSpecs == 0) ? "SUCCESS " : "";
-    var failed = (metrics.failedSpecs > 0) ? "(" + metrics.failedSpecs + " FAILED) " : "";
-    var skipped = (metrics.skippedSpecs > 0) ? "(skipped " + metrics.skippedSpecs + ") " : "";
-    var duration = "in " + (metrics.duration / 1000) + " secs.";
+    var execution = 'Executed ' + metrics.executedSpecs + ' of ' + metrics.totalSpecs + (metrics.totalSpecs === 1 ? ' spec ' : ' specs ');
+    var successful = (metrics.failedSpecs == 0) ? 'SUCCESS ' : '';
+    var failed = (metrics.failedSpecs > 0) ? '(' + metrics.failedSpecs + ' FAILED) ' : '';
+    var skipped = (metrics.skippedSpecs > 0) ? '(skipped ' + metrics.skippedSpecs + ') ' : '';
+    var duration = 'in ' + (metrics.duration / 1000) + ' secs.';
 
     this.resetIndent();
     this.newLine();
@@ -69,19 +69,19 @@ SpecDisplay.prototype = {
   },
 
   successful: function (spec) {
-    var result = "✓ " + spec.results().description;
+    var result = '✓ ' + spec.results().description;
     this.log(result.success)
   },
 
   failed: function (spec) {
-    var result = "✗ " + spec.results().description;
+    var result = '✗ ' + spec.results().description;
     this.log(result.failure);
     this.displayErrorMessages(spec);
   },
 
   displayErrorMessages: function (spec) {
     this.increaseIndent();
-    this.log("Message:");
+    this.log('Message:');
     this.increaseIndent();
     var assertions = spec.results().items_;
     for (var i = 0; i < assertions.length; i++) {
@@ -118,7 +118,7 @@ SpecDisplay.prototype = {
   },
 
   newLine: function () {
-    console.log("");
+    console.log('');
   },
 
   computeSuiteIndent: function (suite) {
@@ -131,7 +131,7 @@ SpecDisplay.prototype = {
   },
 
   resetIndent: function () {
-    this.currentIndent = "";
+    this.currentIndent = '';
   },
 
   increaseIndent: function () {
