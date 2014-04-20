@@ -83,16 +83,16 @@ SpecDisplay.prototype = {
 
   displayErrorMessages: function (spec) {
     this.increaseIndent();
-    this.log('Message:');
-    this.increaseIndent();
     var assertions = spec.results().items_;
     for (var i = 0; i < assertions.length; i++) {
       if (!assertions[i].passed()) {
+        this.log('Message:');
+        this.increaseIndent();
         this.log(assertions[i].message.failure);
+        this.decreaseIndent();
+        this.newLine();
       }
     }
-    this.newLine();
-    this.decreaseIndent();
     this.decreaseIndent();
   },
 

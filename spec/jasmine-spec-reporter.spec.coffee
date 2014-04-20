@@ -47,6 +47,8 @@ describe 'spec reporter', ->
         '    ✗ failed spec'
         '      Message:'
         '        first failed assertion'
+        ''
+        '      Message:'
         '        second failed assertion'
         ''
       ]
