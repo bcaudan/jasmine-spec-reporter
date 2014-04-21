@@ -5,7 +5,7 @@
   "main": "src/jasmine-spec-reporter.js",
   "scripts": {
     "test": "./node_modules/jasmine-node/bin/jasmine-node --coffee --noStack spec",
-    "start": "./node_modules/jasmine-node/bin/jasmine-node --coffee example"
+    "example": "./node_modules/jasmine-node/bin/jasmine-node --coffee example"
   },
   "repository": {
     "type": "git",

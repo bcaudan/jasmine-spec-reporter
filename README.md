@@ -44,4 +44,4 @@ To launch all unit tests:
 ### Example
 To launch an output example:
 
-    npm start
+    npm run example
