@@ -2,7 +2,8 @@ require('../src/jasmine-spec-reporter.js')
 jasmine.getEnv().reporter.subReporters_ = [] # remove jasmine-node default reporter
 jasmine.getEnv().addReporter(new jasmine.SpecReporter({
   displayStacktrace: false,
-  displaySuccessfulSpec: true
+  displaySuccessfulSpec: true,
+  displayFailedSpec: true
 }))
 
 describe 'first suite', ->
@@ -38,7 +39,7 @@ describe 'second suite', ->
 
       it 'should be ok', ->
         expect(true).toBe(true)
-      
+
 
     describe 'second grandchild suite', ->
       it 'should failed', ->

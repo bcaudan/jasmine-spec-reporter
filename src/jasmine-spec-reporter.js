@@ -57,6 +57,7 @@ var SpecDisplay = function (options) {
   this.lastWasNewLine = false;
   this.displayStacktrace = options.displayStacktrace || false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
+  this.displayFailedSpec = options.displayFailedSpec !== false;
 };
 
 SpecDisplay.prototype = {
@@ -81,10 +82,12 @@ SpecDisplay.prototype = {
   },
 
   failed: function (spec) {
-    this.ensureSuiteDisplayed(spec.suite);
-    var result = '✗ ' + spec.results().description;
-    this.log(result.failure);
-    this.displayErrorMessages(spec);
+    if (this.displayFailedSpec) {
+      this.ensureSuiteDisplayed(spec.suite);
+      var result = '✗ ' + spec.results().description;
+      this.log(result.failure);
+      this.displayErrorMessages(spec);
+    }
   },
 
   displayErrorMessages: function (spec) {
