@@ -38,12 +38,5 @@ Use it in your Protractor configuration file:
 
 ## Developement
 
-### Tests
-To launch all unit tests:
-
-    npm test
-
-### Example
-To launch an output example:
-
-    npm run example
+* launch all unit tests: `npm test`
+* launch an output example: `npm run example`
