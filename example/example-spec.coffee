@@ -1,6 +1,9 @@
 require('../src/jasmine-spec-reporter.js')
 jasmine.getEnv().reporter.subReporters_ = [] # remove jasmine-node default reporter
-jasmine.getEnv().addReporter(new jasmine.SpecReporter())
+jasmine.getEnv().addReporter(new jasmine.SpecReporter({
+  displayStacktrace: false,
+  displaySuccessfulSpec: true
+}))
 
 describe 'first suite', ->
   it 'should be ok', ->

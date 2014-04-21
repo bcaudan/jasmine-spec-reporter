@@ -35,7 +35,6 @@ SpecReporter.prototype = {
   },
 
   reportSpecStarting: function (spec) {
-    this.display.ensureSuiteDisplayed(spec.suite);
   },
 
   reportSpecResults: function (spec) {
@@ -57,6 +56,7 @@ var SpecDisplay = function (options) {
   this.displayedSuites = [];
   this.lastWasNewLine = false;
   this.displayStacktrace = options.displayStacktrace || false;
+  this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
 };
 
 SpecDisplay.prototype = {
@@ -73,11 +73,15 @@ SpecDisplay.prototype = {
   },
 
   successful: function (spec) {
-    var result = '✓ ' + spec.results().description;
-    this.log(result.success)
+    if (this.displaySuccessfulSpec) {
+      this.ensureSuiteDisplayed(spec.suite);
+      var result = '✓ ' + spec.results().description;
+      this.log(result.success)
+    }
   },
 
   failed: function (spec) {
+    this.ensureSuiteDisplayed(spec.suite);
     var result = '✗ ' + spec.results().description;
     this.log(result.failure);
     this.displayErrorMessages(spec);

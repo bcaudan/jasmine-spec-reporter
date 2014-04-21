@@ -13,10 +13,10 @@ describe 'spec reporter', ->
       it 'should report success', ->
         expect(new Test(@reporter, ->
           @describe 'suite', ->
-            @it 'successfull spec', ->
+            @it 'successful spec', ->
               @passed()
         ).outputs)
-        .contains /✓ successfull spec/
+        .contains /✓ successful spec/
 
 
       it 'should report failure', ->
@@ -198,3 +198,47 @@ describe 'spec reporter', ->
           '        {Stacktrace}'
           ''
         ]
+
+
+  describe 'with successful spec disabled', ->
+
+    beforeEach ->
+      @reporter = new jasmine.SpecReporter({displaySuccessfulSpec: false})
+
+    describe 'when spec', ->
+
+      it 'should not report success', ->
+        expect(new Test(@reporter, ->
+          @describe 'suite', ->
+            @it 'successful spec', ->
+              @passed()
+        ).outputs)
+        .not.contains /successful spec/
+
+
+    describe 'when suite', ->
+
+      it 'should not display successful suite', ->
+        outputs = new Test(@reporter, ->
+          @describe 'suite', ->
+            @it 'spec 1', ->
+              @passed()
+            @it 'spec 2', ->
+              @passed()
+        ).outputs
+
+        expect(outputs).not.contains /suite/
+
+
+      it 'should display failed suite', ->
+        outputs = new Test(@reporter, ->
+          @describe 'suite', ->
+            @it 'failed spec', ->
+              @failed()
+            @it 'successful spec', ->
+              @passed()
+        ).outputs
+
+        expect(outputs).contains /suite/
+        expect(outputs).contains /failed spec/
+        expect(outputs).not.contains /successful spec/
