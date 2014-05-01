@@ -25,12 +25,11 @@ Install `jasmine-spec-reporter` via npm:
 
 Use it in your Protractor configuration file:
 
-    require('jasmine-spec-reporter');
-
     exports.config = {
        // your config here ...
 
        onPrepare: function() {
+          require('jasmine-spec-reporter');
           // add jasmine spec reporter
           jasmine.getEnv().addReporter(new jasmine.SpecReporter({displayStacktrace: true}));
        }
