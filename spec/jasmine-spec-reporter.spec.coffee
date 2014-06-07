@@ -283,3 +283,18 @@ describe 'spec reporter', ->
         expect(outputs).contains /failed suite/
         expect(outputs).contains /successful spec/
         expect(outputs).not.contains /failed spec/
+
+
+  describe 'with jasmine callback hack', ->
+    beforeEach ->
+      @reporter = new jasmine.SpecReporter()
+      @spy = jasmine.createSpy('callback')
+      @reporter.jasmineCallback = @spy
+
+    it 'should call jasmine callback when runner ends', ->
+      new Test(@reporter, ->
+        @describe 'suite', ->
+          @it 'successful spec', ->
+            @passed()
+      )
+      expect(@spy).toHaveBeenCalled()
