@@ -68,7 +68,7 @@ SpecDisplay.prototype = {
     var successful = (metrics.failedSpecs == 0) ? 'SUCCESS ' : '';
     var failed = (metrics.failedSpecs > 0) ? '(' + metrics.failedSpecs + ' FAILED) ' : '';
     var skipped = (metrics.skippedSpecs > 0) ? '(skipped ' + metrics.skippedSpecs + ') ' : '';
-    var duration = 'in ' + (metrics.duration / 1000) + ' secs.';
+    var duration = 'in ' + metrics.duration + '.';
 
     this.resetIndent();
     this.newLine();
@@ -188,9 +188,35 @@ SpecMetrics.prototype = {
   },
 
   stop: function () {
-    this.duration = (new Date()).getTime() - this.startTime;
+    this.duration = this.formatDuration((new Date()).getTime() - this.startTime);
     this.totalSpecs = this.failedSpecs + this.successfulSpecs + this.skippedSpecs;
     this.executedSpecs = this.failedSpecs + this.successfulSpecs;
+  },
+
+  formatDuration: function (durationInMs) {
+    var duration = '', durationInSecs, durationInMins, durationInHrs;
+    durationInSecs = durationInMs / 1000;
+    if (durationInSecs < 1) {
+      return durationInSecs + ' secs';
+    }
+    durationInSecs = Math.round(durationInSecs);
+    if (durationInSecs < 60) {
+      return durationInSecs + ' secs';
+    }
+    durationInMins = Math.floor(durationInSecs / 60);
+    durationInSecs = durationInSecs % 60;
+    if (durationInSecs) {
+      duration = ' ' + durationInSecs + ' secs';
+    }
+    if (durationInMins < 60) {
+      return durationInMins + ' mins' + duration;
+    }
+    durationInHrs = Math.floor(durationInMins / 60);
+    durationInMins = durationInMins % 60;
+    if (durationInMins) {
+      duration = ' ' + durationInMins + ' mins' + duration;
+    }
+    return durationInHrs + ' hours' + duration;
   }
 };
 
