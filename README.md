@@ -13,10 +13,17 @@ Console spec reporter for jasmine behavior-driven development testing framework.
     {
       displayStacktrace: false,     // display stacktrace for each failed assertion
       displaySuccessfulSpec: true,  // display each successful spec
-      displayFailedSpec: true       // display each failed spec
-      displaySkippedSpec: false     // display each skipped spec
-      displaySpecDuration: false    // display each spec duration
+      displayFailedSpec: true,      // display each failed spec
+      displaySkippedSpec: false,    // display each skipped spec
+      displaySpecDuration: false,   // display each spec duration
+      colors: {
+        success: 'green',
+        failure: 'red',
+        skipped: 'cyan'
+      }
     }
+
+Colors are displayed in the console via [colors](https://github.com/Marak/colors.js), you can see all available colors on the [project page](https://github.com/Marak/colors.js).
 
 ## Protractor
 The `jasmine-spec-reporter` can be used to enhance your [Protractor](https://github.com/angular/protractor) tests execution report.

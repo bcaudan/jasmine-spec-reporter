@@ -5,7 +5,12 @@ jasmine.getEnv().addReporter(new jasmine.SpecReporter({
   displaySuccessfulSpec: true,
   displayFailedSpec: true,
   displaySkippedSpec: false,
-  displaySpecDuration: false
+  displaySpecDuration: false,
+  colors: {
+    success: 'green',
+    failure: 'red',
+    skipped: 'cyan'
+  }
 }))
 
 describe 'first suite', ->

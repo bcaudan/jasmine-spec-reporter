@@ -1,11 +1,5 @@
 var colors = require('colors');
 
-colors.setTheme({
-  success: 'green',
-  failure: 'red',
-  skipped: 'cyan'
-});
-
 if (!jasmine) {
   throw new Exception('jasmine library does not exist in global namespace!');
 }
@@ -66,6 +60,12 @@ var SpecDisplay = function (options) {
   this.displayFailedSpec = options.displayFailedSpec !== false;
   this.displaySkippedSpec = options.displaySkippedSpec || false;
   this.displaySpecDuration = options.displaySpecDuration || false;
+
+  colors.setTheme({
+    success: options.colors && options.colors.success ? options.colors.success : 'green',
+    failure: options.colors && options.colors.failure ? options.colors.failure : 'red',
+    skipped: options.colors && options.colors.skipped ? options.colors.skipped : 'cyan'
+  });
 };
 
 SpecDisplay.prototype = {
