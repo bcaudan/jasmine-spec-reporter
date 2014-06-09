@@ -60,6 +60,7 @@ var SpecDisplay = function (options) {
   this.displayFailedSpec = options.displayFailedSpec !== false;
   this.displaySkippedSpec = options.displaySkippedSpec || false;
   this.displaySpecDuration = options.displaySpecDuration || false;
+  this.displayWithoutColors = options.colors === false;
 
   colors.setTheme({
     success: options.colors && options.colors.success ? options.colors.success : 'green',
@@ -155,6 +156,9 @@ SpecDisplay.prototype = {
   },
 
   log: function (stuff) {
+    if (this.displayWithoutColors) {
+      stuff = stuff.stripColors;
+    }
     console.log(this.currentIndent + stuff);
     this.lastWasNewLine = false;
   },

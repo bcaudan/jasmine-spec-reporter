@@ -24,6 +24,7 @@ Console spec reporter for jasmine behavior-driven development testing framework.
     }
 
 Colors are displayed in the console via [colors](https://github.com/Marak/colors.js), you can see all available colors on the [project page](https://github.com/Marak/colors.js).
+You can also disable colors with the option: `colors: false`.
 
 ## Protractor
 The `jasmine-spec-reporter` can be used to enhance your [Protractor](https://github.com/angular/protractor) tests execution report.
