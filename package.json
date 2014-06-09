@@ -15,6 +15,7 @@
     "jasmine",
     "reporter",
     "bdd",
+    "spec",
     "protractor"
   ],
   "author": "Bastien Caudan",

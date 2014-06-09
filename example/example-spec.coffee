@@ -3,7 +3,8 @@ jasmine.getEnv().reporter.subReporters_ = [] # remove jasmine-node default repor
 jasmine.getEnv().addReporter(new jasmine.SpecReporter({
   displayStacktrace: false,
   displaySuccessfulSpec: true,
-  displayFailedSpec: true
+  displayFailedSpec: true,
+  displaySpecDuration: false
 }))
 
 describe 'first suite', ->

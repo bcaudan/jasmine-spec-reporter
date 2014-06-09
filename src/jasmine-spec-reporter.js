@@ -37,9 +37,11 @@ SpecReporter.prototype = {
   },
 
   reportSpecStarting: function (spec) {
+    this.metrics.startSpec();
   },
 
   reportSpecResults: function (spec) {
+    this.metrics.stopSpec(spec);
     if (spec.results().skipped) {
       this.metrics.skippedSpecs++;
     } else if (spec.results().passed()) {
@@ -60,6 +62,7 @@ var SpecDisplay = function (options) {
   this.displayStacktrace = options.displayStacktrace || false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
   this.displayFailedSpec = options.displayFailedSpec !== false;
+  this.displaySpecDuration = options.displaySpecDuration || false;
 };
 
 SpecDisplay.prototype = {
@@ -79,7 +82,8 @@ SpecDisplay.prototype = {
     if (this.displaySuccessfulSpec) {
       this.ensureSuiteDisplayed(spec.suite);
       var result = '✓ ' + spec.results().description;
-      this.log(result.success)
+      var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
+      this.log(result.success + duration)
     }
   },
 
@@ -87,7 +91,8 @@ SpecDisplay.prototype = {
     if (this.displayFailedSpec) {
       this.ensureSuiteDisplayed(spec.suite);
       var result = '✗ ' + spec.results().description;
-      this.log(result.failure);
+      var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
+      this.log(result.failure + duration);
       this.displayErrorMessages(spec);
     }
   },
@@ -174,6 +179,7 @@ SpecDisplay.prototype = {
 
 var SpecMetrics = function () {
   this.startTime = null;
+  this.specStartTime = null;
   this.duration = null;
   this.successfulSpecs = 0;
   this.failedSpecs = 0;
@@ -191,6 +197,14 @@ SpecMetrics.prototype = {
     this.duration = this.formatDuration((new Date()).getTime() - this.startTime);
     this.totalSpecs = this.failedSpecs + this.successfulSpecs + this.skippedSpecs;
     this.executedSpecs = this.failedSpecs + this.successfulSpecs;
+  },
+
+  startSpec: function () {
+    this.specStartTime = (new Date()).getTime();
+  },
+
+  stopSpec: function (spec) {
+    spec.duration = this.formatDuration((new Date()).getTime() - this.specStartTime);
   },
 
   formatDuration: function (durationInMs) {
