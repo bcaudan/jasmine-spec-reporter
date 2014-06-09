@@ -4,6 +4,7 @@ jasmine.getEnv().addReporter(new jasmine.SpecReporter({
   displayStacktrace: false,
   displaySuccessfulSpec: true,
   displayFailedSpec: true,
+  displaySkippedSpec: false,
   displaySpecDuration: false
 }))
 

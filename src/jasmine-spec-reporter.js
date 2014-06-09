@@ -2,7 +2,8 @@ var colors = require('colors');
 
 colors.setTheme({
   success: 'green',
-  failure: 'red'
+  failure: 'red',
+  skipped: 'cyan'
 });
 
 if (!jasmine) {
@@ -44,6 +45,7 @@ SpecReporter.prototype = {
     this.metrics.stopSpec(spec);
     if (spec.results().skipped) {
       this.metrics.skippedSpecs++;
+      this.display.skipped(spec);
     } else if (spec.results().passed()) {
       this.metrics.successfulSpecs++;
       this.display.successful(spec);
@@ -62,6 +64,7 @@ var SpecDisplay = function (options) {
   this.displayStacktrace = options.displayStacktrace || false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
   this.displayFailedSpec = options.displayFailedSpec !== false;
+  this.displaySkippedSpec = options.displaySkippedSpec || false;
   this.displaySpecDuration = options.displaySpecDuration || false;
 };
 
@@ -94,6 +97,14 @@ SpecDisplay.prototype = {
       var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
       this.log(result.failure + duration);
       this.displayErrorMessages(spec);
+    }
+  },
+
+  skipped: function (spec) {
+    if (this.displaySkippedSpec) {
+      this.ensureSuiteDisplayed(spec.suite);
+      var result = '- ' + spec.results().description;
+      this.log(result.skipped)
     }
   },
 

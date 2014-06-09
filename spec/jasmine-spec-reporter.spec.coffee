@@ -272,6 +272,19 @@ describe 'spec reporter', ->
         expect(outputs).not.contains /failed spec/
 
 
+  describe 'with skipped spec enabled', ->
+    beforeEach ->
+      @reporter = new jasmine.SpecReporter({displaySkippedSpec: true})
+
+    describe 'when spec', ->
+      it 'should report skipped', ->
+        expect(new Test(@reporter,->
+          @describe 'suite', ->
+            @xit 'skipped spec', ->
+        ).outputs)
+        .contains /- skipped spec/
+
+
   describe 'with spec duration enabled', ->
     beforeEach ->
       @reporter = new jasmine.SpecReporter({displaySpecDuration: true})
