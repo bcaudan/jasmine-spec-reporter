@@ -45,11 +45,16 @@ Use it in your Protractor configuration file:
        }
     }
 
-## Hack to remove protractor dot reporter
+## Remove protractor dot reporter
+### For protractor >= 1.0.0-rc2
+In your protractor configuration file, add the silent option in the jasmineNodeOpts section:
 
-In order to remove the dot reporter, I proposed this [PR](https://github.com/juliemr/minijasminenode/pull/17).
-In the meantime, you can follow these instructions to get rid of it now:
+    jasmineNodeOpts: {
+       ...
+       silent: true
+    }
 
+### For protractor < 1.0.0-rc2
 Create a file in your project, for example `spec/util/reporter-hack.js`,  with this code:
 
     var reporters = jasmine.getEnv().reporter.subReporters_;
