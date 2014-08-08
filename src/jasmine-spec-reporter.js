@@ -61,6 +61,11 @@ var SpecDisplay = function (options) {
   this.displaySkippedSpec = options.displaySkippedSpec || false;
   this.displaySpecDuration = options.displaySpecDuration || false;
   this.displayWithoutColors = options.colors === false;
+  this.prefixes = {
+    success: options.prefixes && options.prefixes.success !== undefined ? options.prefixes.success : '✓ ',
+    failure: options.prefixes && options.prefixes.failure !== undefined ? options.prefixes.failure : '✗ ',
+    skipped: options.prefixes && options.prefixes.skipped !== undefined ? options.prefixes.skipped : '- '
+  };
 
   colors.setTheme({
     success: options.colors && options.colors.success ? options.colors.success : 'green',
@@ -85,18 +90,18 @@ SpecDisplay.prototype = {
   successful: function (spec) {
     if (this.displaySuccessfulSpec) {
       this.ensureSuiteDisplayed(spec.suite);
-      var result = '✓ ' + spec.results().description;
+      var result = spec.results().description;
       var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
-      this.log(result.success + duration)
+      this.log(this.prefixes.success + result.success + duration)
     }
   },
 
   failed: function (spec) {
     if (this.displayFailedSpec) {
       this.ensureSuiteDisplayed(spec.suite);
-      var result = '✗ ' + spec.results().description;
+      var result = spec.results().description;
       var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
-      this.log(result.failure + duration);
+      this.log(this.prefixes.failure + result.failure + duration);
       this.displayErrorMessages(spec);
     }
   },
@@ -104,8 +109,8 @@ SpecDisplay.prototype = {
   skipped: function (spec) {
     if (this.displaySkippedSpec) {
       this.ensureSuiteDisplayed(spec.suite);
-      var result = '- ' + spec.results().description;
-      this.log(result.skipped)
+      var result = spec.results().description;
+      this.log(this.prefixes.skipped + result.skipped)
     }
   },
 
