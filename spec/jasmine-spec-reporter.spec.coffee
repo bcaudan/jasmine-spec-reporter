@@ -128,7 +128,6 @@ describe 'spec reporter', ->
           '    suite 2'
           '      ✓ spec 2'
           ''
-          /Executed/
         ]
 
 
@@ -138,7 +137,7 @@ describe 'spec reporter', ->
           @describe 'suite', ->
             @it 'spec', ->
               @passed()
-        ).outputs)
+        ).summary)
         .contains 'Executed 1 of 1 spec SUCCESS in {time}.'
 
 
@@ -147,15 +146,36 @@ describe 'spec reporter', ->
           @describe 'suite', ->
             @it 'spec', ->
               @failed()
-        ).outputs)
+        ).summary)
         .contains 'Executed 1 of 1 spec (1 FAILED) in {time}.'
 
+
+      it 'should report failures summary', ->
+        expect(new Test(@reporter,->
+          @describe 'suite 1', ->
+            @it 'spec 1', ->
+              @failed('failed assertion 1')
+            @describe 'suite 2', ->
+              @it 'spec 2', ->
+                @failed('failed assertion 2')
+        ).summary).contains [
+          'Failures:'
+          ''
+          '1) suite 1 spec 1'
+          '  Message:'
+          '    failed assertion 1'
+          ''
+          '2) suite 1 suite 2 spec 2'
+          '  Message:'
+          '    failed assertion 2'
+          ''
+        ]
 
       it 'should report skipped whith success', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @xit 'spec', ->
-        ).outputs)
+        ).summary)
         .contains 'Executed 0 of 1 spec SUCCESS (skipped 1) in {time}.'
 
 
@@ -165,7 +185,7 @@ describe 'spec reporter', ->
             @xit 'spec', ->
             @it 'spec', ->
               @failed()
-        ).outputs)
+        ).summary)
         .toContain 'Executed 1 of 2 specs (1 FAILED) (skipped 1) in {time}.'
 
 
@@ -191,6 +211,51 @@ describe 'spec reporter', ->
           '        {Stacktrace}'
           ''
         ]
+
+
+    describe 'when summary', ->
+      it 'should report failures summary with stacktraces', ->
+        expect(new Test(@reporter,->
+          @describe 'suite 1', ->
+            @it 'spec 1', ->
+              @failed('failed assertion 1')
+            @describe 'suite 2', ->
+              @it 'spec 2', ->
+                @failed('failed assertion 2')
+        ).summary).contains [
+          'Failures:'
+          ''
+          '1) suite 1 spec 1'
+          '  Message:'
+          '    failed assertion 1'
+          ''
+          '  Stacktrace:'
+          '    {Stacktrace}'
+          ''
+          '2) suite 1 suite 2 spec 2'
+          '  Message:'
+          '    failed assertion 2'
+          ''
+          '  Stacktrace:'
+          '    {Stacktrace}'
+          ''
+        ]
+
+
+  describe 'with failures summary disabled', ->
+    beforeEach ->
+      @reporter = new jasmine.SpecReporter({displayFailuresSummary: false})
+
+    describe 'when summary', ->
+      it 'should not report failures summary', ->
+        expect(new Test(@reporter,->
+          @describe 'suite 1', ->
+            @it 'spec 1', ->
+              @failed('failed assertion 1')
+            @describe 'suite 2', ->
+              @it 'spec 2', ->
+                @failed('failed assertion 2')
+        ).summary).not.contains /Failures:/
 
 
   describe 'with successful spec disabled', ->

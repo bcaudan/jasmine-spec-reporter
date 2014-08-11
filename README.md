@@ -12,6 +12,7 @@ Console spec reporter for jasmine behavior-driven development testing framework.
 
     {
       displayStacktrace: false,     // display stacktrace for each failed assertion
+      displayFailuresSummary: true, // display summary of all failures after tests execution
       displaySuccessfulSpec: true,  // display each successful spec
       displayFailedSpec: true,      // display each failed spec
       displaySkippedSpec: false,    // display each skipped spec

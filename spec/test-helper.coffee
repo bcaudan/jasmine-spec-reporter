@@ -30,8 +30,16 @@ class Test
 
   init: ->
     @outputs = []
+    @summary = []
+    logInSummary = false
     console.log = (stuff) =>
-      @outputs.push stuff.stripColors.stripTime
+      stuff = stuff.stripColors.stripTime
+      logInSummary = true if /^(Executed|Failures)/.test stuff
+
+      unless logInSummary
+        @outputs.push stuff
+      else
+        @summary.push stuff
 
   run: ->
     env = new FakeEnv(@testFn)

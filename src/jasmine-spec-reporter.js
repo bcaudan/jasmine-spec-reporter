@@ -54,8 +54,10 @@ var SpecDisplay = function (options) {
   this.indent = '  ';
   this.currentIndent = '';
   this.displayedSuites = [];
+  this.failedSpecs = [];
   this.lastWasNewLine = false;
   this.displayStacktrace = options.displayStacktrace || false;
+  this.displayFailuresSummary = options.displayFailuresSummary !== false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
   this.displayFailedSpec = options.displayFailedSpec !== false;
   this.displaySkippedSpec = options.displaySkippedSpec || false;
@@ -79,7 +81,36 @@ SpecDisplay.prototype = {
 
     this.resetIndent();
     this.newLine();
+    if (this.displayFailuresSummary && metrics.failedSpecs > 0) {
+      this.failuresSummary();
+    }
     this.log(execution + successful.success + failed.failure + skipped + duration);
+  },
+
+  failuresSummary: function () {
+    this.log("Failures:");
+    this.newLine();
+    for (var i = 0 ; i < this.failedSpecs.length ; i++) {
+      this.failedSummary(this.failedSpecs[i], i + 1);
+      this.newLine();
+    }
+    this.newLine();
+    this.resetIndent();
+  },
+
+  failedSummary: function (spec, index) {
+    this.log(index + ') ' + this.getFullDescription(spec));
+    this.displayErrorMessages(spec);
+  },
+
+  getFullDescription: function (spec) {
+    var description = spec.results().description;
+    var suite = spec.suite;
+    while (suite !== null) {
+      description = suite.description + ' ' + description;
+      suite = suite.parentSuite;
+    }
+    return description;
   },
 
   successful: function (spec) {
@@ -92,6 +123,7 @@ SpecDisplay.prototype = {
   },
 
   failed: function (spec) {
+    this.failedSpecs.push(spec);
     if (this.displayFailedSpec) {
       this.ensureSuiteDisplayed(spec.suite);
       var result = '✗ ' + spec.results().description;
