@@ -85,5 +85,6 @@ In you protractor conf, add this file to your spec files:
 
 ## Developement
 
+* install dependencies: `npm install`
 * launch all unit tests: `npm test`
 * launch an output example: `npm run example`
