@@ -2,7 +2,7 @@
 jasmine-spec-reporter
 =====================
 
-Console spec reporter for jasmine behavior-driven development testing framework.
+Real time console spec reporter for jasmine behavior-driven development testing framework.
 
 ![](https://raw.github.com/bcaudan/jasmine-spec-reporter/master/screenshot.png)
 
@@ -12,7 +12,7 @@ Console spec reporter for jasmine behavior-driven development testing framework.
 
     {
       displayStacktrace: false,     // display stacktrace for each failed assertion
-      displayFailuresSummary: true, // display summary of all failures after tests execution
+      displayFailuresSummary: true, // display summary of all failures after execution
       displaySuccessfulSpec: true,  // display each successful spec
       displayFailedSpec: true,      // display each failed spec
       displaySkippedSpec: false,    // display each skipped spec
