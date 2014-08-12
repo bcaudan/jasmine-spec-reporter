@@ -93,7 +93,9 @@ SpecDisplay.prototype = {
   },
 
   failuresSummary: function () {
-    this.log("Failures:");
+    this.log("**************************************************");
+    this.log("*                    Failures                    *");
+    this.log("**************************************************");
     this.newLine();
     for (var i = 0 ; i < this.failedSpecs.length ; i++) {
       this.failedSummary(this.failedSpecs[i], i + 1);

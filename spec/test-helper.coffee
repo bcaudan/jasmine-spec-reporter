@@ -34,7 +34,7 @@ class Test
     logInSummary = false
     console.log = (stuff) =>
       stuff = stuff.stripColors.stripTime
-      logInSummary = true if /^(Executed|Failures)/.test stuff
+      logInSummary = true if /^(Executed|\*\*\*\*\*\*\*)/.test stuff
 
       unless logInSummary
         @outputs.push stuff

@@ -159,7 +159,9 @@ describe 'spec reporter', ->
               @it 'spec 2', ->
                 @failed('failed assertion 2')
         ).summary).contains [
-          'Failures:'
+          /.*/
+          /Failures/
+          /.*/
           ''
           '1) suite 1 spec 1'
           '  Message:'
@@ -224,7 +226,9 @@ describe 'spec reporter', ->
               @it 'spec 2', ->
                 @failed('failed assertion 2')
         ).summary).contains [
-          'Failures:'
+          /.*/
+          /Failures/
+          /.*/
           ''
           '1) suite 1 spec 1'
           '  Message:'
