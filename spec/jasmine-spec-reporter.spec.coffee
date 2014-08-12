@@ -203,8 +203,7 @@ describe 'spec reporter', ->
         expect(outputs).contains [
           '    ✗ failed spec'
           '      - first failed assertion'
-          '      Stacktrace:'
-          '        {Stacktrace}'
+          '      {Stacktrace}'
           ''
         ]
 
@@ -225,13 +224,11 @@ describe 'spec reporter', ->
           ''
           '1) suite 1 spec 1'
           '  - failed assertion 1'
-          '  Stacktrace:'
-          '    {Stacktrace}'
+          '  {Stacktrace}'
           ''
           '2) suite 1 suite 2 spec 2'
           '  - failed assertion 2'
-          '  Stacktrace:'
-          '    {Stacktrace}'
+          '  {Stacktrace}'
           ''
         ]
 

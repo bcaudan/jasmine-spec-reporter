@@ -107,7 +107,7 @@ class Spec
 
   failed: (message = '') ->
     @success = false
-    @items.push {message, trace: {stack: '{Stacktrace}'}, passed: -> false}
+    @items.push {message, trace: {stack: 'Error: Expectation\n{Stacktrace}'}, passed: -> false}
 
 global.Test = Test
 global.addMatchers = addMatchers

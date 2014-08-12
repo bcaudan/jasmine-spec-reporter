@@ -155,15 +155,22 @@ SpecDisplay.prototype = {
       if (!assertions[i].passed()) {
         this.log('- '.failure + assertions[i].message.failure);
         if (this.displayStacktrace) {
-          this.log('Stacktrace:');
-          this.increaseIndent();
-          this.log(assertions[i].trace.stack);
-          this.decreaseIndent();
-          this.newLine();
+          this.log(this.filterStackTraces(assertions[i].trace.stack));
         }
       }
     }
     this.decreaseIndent();
+  },
+
+  filterStackTraces: function (traces) {
+    var lines = traces.split('\n');
+    var filtered = [];
+    for (var i = 1 ; i < lines.length ; i++) {
+      if (!/(jasmine[^\/]*\.js|Timer\.listOnTimeout)/.test(lines[i])) {
+        filtered.push(lines[i]);
+      }
+    }
+    return filtered.join('\n');
   },
 
   ensureSuiteDisplayed: function (suite) {
