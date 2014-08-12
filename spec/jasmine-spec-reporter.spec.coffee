@@ -47,11 +47,8 @@ describe 'spec reporter', ->
         expect(outputs).not.contains /passed assertion/
         expect(outputs).contains [
           '    ✗ failed spec'
-          '      Message:'
-          '        first failed assertion'
-          ''
-          '      Message:'
-          '        second failed assertion'
+          '      - first failed assertion'
+          '      - second failed assertion'
           ''
         ]
 
@@ -164,12 +161,10 @@ describe 'spec reporter', ->
           /.*/
           ''
           '1) suite 1 spec 1'
-          '  Message:'
-          '    failed assertion 1'
+          '  - failed assertion 1'
           ''
           '2) suite 1 suite 2 spec 2'
-          '  Message:'
-          '    failed assertion 2'
+          '  - failed assertion 2'
           ''
         ]
 
@@ -207,9 +202,7 @@ describe 'spec reporter', ->
         expect(outputs).not.contains /passed assertion/
         expect(outputs).contains [
           '    ✗ failed spec'
-          '      Message:'
-          '        first failed assertion'
-          ''
+          '      - first failed assertion'
           '      Stacktrace:'
           '        {Stacktrace}'
           ''
@@ -231,16 +224,12 @@ describe 'spec reporter', ->
           /.*/
           ''
           '1) suite 1 spec 1'
-          '  Message:'
-          '    failed assertion 1'
-          ''
+          '  - failed assertion 1'
           '  Stacktrace:'
           '    {Stacktrace}'
           ''
           '2) suite 1 suite 2 spec 2'
-          '  Message:'
-          '    failed assertion 2'
-          ''
+          '  - failed assertion 2'
           '  Stacktrace:'
           '    {Stacktrace}'
           ''

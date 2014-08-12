@@ -153,11 +153,7 @@ SpecDisplay.prototype = {
     var assertions = spec.results().items_;
     for (var i = 0; i < assertions.length; i++) {
       if (!assertions[i].passed()) {
-        this.log('Message:');
-        this.increaseIndent();
-        this.log(assertions[i].message.failure);
-        this.decreaseIndent();
-        this.newLine();
+        this.log('- '.failure + assertions[i].message.failure);
         if (this.displayStacktrace) {
           this.log('Stacktrace:');
           this.increaseIndent();
