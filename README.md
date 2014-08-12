@@ -21,6 +21,11 @@ Real time console spec reporter for jasmine behavior-driven development testing 
         success: 'green',
         failure: 'red',
         skipped: 'cyan'
+      },
+      prefixes: {
+        success: '✓ ',
+        failure: '✗ ',
+        skipped: '- '
       }
     }
 

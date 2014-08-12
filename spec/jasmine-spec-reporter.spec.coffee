@@ -171,6 +171,7 @@ describe 'spec reporter', ->
           ''
         ]
 
+
       it 'should report skipped whith success', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
@@ -323,6 +324,7 @@ describe 'spec reporter', ->
               @failed()
         ).outputs).not.contains /failed suite/
 
+
       it 'should display not fully failed suite', ->
         outputs = new Test(@reporter,->
           @describe 'failed suite', ->
@@ -372,6 +374,7 @@ describe 'spec reporter', ->
         ).outputs)
         .contains /✗ failed spec \({time}\)/
 
+
   describe 'with prefixes set to empty strings', ->
     beforeEach ->
       @reporter = new jasmine.SpecReporter({displaySkippedSpec: true, prefixes: {success: '', failure: '', skipped: ''}})
@@ -394,12 +397,14 @@ describe 'spec reporter', ->
         ).outputs)
         .not.contains /✗/
 
+
       it 'should report skipped', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @xit 'skipped spec', ->
         ).outputs)
         .not.contains /-/
+
 
   describe 'with prefixes set to valid strings', ->
     beforeEach ->
@@ -423,6 +428,7 @@ describe 'spec reporter', ->
         ).outputs)
         .not.contains /✗/
 
+
       it 'should report skipped', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
@@ -430,34 +436,6 @@ describe 'spec reporter', ->
         ).outputs)
         .not.contains /-/
 
-  describe 'with prefixes not set', ->
-    beforeEach ->
-      @reporter = new jasmine.SpecReporter({displaySkippedSpec: true, prefixes: {} })
-
-    describe 'when spec', ->
-      it 'should report success', ->
-        expect(new Test(@reporter,->
-          @describe 'suite', ->
-            @it 'successful spec', ->
-              @passed()
-        ).outputs)
-        .contains /✓/
-
-
-      it 'should report failure', ->
-        expect(new Test(@reporter,->
-          @describe 'suite', ->
-            @it 'failed spec', ->
-              @failed()
-        ).outputs)
-        .contains /✗/
-
-      it 'should report skipped', ->
-        expect(new Test(@reporter,->
-          @describe 'suite', ->
-            @xit 'skipped spec', ->
-        ).outputs)
-        .contains /-/
 
   describe 'with jasmine callback hack', ->
     beforeEach ->

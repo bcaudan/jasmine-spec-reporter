@@ -11,6 +11,11 @@ jasmine.getEnv().addReporter(new jasmine.SpecReporter({
     success: 'green',
     failure: 'red',
     skipped: 'cyan'
+  },
+  prefixes: {
+    success: '✓ ',
+    failure: '✗ ',
+    skipped: '- '
   }
 }))
 

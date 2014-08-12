@@ -123,7 +123,7 @@ SpecDisplay.prototype = {
       this.ensureSuiteDisplayed(spec.suite);
       var result = spec.results().description;
       var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
-      this.log(this.prefixes.success + result.success + duration)
+      this.log(this.prefixes.success.success + result.success + duration)
     }
   },
 
@@ -133,7 +133,7 @@ SpecDisplay.prototype = {
       this.ensureSuiteDisplayed(spec.suite);
       var result = spec.results().description;
       var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
-      this.log(this.prefixes.failure + result.failure + duration);
+      this.log(this.prefixes.failure.failure + result.failure + duration);
       this.displayErrorMessages(spec);
     }
   },
@@ -142,7 +142,7 @@ SpecDisplay.prototype = {
     if (this.displaySkippedSpec) {
       this.ensureSuiteDisplayed(spec.suite);
       var result = spec.results().description;
-      this.log(this.prefixes.skipped + result.skipped)
+      this.log(this.prefixes.skipped.skipped + result.skipped)
     }
   },
 
