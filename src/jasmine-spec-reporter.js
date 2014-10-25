@@ -1,10 +1,6 @@
 var SpecMetrics = require('./spec-metrics');
 var SpecDisplay = require('./spec-display');
 
-if (!jasmine) {
-  throw new Exception('jasmine library does not exist in global namespace!');
-}
-
 var SpecReporter = function (options) {
   this.started = false;
   this.finished = false;
@@ -49,4 +45,4 @@ SpecReporter.prototype = {
   }
 };
 
-jasmine.SpecReporter = SpecReporter;
+module.exports = SpecReporter;

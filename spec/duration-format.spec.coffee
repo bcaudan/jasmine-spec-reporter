@@ -1,9 +1,11 @@
+SpecReporter = require('../src/jasmine-spec-reporter.js')
+
 describe 'duration', ->
   it 'should be human readable', ->
     secs = 1000
     mins = 60 * secs
     hours = 60 * mins
-    reporter = new jasmine.SpecReporter()
+    reporter = new SpecReporter()
     @formatDuration = reporter.metrics.formatDuration
     expect(@formatDuration(0)).toBe '0 secs'
     expect(@formatDuration(10)).toBe '0.01 secs'

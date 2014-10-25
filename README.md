@@ -20,9 +20,9 @@ Use it in your Protractor configuration file:
        // your config here ...
 
        onPrepare: function() {
-          require('jasmine-spec-reporter');
+          var SpecReporter = require('jasmine-spec-reporter');
           // add jasmine spec reporter
-          jasmine.getEnv().addReporter(new jasmine.SpecReporter({displayStacktrace: true}));
+          jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
        }
     }
 
@@ -34,7 +34,7 @@ In your protractor configuration file, add the silent option in the jasmineNodeO
        silent: true
     }
 
-## Default options
+# Default options
 
     {
       displayStacktrace: false,     // display stacktrace for each failed assertion
@@ -58,7 +58,11 @@ In your protractor configuration file, add the silent option in the jasmineNodeO
 Colors are displayed in the console via [colors](https://github.com/Marak/colors.js), you can see all available colors on the [project page](https://github.com/Marak/colors.js).
 You can also disable colors with the option: `colors: false`.
 
-## Developement
+# Migration from 0.x.x to 1.0.0
+
+Jasmine spec reporter is no more added to the jasmine object. So, make sure to use it like it is described in the usage section.
+
+# Developement
 
 * install dependencies: `npm install`
 * launch all unit tests: `npm test`

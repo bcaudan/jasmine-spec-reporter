@@ -1,3 +1,4 @@
+SpecReporter = require('../src/jasmine-spec-reporter.js')
 require('./lib/test-helper.coffee')
 
 describe 'spec reporter', ->
@@ -5,7 +6,7 @@ describe 'spec reporter', ->
 
   describe 'with default options', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter()
+      @reporter = new SpecReporter()
 
     describe 'when spec', ->
       it 'should report success', ->
@@ -189,7 +190,7 @@ describe 'spec reporter', ->
 
   describe 'with stacktrace enabled', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter({displayStacktrace: true})
+      @reporter = new SpecReporter({displayStacktrace: true})
 
     describe 'when failed spec', ->
       it 'should display with error messages with stacktraces', ->
@@ -235,7 +236,7 @@ describe 'spec reporter', ->
 
   describe 'with failures summary disabled', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter({displayFailuresSummary: false})
+      @reporter = new SpecReporter({displayFailuresSummary: false})
 
     describe 'when summary', ->
       it 'should not report failures summary', ->
@@ -251,7 +252,7 @@ describe 'spec reporter', ->
 
   describe 'with successful spec disabled', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter({displaySuccessfulSpec: false})
+      @reporter = new SpecReporter({displaySuccessfulSpec: false})
 
     describe 'when spec', ->
       it 'should not report success', ->
@@ -292,7 +293,7 @@ describe 'spec reporter', ->
 
   describe 'with failed spec disabled', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter({displayFailedSpec: false})
+      @reporter = new SpecReporter({displayFailedSpec: false})
 
     describe 'when spec', ->
       it 'should not report failed', ->
@@ -331,7 +332,7 @@ describe 'spec reporter', ->
 
   describe 'with skipped spec enabled', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter({displaySkippedSpec: true})
+      @reporter = new SpecReporter({displaySkippedSpec: true})
 
     describe 'when spec', ->
       it 'should report skipped', ->
@@ -344,7 +345,7 @@ describe 'spec reporter', ->
 
   describe 'with spec duration enabled', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter({displaySpecDuration: true})
+      @reporter = new SpecReporter({displaySpecDuration: true})
 
     describe 'when spec', ->
       it 'should report success', ->
@@ -367,7 +368,7 @@ describe 'spec reporter', ->
 
   describe 'with prefixes set to empty strings', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter({displaySkippedSpec: true, prefixes: {success: '', failure: '', skipped: ''}})
+      @reporter = new SpecReporter({displaySkippedSpec: true, prefixes: {success: '', failure: '', skipped: ''}})
  
     describe 'when spec', ->
       it 'should report success', ->
@@ -398,7 +399,7 @@ describe 'spec reporter', ->
 
   describe 'with prefixes set to valid strings', ->
     beforeEach ->
-      @reporter = new jasmine.SpecReporter({displaySkippedSpec: true, prefixes: {success: 'Pass ', failure: 'Fail ', skipped: 'Skip '}})
+      @reporter = new SpecReporter({displaySkippedSpec: true, prefixes: {success: 'Pass ', failure: 'Fail ', skipped: 'Skip '}})
 
     describe 'when spec', ->
       it 'should report success', ->
