@@ -425,18 +425,3 @@ describe 'spec reporter', ->
             @xit 'skipped spec', ->
         ).outputs)
         .not.contains /-/
-
-
-  describe 'with jasmine callback hack', ->
-    beforeEach ->
-      @reporter = new jasmine.SpecReporter()
-      @spy = jasmine.createSpy('callback')
-      @reporter.jasmineCallback = @spy
-
-    it 'should call jasmine callback when runner ends', ->
-      new Test(@reporter, ->
-        @describe 'suite', ->
-          @it 'successful spec', ->
-            @passed()
-      )
-      expect(@spy).toHaveBeenCalled()

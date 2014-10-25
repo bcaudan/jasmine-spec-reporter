@@ -11,7 +11,6 @@ var SpecReporter = function (options) {
   this.options = options || {};
   this.metrics = new SpecMetrics();
   this.display = new SpecDisplay(this.options);
-  this.jasmineCallback = null;
 };
 
 SpecReporter.prototype = {
@@ -25,7 +24,6 @@ SpecReporter.prototype = {
     this.metrics.stop();
     this.display.summary(this.metrics);
     this.finished = true;
-    if(this.jasmineCallback) { this.jasmineCallback(runner); }
   },
 
   reportSuiteResults: function (suite) {
