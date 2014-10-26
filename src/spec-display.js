@@ -1,6 +1,4 @@
-var colors = require('colors');
-
-var SpecDisplay = function (options) {
+var SpecDisplay = function (options, displayProcessors) {
   this.indent = '  ';
   this.currentIndent = '';
   this.displayedSuites = [];
@@ -11,19 +9,8 @@ var SpecDisplay = function (options) {
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
   this.displayFailedSpec = options.displayFailedSpec !== false;
   this.displaySkippedSpec = options.displaySkippedSpec || false;
-  this.displaySpecDuration = options.displaySpecDuration || false;
   this.displayWithoutColors = options.colors === false;
-  this.prefixes = {
-    success: options.prefixes && options.prefixes.success !== undefined ? options.prefixes.success : '✓ ',
-    failure: options.prefixes && options.prefixes.failure !== undefined ? options.prefixes.failure : '✗ ',
-    skipped: options.prefixes && options.prefixes.skipped !== undefined ? options.prefixes.skipped : '- '
-  };
-
-  colors.setTheme({
-    success: options.colors && options.colors.success ? options.colors.success : 'green',
-    failure: options.colors && options.colors.failure ? options.colors.failure : 'red',
-    skipped: options.colors && options.colors.skipped ? options.colors.skipped : 'cyan'
-  });
+  this.displayProcessors = displayProcessors;
 };
 
 SpecDisplay.prototype = {
@@ -73,9 +60,11 @@ SpecDisplay.prototype = {
   successful: function (spec) {
     if (this.displaySuccessfulSpec) {
       this.ensureSuiteDisplayed(spec.suite);
-      var result = spec.results().description;
-      var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
-      this.log(this.prefixes.success.success + result.success + duration)
+      var log = null;
+      this.displayProcessors.forEach(function (displayProcessor) {
+        log = displayProcessor.displaySuccessfulSpec(spec, log);
+      });
+      this.log(log);
     }
   },
 
@@ -83,9 +72,11 @@ SpecDisplay.prototype = {
     this.failedSpecs.push(spec);
     if (this.displayFailedSpec) {
       this.ensureSuiteDisplayed(spec.suite);
-      var result = spec.results().description;
-      var duration = this.displaySpecDuration ? ' (' + spec.duration + ')' : '';
-      this.log(this.prefixes.failure.failure + result.failure + duration);
+      var log = null;
+      this.displayProcessors.forEach(function (displayProcessor) {
+        log = displayProcessor.displayFailedSpec(spec, log);
+      });
+      this.log(log);
       this.displayErrorMessages(spec);
     }
   },
@@ -93,8 +84,11 @@ SpecDisplay.prototype = {
   skipped: function (spec) {
     if (this.displaySkippedSpec) {
       this.ensureSuiteDisplayed(spec.suite);
-      var result = spec.results().description;
-      this.log(this.prefixes.skipped.skipped + result.skipped)
+      var log = null;
+      this.displayProcessors.forEach(function (displayProcessor) {
+        log = displayProcessor.displaySkippedSpec(spec, log);
+      });
+      this.log(log);
     }
   },
 
@@ -138,7 +132,11 @@ SpecDisplay.prototype = {
   displaySuite: function (suite) {
     this.newLine();
     this.computeSuiteIndent(suite);
-    this.log(suite.description);
+    var log = null;
+    this.displayProcessors.forEach(function (displayProcessor) {
+      log = displayProcessor.displaySuite(suite, log);
+    });
+    this.log(log);
     this.displayedSuites.push(suite.id);
   },
 

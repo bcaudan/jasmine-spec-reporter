@@ -1,13 +1,44 @@
+var colors = require('colors');
+
 var SpecMetrics = require('./spec-metrics');
 var SpecDisplay = require('./spec-display');
+
+var DefaultProcessor = require('./processors/default-processor');
+var SpecPrefixesProcessor = require('./processors/spec-prefixes-processor');
+var SpecColorsProcessor = require('./processors/spec-colors-processor');
+var SpecDurationsProcessor = require('./processors/spec-durations-processor');
 
 var SpecReporter = function (options) {
   this.started = false;
   this.finished = false;
   this.options = options || {};
+  initColors(this.options);
+
+  this.display = new SpecDisplay(this.options, initProcessors(this.options));
   this.metrics = new SpecMetrics();
-  this.display = new SpecDisplay(this.options);
 };
+
+function initColors(options) {
+  colors.setTheme({
+    success: options.colors && options.colors.success ? options.colors.success : 'green',
+    failure: options.colors && options.colors.failure ? options.colors.failure : 'red',
+    skipped: options.colors && options.colors.skipped ? options.colors.skipped : 'cyan'
+  });
+}
+
+function initProcessors(options) {
+  var displayProcessors = [
+    new DefaultProcessor(),
+    new SpecPrefixesProcessor(options.prefixes),
+    new SpecColorsProcessor()
+  ];
+
+  if (options.displaySpecDuration) {
+    displayProcessors.push(new SpecDurationsProcessor());
+  }
+
+  return displayProcessors;
+}
 
 SpecReporter.prototype = {
   reportRunnerStarting: function () {
