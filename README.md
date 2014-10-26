@@ -64,7 +64,7 @@ You can also disable colors with the option: `colors: false`.
 
 # Migration from 0.x.x to 1.0.0
 
-Jasmine spec reporter is no more added to the jasmine object. So, make sure to use it like it is described in the usage section.
+Jasmine spec reporter is no more added to the jasmine object. So, make sure to use it like it is described in the [usage section](https://github.com/bcaudan/jasmine-spec-reporter/blob/master/README.md#usage).
 
 # Developement
 
