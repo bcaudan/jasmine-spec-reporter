@@ -35,7 +35,7 @@ In your protractor configuration file, add the silent option in the jasmineNodeO
     }
 
 ## Custom output
-You can customize the output of the reporter yourself: [see how](https://github.com/bcaudan/jasmine-spec-reporter/blob/master/README.md).
+You can customize the output of the reporter yourself: [see how](https://github.com/bcaudan/jasmine-spec-reporter/blob/master/customize-output.md).
 
 # Default options
 
