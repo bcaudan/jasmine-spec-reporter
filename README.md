@@ -34,6 +34,9 @@ In your protractor configuration file, add the silent option in the jasmineNodeO
        silent: true
     }
 
+## Custom output
+You can customize the output of the reporter yourself: [see how](https://github.com/bcaudan/jasmine-spec-reporter/blob/master/README.md).
+
 # Default options
 
     {
@@ -52,7 +55,8 @@ In your protractor configuration file, add the silent option in the jasmineNodeO
         success: '✓ ',
         failure: '✗ ',
         skipped: '- '
-      }
+      },
+      customProcessors: []
     }
 
 Colors are displayed in the console via [colors](https://github.com/Marak/colors.js), you can see all available colors on the [project page](https://github.com/Marak/colors.js).

@@ -37,6 +37,12 @@ function initProcessors(options) {
     displayProcessors.push(new SpecDurationsProcessor());
   }
 
+  if (options.customProcessors) {
+    options.customProcessors.forEach(function (Processor) {
+      displayProcessors.push(new Processor(options));
+    })
+  }
+
   return displayProcessors;
 }
 

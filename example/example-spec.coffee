@@ -16,7 +16,8 @@ jasmine.getEnv().addReporter(new SpecReporter({
     success: '✓ ',
     failure: '✗ ',
     skipped: '- '
-  }
+  },
+  customProcessors: []
 }))
 
 describe 'first suite', ->
