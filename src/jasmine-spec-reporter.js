@@ -7,6 +7,7 @@ var DefaultProcessor = require('./processors/default-processor');
 var SpecPrefixesProcessor = require('./processors/spec-prefixes-processor');
 var SpecColorsProcessor = require('./processors/spec-colors-processor');
 var SpecDurationsProcessor = require('./processors/spec-durations-processor');
+var SuiteNumberingProcessor = require('./processors/suite-numbering-processor');
 
 var SpecReporter = function (options) {
   this.started = false;
@@ -35,6 +36,10 @@ function initProcessors(options) {
 
   if (options.displaySpecDuration) {
     displayProcessors.push(new SpecDurationsProcessor());
+  }
+
+  if (options.displaySuiteNumber) {
+    displayProcessors.push(new SuiteNumberingProcessor());
   }
 
   if (options.customProcessors) {

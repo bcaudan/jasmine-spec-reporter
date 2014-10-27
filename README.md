@@ -46,6 +46,7 @@ You can customize the output of the reporter yourself: [see how](https://github.
       displayFailedSpec: true,      // display each failed spec
       displaySkippedSpec: false,    // display each skipped spec
       displaySpecDuration: false,   // display each spec duration
+      displaySuiteNumber: false,    // display each suite number (hierarchical)
       colors: {
         success: 'green',
         failure: 'red',

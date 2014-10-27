@@ -7,6 +7,7 @@ jasmine.getEnv().addReporter(new SpecReporter({
   displayFailedSpec: true,
   displaySkippedSpec: false,
   displaySpecDuration: false,
+  displaySuiteNumber: false,
   colors: {
     success: 'green',
     failure: 'red',
