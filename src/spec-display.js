@@ -98,7 +98,7 @@ SpecDisplay.prototype = {
     for (var i = 0; i < assertions.length; i++) {
       if (!assertions[i].passed()) {
         this.log('- '.failure + assertions[i].message.failure);
-        if (this.displayStacktrace) {
+        if (this.displayStacktrace && assertions[i].trace.stack) {
           this.log(this.filterStackTraces(assertions[i].trace.stack));
         }
       }
