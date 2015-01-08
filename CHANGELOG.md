@@ -1,3 +1,7 @@
+# 1.1.1
+
+Fixes error when the stacktrace is undefined [#22](https://github.com/bcaudan/jasmine-spec-reporter/issues/22)
+
 # 1.1.0
 
 Add suite number option [#19](https://github.com/bcaudan/jasmine-spec-reporter/issues/19)
