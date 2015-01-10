@@ -9,7 +9,7 @@ describe 'spec reporter', ->
       @reporter = new SpecReporter()
 
     describe 'when spec', ->
-      it 'should report success', ->
+      fit 'should report success', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @it 'successful spec', ->

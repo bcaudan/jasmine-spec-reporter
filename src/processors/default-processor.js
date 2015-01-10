@@ -9,7 +9,7 @@ DefaultProcessor.prototype.displaySuite = function (suite) {
 };
 
 function displaySpecDescription(spec) {
-  return spec.results().description;
+  return spec.description;
 }
 
 DefaultProcessor.prototype.displaySuccessfulSpec  = displaySpecDescription;

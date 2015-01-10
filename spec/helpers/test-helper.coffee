@@ -10,17 +10,18 @@ equalOrMatch = (actual, expected) ->
 
 addMatchers = ->
   beforeEach ->
-    @addMatchers
-      contains: (sequence) ->
-        sequence = [sequence] unless typeIsArray sequence
-        i = 0
-        while i < @actual.length - sequence.length + 1
-          j = 0
-          while j < sequence.length && equalOrMatch(@actual[i + j], sequence[j])
-            j++
-          return true if j == sequence.length
-          i++
-        false
+    jasmine.addMatchers
+      contains: ->
+        compare: (actual, sequence) ->
+          sequence = [sequence] unless typeIsArray sequence
+          i = 0
+          while i < actual.length - sequence.length + 1
+            j = 0
+            while j < sequence.length && equalOrMatch(actual[i + j], sequence[j])
+              j++
+            return pass: true if j == sequence.length
+            i++
+          pass: false
 
 class Test
   constructor: (@reporter, @testFn) ->
@@ -42,21 +43,22 @@ class Test
 
   run: ->
     env = new FakeEnv(@testFn)
-    @reporter.reportRunnerStarting()
+    @reporter.jasmineStarted()
 
     for suite in env.queue
       @execSuite suite
 
-    @reporter.reportRunnerResults()
+    @reporter.jasmineDone()
 
   execSuite: (suite) ->
+    @reporter.suiteStarted()
     for item in suite.queue
       if @isSpec(item)
-        @reporter.reportSpecStarting(item)
-        @reporter.reportSpecResults(item)
+        @reporter.specStarted(item)
+        @reporter.specDone(item)
       else
         @execSuite item
-    @reporter.reportSuiteResults()
+    @reporter.suiteDone()
 
   isSpec: (it) -> it.suite != undefined
 
@@ -88,8 +90,7 @@ class Suite
 
 class Spec
   constructor: (@env, @suite, @description, fn) ->
-    @success = false
-    @skipped = false
+    @status = ''
     @items = []
     @id = @env.nextId++
     fn.apply(@)
@@ -101,11 +102,11 @@ class Spec
     skipped: @skipped
 
   passed: (message = '') ->
-    @success = true
+    @status = 'passed'
     @items.push {message, passed: -> true}
 
   failed: (message = '') ->
-    @success = false
+    @status = 'failed'
     @items.push {message, trace: {stack: 'Error: Expectation\n{Stacktrace}'}, passed: -> false}
 
 global.Test = Test
