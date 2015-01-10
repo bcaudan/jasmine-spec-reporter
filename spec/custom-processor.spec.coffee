@@ -1,6 +1,6 @@
-require('./lib/test-helper.coffee')
+require('./helpers/test-helper.coffee')
 SpecReporter = require('../src/jasmine-spec-reporter.js')
-TestProcessor = require('./lib/test-processor.js')
+TestProcessor = require('./helpers/test-processor.js')
 
 describe 'spec reporter', ->
   addMatchers()

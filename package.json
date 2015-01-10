@@ -4,7 +4,7 @@
   "description": "Spec reporter for jasmine behavior-driven development framework",
   "main": "src/jasmine-spec-reporter.js",
   "scripts": {
-    "test": "node node_modules/jasmine-node/bin/jasmine-node --coffee --noStack spec",
+    "test": "node node_modules/jasmine/bin/jasmine.js",
     "example": "node node_modules/jasmine-node/bin/jasmine-node --coffee example"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "colors": "~0.6.2"
   },
   "devDependencies": {
-    "jasmine-node": "~1.14.3"
+    "coffee-script": "1.8.0",
+    "jasmine": "2.1.1",
   }
 }

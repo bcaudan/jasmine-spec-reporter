@@ -1,4 +1,4 @@
-require('./lib/test-helper.coffee')
+require('./helpers/test-helper.coffee')
 SpecReporter = require('../src/jasmine-spec-reporter.js')
 
 describe 'spec reporter', ->
