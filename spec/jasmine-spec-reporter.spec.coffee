@@ -129,6 +129,28 @@ describe 'spec reporter', ->
         ]
 
 
+      it 'should display multiple nested suites', ->
+        expect(new Test(@reporter,->
+          @describe 'suite 1', ->
+            @describe 'suite 2', ->
+              @it 'spec 2', ->
+                @passed()
+            @describe 'suite 3', ->
+              @it 'spec 3', ->
+                @passed()
+        ).outputs).contains [
+          ''
+          '  suite 1'
+          ''
+          '    suite 2'
+          '      ✓ spec 2'
+          ''
+          '    suite 3'
+          '      ✓ spec 3'
+          ''
+        ]
+
+
     describe 'when summary', ->
       it 'should report success', ->
         expect(new Test(@reporter,->

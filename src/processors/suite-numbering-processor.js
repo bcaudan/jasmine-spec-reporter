@@ -1,7 +1,7 @@
 var DisplayProcessor = require('../display-processor');
 
 function SuiteNumberingProcessor() {
-  this.currentHierarchy = [];
+  this.suiteHierarchy = [];
 
   this.computeNumber = function (suite) {
     this.computeHierarchy(suite);
@@ -10,22 +10,22 @@ function SuiteNumberingProcessor() {
 
   this.computeHierarchy = function (suite) {
     var parentName = this.getParentName(suite);
-    for (var i = 0 ; i < this.currentHierarchy.length ; i++) {
-      if (this.currentHierarchy[i].name == parentName) {
-        this.currentHierarchy[i].number++;
-        this.currentHierarchy.splice(i + 1, this.currentHierarchy.length - i - 1);
+    for (var i = 0 ; i < this.suiteHierarchy.length ; i++) {
+      if (this.suiteHierarchy[i].name == parentName) {
+        this.suiteHierarchy[i].number++;
+        this.suiteHierarchy.splice(i + 1, this.suiteHierarchy.length - i - 1);
         break;
       }
     }
-    if (i == this.currentHierarchy.length) {
-      this.currentHierarchy.push({name: parentName, number: 1})
+    if (i == this.suiteHierarchy.length) {
+      this.suiteHierarchy.push({name: parentName, number: 1})
     }
   };
 
   this.computeHierarchyNumber = function () {
     var number = '';
-    for (var i = 0 ; i < this.currentHierarchy.length ; i++) {
-      number += this.currentHierarchy[i].number + '.';
+    for (var i = 0 ; i < this.suiteHierarchy.length ; i++) {
+      number += this.suiteHierarchy[i].number + '.';
     }
     return number.substring(0, number.length - 1);
   };
