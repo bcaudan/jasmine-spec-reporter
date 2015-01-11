@@ -109,7 +109,7 @@ SpecDisplay.prototype = {
   ensureSuiteDisplayed: function (spec) {
     if (this.displayedSuites.length == 0) {
       var suiteName = this.getParentName(spec).trim();
-      this.suite({fullName: suiteName, description: suiteName});
+      this.suite({id: 'single suite', fullName: suiteName, description: suiteName});
     }
   },
 
