@@ -55,7 +55,7 @@ describe 'spec reporter', ->
 
 
     describe 'when suite', ->
-      fit 'should display multiple specs', ->
+      it 'should display multiple specs', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @it 'spec 1', ->

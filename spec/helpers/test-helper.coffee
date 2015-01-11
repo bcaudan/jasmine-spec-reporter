@@ -45,69 +45,68 @@ class Test
     env = new FakeEnv(@testFn)
     @reporter.jasmineStarted()
 
-    for suite in env.queue
-      @execSuite suite
+    if @hasOnlyOneSuite(@testFn)
+        @execSuite env.queue[0]
+    else
+      for suite in env.queue
+        @reporter.suiteStarted(suite)
+        @execSuite suite
+        @reporter.suiteDone(suite)
 
     @reporter.jasmineDone()
 
   execSuite: (suite) ->
-    @reporter.suiteStarted()
     for item in suite.queue
       if @isSpec(item)
         @reporter.specStarted(item)
         @reporter.specDone(item)
       else
+        @reporter.suiteStarted(item)
         @execSuite item
-    @reporter.suiteDone()
+        @reporter.suiteDone(item)
 
-  isSpec: (it) -> it.suite != undefined
+  isSpec: (it) ->
+    it.queue == undefined
+
+  hasOnlyOneSuite: (testFn) ->
+    (testFn.toString().match(/describe/g) || []).length == 1
 
 class FakeEnv
   constructor: (fn) ->
-    @nextId = 0
     @queue = []
     fn.apply(@)
 
   describe: (description, fn) ->
-    @queue.push(new Suite(@, null, description, fn))
+    @queue.push(new Suite(description, description, fn))
 
 class Suite
-  constructor: (@env, @parentSuite, @description, fn) ->
+  constructor: (@description, @fullName, fn) ->
     @queue = []
-    @id = @env.nextId++
     fn.apply(@)
 
   describe: (description, fn) ->
-    @queue.push(new Suite(@env, @, description, fn))
+    @queue.push(new Suite(description, @fullName + ' ' + description, fn))
 
   it: (description, fn) ->
-    @queue.push(new Spec(@env, description, fn))
+    @queue.push(new Spec(description, @fullName + ' ' + description, fn))
 
   xit: (description, fn) ->
-    spec = new Spec(@env, description, fn)
+    spec = new Spec(description, @fullName + ' ' + description, fn)
     spec.status = 'pending'
     @queue.push(spec)
 
 class Spec
-  constructor: (@env, @description, fn) ->
+  constructor: (@description, @fullName, fn) ->
     @status = ''
-    @items = []
-    @id = @env.nextId++
+    @failedExpectations = []
     fn.apply(@)
-
-  results: ->
-    description: @description
-    passed: => @success
-    items_: @items
-    skipped: @skipped
 
   passed: (message = '') ->
     @status = 'passed'
-    @items.push {message, passed: -> true}
 
   failed: (message = '') ->
     @status = 'failed'
-    @items.push {message, trace: {stack: 'Error: Expectation\n{Stacktrace}'}, passed: -> false}
+    @failedExpectations.push {message, stack: 'Error: Expectation\n{Stacktrace}', passed: false}
 
 global.Test = Test
 global.addMatchers = addMatchers

@@ -108,7 +108,7 @@ SpecDisplay.prototype = {
 
   ensureSuiteDisplayed: function (spec) {
     if (this.displayedSuites.length == 0) {
-      var suiteName = this.getParentName(spec);
+      var suiteName = this.getParentName(spec).trim();
       this.suite({fullName: suiteName, description: suiteName});
     }
   },
@@ -150,7 +150,7 @@ SpecDisplay.prototype = {
     this.increaseIndent();
     var currentSuite = suite;
     var i = 1;
-    while (this.getParentName(currentSuite) != '') {
+    while (this.getParentName(currentSuite) != '' && i <= this.displayedSuites.length) {
       this.increaseIndent();
       currentSuite = this.displayedSuites[this.displayedSuites.length - i];
       i++;
