@@ -9,7 +9,7 @@ describe 'spec reporter', ->
       @reporter = new SpecReporter()
 
     describe 'when spec', ->
-      fit 'should report success', ->
+      it 'should report success', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @it 'successful spec', ->
@@ -55,7 +55,7 @@ describe 'spec reporter', ->
 
 
     describe 'when suite', ->
-      it 'should display multiple specs', ->
+      fit 'should display multiple specs', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @it 'spec 1', ->

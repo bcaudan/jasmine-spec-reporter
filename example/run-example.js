@@ -2,9 +2,10 @@ require('coffee-script/register');
 var path = require('path');
 var Jasmine = require('jasmine');
 var SpecReporter = require('../src/jasmine-spec-reporter.js');
+var noop = function () {};
 
 var jrunner = new Jasmine();
-jrunner.configureDefaultReporter({print: function(){}});
+jrunner.configureDefaultReporter({onComplete: noop, print: noop});
 jasmine.getEnv().addReporter(new SpecReporter({
   displayStacktrace: false,
   displayFailuresSummary: true,

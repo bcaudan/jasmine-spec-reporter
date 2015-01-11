@@ -81,15 +81,15 @@ class Suite
     @queue.push(new Suite(@env, @, description, fn))
 
   it: (description, fn) ->
-    @queue.push(new Spec(@env, @, description, fn))
+    @queue.push(new Spec(@env, description, fn))
 
   xit: (description, fn) ->
-    spec = new Spec(@env, @, description, fn)
-    spec.skipped = true
+    spec = new Spec(@env, description, fn)
+    spec.status = 'pending'
     @queue.push(spec)
 
 class Spec
-  constructor: (@env, @suite, @description, fn) ->
+  constructor: (@env, @description, fn) ->
     @status = ''
     @items = []
     @id = @env.nextId++

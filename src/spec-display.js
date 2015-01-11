@@ -43,23 +43,13 @@ SpecDisplay.prototype = {
   },
 
   failedSummary: function (spec, index) {
-    this.log(index + ') ' + this.getFullDescription(spec));
+    this.log(index + ') ' + spec.fullName);
     this.displayErrorMessages(spec);
-  },
-
-  getFullDescription: function (spec) {
-    var description = spec.results().description;
-    var suite = spec.suite;
-    while (suite !== null) {
-      description = suite.description + ' ' + description;
-      suite = suite.parentSuite;
-    }
-    return description;
   },
 
   successful: function (spec) {
     if (this.displaySuccessfulSpec) {
-      this.ensureSuiteDisplayed(spec.suite);
+      this.ensureSuiteDisplayed(spec);
       var log = null;
       this.displayProcessors.forEach(function (displayProcessor) {
         log = displayProcessor.displaySuccessfulSpec(spec, log);
@@ -71,7 +61,7 @@ SpecDisplay.prototype = {
   failed: function (spec) {
     this.failedSpecs.push(spec);
     if (this.displayFailedSpec) {
-      this.ensureSuiteDisplayed(spec.suite);
+      this.ensureSuiteDisplayed(spec);
       var log = null;
       this.displayProcessors.forEach(function (displayProcessor) {
         log = displayProcessor.displayFailedSpec(spec, log);
@@ -83,7 +73,7 @@ SpecDisplay.prototype = {
 
   skipped: function (spec) {
     if (this.displaySkippedSpec) {
-      this.ensureSuiteDisplayed(spec.suite);
+      this.ensureSuiteDisplayed(spec);
       var log = null;
       this.displayProcessors.forEach(function (displayProcessor) {
         log = displayProcessor.displaySkippedSpec(spec, log);
@@ -94,12 +84,11 @@ SpecDisplay.prototype = {
 
   displayErrorMessages: function (spec) {
     this.increaseIndent();
-    var assertions = spec.results().items_;
-    for (var i = 0; i < assertions.length; i++) {
-      if (!assertions[i].passed()) {
-        this.log('- '.failure + assertions[i].message.failure);
-        if (this.displayStacktrace && assertions[i].trace.stack) {
-          this.log(this.filterStackTraces(assertions[i].trace.stack));
+    for (var i = 0; i < spec.failedExpectations.length; i++) {
+      if (!spec.failedExpectations[i].passed) {
+        this.log('- '.failure + spec.failedExpectations[i].message.failure);
+        if (this.displayStacktrace && spec.failedExpectations[i].stack) {
+          this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
         }
       }
     }
@@ -114,22 +103,17 @@ SpecDisplay.prototype = {
         filtered.push(lines[i]);
       }
     }
-    return filtered.join('\n');
+    return filtered.join('\n' + this.currentIndent);
   },
 
-  ensureSuiteDisplayed: function (suite) {
-    if (!this.hasBeenDisplayed(suite)) {
-      this.ensureSuiteDisplayed(suite.parentSuite);
-      this.displaySuite(suite);
-      this.increaseIndent();
+  ensureSuiteDisplayed: function (spec) {
+    if (this.displayedSuites.length == 0) {
+      var suiteName = this.getParentName(spec);
+      this.suite({fullName: suiteName, description: suiteName});
     }
   },
 
-  hasBeenDisplayed: function (suite) {
-    return suite == null || this.displayedSuites.indexOf(suite.id) != -1;
-  },
-
-  displaySuite: function (suite) {
+  suite: function (suite) {
     this.newLine();
     this.computeSuiteIndent(suite);
     var log = null;
@@ -137,7 +121,8 @@ SpecDisplay.prototype = {
       log = displayProcessor.displaySuite(suite, log);
     });
     this.log(log);
-    this.displayedSuites.push(suite.id);
+    this.displayedSuites.push(suite);
+    this.increaseIndent();
   },
 
   suiteResults: function (suite) {
@@ -162,11 +147,18 @@ SpecDisplay.prototype = {
 
   computeSuiteIndent: function (suite) {
     this.resetIndent();
+    this.increaseIndent();
     var currentSuite = suite;
-    while (currentSuite !== null) {
+    var i = 1;
+    while (this.getParentName(currentSuite) != '') {
       this.increaseIndent();
-      currentSuite = currentSuite.parentSuite;
+      currentSuite = this.displayedSuites[this.displayedSuites.length - i];
+      i++;
     }
+  },
+
+  getParentName: function (element) {
+    return element.fullName.replace(element.description, '');
   },
 
   resetIndent: function () {

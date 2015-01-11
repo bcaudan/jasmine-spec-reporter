@@ -58,13 +58,14 @@ SpecReporter.prototype = {
     this.metrics.start();
   },
 
-  jasmineDone: function (runner) {
+  jasmineDone: function () {
     this.metrics.stop();
     this.display.summary(this.metrics);
     this.finished = true;
   },
 
   suiteStarted: function (suite) {
+    this.display.suite(suite);
   },
 
   suiteDone: function (suite) {
