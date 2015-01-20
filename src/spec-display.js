@@ -11,6 +11,7 @@ var SpecDisplay = function (options, displayProcessors) {
   this.displaySkippedSpec = options.displaySkippedSpec || false;
   this.displayWithoutColors = options.colors === false;
   this.displayProcessors = displayProcessors;
+  this.displayStartedSpec = options.displayStartedSpec !== false;
 };
 
 SpecDisplay.prototype = {
@@ -55,6 +56,17 @@ SpecDisplay.prototype = {
       suite = suite.parentSuite;
     }
     return description;
+  },
+
+  started: function (spec) {
+    if (this.displayStartedSpec) {
+      this.ensureSuiteDisplayed(spec.suite);
+      var log = null;
+      this.displayProcessors.forEach(function (displayProcessor) {
+        log = displayProcessor.displayStartedSpec(spec, log);
+      });
+      this.log(log);
+    }
   },
 
   successful: function (spec) {
