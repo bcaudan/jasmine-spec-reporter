@@ -16,4 +16,8 @@ DisplayProcessor.prototype.displaySkippedSpec = function (spec, log) {
   return log;
 };
 
+DisplayProcessor.prototype.displayStartedSpec = function (spec, log) {
+  return spec.description;
+};
+
 module.exports = DisplayProcessor;
