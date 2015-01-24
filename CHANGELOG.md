@@ -1,3 +1,15 @@
+# 2.0.0
+
+## Feature
+
+Add support for jasmine 2.x
+
+## Breaking change
+
+- Jasmine 1.x is not supported by this version
+
+- Skipped specs are not displayable in favour of pending specs.
+
 # 1.1.2
 
 Add message when reporter 1.x is used with jasmine > 1.x

@@ -31,7 +31,7 @@ In your protractor configuration file, add the silent option in the jasmineNodeO
 
     jasmineNodeOpts: {
        ...
-       silent: true
+       print: function() {}
     }
 
 ## Custom output
@@ -62,6 +62,10 @@ You can customize the output of the reporter yourself: [see how](https://github.
 
 Colors are displayed in the console via [colors](https://github.com/Marak/colors.js), you can see all available colors on the [project page](https://github.com/Marak/colors.js).
 You can also disable colors with the option: `colors: false`.
+
+# Compatibility with Jasmine 1.x
+
+To use Jasmine spec reporter with Jasmine 1.x, please see [jasmine1 branch](https://github.com/bcaudan/jasmine-spec-reporter/tree/jasmine1).
 
 # Migration from 0.x.x to 1.0.0
 
