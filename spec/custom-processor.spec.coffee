@@ -8,7 +8,7 @@ describe 'spec reporter', ->
   describe 'with custom processor', ->
     beforeEach ->
       @reporter = new SpecReporter
-        displaySkippedSpec: true
+        displayPendingSpec: true
         customProcessors: [TestProcessor]
         test: ' TEST'
 
@@ -39,9 +39,9 @@ describe 'spec reporter', ->
         .contains /failed spec TEST/
 
 
-      it 'should report skipped with custom display', ->
+      it 'should report pending with custom display', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
-            @xit 'skipped spec', ->
+            @xit 'pending spec', ->
         ).outputs)
-        .contains /skipped spec TEST/
+        .contains /pending spec TEST/

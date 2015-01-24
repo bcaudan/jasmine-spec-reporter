@@ -8,7 +8,7 @@ var SpecDisplay = function (options, displayProcessors) {
   this.displayFailuresSummary = options.displayFailuresSummary !== false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
   this.displayFailedSpec = options.displayFailedSpec !== false;
-  this.displaySkippedSpec = options.displaySkippedSpec || false;
+  this.displayPendingSpec = options.displayPendingSpec || false;
   this.displayWithoutColors = options.colors === false;
   this.displayProcessors = displayProcessors;
 };
@@ -18,7 +18,7 @@ SpecDisplay.prototype = {
     var execution = 'Executed ' + metrics.executedSpecs + ' of ' + metrics.totalSpecs + (metrics.totalSpecs === 1 ? ' spec ' : ' specs ');
     var successful = (metrics.failedSpecs == 0) ? 'SUCCESS ' : '';
     var failed = (metrics.failedSpecs > 0) ? '(' + metrics.failedSpecs + ' FAILED) ' : '';
-    var skipped = (metrics.skippedSpecs > 0) ? '(skipped ' + metrics.skippedSpecs + ') ' : '';
+    var pending = (metrics.pendingSpecs > 0) ? '(' + metrics.pendingSpecs + ' PENDING) ' : '';
     var duration = 'in ' + metrics.duration + '.';
 
     this.resetIndent();
@@ -26,7 +26,7 @@ SpecDisplay.prototype = {
     if (this.displayFailuresSummary && metrics.failedSpecs > 0) {
       this.failuresSummary();
     }
-    this.log(execution + successful.success + failed.failure + skipped + duration);
+    this.log(execution + successful.success + failed.failure + pending.pending + duration);
   },
 
   failuresSummary: function () {
@@ -71,12 +71,12 @@ SpecDisplay.prototype = {
     }
   },
 
-  skipped: function (spec) {
-    if (this.displaySkippedSpec) {
+  pending: function (spec) {
+    if (this.displayPendingSpec) {
       this.ensureSuiteDisplayed(spec);
       var log = null;
       this.displayProcessors.forEach(function (displayProcessor) {
-        log = displayProcessor.displaySkippedSpec(spec, log);
+        log = displayProcessor.displayPendingSpec(spec, log);
       });
       this.log(log);
     }

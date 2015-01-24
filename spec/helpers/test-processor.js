@@ -18,7 +18,7 @@ TestProcessor.prototype.displayFailedSpec = function (spec, log) {
   return log + this.test;
 };
 
-TestProcessor.prototype.displaySkippedSpec = function (spec, log) {
+TestProcessor.prototype.displayPendingSpec = function (spec, log) {
   return log + this.test;
 };
 

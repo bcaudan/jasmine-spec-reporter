@@ -4,7 +4,7 @@ function SpecPrefixesProcessor(prefixes) {
   this.prefixes = {
     success: prefixes && prefixes.success !== undefined ? prefixes.success : '✓ ',
     failure: prefixes && prefixes.failure !== undefined ? prefixes.failure : '✗ ',
-    skipped: prefixes && prefixes.skipped !== undefined ? prefixes.skipped : '- '
+    pending: prefixes && prefixes.pending !== undefined ? prefixes.pending : '- '
   }
 }
 
@@ -18,8 +18,8 @@ SpecPrefixesProcessor.prototype.displayFailedSpec = function (spec, log) {
   return this.prefixes.failure + log;
 };
 
-SpecPrefixesProcessor.prototype.displaySkippedSpec = function (spec, log) {
-  return this.prefixes.skipped + log;
+SpecPrefixesProcessor.prototype.displayPendingSpec = function (spec, log) {
+  return this.prefixes.pending + log;
 };
 
 module.exports = SpecPrefixesProcessor;

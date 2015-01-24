@@ -12,8 +12,8 @@ SpecColorsProcessor.prototype.displayFailedSpec = function (spec, log) {
   return log.failure;
 };
 
-SpecColorsProcessor.prototype.displaySkippedSpec = function (spec, log) {
-  return log.skipped;
+SpecColorsProcessor.prototype.displayPendingSpec = function (spec, log) {
+  return log.pending;
 };
 
 module.exports = SpecColorsProcessor;

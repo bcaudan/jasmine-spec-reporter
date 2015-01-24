@@ -14,6 +14,6 @@ function displaySpecDescription(spec) {
 
 DefaultProcessor.prototype.displaySuccessfulSpec  = displaySpecDescription;
 DefaultProcessor.prototype.displayFailedSpec      = displaySpecDescription;
-DefaultProcessor.prototype.displaySkippedSpec     = displaySpecDescription;
+DefaultProcessor.prototype.displayPendingSpec     = displaySpecDescription;
 
 module.exports = DefaultProcessor;

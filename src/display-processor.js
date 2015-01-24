@@ -12,7 +12,7 @@ DisplayProcessor.prototype.displayFailedSpec = function (spec, log) {
   return log;
 };
 
-DisplayProcessor.prototype.displaySkippedSpec = function (spec, log) {
+DisplayProcessor.prototype.displayPendingSpec = function (spec, log) {
   return log;
 };
 

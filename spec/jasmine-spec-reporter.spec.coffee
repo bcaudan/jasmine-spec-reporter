@@ -27,12 +27,12 @@ describe 'spec reporter', ->
         .contains /✗ failed spec/
 
 
-      it 'should not report skipped', ->
+      it 'should not report pending', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
-            @xit 'skipped spec', ->
+            @xit 'pending spec', ->
         ).outputs)
-        .not.contains /skipped spec/
+        .not.contains /pending spec/
 
 
     describe 'when failed spec', ->
@@ -192,22 +192,22 @@ describe 'spec reporter', ->
         ]
 
 
-      it 'should report skipped whith success', ->
+      it 'should report pending whith success', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @xit 'spec', ->
         ).summary)
-        .contains 'Executed 0 of 1 spec SUCCESS (skipped 1) in {time}.'
+        .contains 'Executed 0 of 1 spec SUCCESS (1 PENDING) in {time}.'
 
 
-      it 'should report skipped whith failure', ->
+      it 'should report pending with failure', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @xit 'spec', ->
             @it 'spec', ->
               @failed()
         ).summary)
-        .toContain 'Executed 1 of 2 specs (1 FAILED) (skipped 1) in {time}.'
+        .toContain 'Executed 1 of 2 specs (1 FAILED) (1 PENDING) in {time}.'
 
 
   describe 'with stacktrace enabled', ->
@@ -352,17 +352,17 @@ describe 'spec reporter', ->
         expect(outputs).not.contains /failed spec/
 
 
-  describe 'with skipped spec enabled', ->
+  describe 'with pending spec enabled', ->
     beforeEach ->
-      @reporter = new SpecReporter({displaySkippedSpec: true})
+      @reporter = new SpecReporter({displayPendingSpec: true})
 
     describe 'when spec', ->
-      it 'should report skipped', ->
+      it 'should report pending', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
-            @xit 'skipped spec', ->
+            @xit 'pending spec', ->
         ).outputs)
-        .contains /- skipped spec/
+        .contains /- pending spec/
 
 
   describe 'with spec duration enabled', ->
@@ -390,7 +390,7 @@ describe 'spec reporter', ->
 
   describe 'with prefixes set to empty strings', ->
     beforeEach ->
-      @reporter = new SpecReporter({displaySkippedSpec: true, prefixes: {success: '', failure: '', skipped: ''}})
+      @reporter = new SpecReporter({displayPendingSpec: true, prefixes: {success: '', failure: '', pending: ''}})
  
     describe 'when spec', ->
       it 'should report success', ->
@@ -411,17 +411,17 @@ describe 'spec reporter', ->
         .not.contains /✗/
 
 
-      it 'should report skipped', ->
+      it 'should report pending', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
-            @xit 'skipped spec', ->
+            @xit 'pending spec', ->
         ).outputs)
         .not.contains /-/
 
 
   describe 'with prefixes set to valid strings', ->
     beforeEach ->
-      @reporter = new SpecReporter({displaySkippedSpec: true, prefixes: {success: 'Pass ', failure: 'Fail ', skipped: 'Skip '}})
+      @reporter = new SpecReporter({displayPendingSpec: true, prefixes: {success: 'Pass ', failure: 'Fail ', pending: 'Skip '}})
 
     describe 'when spec', ->
       it 'should report success', ->
@@ -442,9 +442,9 @@ describe 'spec reporter', ->
         .not.contains /✗/
 
 
-      it 'should report skipped', ->
+      it 'should report pending', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
-            @xit 'skipped spec', ->
+            @xit 'pending spec', ->
         ).outputs)
         .not.contains /-/

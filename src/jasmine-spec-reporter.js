@@ -23,7 +23,7 @@ function initColors(options) {
   colors.setTheme({
     success: options.colors && options.colors.success ? options.colors.success : 'green',
     failure: options.colors && options.colors.failure ? options.colors.failure : 'red',
-    skipped: options.colors && options.colors.skipped ? options.colors.skipped : 'cyan'
+    pending: options.colors && options.colors.pending ? options.colors.pending : 'cyan'
   });
 }
 
@@ -79,8 +79,8 @@ SpecReporter.prototype = {
   specDone: function (spec) {
     this.metrics.stopSpec(spec);
     if (spec.status == 'pending') {
-      this.metrics.skippedSpecs++;
-      this.display.skipped(spec);
+      this.metrics.pendingSpecs++;
+      this.display.pending(spec);
     } else if (spec.status == 'passed') {
       this.metrics.successfulSpecs++;
       this.display.successful(spec);

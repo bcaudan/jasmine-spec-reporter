@@ -4,7 +4,7 @@ var SpecMetrics = function () {
   this.duration = null;
   this.successfulSpecs = 0;
   this.failedSpecs = 0;
-  this.skippedSpecs = 0;
+  this.pendingSpecs = 0;
   this.executedSpecs = 0;
   this.totalSpecs = 0;
 };
@@ -16,7 +16,7 @@ SpecMetrics.prototype = {
 
   stop: function () {
     this.duration = this.formatDuration((new Date()).getTime() - this.startTime);
-    this.totalSpecs = this.failedSpecs + this.successfulSpecs + this.skippedSpecs;
+    this.totalSpecs = this.failedSpecs + this.successfulSpecs + this.pendingSpecs;
     this.executedSpecs = this.failedSpecs + this.successfulSpecs;
   },
 

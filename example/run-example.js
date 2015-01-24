@@ -11,7 +11,7 @@ jasmine.getEnv().addReporter(new SpecReporter({
   displayFailuresSummary: true,
   displaySuccessfulSpec: true,
   displayFailedSpec: true,
-  displaySkippedSpec: false,
+  displayPendingSpec: true,
   displaySpecDuration: false,
   displaySuiteNumber: false,
   colors: {
@@ -22,7 +22,7 @@ jasmine.getEnv().addReporter(new SpecReporter({
   prefixes: {
     success: '✓ ',
     failure: '✗ ',
-    skipped: '- '
+    pending: '- '
   },
   customProcessors: []
 }));

@@ -44,18 +44,18 @@ You can customize the output of the reporter yourself: [see how](https://github.
       displayFailuresSummary: true, // display summary of all failures after execution
       displaySuccessfulSpec: true,  // display each successful spec
       displayFailedSpec: true,      // display each failed spec
-      displaySkippedSpec: false,    // display each skipped spec
+      displayPendingSpec: false,    // display each pending spec
       displaySpecDuration: false,   // display each spec duration
       displaySuiteNumber: false,    // display each suite number (hierarchical)
       colors: {
         success: 'green',
         failure: 'red',
-        skipped: 'cyan'
+        pending: 'cyan'
       },
       prefixes: {
         success: '✓ ',
         failure: '✗ ',
-        skipped: '- '
+        pending: '- '
       },
       customProcessors: []
     }
