@@ -84,6 +84,19 @@ SpecReporter.prototype = {
       this.metrics.failedSpecs++;
       this.display.failed(spec);
     }
+  },
+
+  jasmineStarted: function () {
+      this.display.newLine();
+      this.display.log("*******************************************************************");
+      this.display.log("* Oops!                                                           *");
+      this.display.log("* jasmine-spec-reporter 1.x is not compatible with jasmine > 1.x. *");
+      this.display.log("*                                                                 *");
+      this.display.log("* Please consider using jasmine-spec-reporter >= 2.0.0.           *");
+      this.display.log("*                                                                 *");
+      this.display.log("*      npm install jasmine-spec-reporter@latest --save-dev        *");
+      this.display.log("*******************************************************************");
+      this.display.newLine();
   }
 };
 
