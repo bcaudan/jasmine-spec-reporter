@@ -27,7 +27,7 @@ Use it in your Protractor configuration file:
     }
 
 ## Remove protractor dot reporter
-In your protractor configuration file, add the silent option in the jasmineNodeOpts section:
+In your protractor configuration file, add the print function in the jasmineNodeOpts section:
 
     jasmineNodeOpts: {
        ...
