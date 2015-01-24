@@ -12,7 +12,7 @@ The `jasmine-spec-reporter` can be used to enhance your [Protractor](https://git
 
 Install `jasmine-spec-reporter` via npm:
 
-    npm install jasmine-spec-reporter --save-dev
+    npm install jasmine-spec-reporter@"<2.0.0" --save-dev
 
 Use it in your Protractor configuration file:
 
