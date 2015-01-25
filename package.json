@@ -25,9 +25,9 @@
   },
   "homepage": "https://github.com/bcaudan/jasmine-spec-reporter",
   "dependencies": {
-    "colors": "~0.6.2"
+    "colors": "~1.0.3"
   },
   "devDependencies": {
-    "jasmine-node": "~1.14.3"
+    "jasmine-node": "~1.14.5"
   }
 }
