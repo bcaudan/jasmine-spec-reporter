@@ -15,10 +15,11 @@ var SpecDisplay = function (options, displayProcessors) {
 
 SpecDisplay.prototype = {
   summary: function (metrics) {
-    var execution = 'Executed ' + metrics.executedSpecs + ' of ' + metrics.totalSpecs + (metrics.totalSpecs === 1 ? ' spec ' : ' specs ');
+    var execution = 'Executed ' + metrics.executedSpecs + ' of ' + metrics.totalSpecsDefined + (metrics.totalSpecsDefined === 1 ? ' spec ' : ' specs ');
     var successful = (metrics.failedSpecs == 0) ? 'SUCCESS ' : '';
     var failed = (metrics.failedSpecs > 0) ? '(' + metrics.failedSpecs + ' FAILED) ' : '';
     var pending = (metrics.pendingSpecs > 0) ? '(' + metrics.pendingSpecs + ' PENDING) ' : '';
+    var skipped = (metrics.skippedSpecs > 0) ? '(' + metrics.skippedSpecs + ' SKIPPED) ' : '';
     var duration = 'in ' + metrics.duration + '.';
 
     this.resetIndent();
@@ -26,7 +27,7 @@ SpecDisplay.prototype = {
     if (this.displayFailuresSummary && metrics.failedSpecs > 0) {
       this.failuresSummary();
     }
-    this.log(execution + successful.success + failed.failure + pending.pending + duration);
+    this.log(execution + successful.success + failed.failure + pending.pending + skipped + duration);
   },
 
   failuresSummary: function () {

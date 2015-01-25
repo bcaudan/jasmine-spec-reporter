@@ -192,7 +192,7 @@ describe 'spec reporter', ->
         ]
 
 
-      it 'should report pending whith success', ->
+      it 'should report pending with success', ->
         expect(new Test(@reporter,->
           @describe 'suite', ->
             @xit 'spec', ->
@@ -208,6 +208,28 @@ describe 'spec reporter', ->
               @failed()
         ).summary)
         .toContain 'Executed 1 of 2 specs (1 FAILED) (1 PENDING) in {time}.'
+
+
+      xit 'should report skipped with success', ->
+        expect(new Test(@reporter,->
+          @describe 'suite', ->
+            @it 'spec', ->
+            @fit 'spec', ->
+        ).summary)
+        .toContain 'Executed 1 of 1 specs SUCCESS (1 SKIPPED) in {time}.'
+
+
+      xit 'should report skipped with failure and pending', ->
+        expect(new Test(@reporter,->
+          @fdescribe 'suite', ->
+            @xit 'spec', ->
+            @it 'spec', ->
+              @failed()
+          @describe 'suite', ->
+            @it 'spec', ->
+            @xit 'spec', ->
+        ).summary)
+        .toContain 'Executed 1 of 2 specs (1 FAILED) (1 PENDING) (2 SKIPPED) in {time}.'
 
 
   describe 'with stacktrace enabled', ->

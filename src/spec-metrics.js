@@ -6,18 +6,23 @@ var SpecMetrics = function () {
   this.failedSpecs = 0;
   this.pendingSpecs = 0;
   this.executedSpecs = 0;
+  this.skippedSpecs = 0;
   this.totalSpecs = 0;
+  this.totalSpecsDefined = 0;
 };
 
 SpecMetrics.prototype = {
-  start: function () {
+  start: function (info) {
     this.startTime = (new Date()).getTime();
+    this.totalSpecsDefined = info && info.totalSpecsDefined ? info.totalSpecsDefined : 0;
   },
 
   stop: function () {
     this.duration = this.formatDuration((new Date()).getTime() - this.startTime);
     this.totalSpecs = this.failedSpecs + this.successfulSpecs + this.pendingSpecs;
     this.executedSpecs = this.failedSpecs + this.successfulSpecs;
+    this.totalSpecsDefined = this.totalSpecsDefined ? this.totalSpecsDefined : this.totalSpecs;
+    this.skippedSpecs = this.totalSpecsDefined - this.totalSpecs;
   },
 
   startSpec: function () {

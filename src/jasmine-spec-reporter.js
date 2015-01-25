@@ -52,10 +52,10 @@ function initProcessors(options) {
 }
 
 SpecReporter.prototype = {
-  jasmineStarted: function () {
+  jasmineStarted: function (info) {
     this.started = true;
     this.display.log('Spec started');
-    this.metrics.start();
+    this.metrics.start(info);
   },
 
   jasmineDone: function () {

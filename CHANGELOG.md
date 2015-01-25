@@ -1,8 +1,12 @@
+# 2.1.0
+
+When a suite or spec is focused, it displays the total of specs defined and the number of skipped specs [#11](https://github.com/bcaudan/jasmine-spec-reporter/issues/11)
+
 # 2.0.0
 
 ## Feature
 
-Add support for jasmine 2.x
+Add support for jasmine 2.x [#10](https://github.com/bcaudan/jasmine-spec-reporter/issues/10)
 
 ## Breaking change
 
