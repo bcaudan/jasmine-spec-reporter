@@ -78,7 +78,7 @@ SpecReporter.prototype = {
 
   specDone: function (spec) {
     this.metrics.stopSpec(spec);
-    if (spec.status == 'pending') {
+    if (spec.status == 'pending' || spec.status == 'disabled') {
       this.metrics.pendingSpecs++;
       this.display.pending(spec);
     } else if (spec.status == 'passed') {
