@@ -17,6 +17,14 @@ var SpecDisplay = function (options, displayProcessors) {
 };
 
 SpecDisplay.prototype = {
+  jasmineStarted: function (runner) {
+    var log = null;
+    this.displayProcessors.forEach(function (displayProcessor) {
+      log = displayProcessor.displayJasmineStarted(runner, log);
+    });
+    this.log(log);
+  },
+
   summary: function (metrics) {
     var execution = 'Executed ' + metrics.executedSpecs + ' of ' + metrics.totalSpecsDefined + (metrics.totalSpecsDefined === 1 ? ' spec ' : ' specs ');
     var successful = (metrics.failedSpecs == 0) ? 'SUCCESS ' : '';

@@ -54,8 +54,8 @@ function initProcessors(options) {
 SpecReporter.prototype = {
   jasmineStarted: function (info) {
     this.started = true;
-    this.display.log('Spec started');
     this.metrics.start(info);
+    this.display.jasmineStarted(info);
   },
 
   jasmineDone: function () {

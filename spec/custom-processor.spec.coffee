@@ -12,6 +12,15 @@ describe 'spec reporter', ->
         customProcessors: [TestProcessor]
         test: ' TEST'
 
+    describe 'when jasmine started', ->
+      it 'should report start with custom display', ->
+        expect(new Test(@reporter,->
+          @describe 'suite', ->
+            @it 'successful spec', ->
+              @passed()
+        ).outputs)
+        .contains /Spec started TEST/
+
     describe 'when suite', ->
       it 'should report suite with custom display', ->
         expect(new Test(@reporter,->

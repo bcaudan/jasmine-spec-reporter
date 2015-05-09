@@ -6,6 +6,10 @@ function TestProcessor(options) {
 
 TestProcessor.prototype = new DisplayProcessor();
 
+TestProcessor.prototype.displayJasmineStarted = function (runner, log) {
+  return log + this.test;
+};
+
 TestProcessor.prototype.displaySuite = function (suite, log) {
   return log + this.test;
 };
