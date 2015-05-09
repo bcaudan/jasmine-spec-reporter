@@ -74,6 +74,7 @@ SpecReporter.prototype = {
 
   specStarted: function (spec) {
     this.metrics.startSpec();
+    this.display.specStarted(spec);
   },
 
   specDone: function (spec) {

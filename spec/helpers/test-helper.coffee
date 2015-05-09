@@ -45,13 +45,10 @@ class Test
     env = new FakeEnv(@testFn)
     @reporter.jasmineStarted()
 
-    if @hasOnlyOneSuite(@testFn)
-        @execSuite env.queue[0]
-    else
-      for suite in env.queue
-        @reporter.suiteStarted(suite)
-        @execSuite suite
-        @reporter.suiteDone(suite)
+    for suite in env.queue
+      @reporter.suiteStarted(suite)
+      @execSuite suite
+      @reporter.suiteDone(suite)
 
     @reporter.jasmineDone()
 
@@ -67,9 +64,6 @@ class Test
 
   isSpec: (it) ->
     it.queue == undefined
-
-  hasOnlyOneSuite: (testFn) ->
-    (testFn.toString().match(/describe/g) || []).length == 1
 
 class FakeEnv
   constructor: (fn) ->

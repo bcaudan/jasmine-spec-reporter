@@ -14,6 +14,10 @@ TestProcessor.prototype.displaySuite = function (suite, log) {
   return log + this.test;
 };
 
+TestProcessor.prototype.displaySpecStarted = function (spec, log) {
+  return spec.description + this.test;
+};
+
 TestProcessor.prototype.displaySuccessfulSpec = function (spec, log) {
   return log + this.test;
 };

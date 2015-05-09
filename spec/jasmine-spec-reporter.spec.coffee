@@ -287,52 +287,6 @@ describe 'spec reporter', ->
         ]
 
 
-  describe 'with stacktrace "all" enabled', ->
-    beforeEach ->
-      @reporter = new SpecReporter({displayStacktrace: 'all'})
-
-    describe 'when failed spec', ->
-      it 'should display with error messages with stacktraces', ->
-        outputs = new Test(@reporter,->
-          @describe 'suite', ->
-            @it 'failed spec', ->
-              @failed('first failed assertion')
-        ).outputs
-
-        expect(outputs).not.contains /passed assertion/
-        expect(outputs).contains [
-          '    ✗ failed spec'
-          '      - first failed assertion'
-          '      {Stacktrace}'
-          ''
-        ]
-
-
-    describe 'when summary', ->
-      it 'should report failures summary with stacktraces', ->
-        expect(new Test(@reporter,->
-          @describe 'suite 1', ->
-            @it 'spec 1', ->
-              @failed('failed assertion 1')
-            @describe 'suite 2', ->
-              @it 'spec 2', ->
-                @failed('failed assertion 2')
-        ).summary).contains [
-          /.*/
-          /Failures/
-          /.*/
-          ''
-          '1) suite 1 spec 1'
-          '  - failed assertion 1'
-          '  {Stacktrace}'
-          ''
-          '2) suite 1 suite 2 spec 2'
-          '  - failed assertion 2'
-          '  {Stacktrace}'
-          ''
-        ]
-
-
   describe 'with stacktrace "specs" enabled', ->
     beforeEach ->
       @reporter = new SpecReporter({displayStacktrace: 'specs'})
@@ -496,7 +450,7 @@ describe 'spec reporter', ->
 
 
     describe 'when suite', ->
-      it 'should not display successful suite', ->
+      it 'should display successful suite', ->
         outputs = new Test(@reporter,->
           @describe 'suite', ->
             @it 'spec 1', ->
@@ -505,7 +459,7 @@ describe 'spec reporter', ->
               @passed()
         ).outputs
 
-        expect(outputs).not.contains /suite/
+        expect(outputs).contains /suite/
 
 
       it 'should display failed suite', ->
@@ -537,14 +491,14 @@ describe 'spec reporter', ->
 
 
     describe 'when suite', ->
-      it 'should not display fully failed suite', ->
+      it 'should display fully failed suite', ->
         expect(new Test(@reporter,->
           @describe 'failed suite', ->
             @it 'spec 1', ->
               @failed()
             @it 'spec 2', ->
               @failed()
-        ).outputs).not.contains /failed suite/
+        ).outputs).contains /failed suite/
 
 
       it 'should display not fully failed suite', ->

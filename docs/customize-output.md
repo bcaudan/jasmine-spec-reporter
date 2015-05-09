@@ -27,6 +27,7 @@ var DisplayProcessor = require('./node_modules/jasmine-spec-reporter/src/display
 You can then customize the following methods:
 * displayJasmineStarted(runner, log)
 * displaySuite(suite, log)
+* displaySpecStarted(spec, log)
 * displaySuccessfulSpec(spec, log)
 * displayFailedSpec(spec, log)
 * displayPendingSpec(spec, log)

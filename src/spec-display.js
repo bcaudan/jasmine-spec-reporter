@@ -59,6 +59,14 @@ SpecDisplay.prototype = {
     this.displayErrorMessages(spec, this.displaySummaryWithStacktrace);
   },
 
+  specStarted: function (spec) {
+    var log = null;
+    this.displayProcessors.forEach(function (displayProcessor) {
+      log = displayProcessor.displaySpecStarted(spec, log);
+    });
+    this.log(log);
+  },
+
   successful: function (spec) {
     if (this.displaySuccessfulSpec) {
       this.ensureSuiteDisplayed(spec);
@@ -143,11 +151,13 @@ SpecDisplay.prototype = {
   },
 
   log: function (stuff) {
-    if (this.displayWithoutColors) {
-      stuff = stuff.stripColors;
+    if (stuff !== null) {
+      if (this.displayWithoutColors) {
+        stuff = stuff.stripColors;
+      }
+      console.log(this.currentIndent + stuff);
+      this.lastWasNewLine = false;
     }
-    console.log(this.currentIndent + stuff);
-    this.lastWasNewLine = false;
   },
 
   newLine: function () {

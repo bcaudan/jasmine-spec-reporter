@@ -8,7 +8,9 @@
     * summary: display stacktraces in failures summary only. 
     * none: do not display stacktraces.
 
-* **processor**: add `displayJasmineStarted` hook
+* **processor**: 
+    * add `displayJasmineStarted` hook
+    * add `displaySpecStarted` hook
 
 ## Breaking change
 
