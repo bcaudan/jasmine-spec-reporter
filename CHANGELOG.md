@@ -2,12 +2,13 @@
 
 ## Feature
 
-`displayStacktrace` option has now 4 modes available:
+* **stacktrace**: `displayStacktrace` option has now 4 modes available:
+    * all: display stacktraces for failed specs and in failures summary.  
+    * specs: display stacktraces for failed specs only.
+    * summary: display stacktraces in failures summary only. 
+    * none: do not display stacktraces.
 
-* all: display stacktraces for failed specs and in failures summary.  
-* specs: display stacktraces for failed specs only.
-* summary: display stacktraces in failures summary only. 
-* none: do not display stacktraces.
+* **processor**: add `displayJasmineStarted` hook
 
 ## Breaking change
 

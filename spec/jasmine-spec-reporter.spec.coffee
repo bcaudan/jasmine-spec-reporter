@@ -8,6 +8,15 @@ describe 'spec reporter', ->
     beforeEach ->
       @reporter = new SpecReporter()
 
+    describe 'when jasmine started', ->
+      it 'should report start', ->
+        expect(new Test(@reporter,->
+          @describe 'suite', ->
+            @it 'successful spec', ->
+              @passed()
+        ).outputs)
+        .contains /Spec started/
+
     describe 'when spec', ->
       it 'should report success', ->
         expect(new Test(@reporter,->
