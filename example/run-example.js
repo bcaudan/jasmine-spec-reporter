@@ -5,7 +5,7 @@ var SpecReporter = require('../src/jasmine-spec-reporter.js');
 var noop = function () {};
 
 var jrunner = new Jasmine();
-jrunner.configureDefaultReporter({onComplete: noop, print: noop});
+jrunner.configureDefaultReporter({print: noop});
 jasmine.getEnv().addReporter(new SpecReporter({
   displayStacktrace: false,
   displayFailuresSummary: true,
