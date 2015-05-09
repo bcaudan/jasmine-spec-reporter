@@ -20,7 +20,9 @@ Let's say that you want to add the current time before each output of the report
 
 You need to require the display processor:
 
-    var DisplayProcessor = require('./node_modules/jasmine-spec-reporter/src/display-processor');
+```node
+var DisplayProcessor = require('./node_modules/jasmine-spec-reporter/src/display-processor');
+```
 
 You can then customize the following methods:
 * displaySuite(suite, log)
@@ -32,47 +34,50 @@ The first argument is the jasmine object corresponding to the suite or the spec.
 
 For our example:
 
-    var DisplayProcessor = require('./node_modules/jasmine-spec-reporter/src/display-processor');
+```node
+var DisplayProcessor = require('./node_modules/jasmine-spec-reporter/src/display-processor');
 
-    function TimeProcessor(options) {
-    }
+function TimeProcessor(options) {
+}
 
-    function getTime() {
-        var now = new Date();
-        return now.getHours() + ":" +
-               now.getMinutes() + ":" +
-               now.getSeconds()
-    }
+function getTime() {
+    var now = new Date();
+    return now.getHours() + ':' +
+           now.getMinutes() + ':' +
+           now.getSeconds()
+}
 
-    TimeProcessor.prototype = new DisplayProcessor();
+TimeProcessor.prototype = new DisplayProcessor();
 
-    TimeProcessor.prototype.displaySuite = function (suite, log) {
-      return getTime() + " - " + log;
-    };
+TimeProcessor.prototype.displaySuite = function (suite, log) {
+  return getTime() + ' - ' + log;
+};
 
-    TimeProcessor.prototype.displaySuccessfulSpec = function (spec, log) {
-      return getTime() + " - " + log;
-    };
+TimeProcessor.prototype.displaySuccessfulSpec = function (spec, log) {
+  return getTime() + ' - ' + log;
+};
 
-    TimeProcessor.prototype.displayFailedSpec = function (spec, log) {
-      return getTime() + " - " + log;
-    };
+TimeProcessor.prototype.displayFailedSpec = function (spec, log) {
+  return getTime() + ' - ' + log;
+};
 
-    TimeProcessor.prototype.displayPendingSpec = function (spec, log) {
-      return getTime() + " - " + log;
-    };
-
+TimeProcessor.prototype.displayPendingSpec = function (spec, log) {
+  return getTime() + ' - ' + log;
+};
+```
 
 ## Add it to the configuration
 
 Then you need to configure jasmine spec reporter to use your processor:
 
-    var SpecReporter = require('jasmine-spec-reporter');
+```node
+var SpecReporter = require('jasmine-spec-reporter');
 
-    var reporter = new SpecReporter({
-        customProcessors: [TimeProcessor]
-    });
+var reporter = new SpecReporter({
+    customProcessors: [TimeProcessor]
+});
 
-    jasmine.getEnv().addReporter(reporter);
+jasmine.getEnv().addReporter(reporter);
+```
 
 You must pass the processor constructor in the customProcessors array. Jasmine spec reporter will instantiate it with the options if you need them. You can add as many processors as you want, they will be applied in the order which they are in the customProcessors array.
