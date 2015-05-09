@@ -1,3 +1,22 @@
+# 1.2.0
+
+## Feature
+
+`displayStacktrace` option has now 4 modes available:
+
+* all: display stacktraces for failed specs and in failures summary.  
+* specs: display stacktraces for failed specs only.
+* summary: display stacktraces in failures summary only. 
+* none: do not display stacktraces.
+
+## Breaking change
+
+`displayStacktrace: true` is not working anymore. You will have to choose the displayStacktrace mode that suits you best.
+
+## Other
+
+* Bump colors versions
+
 # 1.1.2
 
 Add message when reporter 1.x is used with jasmine > 1.x

@@ -4,13 +4,16 @@ var SpecDisplay = function (options, displayProcessors) {
   this.displayedSuites = [];
   this.failedSpecs = [];
   this.lastWasNewLine = false;
-  this.displayStacktrace = options.displayStacktrace || false;
   this.displayFailuresSummary = options.displayFailuresSummary !== false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
   this.displayFailedSpec = options.displayFailedSpec !== false;
   this.displaySkippedSpec = options.displaySkippedSpec || false;
   this.displayWithoutColors = options.colors === false;
   this.displayProcessors = displayProcessors;
+
+  var displayStacktrace = options.displayStacktrace || 'none';
+  this.displaySpecsWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'specs';
+  this.displaySummaryWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'summary';
 };
 
 SpecDisplay.prototype = {
@@ -44,7 +47,7 @@ SpecDisplay.prototype = {
 
   failedSummary: function (spec, index) {
     this.log(index + ') ' + this.getFullDescription(spec));
-    this.displayErrorMessages(spec);
+    this.displayErrorMessages(spec, this.displaySummaryWithStacktrace);
   },
 
   getFullDescription: function (spec) {
@@ -77,7 +80,7 @@ SpecDisplay.prototype = {
         log = displayProcessor.displayFailedSpec(spec, log);
       });
       this.log(log);
-      this.displayErrorMessages(spec);
+      this.displayErrorMessages(spec, this.displaySpecsWithStacktrace);
     }
   },
 
@@ -92,13 +95,13 @@ SpecDisplay.prototype = {
     }
   },
 
-  displayErrorMessages: function (spec) {
+  displayErrorMessages: function (spec, withStacktrace) {
     this.increaseIndent();
     var assertions = spec.results().items_;
     for (var i = 0; i < assertions.length; i++) {
       if (!assertions[i].passed()) {
         this.log('- '.failure + assertions[i].message.failure);
-        if (this.displayStacktrace && assertions[i].trace.stack) {
+        if (withStacktrace && assertions[i].trace.stack) {
           this.log(this.filterStackTraces(assertions[i].trace.stack));
         }
       }

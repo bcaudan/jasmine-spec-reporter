@@ -1,7 +1,7 @@
 SpecReporter = require('../src/jasmine-spec-reporter.js')
 jasmine.getEnv().reporter.subReporters_ = [] # remove jasmine-node default reporter
 jasmine.getEnv().addReporter(new SpecReporter({
-  displayStacktrace: false,
+  displayStacktrace: 'none',
   displayFailuresSummary: true,
   displaySuccessfulSpec: true,
   displayFailedSpec: true,

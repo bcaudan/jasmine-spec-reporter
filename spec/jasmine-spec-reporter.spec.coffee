@@ -188,9 +188,9 @@ describe 'spec reporter', ->
         .toContain 'Executed 1 of 2 specs (1 FAILED) (skipped 1) in {time}.'
 
 
-  describe 'with stacktrace enabled', ->
+  describe 'with stacktrace "all" enabled', ->
     beforeEach ->
-      @reporter = new SpecReporter({displayStacktrace: true})
+      @reporter = new SpecReporter({displayStacktrace: 'all'})
 
     describe 'when failed spec', ->
       it 'should display with error messages with stacktraces', ->
@@ -230,6 +230,184 @@ describe 'spec reporter', ->
           '2) suite 1 suite 2 spec 2'
           '  - failed assertion 2'
           '  {Stacktrace}'
+          ''
+        ]
+
+
+  describe 'with stacktrace "all" enabled', ->
+    beforeEach ->
+      @reporter = new SpecReporter({displayStacktrace: 'all'})
+
+    describe 'when failed spec', ->
+      it 'should display with error messages with stacktraces', ->
+        outputs = new Test(@reporter,->
+          @describe 'suite', ->
+            @it 'failed spec', ->
+              @failed('first failed assertion')
+        ).outputs
+
+        expect(outputs).not.contains /passed assertion/
+        expect(outputs).contains [
+          '    ✗ failed spec'
+          '      - first failed assertion'
+          '      {Stacktrace}'
+          ''
+        ]
+
+
+    describe 'when summary', ->
+      it 'should report failures summary with stacktraces', ->
+        expect(new Test(@reporter,->
+          @describe 'suite 1', ->
+            @it 'spec 1', ->
+              @failed('failed assertion 1')
+            @describe 'suite 2', ->
+              @it 'spec 2', ->
+                @failed('failed assertion 2')
+        ).summary).contains [
+          /.*/
+          /Failures/
+          /.*/
+          ''
+          '1) suite 1 spec 1'
+          '  - failed assertion 1'
+          '  {Stacktrace}'
+          ''
+          '2) suite 1 suite 2 spec 2'
+          '  - failed assertion 2'
+          '  {Stacktrace}'
+          ''
+        ]
+
+
+  describe 'with stacktrace "specs" enabled', ->
+    beforeEach ->
+      @reporter = new SpecReporter({displayStacktrace: 'specs'})
+
+    describe 'when failed spec', ->
+      it 'should display with error messages with stacktraces', ->
+        outputs = new Test(@reporter,->
+          @describe 'suite', ->
+            @it 'failed spec', ->
+              @failed('first failed assertion')
+        ).outputs
+
+        expect(outputs).not.contains /passed assertion/
+        expect(outputs).contains [
+          '    ✗ failed spec'
+          '      - first failed assertion'
+          '      {Stacktrace}'
+          ''
+        ]
+
+
+    describe 'when summary', ->
+      it 'should not report stacktraces in failures summary', ->
+        expect(new Test(@reporter,->
+          @describe 'suite 1', ->
+            @it 'spec 1', ->
+              @failed('failed assertion 1')
+            @describe 'suite 2', ->
+              @it 'spec 2', ->
+                @failed('failed assertion 2')
+        ).summary).contains [
+          /.*/
+          /Failures/
+          /.*/
+          ''
+          '1) suite 1 spec 1'
+          '  - failed assertion 1'
+          ''
+          '2) suite 1 suite 2 spec 2'
+          '  - failed assertion 2'
+          ''
+        ]
+
+
+  describe 'with stacktrace "summary" enabled', ->
+    beforeEach ->
+      @reporter = new SpecReporter({displayStacktrace: 'summary'})
+
+    describe 'when failed spec', ->
+      it 'should not display stacktraces with error messages', ->
+        outputs = new Test(@reporter,->
+          @describe 'suite', ->
+            @it 'failed spec', ->
+              @failed('first failed assertion')
+        ).outputs
+
+        expect(outputs).not.contains /passed assertion/
+        expect(outputs).contains [
+          '    ✗ failed spec'
+          '      - first failed assertion'
+          ''
+        ]
+
+
+    describe 'when summary', ->
+      it 'should report failures summary with stacktraces', ->
+        expect(new Test(@reporter,->
+          @describe 'suite 1', ->
+            @it 'spec 1', ->
+              @failed('failed assertion 1')
+            @describe 'suite 2', ->
+              @it 'spec 2', ->
+                @failed('failed assertion 2')
+        ).summary).contains [
+          /.*/
+          /Failures/
+          /.*/
+          ''
+          '1) suite 1 spec 1'
+          '  - failed assertion 1'
+          '  {Stacktrace}'
+          ''
+          '2) suite 1 suite 2 spec 2'
+          '  - failed assertion 2'
+          '  {Stacktrace}'
+          ''
+        ]
+
+
+  describe 'with stacktrace "none" enabled', ->
+    beforeEach ->
+      @reporter = new SpecReporter({displayStacktrace: 'none'})
+
+    describe 'when failed spec', ->
+      it 'should not display stacktraces with error messages', ->
+        outputs = new Test(@reporter,->
+          @describe 'suite', ->
+            @it 'failed spec', ->
+              @failed('first failed assertion')
+        ).outputs
+
+        expect(outputs).not.contains /passed assertion/
+        expect(outputs).contains [
+          '    ✗ failed spec'
+          '      - first failed assertion'
+          ''
+        ]
+
+
+    describe 'when summary', ->
+      it 'should not report stacktraces in failures summary', ->
+        expect(new Test(@reporter,->
+          @describe 'suite 1', ->
+            @it 'spec 1', ->
+              @failed('failed assertion 1')
+            @describe 'suite 2', ->
+              @it 'spec 2', ->
+                @failed('failed assertion 2')
+        ).summary).contains [
+          /.*/
+          /Failures/
+          /.*/
+          ''
+          '1) suite 1 spec 1'
+          '  - failed assertion 1'
+          ''
+          '2) suite 1 suite 2 spec 2'
+          '  - failed assertion 2'
           ''
         ]
 
