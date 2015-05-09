@@ -1,5 +1,9 @@
 function DisplayProcessor () {}
 
+DisplayProcessor.prototype.displayJasmineStarted = function (runner, log) {
+  return log;
+};
+
 DisplayProcessor.prototype.displaySuite = function (suite, log) {
   return log;
 };
