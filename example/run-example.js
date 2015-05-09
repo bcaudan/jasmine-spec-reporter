@@ -7,7 +7,7 @@ var noop = function () {};
 var jrunner = new Jasmine();
 jrunner.configureDefaultReporter({print: noop});
 jasmine.getEnv().addReporter(new SpecReporter({
-  displayStacktrace: false,
+  displayStacktrace: 'none',
   displayFailuresSummary: true,
   displaySuccessfulSpec: true,
   displayFailedSpec: true,

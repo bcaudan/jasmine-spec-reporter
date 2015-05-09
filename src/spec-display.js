@@ -4,13 +4,16 @@ var SpecDisplay = function (options, displayProcessors) {
   this.suiteHierarchy = [];
   this.failedSpecs = [];
   this.lastWasNewLine = false;
-  this.displayStacktrace = options.displayStacktrace || false;
   this.displayFailuresSummary = options.displayFailuresSummary !== false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
   this.displayFailedSpec = options.displayFailedSpec !== false;
   this.displayPendingSpec = options.displayPendingSpec || false;
   this.displayWithoutColors = options.colors === false;
   this.displayProcessors = displayProcessors;
+
+  var displayStacktrace = options.displayStacktrace || 'none';
+  this.displaySpecsWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'specs';
+  this.displaySummaryWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'summary';
 };
 
 SpecDisplay.prototype = {
@@ -45,7 +48,7 @@ SpecDisplay.prototype = {
 
   failedSummary: function (spec, index) {
     this.log(index + ') ' + spec.fullName);
-    this.displayErrorMessages(spec);
+    this.displayErrorMessages(spec, this.displaySummaryWithStacktrace);
   },
 
   successful: function (spec) {
@@ -68,7 +71,7 @@ SpecDisplay.prototype = {
         log = displayProcessor.displayFailedSpec(spec, log);
       });
       this.log(log);
-      this.displayErrorMessages(spec);
+      this.displayErrorMessages(spec, this.displaySpecsWithStacktrace);
     }
   },
 
@@ -83,12 +86,12 @@ SpecDisplay.prototype = {
     }
   },
 
-  displayErrorMessages: function (spec) {
+  displayErrorMessages: function (spec, withStacktrace) {
     this.increaseIndent();
     for (var i = 0; i < spec.failedExpectations.length; i++) {
       if (!spec.failedExpectations[i].passed) {
         this.log('- '.failure + spec.failedExpectations[i].message.failure);
-        if (this.displayStacktrace && spec.failedExpectations[i].stack) {
+        if (withStacktrace && spec.failedExpectations[i].stack) {
           this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
         }
       }

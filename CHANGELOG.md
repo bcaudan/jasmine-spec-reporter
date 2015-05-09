@@ -1,3 +1,23 @@
+# 2.2.0
+
+## Feature
+
+`displayStacktrace` option has now 4 modes available:
+
+* all: display stacktraces for failed specs and in failures summary.  
+* specs: display stacktraces for failed specs only.
+* summary: display stacktraces in failures summary only. 
+* none: do not display stacktraces.
+
+## Breaking change
+
+`displayStacktrace: true` is not working anymore. You will have to choose the displayStacktrace mode that suits you best.
+
+## Other
+
+* Bump dependencies versions
+* Rework documentation 
+
 # 2.1.0
 
 When a suite or spec is focused, it displays the total of specs defined and the number of skipped specs [#11](https://github.com/bcaudan/jasmine-spec-reporter/issues/11)
@@ -13,6 +33,26 @@ Add support for jasmine 2.x [#10](https://github.com/bcaudan/jasmine-spec-report
 - Jasmine 1.x is not supported by this version
 
 - Skipped specs are not displayable in favour of pending specs.
+
+# 1.2.0
+
+## Feature
+
+`displayStacktrace` option has now 4 modes available:
+
+* all: display stacktraces for failed specs and in failures summary.  
+* specs: display stacktraces for failed specs only.
+* summary: display stacktraces in failures summary only. 
+* none: do not display stacktraces.
+
+## Breaking change
+
+`displayStacktrace: true` is not working anymore. You will have to choose the displayStacktrace mode that suits you best.
+
+## Other
+
+* Bump colors versions
+* Rework documentation
 
 # 1.1.2
 
