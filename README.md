@@ -4,7 +4,7 @@ jasmine-spec-reporter
 
 Real time console spec reporter for jasmine behavior-driven development testing framework.
 
-![](https://raw.github.com/bcaudan/jasmine-spec-reporter/master/screenshot.png)
+![](screenshot.png)
 
 # Usage
 ## Protractor
@@ -16,49 +16,55 @@ Install `jasmine-spec-reporter` via npm:
 
 Use it in your Protractor configuration file:
 
-    exports.config = {
-       // your config here ...
+```node
+exports.config = {
+   // your config here ...
 
-       onPrepare: function() {
-          var SpecReporter = require('jasmine-spec-reporter');
-          // add jasmine spec reporter
-          jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
-       }
-    }
+   onPrepare: function() {
+      var SpecReporter = require('jasmine-spec-reporter');
+      // add jasmine spec reporter
+      jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
+   }
+}
+```
 
 ## Remove protractor dot reporter
 In your protractor configuration file, add the silent option in the jasmineNodeOpts section:
 
-    jasmineNodeOpts: {
-       ...
-       silent: true
-    }
+```node
+jasmineNodeOpts: {
+   ...
+   silent: true
+}
+```
 
 ## Custom output
-You can customize the output of the reporter yourself: [see how](https://github.com/bcaudan/jasmine-spec-reporter/blob/master/customize-output.md).
+You can customize the output of the reporter yourself: [see how](customize-output.md).
 
 # Default options
 
-    {
-      displayStacktrace: 'none',    // display stacktrace for each failed assertion, values: (all|specs|summary|none)
-      displayFailuresSummary: true, // display summary of all failures after execution
-      displaySuccessfulSpec: true,  // display each successful spec
-      displayFailedSpec: true,      // display each failed spec
-      displaySkippedSpec: false,    // display each skipped spec
-      displaySpecDuration: false,   // display each spec duration
-      displaySuiteNumber: false,    // display each suite number (hierarchical)
-      colors: {
-        success: 'green',
-        failure: 'red',
-        skipped: 'cyan'
-      },
-      prefixes: {
-        success: '✓ ',
-        failure: '✗ ',
-        skipped: '- '
-      },
-      customProcessors: []
-    }
+```node
+{
+  displayStacktrace: 'none',    // display stacktrace for each failed assertion, values: (all|specs|summary|none)
+  displayFailuresSummary: true, // display summary of all failures after execution
+  displaySuccessfulSpec: true,  // display each successful spec
+  displayFailedSpec: true,      // display each failed spec
+  displaySkippedSpec: false,    // display each skipped spec
+  displaySpecDuration: false,   // display each spec duration
+  displaySuiteNumber: false,    // display each suite number (hierarchical)
+  colors: {
+    success: 'green',
+    failure: 'red',
+    skipped: 'cyan'
+  },
+  prefixes: {
+    success: '✓ ',
+    failure: '✗ ',
+    skipped: '- '
+  },
+  customProcessors: []
+}
+```
 
 Colors are displayed in the console via [colors](https://github.com/Marak/colors.js), you can see all available colors on the [project page](https://github.com/Marak/colors.js).
 You can also disable colors with the option: `colors: false`.

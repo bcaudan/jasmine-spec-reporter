@@ -16,6 +16,7 @@
 ## Other
 
 * Bump colors versions
+* Rework documentation
 
 # 1.1.2
 
