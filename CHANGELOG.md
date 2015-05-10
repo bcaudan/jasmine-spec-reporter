@@ -1,5 +1,11 @@
 # Unreleased
 
+## Bugfix
+
+* Disabled specs was incorrectly reported as failed. [#28](https://github.com/bcaudan/jasmine-spec-reporter/issues/28)
+
+## Other
+
 * Tests: Use jasmine env instead of fake env [#25](https://github.com/bcaudan/jasmine-spec-reporter/issues/25)
 
 # 2.2.0

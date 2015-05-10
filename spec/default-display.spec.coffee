@@ -1,4 +1,4 @@
-describe 'with default options', ->
+describe 'with default display', ->
   beforeEach ->
     @reporter = new SpecReporter()
 
@@ -167,7 +167,7 @@ describe 'with default options', ->
       ]
 
 
-  describe 'when summary', ->
+  describe 'summary', ->
     it 'should report success', ->
       expect(new Test(@reporter, ->
         @describe 'suite', =>
@@ -227,18 +227,16 @@ describe 'with default options', ->
 
 
     it 'should report skipped with success', ->
-      pending('buggy may be related to #28')
       expect(new Test(@reporter, ->
         @describe 'suite', =>
           @it 'spec', =>
           @fit 'spec', =>
             @passed()
       ).summary)
-      .toContain 'Executed 1 of 1 specs SUCCESS (1 SKIPPED) in {time}.'
+      .toContain 'Executed 1 of 2 specs SUCCESS (1 SKIPPED) in {time}.'
 
 
     it 'should report skipped with failure and pending', ->
-      pending('buggy may be related to #28')
       expect(new Test(@reporter, ->
         @fdescribe 'suite', =>
           @xit 'spec', =>
@@ -248,4 +246,4 @@ describe 'with default options', ->
           @it 'spec', =>
           @xit 'spec', =>
       ).summary)
-      .toContain 'Executed 1 of 2 specs (1 FAILED) (1 PENDING) (2 SKIPPED) in {time}.'
+      .toContain 'Executed 1 of 4 specs (1 FAILED) (1 PENDING) (2 SKIPPED) in {time}.'

@@ -85,7 +85,7 @@ SpecReporter.prototype = {
     } else if (spec.status == 'passed') {
       this.metrics.successfulSpecs++;
       this.display.successful(spec);
-    } else {
+    } else if (spec.status == 'failed') {
       this.metrics.failedSpecs++;
       this.display.failed(spec);
     }
