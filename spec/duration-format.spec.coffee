@@ -1,5 +1,3 @@
-SpecReporter = require('../src/jasmine-spec-reporter.js')
-
 describe 'duration', ->
   it 'should be human readable', ->
     secs = 1000
