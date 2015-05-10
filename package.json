@@ -33,6 +33,7 @@
     "coffee-script": "1.9.2",
     "coveralls": "2.11.2",
     "istanbul": "0.3.13",
-    "jasmine": "2.3.1"
+    "jasmine": "2.3.1",
+    "jasmine-core": "2.3.2"
   }
 }

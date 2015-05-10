@@ -1,8 +1,12 @@
+# Unreleased
+
+* Tests: Use jasmine env instead of fake env [#25](https://github.com/bcaudan/jasmine-spec-reporter/issues/25)
+
 # 2.2.0
 
 ## Feature
 
-* **stacktrace**: `displayStacktrace` option has now 4 modes available:
+* **stacktrace**: `displayStacktrace` option has now 4 modes available [#26](https://github.com/bcaudan/jasmine-spec-reporter/issues/26):
     * all: display stacktraces for failed specs and in failures summary.  
     * specs: display stacktraces for failed specs only.
     * summary: display stacktraces in failures summary only. 
@@ -10,7 +14,7 @@
 
 * **processor**: 
     * add `displayJasmineStarted` hook
-    * add `displaySpecStarted` hook
+    * add `displaySpecStarted` hook [#23](https://github.com/bcaudan/jasmine-spec-reporter/issues/23)
 
 ## Breaking change
 

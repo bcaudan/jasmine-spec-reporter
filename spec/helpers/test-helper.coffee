@@ -42,65 +42,15 @@ class Test
         @summary.push stuff
 
   run: ->
-    env = new FakeEnv(@testFn)
-    @reporter.jasmineStarted()
+    env = new j$.Env()
+    env.passed = ->
+      env.expect(true).toBe(true)
+    env.failed = ->
+      env.expect(true).toBe(false)
 
-    for suite in env.queue
-      @reporter.suiteStarted(suite)
-      @execSuite suite
-      @reporter.suiteDone(suite)
-
-    @reporter.jasmineDone()
-
-  execSuite: (suite) ->
-    for item in suite.queue
-      if @isSpec(item)
-        @reporter.specStarted(item)
-        @reporter.specDone(item)
-      else
-        @reporter.suiteStarted(item)
-        @execSuite item
-        @reporter.suiteDone(item)
-
-  isSpec: (it) ->
-    it.queue == undefined
-
-class FakeEnv
-  constructor: (fn) ->
-    @queue = []
-    fn.apply(@)
-
-  describe: (description, fn) ->
-    @queue.push(new Suite(description, description, fn))
-
-class Suite
-  constructor: (@description, @fullName, fn) ->
-    @queue = []
-    fn.apply(@)
-
-  describe: (description, fn) ->
-    @queue.push(new Suite(description, @fullName + ' ' + description, fn))
-
-  it: (description, fn) ->
-    @queue.push(new Spec(description, @fullName + ' ' + description, fn))
-
-  xit: (description, fn) ->
-    spec = new Spec(description, @fullName + ' ' + description, fn)
-    spec.status = 'pending'
-    @queue.push(spec)
-
-class Spec
-  constructor: (@description, @fullName, fn) ->
-    @status = ''
-    @failedExpectations = []
-    fn.apply(@)
-
-  passed: (message = '') ->
-    @status = 'passed'
-
-  failed: (message = '') ->
-    @status = 'failed'
-    @failedExpectations.push {message, stack: 'Error: Expectation\n{Stacktrace}', passed: false}
+    @testFn.apply(env)
+    env.addReporter(@reporter)
+    env.execute()
 
 global.Test = Test
 global.addMatchers = addMatchers
