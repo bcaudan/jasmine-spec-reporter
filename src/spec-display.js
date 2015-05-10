@@ -105,11 +105,9 @@ SpecDisplay.prototype = {
   displayErrorMessages: function (spec, withStacktrace) {
     this.increaseIndent();
     for (var i = 0; i < spec.failedExpectations.length; i++) {
-      if (!spec.failedExpectations[i].passed) {
-        this.log('- '.failure + spec.failedExpectations[i].message.failure);
-        if (withStacktrace && spec.failedExpectations[i].stack) {
-          this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
-        }
+      this.log('- '.failure + spec.failedExpectations[i].message.failure);
+      if (withStacktrace && spec.failedExpectations[i].stack) {
+        this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
       }
     }
     this.decreaseIndent();
