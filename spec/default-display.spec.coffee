@@ -57,6 +57,20 @@ describe 'with default options', ->
 
 
   describe 'when suite', ->
+    it 'should display top level suite', ->
+      expect(new Test(@reporter, ->
+        @it 'spec 1', =>
+          @passed()
+        @it 'spec 2', =>
+          @passed()
+      ).outputs).contains [
+        '  Top level suite'
+        '    ✓ spec 1'
+        '    ✓ spec 2'
+        ''
+      ]
+
+
     it 'should display multiple specs', ->
       expect(new Test(@reporter, ->
         @describe 'suite', =>

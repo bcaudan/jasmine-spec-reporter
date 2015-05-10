@@ -69,7 +69,7 @@ SpecDisplay.prototype = {
 
   successful: function (spec) {
     if (this.displaySuccessfulSpec) {
-      this.ensureSuiteDisplayed(spec);
+      this.ensureSuiteDisplayed();
       var log = null;
       this.displayProcessors.forEach(function (displayProcessor) {
         log = displayProcessor.displaySuccessfulSpec(spec, log);
@@ -81,7 +81,7 @@ SpecDisplay.prototype = {
   failed: function (spec) {
     this.failedSpecs.push(spec);
     if (this.displayFailedSpec) {
-      this.ensureSuiteDisplayed(spec);
+      this.ensureSuiteDisplayed();
       var log = null;
       this.displayProcessors.forEach(function (displayProcessor) {
         log = displayProcessor.displayFailedSpec(spec, log);
@@ -93,7 +93,7 @@ SpecDisplay.prototype = {
 
   pending: function (spec) {
     if (this.displayPendingSpec) {
-      this.ensureSuiteDisplayed(spec);
+      this.ensureSuiteDisplayed();
       var log = null;
       this.displayProcessors.forEach(function (displayProcessor) {
         log = displayProcessor.displayPendingSpec(spec, log);
@@ -126,10 +126,10 @@ SpecDisplay.prototype = {
     return filtered.join('\n' + this.currentIndent);
   },
 
-  ensureSuiteDisplayed: function (spec) {
+  ensureSuiteDisplayed: function () {
     if (this.suiteHierarchy.length == 0) {
-      var suiteName = this.getParentName(spec).trim();
-      this.suite({id: 'single suite', fullName: suiteName, description: suiteName});
+      var suiteName = 'Top level suite';
+      this.suite({fullName: suiteName, description: suiteName});
     }
   },
 
