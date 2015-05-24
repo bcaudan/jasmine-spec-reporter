@@ -1,3 +1,9 @@
+# 2.2.2
+
+## Bugfix
+
+* Fixes All specs displayed when using `fdescribe` and `fit`. [#37](https://github.com/bcaudan/jasmine-spec-reporter/issues/37)
+
 # 2.2.1
 
 ## Bugfix

@@ -13,14 +13,14 @@ describe 'with failed spec disabled', ->
 
 
   describe 'when suite', ->
-    it 'should display fully failed suite', ->
+    it 'should not display fully failed suite', ->
       expect(new Test(@reporter, ->
         @describe 'failed suite', =>
           @it 'spec 1', =>
             @failed()
           @it 'spec 2', =>
             @failed()
-      ).outputs).contains /failed suite/
+      ).outputs).not.contains /failed suite/
 
 
     it 'should display not fully failed suite', ->

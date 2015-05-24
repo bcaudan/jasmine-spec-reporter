@@ -13,7 +13,7 @@ describe 'with successful spec disabled', ->
 
 
   describe 'when suite', ->
-    it 'should display successful suite', ->
+    it 'should not display fully successful suite', ->
       outputs = new Test(@reporter, ->
         @describe 'suite', =>
           @it 'spec 1', =>
@@ -22,7 +22,7 @@ describe 'with successful spec disabled', ->
             @passed()
       ).outputs
 
-      expect(outputs).contains /suite/
+      expect(outputs).not.contains /suite/
 
 
     it 'should display failed suite', ->

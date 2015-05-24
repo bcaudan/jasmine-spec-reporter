@@ -14,8 +14,10 @@ var SpecReporter = function (options) {
   this.finished = false;
   this.options = options || {};
   initColors(this.options);
+  var displayProcessors = initProcessors(this.options);
+  this.options.hasCustomDisplaySpecStarted = hasCustomDisplaySpecStarted(displayProcessors);
 
-  this.display = new SpecDisplay(this.options, initProcessors(this.options));
+  this.display = new SpecDisplay(this.options, displayProcessors);
   this.metrics = new SpecMetrics();
 };
 
@@ -51,6 +53,16 @@ function initProcessors(options) {
   return displayProcessors;
 }
 
+function hasCustomDisplaySpecStarted(processors) {
+  var hasCustomDisplaySpecStarted = false;
+  processors.forEach(function (processor) {
+    var log = 'foo';
+    var result = processor.displaySpecStarted({id: 'bar', description: 'bar', fullName: 'bar'}, log);
+    hasCustomDisplaySpecStarted |= result !== log;
+  });
+  return hasCustomDisplaySpecStarted;
+}
+
 SpecReporter.prototype = {
   jasmineStarted: function (info) {
     this.started = true;
@@ -65,11 +77,11 @@ SpecReporter.prototype = {
   },
 
   suiteStarted: function (suite) {
-    this.display.suite(suite);
+    this.display.suiteStarted(suite);
   },
 
   suiteDone: function (suite) {
-    this.display.suiteResults(suite);
+    this.display.suiteDone(suite);
   },
 
   specStarted: function (spec) {

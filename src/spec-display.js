@@ -2,6 +2,7 @@ var SpecDisplay = function (options, displayProcessors) {
   this.indent = '  ';
   this.currentIndent = '';
   this.suiteHierarchy = [];
+  this.suiteHierarchyDisplayed = [];
   this.failedSpecs = [];
   this.lastWasNewLine = false;
   this.displayFailuresSummary = options.displayFailuresSummary !== false;
@@ -9,6 +10,7 @@ var SpecDisplay = function (options, displayProcessors) {
   this.displayFailedSpec = options.displayFailedSpec !== false;
   this.displayPendingSpec = options.displayPendingSpec || false;
   this.displayWithoutColors = options.colors === false;
+  this.hasCustomDisplaySpecStarted = options.hasCustomDisplaySpecStarted;
   this.displayProcessors = displayProcessors;
 
   var displayStacktrace = options.displayStacktrace || 'none';
@@ -60,11 +62,14 @@ SpecDisplay.prototype = {
   },
 
   specStarted: function (spec) {
-    var log = null;
-    this.displayProcessors.forEach(function (displayProcessor) {
-      log = displayProcessor.displaySpecStarted(spec, log);
-    });
-    this.log(log);
+    if (this.hasCustomDisplaySpecStarted) {
+      this.ensureSuiteDisplayed();
+      var log = null;
+      this.displayProcessors.forEach(function (displayProcessor) {
+        log = displayProcessor.displaySpecStarted(spec, log);
+      });
+      this.log(log);
+    }
   },
 
   successful: function (spec) {
@@ -124,17 +129,36 @@ SpecDisplay.prototype = {
     return filtered.join('\n' + this.currentIndent);
   },
 
+  suiteStarted: function (suite) {
+    this.suiteHierarchy.push(suite);
+  },
+
+  suiteDone: function () {
+    var suite = this.suiteHierarchy.pop();
+    if (this.suiteHierarchyDisplayed[this.suiteHierarchyDisplayed.length - 1] === suite) {
+      this.suiteHierarchyDisplayed.pop();
+    }
+    this.newLine();
+    this.decreaseIndent();
+  },
+
   ensureSuiteDisplayed: function () {
-    if (this.suiteHierarchy.length == 0) {
-      var suiteName = 'Top level suite';
-      this.suite({fullName: suiteName, description: suiteName});
+    if (this.suiteHierarchy.length !== 0) {
+      for (var i = this.suiteHierarchyDisplayed.length ; i < this.suiteHierarchy.length; i++) {
+        this.suiteHierarchyDisplayed.push(this.suiteHierarchy[i]);
+        this.displaySuite(this.suiteHierarchy[i]);
+      }
+    } else {
+      var topLevelSuite = { description: 'Top level suite' };
+      this.suiteHierarchy.push(topLevelSuite);
+      this.suiteHierarchyDisplayed.push(topLevelSuite);
+      this.displaySuite(topLevelSuite)
     }
   },
 
-  suite: function (suite) {
+  displaySuite: function (suite) {
     this.newLine();
-    this.computeSuiteHierarchy(suite);
-    this.computeSuiteIndent();
+    this.computeSuiteIndent(suite);
     var log = null;
     this.displayProcessors.forEach(function (displayProcessor) {
       log = displayProcessor.displaySuite(suite, log);
@@ -143,9 +167,11 @@ SpecDisplay.prototype = {
     this.increaseIndent();
   },
 
-  suiteResults: function (suite) {
-    this.newLine();
-    this.decreaseIndent();
+  computeSuiteIndent: function () {
+    this.resetIndent();
+    for (var i = 0 ; i < this.suiteHierarchyDisplayed.length ; i++) {
+      this.increaseIndent();
+    }
   },
 
   log: function (stuff) {
@@ -163,30 +189,6 @@ SpecDisplay.prototype = {
       console.log('');
       this.lastWasNewLine = true;
     }
-  },
-
-  computeSuiteHierarchy: function (suite) {
-    var parentName = this.getParentName(suite);
-    for (var i = 0 ; i < this.suiteHierarchy.length ; i++) {
-      if (this.suiteHierarchy[i] == parentName) {
-        this.suiteHierarchy.splice(i + 1, this.suiteHierarchy.length - i - 1);
-        break;
-      }
-    }
-    if (i == this.suiteHierarchy.length) {
-      this.suiteHierarchy.push(parentName);
-    }
-  },
-
-  computeSuiteIndent: function () {
-    this.resetIndent();
-    for (var i = 0 ; i < this.suiteHierarchy.length ; i++) {
-      this.increaseIndent();
-    }
-  },
-
-  getParentName: function (element) {
-    return element.fullName.replace(element.description, '');
   },
 
   resetIndent: function () {

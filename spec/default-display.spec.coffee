@@ -166,6 +166,19 @@ describe 'with default display', ->
         ''
       ]
 
+    it 'should not display empty suite', ->
+      outputs = new Test(@reporter, ->
+        @describe 'suite 1', =>
+          @it 'spec 1', =>
+            @passed()
+        @describe 'empty suite', =>
+      ).outputs
+      expect(outputs).contains [
+        '  suite 1'
+        '    ✓ spec 1'
+        ''
+      ]
+      expect(outputs).not.contains /empty suite/
 
   describe 'summary', ->
     it 'should report success', ->
