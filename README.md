@@ -24,7 +24,7 @@ You can customize the output of the reporter yourself: [see how](docs/customize-
 
 # Default options
 
-```node
+```js
 {
   displayStacktrace: 'none',    // display stacktrace for each failed assertion, values: (all|specs|summary|none)
   displayFailuresSummary: true, // display summary of all failures after execution
