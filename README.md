@@ -59,3 +59,9 @@ To use Jasmine spec reporter with Jasmine 1.x, please see [jasmine1 branch](http
 * install dependencies: `npm install`
 * launch all unit tests: `npm test`
 * launch an output example: `npm run example`
+* launch a protractor example:
+```sh
+npm run webdriver-update # if needed
+npm run webdriver-start
+npm run protractor-example
+```

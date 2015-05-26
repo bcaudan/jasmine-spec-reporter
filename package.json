@@ -8,7 +8,10 @@
     "coverage": "rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
     "open-coverage": "npm run coverage && open ./coverage/lcov-report/index.html",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "example": "node example/run-example.js"
+    "example": "node example/run-example.js",
+    "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update",
+    "webdriver-start": "node node_modules/protractor/bin/webdriver-manager start",
+    "protractor-example": "node node_modules/protractor/bin/protractor example/protractor.conf.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +38,7 @@
     "coveralls": "2.11.2",
     "istanbul": "0.3.13",
     "jasmine": "2.3.1",
-    "jasmine-core": "~2.3.2"
+    "jasmine-core": "~2.3.2",
+    "protractor": "^2.1.0"
   }
 }
