@@ -27,6 +27,7 @@ function initColors(options) {
     failure: options.colors && options.colors.failure ? options.colors.failure : 'red',
     pending: options.colors && options.colors.pending ? options.colors.pending : 'cyan'
   });
+  colors.enabled = true;
 }
 
 function initProcessors(options) {

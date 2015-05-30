@@ -1,3 +1,7 @@
+# 2.2.3
+
+Ensure that colors are always enabled. [#36](https://github.com/bcaudan/jasmine-spec-reporter/issues/36)
+
 # 2.2.2
 
 ## Bugfix
