@@ -7,6 +7,7 @@
 
 ## Other
 
+* Add tests on colors. [#34](https://github.com/bcaudan/jasmine-spec-reporter/issues/34)
 * Bump dependencies versions
 
 # 2.2.3

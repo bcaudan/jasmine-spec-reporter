@@ -24,16 +24,17 @@ addMatchers = ->
           pass: false
 
 class Test
-  constructor: (@reporter, @testFn) ->
-    @init()
+  constructor: (@reporter, @testFn, withColor = false) ->
+    @init(withColor)
     @run()
 
-  init: ->
+  init: (withColor) ->
     @outputs = []
     @summary = []
     logInSummary = false
     console.log = (stuff) =>
-      stuff = stuff.stripColors.stripTime
+      unless withColor
+        stuff = stuff.stripColors.stripTime
       logInSummary = true if /^(Executed|\*\*\*\*\*\*\*)/.test stuff
 
       unless logInSummary
