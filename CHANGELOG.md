@@ -1,6 +1,12 @@
 # 2.3.0
 
-Bump dependencies versions
+## Feature
+
+* Have same sign/color convention than jasmine default reporter for pending specs
+
+## Other
+
+* Bump dependencies versions
 
 # 2.2.3
 

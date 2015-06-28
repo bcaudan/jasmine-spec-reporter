@@ -17,12 +17,12 @@ jasmine.getEnv().addReporter(new SpecReporter({
   colors: {
     success: 'green',
     failure: 'red',
-    skipped: 'cyan'
+    pending: 'yellow'
   },
   prefixes: {
     success: '✓ ',
     failure: '✗ ',
-    pending: '- '
+    pending: '* '
   },
   customProcessors: []
 }));

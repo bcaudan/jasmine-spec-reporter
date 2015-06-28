@@ -27,7 +27,7 @@ describe 'with spec result prefixes', ->
           @describe 'suite', =>
             @xit 'pending spec', =>
         ).outputs)
-        .not.contains /-/
+        .not.contains /\*/
 
 
   describe 'set to valid strings', ->
@@ -63,5 +63,5 @@ describe 'with spec result prefixes', ->
             @xit 'pending spec', =>
         ).outputs
 
-        expect(outputs).not.contains /-/
+        expect(outputs).not.contains /\*/
         expect(outputs).contains /Pend /

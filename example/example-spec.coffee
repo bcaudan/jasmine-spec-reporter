@@ -2,7 +2,8 @@ describe 'first suite', ->
   it 'should be ok', ->
     expect(true).toBe(true)
 
-  it 'should be ok', ->
+  it 'should be peding', ->
+    pending('will work soon')
     expect(true).toBe(true)
 
   it 'should failed', ->
@@ -13,7 +14,7 @@ describe 'first suite', ->
 
 
 describe 'second suite', ->
-  it 'should failed', ->
+  xit 'should be pending', ->
     expect(true).toBe(false)
 
   it 'should be ok', ->

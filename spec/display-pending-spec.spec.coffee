@@ -8,4 +8,4 @@ describe 'with pending spec enabled', ->
         @describe 'suite', =>
           @xit 'pending spec', =>
       ).outputs)
-      .contains /- pending spec/
+      .contains /\* pending spec/

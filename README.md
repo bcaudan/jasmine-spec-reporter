@@ -36,12 +36,12 @@ You can customize the output of the reporter yourself: [see how](docs/customize-
   colors: {
     success: 'green',
     failure: 'red',
-    pending: 'cyan'
+    pending: 'yellow'
   },
   prefixes: {
     success: '✓ ',
     failure: '✗ ',
-    pending: '- '
+    pending: '* '
   },
   customProcessors: []
 }

@@ -4,7 +4,7 @@ function SpecPrefixesProcessor(prefixes) {
   this.prefixes = {
     success: prefixes && prefixes.success !== undefined ? prefixes.success : '✓ ',
     failure: prefixes && prefixes.failure !== undefined ? prefixes.failure : '✗ ',
-    pending: prefixes && prefixes.pending !== undefined ? prefixes.pending : '- '
+    pending: prefixes && prefixes.pending !== undefined ? prefixes.pending : '* '
   }
 }
 
