@@ -28,6 +28,7 @@ You can customize the output of the reporter yourself: [see how](docs/customize-
 {
   displayStacktrace: 'none',    // display stacktrace for each failed assertion, values: (all|specs|summary|none)
   displayFailuresSummary: true, // display summary of all failures after execution
+  displayPendingSummary: true,  // display summary of all pending specs after execution
   displaySuccessfulSpec: true,  // display each successful spec
   displayFailedSpec: true,      // display each failed spec
   displayPendingSpec: false,    // display each pending spec

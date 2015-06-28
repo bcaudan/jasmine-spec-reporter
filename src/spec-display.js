@@ -4,8 +4,10 @@ var SpecDisplay = function (options, displayProcessors) {
   this.suiteHierarchy = [];
   this.suiteHierarchyDisplayed = [];
   this.failedSpecs = [];
+  this.pendingSpecs = [];
   this.lastWasNewLine = false;
   this.displayFailuresSummary = options.displayFailuresSummary !== false;
+  this.displayPendingSummary = options.displayPendingSummary !== false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
   this.displayFailedSpec = options.displayFailedSpec !== false;
   this.displayPendingSpec = options.displayPendingSpec || false;
@@ -40,6 +42,9 @@ SpecDisplay.prototype = {
     if (this.displayFailuresSummary && metrics.failedSpecs > 0) {
       this.failuresSummary();
     }
+    if (this.displayPendingSummary && metrics.pendingSpecs > 0) {
+      this.pendingsSummary();
+    }
     this.log(execution + successful.success + failed.failure + pending.pending + skipped + duration);
   },
 
@@ -59,6 +64,27 @@ SpecDisplay.prototype = {
   failedSummary: function (spec, index) {
     this.log(index + ') ' + spec.fullName);
     this.displayErrorMessages(spec, this.displaySummaryWithStacktrace);
+  },
+
+  pendingsSummary: function () {
+    this.log("**************************************************");
+    this.log("*                    Pending                     *");
+    this.log("**************************************************");
+    this.newLine();
+    for (var i = 0 ; i < this.pendingSpecs.length ; i++) {
+      this.pendingSummary(this.pendingSpecs[i], i + 1);
+      this.newLine();
+    }
+    this.newLine();
+    this.resetIndent();
+  },
+
+  pendingSummary: function (spec, index) {
+    this.log(index + ') ' + spec.fullName);
+    this.increaseIndent();
+    var pendingReason = spec.pendingReason ? spec.pendingReason : 'No reason given';
+    this.log(pendingReason.pending);
+    this.resetIndent();
   },
 
   specStarted: function (spec) {
@@ -97,6 +123,7 @@ SpecDisplay.prototype = {
   },
 
   pending: function (spec) {
+    this.pendingSpecs.push(spec);
     if (this.displayPendingSpec) {
       this.ensureSuiteDisplayed();
       var log = null;

@@ -11,4 +11,4 @@ describe 'with failures summary disabled', ->
           @describe 'suite 2', =>
             @it 'spec 2', =>
               @failed()
-      ).summary).not.contains /Failures:/
+      ).summary).not.contains /Failures/

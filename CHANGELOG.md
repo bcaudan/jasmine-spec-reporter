@@ -2,7 +2,8 @@
 
 ## Feature
 
-* Have same sign/color convention than jasmine default reporter for pending specs
+* Add pending summary to display pending reasons. [#33](https://github.com/bcaudan/jasmine-spec-reporter/issues/33)
+* Have same sign/color convention than jasmine default reporter for pending specs.
 
 ## Other
 

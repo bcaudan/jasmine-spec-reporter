@@ -221,12 +221,37 @@ describe 'with default display', ->
       ]
 
 
+    it 'should report failures summary', ->
+      expect(new Test(@reporter, ->
+        @describe 'suite 1', =>
+          @xit 'spec 1', =>
+            @expect(true).toBe false
+          @describe 'suite 2', =>
+            @it 'spec 2', =>
+              @pending('Will work soon')
+              @expect(2).toBe 1
+      ).summary).contains [
+        /.*/
+        /Pending/
+        /.*/
+        ''
+        '1) suite 1 spec 1'
+        '  No reason given'
+        ''
+        '2) suite 1 suite 2 spec 2'
+        '  Will work soon'
+        ''
+      ]
+
+
     it 'should report pending with success', ->
       expect(new Test(@reporter, ->
         @describe 'suite', =>
           @xit 'spec', =>
+          @it 'spec', =>
+            @pending()
       ).summary)
-      .contains 'Executed 0 of 1 spec SUCCESS (1 PENDING) in {time}.'
+      .contains 'Executed 0 of 2 specs SUCCESS (2 PENDING) in {time}.'
 
 
     it 'should report pending with failure', ->

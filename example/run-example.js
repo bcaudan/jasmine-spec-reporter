@@ -9,6 +9,7 @@ jrunner.configureDefaultReporter({print: noop});
 jasmine.getEnv().addReporter(new SpecReporter({
   displayStacktrace: 'none',
   displayFailuresSummary: true,
+  displayPendingSummary: true,
   displaySuccessfulSpec: true,
   displayFailedSpec: true,
   displayPendingSpec: true,
