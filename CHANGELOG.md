@@ -1,3 +1,7 @@
+# 2.3.0
+
+Bump dependencies versions
+
 # 2.2.3
 
 Ensure that colors are always enabled. [#36](https://github.com/bcaudan/jasmine-spec-reporter/issues/36)
