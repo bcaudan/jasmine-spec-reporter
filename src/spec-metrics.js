@@ -37,26 +37,35 @@ SpecMetrics.prototype = {
     var duration = '', durationInSecs, durationInMins, durationInHrs;
     durationInSecs = durationInMs / 1000;
     if (durationInSecs < 1) {
-      return durationInSecs + ' secs';
+      return durationInSecs +
+      ' sec' + ((durationInSecs > 1) ? 's' : '');
     }
     durationInSecs = Math.round(durationInSecs);
     if (durationInSecs < 60) {
-      return durationInSecs + ' secs';
+      return durationInSecs +
+      ' sec' + ((durationInSecs > 1) ? 's' : '');
     }
     durationInMins = Math.floor(durationInSecs / 60);
     durationInSecs = durationInSecs % 60;
     if (durationInSecs) {
-      duration = ' ' + durationInSecs + ' secs';
+      duration = ' ' + durationInSecs +
+      ' sec' + ((durationInSecs > 1) ? 's' : '');
     }
     if (durationInMins < 60) {
-      return durationInMins + ' mins' + duration;
+      return durationInMins +
+      ' min' + ((durationInMins > 1) ? 's' : '') +
+      duration;
     }
     durationInHrs = Math.floor(durationInMins / 60);
     durationInMins = durationInMins % 60;
     if (durationInMins) {
-      duration = ' ' + durationInMins + ' mins' + duration;
+      duration = ' ' + durationInMins +
+      ' min' + ((durationInMins > 1) ? 's' : '') +
+      duration;
     }
-    return durationInHrs + ' hours' + duration;
+    return durationInHrs +
+      ' hour' + ((durationInHrs > 1) ? 's' : '') +
+      duration;
   }
 };
 
