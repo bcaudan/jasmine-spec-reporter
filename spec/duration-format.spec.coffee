@@ -14,6 +14,7 @@ describe 'duration', ->
     expect(@formatDuration(60 * secs)).toBe '1 mins'
     expect(@formatDuration(61 * secs)).toBe '1 mins 1 secs'
     expect(@formatDuration(59 * mins)).toBe '59 mins'
-    expect(@formatDuration(60 * mins)).toBe '1 hours'
+    expect(@formatDuration(60 * mins)).toBe '1 hour'
+    expect(@formatDuration(1 * hours + 59 * mins)).toBe '1 hour 59 mins'
     expect(@formatDuration(3 * hours + 28 * mins + 53 * secs + 127)).toBe '3 hours 28 mins 53 secs'
     expect(@formatDuration(3 * hours + 53 * secs + 127)).toBe '3 hours 53 secs'
