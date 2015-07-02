@@ -56,7 +56,9 @@ SpecMetrics.prototype = {
     if (durationInMins) {
       duration = ' ' + durationInMins + ' mins' + duration;
     }
-    return durationInHrs + ' hours' + duration;
+    return durationInHrs +
+      ' hour' + ((durationInHrs > 1) ? 's' : '') +
+      duration;
   }
 };
 
