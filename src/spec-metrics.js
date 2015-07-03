@@ -37,36 +37,31 @@ SpecMetrics.prototype = {
     var duration = '', durationInSecs, durationInMins, durationInHrs;
     durationInSecs = durationInMs / 1000;
     if (durationInSecs < 1) {
-      return durationInSecs +
-      ' sec' + ((durationInSecs > 1) ? 's' : '');
+      return durationInSecs + ' sec' + pluralize(durationInSecs);
     }
     durationInSecs = Math.round(durationInSecs);
     if (durationInSecs < 60) {
-      return durationInSecs +
-      ' sec' + ((durationInSecs > 1) ? 's' : '');
+      return durationInSecs + ' sec' + pluralize(durationInSecs);
     }
     durationInMins = Math.floor(durationInSecs / 60);
     durationInSecs = durationInSecs % 60;
     if (durationInSecs) {
-      duration = ' ' + durationInSecs +
-      ' sec' + ((durationInSecs > 1) ? 's' : '');
+      duration = ' ' + durationInSecs + ' sec' + pluralize(durationInSecs);
     }
     if (durationInMins < 60) {
-      return durationInMins +
-      ' min' + ((durationInMins > 1) ? 's' : '') +
-      duration;
+      return durationInMins + ' min' + pluralize(durationInMins) + duration;
     }
     durationInHrs = Math.floor(durationInMins / 60);
     durationInMins = durationInMins % 60;
     if (durationInMins) {
-      duration = ' ' + durationInMins +
-      ' min' + ((durationInMins > 1) ? 's' : '') +
-      duration;
+      duration = ' ' + durationInMins + ' min' + pluralize(durationInMins) + duration;
     }
-    return durationInHrs +
-      ' hour' + ((durationInHrs > 1) ? 's' : '') +
-      duration;
+    return durationInHrs + ' hour' + pluralize(durationInHrs) + duration;
   }
 };
+
+function pluralize(count){
+  return count > 1 ? 's' : '';
+}
 
 module.exports = SpecMetrics;
