@@ -1,3 +1,7 @@
+# 2.4.0
+
+* Add singular form of spec metrics. [#41](https://github.com/bcaudan/jasmine-spec-reporter/issues/41)
+
 # 2.3.0
 
 ## Feature
