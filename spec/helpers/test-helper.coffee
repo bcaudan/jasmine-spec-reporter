@@ -1,7 +1,8 @@
 require('colors')
 
 String.prototype.__defineGetter__ 'stripTime', ->
-  this.replace /(\d+\.?\d*|\.\d+) (?!second)secs?/, '{time}'
+  this.replace /in (\d+\.?\d*|\.\d+) secs?/, 'in {time}' # replace time in summary
+      .replace /\((\d+\.?\d*|\.\d+) secs?\)/, '({time})' # replace time in specs
 
 typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
 
