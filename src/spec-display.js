@@ -31,7 +31,7 @@ SpecDisplay.prototype = {
 
   summary: function (metrics) {
     var execution = 'Executed ' + metrics.executedSpecs + ' of ' + metrics.totalSpecsDefined + (metrics.totalSpecsDefined === 1 ? ' spec ' : ' specs ');
-    var successful = (metrics.failedSpecs == 0) ? 'SUCCESS ' : '';
+    var successful = (metrics.failedSpecs === 0) ? 'SUCCESS ' : '';
     var failed = (metrics.failedSpecs > 0) ? '(' + metrics.failedSpecs + ' FAILED) ' : '';
     var pending = (metrics.pendingSpecs > 0) ? '(' + metrics.pendingSpecs + ' PENDING) ' : '';
     var skipped = (metrics.skippedSpecs > 0) ? '(' + metrics.skippedSpecs + ' SKIPPED) ' : '';
@@ -179,7 +179,7 @@ SpecDisplay.prototype = {
       var topLevelSuite = { description: 'Top level suite' };
       this.suiteHierarchy.push(topLevelSuite);
       this.suiteHierarchyDisplayed.push(topLevelSuite);
-      this.displaySuite(topLevelSuite)
+      this.displaySuite(topLevelSuite);
     }
   },
 

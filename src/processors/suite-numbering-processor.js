@@ -11,14 +11,14 @@ function SuiteNumberingProcessor() {
   this.computeHierarchy = function (suite) {
     var parentName = this.getParentName(suite);
     for (var i = 0 ; i < this.suiteHierarchy.length ; i++) {
-      if (this.suiteHierarchy[i].name == parentName) {
+      if (this.suiteHierarchy[i].name === parentName) {
         this.suiteHierarchy[i].number++;
         this.suiteHierarchy.splice(i + 1, this.suiteHierarchy.length - i - 1);
         break;
       }
     }
-    if (i == this.suiteHierarchy.length) {
-      this.suiteHierarchy.push({name: parentName, number: 1})
+    if (i === this.suiteHierarchy.length) {
+      this.suiteHierarchy.push({name: parentName, number: 1});
     }
   };
 
@@ -32,7 +32,7 @@ function SuiteNumberingProcessor() {
 
   this.getParentName = function (element) {
     return element.fullName.replace(element.description, '').trim();
-  }
+  };
 }
 
 SuiteNumberingProcessor.prototype = new DisplayProcessor();

@@ -48,20 +48,20 @@ function initProcessors(options) {
   if (options.customProcessors) {
     options.customProcessors.forEach(function (Processor) {
       displayProcessors.push(new Processor(options));
-    })
+    });
   }
 
   return displayProcessors;
 }
 
 function hasCustomDisplaySpecStarted(processors) {
-  var hasCustomDisplaySpecStarted = false;
+  var isDisplayed = false;
   processors.forEach(function (processor) {
     var log = 'foo';
     var result = processor.displaySpecStarted({id: 'bar', description: 'bar', fullName: 'bar'}, log);
-    hasCustomDisplaySpecStarted |= result !== log;
+    isDisplayed |= result !== log;
   });
-  return hasCustomDisplaySpecStarted;
+  return isDisplayed;
 }
 
 SpecReporter.prototype = {
@@ -92,13 +92,13 @@ SpecReporter.prototype = {
 
   specDone: function (spec) {
     this.metrics.stopSpec(spec);
-    if (spec.status == 'pending') {
+    if (spec.status === 'pending') {
       this.metrics.pendingSpecs++;
       this.display.pending(spec);
-    } else if (spec.status == 'passed') {
+    } else if (spec.status === 'passed') {
       this.metrics.successfulSpecs++;
       this.display.successful(spec);
-    } else if (spec.status == 'failed') {
+    } else if (spec.status === 'failed') {
       this.metrics.failedSpecs++;
       this.display.failed(spec);
     }

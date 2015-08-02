@@ -5,7 +5,7 @@ function DefaultProcessor() {}
 DefaultProcessor.prototype = new DisplayProcessor();
 
 DefaultProcessor.prototype.displayJasmineStarted = function () {
-  return 'Spec started'
+  return 'Spec started';
 };
 
 DefaultProcessor.prototype.displaySuite = function (suite) {
