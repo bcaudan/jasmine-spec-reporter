@@ -3,9 +3,11 @@ var SpecDisplay = function (options, displayProcessors) {
   this.currentIndent = '';
   this.suiteHierarchy = [];
   this.suiteHierarchyDisplayed = [];
+  this.successfulSpecs = [];
   this.failedSpecs = [];
   this.pendingSpecs = [];
   this.lastWasNewLine = false;
+  this.displaySuccessesSummary = options.displaySuccessesSummary || false;
   this.displayFailuresSummary = options.displayFailuresSummary !== false;
   this.displayPendingSummary = options.displayPendingSummary !== false;
   this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
@@ -39,6 +41,9 @@ SpecDisplay.prototype = {
 
     this.resetIndent();
     this.newLine();
+    if (this.displaySuccessesSummary && metrics.successfulSpecs > 0) {
+      this.successesSummary();
+    }
     if (this.displayFailuresSummary && metrics.failedSpecs > 0) {
       this.failuresSummary();
     }
@@ -46,6 +51,23 @@ SpecDisplay.prototype = {
       this.pendingsSummary();
     }
     this.log(execution + successful.success + failed.failure + pending.pending + skipped + duration);
+  },
+
+  successesSummary: function () {
+    this.log("**************************************************");
+    this.log("*                   Successes                    *");
+    this.log("**************************************************");
+    this.newLine();
+    for (var i = 0 ; i < this.successfulSpecs.length ; i++) {
+      this.successfulSummary(this.successfulSpecs[i], i + 1);
+      this.newLine();
+    }
+    this.newLine();
+    this.resetIndent();
+  },
+
+  successfulSummary: function (spec, index) {
+    this.log(index + ') ' + spec.fullName);
   },
 
   failuresSummary: function () {
@@ -99,6 +121,7 @@ SpecDisplay.prototype = {
   },
 
   successful: function (spec) {
+    this.successfulSpecs.push(spec);
     if (this.displaySuccessfulSpec) {
       this.ensureSuiteDisplayed();
       var log = null;
