@@ -190,6 +190,15 @@ describe 'with default display', ->
       .contains 'Executed 1 of 1 spec SUCCESS in {time}.'
 
 
+    it 'should not report successes summary', ->
+      expect(new Test(@reporter, ->
+        @describe 'suite', =>
+          @it 'spec', =>
+            @passed()
+      ).summary)
+      .not.contains /Successes/
+
+
     it 'should report failure', ->
       expect(new Test(@reporter, ->
         @describe 'suite', =>
