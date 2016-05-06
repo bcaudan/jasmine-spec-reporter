@@ -236,7 +236,7 @@ describe 'with default display', ->
         /.*/
         ''
         '1) suite 1 spec 1'
-        '  No reason given'
+        '  Temporarily disabled with xit'
         ''
         '2) suite 1 suite 2 spec 2'
         '  Will work soon'
