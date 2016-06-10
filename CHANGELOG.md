@@ -1,3 +1,7 @@
+# 2.5.0
+
+* Added support for windows platform to show tick mark and cross symbols. #52](https://github.com/bcaudan/jasmine-spec-reporter/issues/52)
+
 # 2.4.0
 
 * Add singular form of spec metrics. [#41](https://github.com/bcaudan/jasmine-spec-reporter/issues/41)
