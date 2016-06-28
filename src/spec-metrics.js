@@ -2,6 +2,7 @@ var SpecMetrics = function () {
   this.startTime = null;
   this.specStartTime = null;
   this.duration = null;
+	this.rawDuration = 0;
   this.successfulSpecs = 0;
   this.failedSpecs = 0;
   this.pendingSpecs = 0;
@@ -31,6 +32,7 @@ SpecMetrics.prototype = {
 
   stopSpec: function (spec) {
     spec.duration = this.formatDuration((new Date()).getTime() - this.specStartTime);
+		spec.rawDuration = new Date().getTime() - this.specStartTime;
   },
 
   formatDuration: function (durationInMs) {
