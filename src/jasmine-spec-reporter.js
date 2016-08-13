@@ -71,8 +71,8 @@ SpecReporter.prototype = {
     this.display.jasmineStarted(info);
   },
 
-  jasmineDone: function () {
-    this.metrics.stop();
+  jasmineDone: function (info) {
+    this.metrics.stop(info);
     this.display.summary(this.metrics);
     this.finished = true;
   },

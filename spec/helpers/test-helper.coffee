@@ -25,9 +25,9 @@ addMatchers = ->
           pass: false
 
 class Test
-  constructor: (@reporter, @testFn, withColor = false) ->
+  constructor: (@reporter, @testFn, withColor = false, options = { random: false } ) ->
     @init(withColor)
-    @run()
+    @run(options)
 
   init: (withColor) ->
     @outputs = []
@@ -43,7 +43,7 @@ class Test
       else
         @summary.push stuff
 
-  run: ->
+  run: (options) ->
     env = new j$.Env()
     env.passed = ->
       env.expect(true).toBe(true)
@@ -52,6 +52,7 @@ class Test
 
     @testFn.apply(env)
     env.addReporter(@reporter)
+    env.randomizeTests(true) if options.random
     env.execute()
 
 global.Test = Test

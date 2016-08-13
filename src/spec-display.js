@@ -46,6 +46,10 @@ SpecDisplay.prototype = {
       this.pendingsSummary();
     }
     this.log(execution + successful.success + failed.failure + pending.pending + skipped + duration);
+
+    if (metrics.random) {
+      this.log('Randomized with seed ' + metrics.seed + '.');
+    }
   },
 
   failuresSummary: function () {
