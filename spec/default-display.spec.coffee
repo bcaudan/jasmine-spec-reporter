@@ -285,3 +285,11 @@ describe 'with default display', ->
           @xit 'spec', =>
       ).summary)
       .toContain 'Executed 1 of 4 specs (1 FAILED) (1 PENDING) (2 SKIPPED) in {time}.'
+
+    it 'should report seed', ->
+      expect(new Test(@reporter, ->
+        @describe 'suite 1', =>
+          @it 'spec 1', =>
+            @passed()
+      , false, random: true).summary)
+      .contains /Randomized with seed \d+\./
