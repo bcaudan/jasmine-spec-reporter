@@ -1,3 +1,7 @@
+# 2.7.0
+
+* Add successes summary. [#49](https://github.com/bcaudan/jasmine-spec-reporter/issues/49) 
+
 # 2.6.0
 
 * Display seed used if specs are randomized. [#55](https://github.com/bcaudan/jasmine-spec-reporter/issues/55) 
