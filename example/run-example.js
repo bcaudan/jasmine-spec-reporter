@@ -29,5 +29,6 @@ jasmine.getEnv().addReporter(new SpecReporter({
 }));
 jrunner.projectBaseDir = '';
 jrunner.specDir = '';
+jrunner.randomizeTests(false);
 jrunner.addSpecFiles([path.resolve('example/example-spec.coffee')]);
 jrunner.execute();
