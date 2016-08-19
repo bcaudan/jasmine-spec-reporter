@@ -1,6 +1,10 @@
+# 2.6.0
+
+* Display seed used if specs are randomized. [#55](https://github.com/bcaudan/jasmine-spec-reporter/issues/55) 
+
 # 2.5.0
 
-* Added support for windows platform to show tick mark and cross symbols. #52](https://github.com/bcaudan/jasmine-spec-reporter/issues/52)
+* Added support for windows platform to show tick mark and cross symbols. [#52](https://github.com/bcaudan/jasmine-spec-reporter/issues/52)
 
 # 2.4.0
 
