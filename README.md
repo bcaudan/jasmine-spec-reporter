@@ -67,3 +67,19 @@ npm run webdriver-update # if needed
 npm run webdriver-start
 npm run protractor-example
 ```
+
+# Contribution
+
+## Bug
+
+If you find a bug in the source code or a mistake in the documentation, feel free to submit an issue or even better a pull request with a fix and **appropriate test cases**.
+
+## Feature
+
+If you want a new feature, you can do the same but some types of features would probably not be integrated:
+
+* options to tweak output format
+* options to add extra information to specific sections (spec, suite, summary)
+
+There is already a lot of options, so to add your specific behavior to the reporter, please consider to [build and use your own display processor](docs/customize-output.md).
+
