@@ -7,7 +7,7 @@ import {SpecDurationsProcessor} from './processors/spec-durations-processor';
 import {SpecPrefixesProcessor} from './processors/spec-prefixes-processor';
 import {SuiteNumberingProcessor} from './processors/suite-numbering-processor';
 
-var colors = require('colors');
+import * as colors from 'colors';
 
 module.exports = class SpecReporter {
     private started = false;

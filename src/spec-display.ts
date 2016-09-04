@@ -60,7 +60,7 @@ export class SpecDisplay {
         if (this.displayPendingSummary && metrics.pendingSpecs > 0) {
             this.pendingsSummary();
         }
-        this.log(execution + (successful as any).success + (failed as any).failure + (pending as any).pending + skipped + duration);
+        this.log(execution + successful.success + failed.failure + pending.pending + skipped + duration);
 
         if (metrics.random) {
             this.log('Randomized with seed ' + metrics.seed + '.');
@@ -174,7 +174,7 @@ export class SpecDisplay {
     displayErrorMessages(spec, withStacktrace) {
         this.increaseIndent();
         for (var i = 0; i < spec.failedExpectations.length; i++) {
-            this.log(('- ' as any).failure + spec.failedExpectations[i].message.failure);
+            this.log('- '.failure + spec.failedExpectations[i].message.failure);
             if (withStacktrace && spec.failedExpectations[i].stack) {
                 this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
             }

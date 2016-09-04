@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
+    "colors": "registry:dt/colors#0.6.0-1+20160501135139",
     "node": "registry:env/node#0.10.0+20160902022231"
   }
 }
