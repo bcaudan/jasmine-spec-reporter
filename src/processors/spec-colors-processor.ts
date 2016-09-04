@@ -1,19 +1,15 @@
 import {DisplayProcessor} from '../display-processor';
 
-function SpecColorsProcessor() {}
+export class SpecColorsProcessor extends DisplayProcessor {
+    displaySuccessfulSpec(spec, log) {
+        return log.success;
+    }
 
-SpecColorsProcessor.prototype = new DisplayProcessor();
+    displayFailedSpec(spec, log) {
+        return log.failure;
+    }
 
-SpecColorsProcessor.prototype.displaySuccessfulSpec = function (spec, log) {
-  return log.success;
-};
-
-SpecColorsProcessor.prototype.displayFailedSpec = function (spec, log) {
-  return log.failure;
-};
-
-SpecColorsProcessor.prototype.displayPendingSpec = function (spec, log) {
-  return log.pending;
-};
-
-module.exports = SpecColorsProcessor;
+    displayPendingSpec(spec, log) {
+        return log.pending;
+    }
+}

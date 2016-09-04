@@ -1,24 +1,27 @@
 import {DisplayProcessor} from '../display-processor';
 
-function DefaultProcessor() {
+export class DefaultProcessor extends DisplayProcessor {
+    displayJasmineStarted() {
+        return 'Spec started';
+    }
+
+    displaySuite(suite) {
+        return suite.description;
+    }
+
+    displaySuccessfulSpec(spec) {
+        return this.displaySpecDescription(spec);
+    }
+
+    displayFailedSpec(spec) {
+        return this.displaySpecDescription(spec);
+    }
+
+    displayPendingSpec(spec) {
+        return this.displaySpecDescription(spec);
+    }
+
+    private displaySpecDescription(spec) {
+        return spec.description;
+    }
 }
-
-DefaultProcessor.prototype = new DisplayProcessor();
-
-DefaultProcessor.prototype.displayJasmineStarted = function () {
-    return 'Spec started';
-};
-
-DefaultProcessor.prototype.displaySuite = function (suite) {
-    return suite.description;
-};
-
-function displaySpecDescription(spec) {
-    return spec.description;
-}
-
-DefaultProcessor.prototype.displaySuccessfulSpec = displaySpecDescription;
-DefaultProcessor.prototype.displayFailedSpec = displaySpecDescription;
-DefaultProcessor.prototype.displayPendingSpec = displaySpecDescription;
-
-module.exports = DefaultProcessor;

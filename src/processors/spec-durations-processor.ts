@@ -1,14 +1,15 @@
 import {DisplayProcessor} from '../display-processor';
 
-function SpecDurationsProcessor() {}
+export class SpecDurationsProcessor extends DisplayProcessor {
+    displaySuccessfulSpec(spec, log) {
+        return this.displayDuration(spec, log)
+    }
 
-SpecDurationsProcessor.prototype = new DisplayProcessor();
+    displayFailedSpec(spec, log) {
+        return this.displayDuration(spec, log)
+    }
 
-function displayDuration(spec, log) {
-  return log + ' (' + spec.duration + ')';
+    private displayDuration(spec, log) {
+        return log + ' (' + spec.duration + ')';
+    }
 }
-
-SpecDurationsProcessor.prototype.displaySuccessfulSpec  = displayDuration;
-SpecDurationsProcessor.prototype.displayFailedSpec      = displayDuration;
-
-module.exports = SpecDurationsProcessor;

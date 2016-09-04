@@ -1,13 +1,13 @@
+import {SpecDisplay} from "./spec-display";
+import {DefaultProcessor} from './processors/default-processor';
+import {SpecColorsProcessor} from './processors/spec-colors-processor';
+import {SpecDurationsProcessor} from './processors/spec-durations-processor';
+import {SpecPrefixesProcessor} from './processors/spec-prefixes-processor';
+import {SuiteNumberingProcessor} from './processors/suite-numbering-processor';
+
 var colors = require('colors');
 
 var SpecMetrics = require('./spec-metrics');
-import {SpecDisplay} from "./spec-display";
-
-var DefaultProcessor = require('./processors/default-processor');
-var SpecPrefixesProcessor = require('./processors/spec-prefixes-processor');
-var SpecColorsProcessor = require('./processors/spec-colors-processor');
-var SpecDurationsProcessor = require('./processors/spec-durations-processor');
-var SuiteNumberingProcessor = require('./processors/suite-numbering-processor');
 
 var SpecReporter = function (options) {
   this.started = false;
