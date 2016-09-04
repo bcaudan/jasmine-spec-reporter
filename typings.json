@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "node": "registry:env/node#0.10.0+20160902022231"
+  }
+}

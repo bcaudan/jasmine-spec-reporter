@@ -1,4 +1,4 @@
-var DisplayProcessor = require('../display-processor');
+import {DisplayProcessor} from '../display-processor';
 
 function SpecPrefixesProcessor(prefixes) {
   var successSymbol = '✓ ',

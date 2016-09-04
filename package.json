@@ -2,10 +2,11 @@
   "name": "jasmine-spec-reporter",
   "version": "2.7.0",
   "description": "Spec reporter for jasmine behavior-driven development framework",
-  "main": "src/jasmine-spec-reporter.js",
+  "main": "dist/jasmine-spec-reporter.js",
   "scripts": {
-    "test": "node node_modules/jasmine/bin/jasmine.js",
-    "coverage": "rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
+    "tsc": "rm -rf dist/* && node node_modules/typescript/bin/tsc",
+    "test": "npm run tsc && node node_modules/jasmine/bin/jasmine.js",
+    "coverage": "npm run tsc && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
     "open-coverage": "npm run coverage && open ./coverage/lcov-report/index.html",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "example": "node example/run-example.js",
@@ -39,6 +40,7 @@
     "istanbul": "0.4.4",
     "jasmine": "2.4.1",
     "jasmine-core": "2.4.1",
-    "protractor": "4.0.3"
+    "protractor": "4.0.3",
+    "typescript": "^1.8.10"
   }
 }

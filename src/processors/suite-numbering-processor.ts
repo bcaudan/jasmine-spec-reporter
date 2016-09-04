@@ -1,4 +1,4 @@
-var DisplayProcessor = require('../display-processor');
+import {DisplayProcessor} from '../display-processor';
 
 function SuiteNumberingProcessor() {
   this.suiteHierarchy = [];

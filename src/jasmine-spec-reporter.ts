@@ -1,7 +1,7 @@
 var colors = require('colors');
 
 var SpecMetrics = require('./spec-metrics');
-var SpecDisplay = require('./spec-display');
+import {SpecDisplay} from "./spec-display";
 
 var DefaultProcessor = require('./processors/default-processor');
 var SpecPrefixesProcessor = require('./processors/spec-prefixes-processor');
@@ -59,7 +59,7 @@ function hasCustomDisplaySpecStarted(processors) {
   processors.forEach(function (processor) {
     var log = 'foo';
     var result = processor.displaySpecStarted({id: 'bar', description: 'bar', fullName: 'bar'}, log);
-    isDisplayed |= result !== log;
+    isDisplayed = isDisplayed || result !== log;
   });
   return isDisplayed;
 }
