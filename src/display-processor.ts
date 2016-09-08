@@ -1,4 +1,6 @@
 export class DisplayProcessor {
+    constructor(protected options?: any){}
+
     displayJasmineStarted(info, log) {
         return log;
     }
