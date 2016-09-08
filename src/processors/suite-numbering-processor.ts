@@ -1,19 +1,19 @@
 import {DisplayProcessor} from '../display-processor';
 
 export class SuiteNumberingProcessor extends DisplayProcessor {
-    private suiteHierarchy = [];
+    private suiteHierarchy: any[] = [];
 
-    displaySuite(suite, log) {
-        return this.computeNumber(suite) + ' ' + log;
+    displaySuite(suite: any, log: String): String {
+        return `${this.computeNumber(suite)} ${log}`;
     }
 
-    private computeNumber = function (suite) {
+    private computeNumber(suite: any): String {
         this.computeHierarchy(suite);
         return this.computeHierarchyNumber();
-    };
+    }
 
-    private computeHierarchy = function (suite) {
-        var parentName = this.getParentName(suite);
+    private computeHierarchy(suite: any): void {
+        let parentName = this.getParentName(suite);
         for (var i = 0; i < this.suiteHierarchy.length; i++) {
             if (this.suiteHierarchy[i].name === parentName) {
                 this.suiteHierarchy[i].number++;
@@ -26,15 +26,15 @@ export class SuiteNumberingProcessor extends DisplayProcessor {
         }
     };
 
-    private computeHierarchyNumber = function () {
-        var number = '';
-        for (var i = 0; i < this.suiteHierarchy.length; i++) {
+    private computeHierarchyNumber(): String {
+        let number: String = '';
+        for (let i = 0; i < this.suiteHierarchy.length; i++) {
             number += this.suiteHierarchy[i].number + '.';
         }
         return number.substring(0, number.length - 1);
     };
 
-    private getParentName = function (element) {
+    private getParentName(element: any): String {
         return element.fullName.replace(element.description, '').trim();
     };
 }

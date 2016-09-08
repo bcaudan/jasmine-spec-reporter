@@ -1,27 +1,27 @@
 export class DisplayProcessor {
     constructor(protected options?: any){}
 
-    displayJasmineStarted(info, log) {
+    displayJasmineStarted(info: any, log: String): String {
         return log;
     }
 
-    displaySuite(suite, log) {
+    displaySuite(suite: any, log: String): String {
         return log;
     }
 
-    displaySpecStarted(spec, log) {
+    displaySpecStarted(spec: any, log: String): String {
         return log;
     }
 
-    displaySuccessfulSpec(spec, log) {
+    displaySuccessfulSpec(spec: any, log: String): String {
         return log;
     }
 
-    displayFailedSpec(spec, log) {
+    displayFailedSpec(spec: any, log: String): String {
         return log;
     }
 
-    displayPendingSpec(spec, log) {
+    displayPendingSpec(spec: any, log: String): String {
         return log;
     }
 }

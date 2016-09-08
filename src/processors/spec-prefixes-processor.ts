@@ -1,11 +1,11 @@
 import {DisplayProcessor} from '../display-processor';
 
 export class SpecPrefixesProcessor extends DisplayProcessor {
-    constructor(private prefixes) {
+    constructor(private prefixes: any) {
         super();
-        var successSymbol = '✓ ',
-            failureSymbol = '✗ ',
-            pendingSymbol = '* ';
+        let successSymbol = '✓ ';
+        let failureSymbol = '✗ ';
+        let pendingSymbol = '* ';
 
         if (process && process.platform === 'win32') {
             successSymbol = '\u221A ';
@@ -20,15 +20,15 @@ export class SpecPrefixesProcessor extends DisplayProcessor {
         }
     }
 
-    displaySuccessfulSpec(spec, log) {
+    displaySuccessfulSpec(spec: any, log: String): String {
         return this.prefixes.success + log;
     }
 
-    displayFailedSpec(spec, log) {
+    displayFailedSpec(spec: any, log: String): String {
         return this.prefixes.failure + log;
     }
 
-    displayPendingSpec(spec, log) {
+    displayPendingSpec(spec: any, log: String): String {
         return this.prefixes.pending + log;
     }
 }
