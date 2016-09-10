@@ -1,24 +1,27 @@
-export class SpecDisplay {
-    private indent = '  ';
-    private currentIndent = '';
-    private suiteHierarchy = [];
-    private suiteHierarchyDisplayed = [];
-    private successfulSpecs = [];
-    private failedSpecs = [];
-    private pendingSpecs = [];
-    private lastWasNewLine = false;
-    private displaySuccessesSummary;
-    private displayFailuresSummary;
-    private displayPendingSummary;
-    private displaySuccessfulSpec;
-    private displayFailedSpec;
-    private displayPendingSpec;
-    private displayWithoutColors;
-    private hasCustomDisplaySpecStarted;
-    private displaySpecsWithStacktrace;
-    private displaySummaryWithStacktrace;
+import {DisplayProcessor} from "./display-processor";
+import {SpecMetrics} from "./spec-metrics";
 
-    constructor(options, private displayProcessors) {
+export class SpecDisplay {
+    private indent: string = '  ';
+    private currentIndent: string = '';
+    private suiteHierarchy: any[] = [];
+    private suiteHierarchyDisplayed: any[] = [];
+    private successfulSpecs: any[] = [];
+    private failedSpecs: any[] = [];
+    private pendingSpecs: any[] = [];
+    private lastWasNewLine: boolean = false;
+    private displaySuccessesSummary: boolean;
+    private displayFailuresSummary: boolean;
+    private displayPendingSummary: boolean;
+    private displaySuccessfulSpec: boolean;
+    private displayFailedSpec: boolean;
+    private displayPendingSpec: boolean;
+    private displayWithoutColors: boolean;
+    private hasCustomDisplaySpecStarted: boolean;
+    private displaySpecsWithStacktrace: boolean;
+    private displaySummaryWithStacktrace: boolean;
+
+    constructor(options: any, private displayProcessors: DisplayProcessor[]) {
         this.displaySuccessesSummary = options.displaySuccessesSummary || false;
         this.displayFailuresSummary = options.displayFailuresSummary !== false;
         this.displayPendingSummary = options.displayPendingSummary !== false;
@@ -28,26 +31,26 @@ export class SpecDisplay {
         this.displayWithoutColors = options.colors === false;
         this.hasCustomDisplaySpecStarted = options.hasCustomDisplaySpecStarted;
 
-        var displayStacktrace = options.displayStacktrace || 'none';
+        let displayStacktrace: string = options.displayStacktrace || 'none';
         this.displaySpecsWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'specs';
         this.displaySummaryWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'summary';
     }
 
-    jasmineStarted(runner) {
-        var log = null;
-        this.displayProcessors.forEach(function (displayProcessor) {
+    jasmineStarted(runner: any): void {
+        let log: String = '';
+        this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
             log = displayProcessor.displayJasmineStarted(runner, log);
         });
         this.log(log);
     }
 
-    summary(metrics) {
-        var execution = 'Executed ' + metrics.executedSpecs + ' of ' + metrics.totalSpecsDefined + (metrics.totalSpecsDefined === 1 ? ' spec ' : ' specs ');
-        var successful = (metrics.failedSpecs === 0) ? 'SUCCESS ' : '';
-        var failed = (metrics.failedSpecs > 0) ? '(' + metrics.failedSpecs + ' FAILED) ' : '';
-        var pending = (metrics.pendingSpecs > 0) ? '(' + metrics.pendingSpecs + ' PENDING) ' : '';
-        var skipped = (metrics.skippedSpecs > 0) ? '(' + metrics.skippedSpecs + ' SKIPPED) ' : '';
-        var duration = 'in ' + metrics.duration + '.';
+    summary(metrics: SpecMetrics): void {
+        let execution: string = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${(metrics.totalSpecsDefined === 1 ? ' spec ' : ' specs ')}`;
+        let successful: string = (metrics.failedSpecs === 0) ? 'SUCCESS ' : '';
+        let failed: string = (metrics.failedSpecs > 0) ? `(${metrics.failedSpecs} FAILED) ` : '';
+        let pending: string = (metrics.pendingSpecs > 0) ? `(${metrics.pendingSpecs} PENDING) ` : '';
+        let skipped: string = (metrics.skippedSpecs > 0) ? `(${metrics.skippedSpecs} SKIPPED) ` : '';
+        let duration: string = `in ${metrics.duration}.`;
 
         this.resetIndent();
         this.newLine();
@@ -63,16 +66,16 @@ export class SpecDisplay {
         this.log(execution + successful.success + failed.failure + pending.pending + skipped + duration);
 
         if (metrics.random) {
-            this.log('Randomized with seed ' + metrics.seed + '.');
+            this.log(`Randomized with seed ${metrics.seed}.`);
         }
     }
 
-    successesSummary() {
+    successesSummary(): void {
         this.log("**************************************************");
         this.log("*                   Successes                    *");
         this.log("**************************************************");
         this.newLine();
-        for (var i = 0; i < this.successfulSpecs.length; i++) {
+        for (let i: number = 0; i < this.successfulSpecs.length; i++) {
             this.successfulSummary(this.successfulSpecs[i], i + 1);
             this.newLine();
         }
@@ -80,16 +83,16 @@ export class SpecDisplay {
         this.resetIndent();
     }
 
-    successfulSummary(spec, index) {
-        this.log(index + ') ' + spec.fullName);
+    successfulSummary(spec: any, index: number): void {
+        this.log(`${index}) ${spec.fullName}`);
     }
 
-    failuresSummary() {
+    failuresSummary(): void {
         this.log("**************************************************");
         this.log("*                    Failures                    *");
         this.log("**************************************************");
         this.newLine();
-        for (var i = 0; i < this.failedSpecs.length; i++) {
+        for (let i: number = 0; i < this.failedSpecs.length; i++) {
             this.failedSummary(this.failedSpecs[i], i + 1);
             this.newLine();
         }
@@ -97,17 +100,17 @@ export class SpecDisplay {
         this.resetIndent();
     }
 
-    failedSummary(spec, index) {
-        this.log(index + ') ' + spec.fullName);
+    failedSummary(spec: any, index: number): void {
+        this.log(`${index}) ${spec.fullName}`);
         this.displayErrorMessages(spec, this.displaySummaryWithStacktrace);
     }
 
-    pendingsSummary() {
+    pendingsSummary(): void {
         this.log("**************************************************");
         this.log("*                    Pending                     *");
         this.log("**************************************************");
         this.newLine();
-        for (var i = 0; i < this.pendingSpecs.length; i++) {
+        for (let i: number = 0; i < this.pendingSpecs.length; i++) {
             this.pendingSummary(this.pendingSpecs[i], i + 1);
             this.newLine();
         }
@@ -115,43 +118,43 @@ export class SpecDisplay {
         this.resetIndent();
     }
 
-    pendingSummary(spec, index) {
-        this.log(index + ') ' + spec.fullName);
+    pendingSummary(spec: any, index: number) {
+        this.log(`${index}) ${spec.fullName}`);
         this.increaseIndent();
-        var pendingReason = spec.pendingReason ? spec.pendingReason : 'No reason given';
+        let pendingReason = spec.pendingReason ? spec.pendingReason : 'No reason given';
         this.log(pendingReason.pending);
         this.resetIndent();
     }
 
-    specStarted(spec) {
+    specStarted(spec: any): void {
         if (this.hasCustomDisplaySpecStarted) {
             this.ensureSuiteDisplayed();
-            var log = null;
-            this.displayProcessors.forEach(function (displayProcessor) {
+            let log: String = '';
+            this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
                 log = displayProcessor.displaySpecStarted(spec, log);
             });
             this.log(log);
         }
     }
 
-    successful(spec) {
+    successful(spec: any): void {
         this.successfulSpecs.push(spec);
         if (this.displaySuccessfulSpec) {
             this.ensureSuiteDisplayed();
-            var log = null;
-            this.displayProcessors.forEach(function (displayProcessor) {
+            let log: String = '';
+            this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
                 log = displayProcessor.displaySuccessfulSpec(spec, log);
             });
             this.log(log);
         }
     }
 
-    failed(spec) {
+    failed(spec: any): void {
         this.failedSpecs.push(spec);
         if (this.displayFailedSpec) {
             this.ensureSuiteDisplayed();
-            var log = null;
-            this.displayProcessors.forEach(function (displayProcessor) {
+            let log: String = '';
+            this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
                 log = displayProcessor.displayFailedSpec(spec, log);
             });
             this.log(log);
@@ -159,21 +162,21 @@ export class SpecDisplay {
         }
     }
 
-    pending(spec) {
+    pending(spec: any): void {
         this.pendingSpecs.push(spec);
         if (this.displayPendingSpec) {
             this.ensureSuiteDisplayed();
-            var log = null;
-            this.displayProcessors.forEach(function (displayProcessor) {
+            let log: String = '';
+            this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
                 log = displayProcessor.displayPendingSpec(spec, log);
             });
             this.log(log);
         }
     }
 
-    displayErrorMessages(spec, withStacktrace) {
+    displayErrorMessages(spec: any, withStacktrace: boolean): void {
         this.increaseIndent();
-        for (var i = 0; i < spec.failedExpectations.length; i++) {
+        for (let i: number = 0; i < spec.failedExpectations.length; i++) {
             this.log('- '.failure + spec.failedExpectations[i].message.failure);
             if (withStacktrace && spec.failedExpectations[i].stack) {
                 this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
@@ -182,23 +185,23 @@ export class SpecDisplay {
         this.decreaseIndent();
     }
 
-    filterStackTraces(traces) {
-        var lines = traces.split('\n');
-        var filtered = [];
-        for (var i = 1; i < lines.length; i++) {
+    filterStackTraces(traces: string): string {
+        let lines: string[] = traces.split('\n');
+        let filtered: string[] = [];
+        for (let i: number = 1; i < lines.length; i++) {
             if (!/(jasmine[^\/]*\.js|Timer\.listOnTimeout)/.test(lines[i])) {
                 filtered.push(lines[i]);
             }
         }
-        return filtered.join('\n' + this.currentIndent);
+        return filtered.join(`\n${this.currentIndent}`);
     }
 
-    suiteStarted(suite) {
+    suiteStarted(suite: any): void {
         this.suiteHierarchy.push(suite);
     }
 
-    suiteDone() {
-        var suite = this.suiteHierarchy.pop();
+    suiteDone(): void {
+        let suite = this.suiteHierarchy.pop();
         if (this.suiteHierarchyDisplayed[this.suiteHierarchyDisplayed.length - 1] === suite) {
             this.suiteHierarchyDisplayed.pop();
         }
@@ -206,39 +209,39 @@ export class SpecDisplay {
         this.decreaseIndent();
     }
 
-    ensureSuiteDisplayed() {
+    ensureSuiteDisplayed(): void {
         if (this.suiteHierarchy.length !== 0) {
-            for (var i = this.suiteHierarchyDisplayed.length; i < this.suiteHierarchy.length; i++) {
+            for (let i: number = this.suiteHierarchyDisplayed.length; i < this.suiteHierarchy.length; i++) {
                 this.suiteHierarchyDisplayed.push(this.suiteHierarchy[i]);
                 this.displaySuite(this.suiteHierarchy[i]);
             }
         } else {
-            var topLevelSuite = {description: 'Top level suite'};
+            let topLevelSuite: any = {description: 'Top level suite'};
             this.suiteHierarchy.push(topLevelSuite);
             this.suiteHierarchyDisplayed.push(topLevelSuite);
             this.displaySuite(topLevelSuite);
         }
     }
 
-    displaySuite(suite) {
+    displaySuite(suite: any): void {
         this.newLine();
         this.computeSuiteIndent();
-        var log = null;
-        this.displayProcessors.forEach(function (displayProcessor) {
+        let log: String = '';
+        this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
             log = displayProcessor.displaySuite(suite, log);
         });
         this.log(log);
         this.increaseIndent();
     }
 
-    computeSuiteIndent() {
+    computeSuiteIndent(): void {
         this.resetIndent();
-        for (var i = 0; i < this.suiteHierarchyDisplayed.length; i++) {
+        for (let i: number = 0; i < this.suiteHierarchyDisplayed.length; i++) {
             this.increaseIndent();
         }
     }
 
-    log(stuff) {
+    log(stuff: String): void {
         if (stuff !== null) {
             if (this.displayWithoutColors) {
                 stuff = stuff.stripColors;
@@ -248,22 +251,22 @@ export class SpecDisplay {
         }
     }
 
-    newLine() {
+    newLine(): void {
         if (!this.lastWasNewLine) {
             console.log('');
             this.lastWasNewLine = true;
         }
     }
 
-    resetIndent() {
+    resetIndent(): void {
         this.currentIndent = '';
     }
 
-    increaseIndent() {
+    increaseIndent(): void {
         this.currentIndent += this.indent;
     }
 
-    decreaseIndent() {
+    decreaseIndent(): void {
         this.currentIndent = this.currentIndent.substr(0, this.currentIndent.length - this.indent.length);
     }
 }

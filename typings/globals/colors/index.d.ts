@@ -122,4 +122,6 @@ interface String {
     trap: string;
     random: string;
     zalgo: string;
+
+    stripColors: string;
 }
