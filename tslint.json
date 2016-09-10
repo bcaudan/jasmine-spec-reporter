@@ -1,0 +1,135 @@
+{
+    "rulesDirectory": "node_modules/tslint-eslint-rules/dist/rules",
+    "rules": {
+        "class-name": true,
+        "comment-format": [
+            true,
+            "check-space"
+        ],
+        "indent": [
+            true,
+            "spaces"
+        ],
+        "no-duplicate-variable": true,
+        "no-eval": true,
+        "no-internal-module": true,
+        "no-trailing-whitespace": true,
+        "no-unsafe-finally": true,
+        "no-var-keyword": true,
+        "one-line": [
+            true,
+            "check-open-brace",
+            "check-whitespace"
+        ],
+        "quotemark": [
+            true,
+            "double"
+        ],
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "triple-equals": [
+            true,
+            "allow-null-check"
+        ],
+        "typedef-whitespace": [
+            true,
+            {
+                "call-signature": "nospace",
+                "index-signature": "nospace",
+                "parameter": "nospace",
+                "property-declaration": "nospace",
+                "variable-declaration": "nospace"
+            }
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords"
+        ],
+        "whitespace": [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-separator",
+            "check-type"
+        ],
+        "trailing-comma": [
+            true,
+            {
+                "multiline": "never",
+                "singleline": "never"
+            }
+        ],
+        "no-conditional-assignment": true,
+        "no-console": [
+            true,
+            "debug",
+            "info",
+            "time",
+            "timeEnd",
+            "trace"
+        ],
+        "no-constant-condition": true,
+        "no-control-regex": true,
+        "no-debugger": true,
+        "no-duplicate-key": true,
+        "no-duplicate-case": true,
+        "no-empty": true,
+        "no-empty-character-class": true,
+        "no-extra-boolean-cast": true,
+        "no-extra-semi": true,
+        "no-inner-declarations": [
+            true,
+            "both"
+        ],
+        "no-invalid-regexp": true,
+        "no-irregular-whitespace": true,
+        "no-regex-spaces": true,
+        "no-sparse-arrays": true,
+        "no-unexpected-multiline": true,
+        "no-unreachable": true,
+        "use-isnan": true,
+        "valid-jsdoc": [
+            true,
+            {
+                "prefer": {
+                    "return": "returns"
+                },
+                "requireReturn": false,
+                "requireParamDescription": true,
+                "requireReturnDescription": true,
+                "matchDescription": "^[A-Z][A-Za-z0-9\\s]*[.]$"
+            }
+        ],
+        "valid-typeof": true,
+        "curly": true,
+        "forin": true,
+        "no-arg": true,
+        "radix": true,
+        "no-shadowed-variable": true,
+        "no-unused-variable": true,
+        "handle-callback-err": [
+            true,
+            "^(err|error|anySpecificError)$"
+        ],
+        "array-bracket-spacing": [
+            true,
+            "always",
+            {
+                "singleValue": false,
+                "objectsInArrays": false,
+                "arraysInArrays": false
+            }
+        ],
+        "block-spacing": [
+            true,
+            "always"
+        ],
+        "object-curly-spacing": [
+            true,
+            "always"
+        ]
+    }
+}

@@ -1,4 +1,4 @@
-import {DisplayProcessor} from '../display-processor';
+import { DisplayProcessor } from "../display-processor";
 
 export class SpecColorsProcessor extends DisplayProcessor {
     displaySuccessfulSpec(spec: any, log: String): String {

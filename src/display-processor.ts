@@ -1,5 +1,5 @@
 export class DisplayProcessor {
-    constructor(protected options?: any){}
+    constructor(protected options?: any) {}
 
     displayJasmineStarted(info: any, log: String): String {
         return log;

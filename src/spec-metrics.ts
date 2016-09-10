@@ -38,7 +38,7 @@ export class SpecMetrics {
     }
 
     formatDuration(durationInMs: number): string {
-        let duration: string = '';
+        let duration: string = "";
         let durationInSecs: number = durationInMs / 1000;
         let durationInMins: number;
         let durationInHrs: number;
@@ -66,6 +66,6 @@ export class SpecMetrics {
     }
 
     private static pluralize(count: number): string {
-        return count > 1 ? 's' : '';
+        return count > 1 ? "s" : "";
     }
 }

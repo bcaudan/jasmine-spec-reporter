@@ -1,8 +1,8 @@
-import {DisplayProcessor} from '../display-processor';
+import { DisplayProcessor } from "../display-processor";
 
 export class DefaultProcessor extends DisplayProcessor {
     displayJasmineStarted(): String {
-        return 'Spec started';
+        return "Spec started";
     }
 
     displaySuite(suite: any): String {
@@ -10,18 +10,18 @@ export class DefaultProcessor extends DisplayProcessor {
     }
 
     displaySuccessfulSpec(spec: any): String {
-        return this.displaySpecDescription(spec);
+        return DefaultProcessor.displaySpecDescription(spec);
     }
 
     displayFailedSpec(spec: any): String {
-        return this.displaySpecDescription(spec);
+        return DefaultProcessor.displaySpecDescription(spec);
     }
 
     displayPendingSpec(spec: any): String {
-        return this.displaySpecDescription(spec);
+        return DefaultProcessor.displaySpecDescription(spec);
     }
 
-    private displaySpecDescription(spec: any): String {
+    private static displaySpecDescription(spec: any): String {
         return spec.description;
     }
 }

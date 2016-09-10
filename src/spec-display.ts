@@ -1,9 +1,9 @@
-import {DisplayProcessor} from "./display-processor";
-import {SpecMetrics} from "./spec-metrics";
+import { DisplayProcessor } from "./display-processor";
+import { SpecMetrics } from "./spec-metrics";
 
 export class SpecDisplay {
-    private indent: string = '  ';
-    private currentIndent: string = '';
+    private indent: string = "  ";
+    private currentIndent: string = "";
     private suiteHierarchy: any[] = [];
     private suiteHierarchyDisplayed: any[] = [];
     private successfulSpecs: any[] = [];
@@ -31,13 +31,13 @@ export class SpecDisplay {
         this.displayWithoutColors = options.colors === false;
         this.hasCustomDisplaySpecStarted = options.hasCustomDisplaySpecStarted;
 
-        let displayStacktrace: string = options.displayStacktrace || 'none';
-        this.displaySpecsWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'specs';
-        this.displaySummaryWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'summary';
+        let displayStacktrace: string = options.displayStacktrace || "none";
+        this.displaySpecsWithStacktrace = displayStacktrace === "all" || displayStacktrace === "specs";
+        this.displaySummaryWithStacktrace = displayStacktrace === "all" || displayStacktrace === "summary";
     }
 
     jasmineStarted(runner: any): void {
-        let log: String = '';
+        let log: String = "";
         this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
             log = displayProcessor.displayJasmineStarted(runner, log);
         });
@@ -45,11 +45,11 @@ export class SpecDisplay {
     }
 
     summary(metrics: SpecMetrics): void {
-        let execution: string = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${(metrics.totalSpecsDefined === 1 ? ' spec ' : ' specs ')}`;
-        let successful: string = (metrics.failedSpecs === 0) ? 'SUCCESS ' : '';
-        let failed: string = (metrics.failedSpecs > 0) ? `(${metrics.failedSpecs} FAILED) ` : '';
-        let pending: string = (metrics.pendingSpecs > 0) ? `(${metrics.pendingSpecs} PENDING) ` : '';
-        let skipped: string = (metrics.skippedSpecs > 0) ? `(${metrics.skippedSpecs} SKIPPED) ` : '';
+        let execution: string = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${(metrics.totalSpecsDefined === 1 ? " spec " : " specs ")}`;
+        let successful: string = (metrics.failedSpecs === 0) ? "SUCCESS " : "";
+        let failed: string = (metrics.failedSpecs > 0) ? `(${metrics.failedSpecs} FAILED) ` : "";
+        let pending: string = (metrics.pendingSpecs > 0) ? `(${metrics.pendingSpecs} PENDING) ` : "";
+        let skipped: string = (metrics.skippedSpecs > 0) ? `(${metrics.skippedSpecs} SKIPPED) ` : "";
         let duration: string = `in ${metrics.duration}.`;
 
         this.resetIndent();
@@ -121,7 +121,7 @@ export class SpecDisplay {
     pendingSummary(spec: any, index: number) {
         this.log(`${index}) ${spec.fullName}`);
         this.increaseIndent();
-        let pendingReason = spec.pendingReason ? spec.pendingReason : 'No reason given';
+        let pendingReason = spec.pendingReason ? spec.pendingReason : "No reason given";
         this.log(pendingReason.pending);
         this.resetIndent();
     }
@@ -129,7 +129,7 @@ export class SpecDisplay {
     specStarted(spec: any): void {
         if (this.hasCustomDisplaySpecStarted) {
             this.ensureSuiteDisplayed();
-            let log: String = '';
+            let log: String = "";
             this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displaySpecStarted(spec, log);
             });
@@ -141,7 +141,7 @@ export class SpecDisplay {
         this.successfulSpecs.push(spec);
         if (this.displaySuccessfulSpec) {
             this.ensureSuiteDisplayed();
-            let log: String = '';
+            let log: String = "";
             this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displaySuccessfulSpec(spec, log);
             });
@@ -153,7 +153,7 @@ export class SpecDisplay {
         this.failedSpecs.push(spec);
         if (this.displayFailedSpec) {
             this.ensureSuiteDisplayed();
-            let log: String = '';
+            let log: String = "";
             this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displayFailedSpec(spec, log);
             });
@@ -166,7 +166,7 @@ export class SpecDisplay {
         this.pendingSpecs.push(spec);
         if (this.displayPendingSpec) {
             this.ensureSuiteDisplayed();
-            let log: String = '';
+            let log: String = "";
             this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displayPendingSpec(spec, log);
             });
@@ -177,7 +177,7 @@ export class SpecDisplay {
     displayErrorMessages(spec: any, withStacktrace: boolean): void {
         this.increaseIndent();
         for (let i: number = 0; i < spec.failedExpectations.length; i++) {
-            this.log('- '.failure + spec.failedExpectations[i].message.failure);
+            this.log("- ".failure + spec.failedExpectations[i].message.failure);
             if (withStacktrace && spec.failedExpectations[i].stack) {
                 this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
             }
@@ -186,7 +186,7 @@ export class SpecDisplay {
     }
 
     filterStackTraces(traces: string): string {
-        let lines: string[] = traces.split('\n');
+        let lines: string[] = traces.split("\n");
         let filtered: string[] = [];
         for (let i: number = 1; i < lines.length; i++) {
             if (!/(jasmine[^\/]*\.js|Timer\.listOnTimeout)/.test(lines[i])) {
@@ -216,7 +216,7 @@ export class SpecDisplay {
                 this.displaySuite(this.suiteHierarchy[i]);
             }
         } else {
-            let topLevelSuite: any = {description: 'Top level suite'};
+            let topLevelSuite: any = { description: "Top level suite" };
             this.suiteHierarchy.push(topLevelSuite);
             this.suiteHierarchyDisplayed.push(topLevelSuite);
             this.displaySuite(topLevelSuite);
@@ -226,7 +226,7 @@ export class SpecDisplay {
     displaySuite(suite: any): void {
         this.newLine();
         this.computeSuiteIndent();
-        let log: String = '';
+        let log: String = "";
         this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
             log = displayProcessor.displaySuite(suite, log);
         });
@@ -253,13 +253,13 @@ export class SpecDisplay {
 
     newLine(): void {
         if (!this.lastWasNewLine) {
-            console.log('');
+            console.log("");
             this.lastWasNewLine = true;
         }
     }
 
     resetIndent(): void {
-        this.currentIndent = '';
+        this.currentIndent = "";
     }
 
     increaseIndent(): void {

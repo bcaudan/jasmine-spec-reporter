@@ -1,16 +1,14 @@
-import {SpecDisplay} from "./spec-display";
-import {SpecMetrics} from "./spec-metrics";
-import {DisplayProcessor} from "./display-processor";
+import { SpecDisplay } from "./spec-display";
+import { SpecMetrics } from "./spec-metrics";
+import { DisplayProcessor } from "./display-processor";
 
-import {DefaultProcessor} from './processors/default-processor';
-import {SpecColorsProcessor} from './processors/spec-colors-processor';
-import {SpecDurationsProcessor} from './processors/spec-durations-processor';
-import {SpecPrefixesProcessor} from './processors/spec-prefixes-processor';
-import {SuiteNumberingProcessor} from './processors/suite-numbering-processor';
+import { DefaultProcessor } from "./processors/default-processor";
+import { SpecColorsProcessor } from "./processors/spec-colors-processor";
+import { SpecDurationsProcessor } from "./processors/spec-durations-processor";
+import { SpecPrefixesProcessor } from "./processors/spec-prefixes-processor";
+import { SuiteNumberingProcessor } from "./processors/suite-numbering-processor";
 
-import * as colors from 'colors';
-import Suite = jasmine.Suite;
-import Spec = jasmine.Spec;
+import * as colors from "colors";
 
 module.exports = class SpecReporter {
     private started: boolean = false;
@@ -31,9 +29,9 @@ module.exports = class SpecReporter {
 
     private static initColors(options: any): void {
         colors.setTheme({
-            success: options.colors && options.colors.success ? options.colors.success : 'green',
-            failure: options.colors && options.colors.failure ? options.colors.failure : 'red',
-            pending: options.colors && options.colors.pending ? options.colors.pending : 'yellow'
+            success: options.colors && options.colors.success ? options.colors.success : "green",
+            failure: options.colors && options.colors.failure ? options.colors.failure : "red",
+            pending: options.colors && options.colors.pending ? options.colors.pending : "yellow"
         });
         colors.enabled = true;
     }
@@ -54,7 +52,7 @@ module.exports = class SpecReporter {
         }
 
         if (options.customProcessors) {
-            options.customProcessors.forEach(<p extends DisplayProcessor>(Processor: {new(options: any): p;}) => {
+            options.customProcessors.forEach(<p extends DisplayProcessor>(Processor: {new(options: any): p; }) => {
                 displayProcessors.push(new Processor(options));
             });
         }
@@ -65,8 +63,8 @@ module.exports = class SpecReporter {
     private static hasCustomDisplaySpecStarted(processors: DisplayProcessor[]): boolean {
         let isDisplayed: boolean = false;
         processors.forEach((processor: DisplayProcessor) => {
-            let log: string = 'foo';
-            let result = processor.displaySpecStarted({id: 'bar', description: 'bar', fullName: 'bar'}, log);
+            let log: string = "foo";
+            let result = processor.displaySpecStarted({ id: "bar", description: "bar", fullName: "bar" }, log);
             isDisplayed = isDisplayed || result !== log;
         });
         return isDisplayed;
@@ -99,13 +97,13 @@ module.exports = class SpecReporter {
 
     specDone(spec: any): void {
         this.metrics.stopSpec(spec);
-        if (spec.status === 'pending') {
+        if (spec.status === "pending") {
             this.metrics.pendingSpecs++;
             this.display.pending(spec);
-        } else if (spec.status === 'passed') {
+        } else if (spec.status === "passed") {
             this.metrics.successfulSpecs++;
             this.display.successful(spec);
-        } else if (spec.status === 'failed') {
+        } else if (spec.status === "failed") {
             this.metrics.failedSpecs++;
             this.display.failed(spec);
         }
