@@ -38,7 +38,7 @@ export class SpecDisplay {
 
     jasmineStarted(runner: any): void {
         let log: String = '';
-        this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
+        this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
             log = displayProcessor.displayJasmineStarted(runner, log);
         });
         this.log(log);
@@ -130,7 +130,7 @@ export class SpecDisplay {
         if (this.hasCustomDisplaySpecStarted) {
             this.ensureSuiteDisplayed();
             let log: String = '';
-            this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
+            this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displaySpecStarted(spec, log);
             });
             this.log(log);
@@ -142,7 +142,7 @@ export class SpecDisplay {
         if (this.displaySuccessfulSpec) {
             this.ensureSuiteDisplayed();
             let log: String = '';
-            this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
+            this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displaySuccessfulSpec(spec, log);
             });
             this.log(log);
@@ -154,7 +154,7 @@ export class SpecDisplay {
         if (this.displayFailedSpec) {
             this.ensureSuiteDisplayed();
             let log: String = '';
-            this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
+            this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displayFailedSpec(spec, log);
             });
             this.log(log);
@@ -167,7 +167,7 @@ export class SpecDisplay {
         if (this.displayPendingSpec) {
             this.ensureSuiteDisplayed();
             let log: String = '';
-            this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
+            this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displayPendingSpec(spec, log);
             });
             this.log(log);
@@ -227,7 +227,7 @@ export class SpecDisplay {
         this.newLine();
         this.computeSuiteIndent();
         let log: String = '';
-        this.displayProcessors.forEach(function (displayProcessor: DisplayProcessor): void {
+        this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
             log = displayProcessor.displaySuite(suite, log);
         });
         this.log(log);

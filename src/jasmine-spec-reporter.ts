@@ -54,7 +54,7 @@ module.exports = class SpecReporter {
         }
 
         if (options.customProcessors) {
-            options.customProcessors.forEach(function <p extends DisplayProcessor>(Processor: {new(options: any): p;}) {
+            options.customProcessors.forEach(<p extends DisplayProcessor>(Processor: {new(options: any): p;}) => {
                 displayProcessors.push(new Processor(options));
             });
         }
@@ -64,7 +64,7 @@ module.exports = class SpecReporter {
 
     private static hasCustomDisplaySpecStarted(processors: DisplayProcessor[]): boolean {
         let isDisplayed: boolean = false;
-        processors.forEach(function (processor: DisplayProcessor) {
+        processors.forEach((processor: DisplayProcessor) => {
             let log: string = 'foo';
             let result = processor.displaySpecStarted({id: 'bar', description: 'bar', fullName: 'bar'}, log);
             isDisplayed = isDisplayed || result !== log;
