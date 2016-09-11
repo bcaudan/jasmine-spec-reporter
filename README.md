@@ -18,6 +18,7 @@ Install `jasmine-spec-reporter` via npm:
 ## Configuration
 * [Jasmine node tests](examples/node)
 * [Protractor tests](examples/protractor)
+* [TypeScript support](examples/typescript)
 
 ## Custom output
 You can customize the output of the reporter yourself: [see how](docs/customize-output.md).

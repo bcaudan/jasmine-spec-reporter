@@ -5,8 +5,10 @@ node_modules
 spec
 !examples/node/spec
 !examples/protractor/spec
+!examples/typescript/spec
 src
 typings
+!examples/typescript/typings
 
 .gitignore
 .istanbul.yml

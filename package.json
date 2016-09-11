@@ -3,6 +3,7 @@
   "version": "2.7.0",
   "description": "Spec reporter for jasmine behavior-driven development framework",
   "main": "built/main.js",
+  "typings": "built/main.d.ts",
   "scripts": {
     "prepublish": "npm run tsc",
     "tsc": "node node_modules/typescript/bin/tsc",
