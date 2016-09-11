@@ -7,7 +7,7 @@
   "scripts": {
     "prepublish": "npm run tsc",
     "tsc": "node node_modules/typescript/bin/tsc",
-    "testc": "npm run tsc -- -p tsconfig-spec.json",
+    "testc": "npm run tsc -- -p spec/tsconfig.json",
     "test": "npm run tsc && npm run testc && node node_modules/jasmine/bin/jasmine.js",
     "coverage": "npm run tsc && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
     "open-coverage": "npm run coverage && open ./coverage/lcov-report/index.html",
@@ -41,6 +41,6 @@
     "jasmine-core": "2.4.1",
     "tslint": "^3.15.1",
     "tslint-eslint-rules": "^1.5.0",
-    "typescript": "^1.8.10"
+    "typescript": "^2.0.0"
   }
 }

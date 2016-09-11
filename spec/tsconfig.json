@@ -3,10 +3,8 @@
     "module": "CommonJS",
     "target": "es5"
   },
-  "exclude": [
-    "src",
-    "built",
-    "node_modules",
-    "examples"
+  "include": [
+    "./**/*.ts",
+    "../typings/**/*.ts"
   ]
 }

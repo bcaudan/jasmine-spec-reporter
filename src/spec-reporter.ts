@@ -8,7 +8,7 @@ import { SpecDurationsProcessor } from "./processors/spec-durations-processor";
 import { SpecPrefixesProcessor } from "./processors/spec-prefixes-processor";
 import { SuiteNumberingProcessor } from "./processors/suite-numbering-processor";
 
-import * as colors from "colors";
+import colors = require("colors");
 
 export class SpecReporter {
     private started: boolean = false;
