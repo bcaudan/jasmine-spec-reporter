@@ -1,33 +1,34 @@
-let DisplayProcessor = require("../../built/main").DisplayProcessor;
+import { DisplayProcessor } from "../../built/main";
 
-function TestProcessor(options) {
-    this.test = options.test;
+export class TestProcessor extends DisplayProcessor {
+    private test: string;
+
+    constructor(protected options: any) {
+        super(options);
+        this.test = options.test;
+    }
+
+    displayJasmineStarted(runner, log) {
+        return log + this.test;
+    }
+
+    displaySuite(suite, log) {
+        return log + this.test;
+    }
+
+    displaySpecStarted(spec, log) {
+        return spec.description + this.test;
+    }
+
+    displaySuccessfulSpec(spec, log) {
+        return log + this.test;
+    }
+
+    displayFailedSpec(spec, log) {
+        return log + this.test;
+    }
+
+    displayPendingSpec(spec, log) {
+        return log + this.test;
+    }
 }
-
-TestProcessor.prototype = new DisplayProcessor();
-
-TestProcessor.prototype.displayJasmineStarted = function (runner, log) {
-    return log + this.test;
-};
-
-TestProcessor.prototype.displaySuite = function (suite, log) {
-    return log + this.test;
-};
-
-TestProcessor.prototype.displaySpecStarted = function (spec, log) {
-    return spec.description + this.test;
-};
-
-TestProcessor.prototype.displaySuccessfulSpec = function (spec, log) {
-    return log + this.test;
-};
-
-TestProcessor.prototype.displayFailedSpec = function (spec, log) {
-    return log + this.test;
-};
-
-TestProcessor.prototype.displayPendingSpec = function (spec, log) {
-    return log + this.test;
-};
-
-module.exports = TestProcessor;

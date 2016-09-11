@@ -56,4 +56,4 @@ class Test
     env.execute()
 
 global.Test = Test
-global.addMatchers = addMatchers
+exports.addMatchers = addMatchers

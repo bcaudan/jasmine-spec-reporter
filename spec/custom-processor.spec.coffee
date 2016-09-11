@@ -1,6 +1,4 @@
 describe 'spec reporter', ->
-  addMatchers()
-
   describe 'with custom processor', ->
     beforeEach ->
       @reporter = new SpecReporter
