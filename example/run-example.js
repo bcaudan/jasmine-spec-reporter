@@ -1,7 +1,7 @@
 require('coffee-script/register');
 var path = require('path');
 var Jasmine = require('jasmine');
-var SpecReporter = require('../built/jasmine-spec-reporter.js');
+var SpecReporter = require('../built/main').SpecReporter;
 var noop = function () {};
 
 var jrunner = new Jasmine();

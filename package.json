@@ -2,7 +2,7 @@
   "name": "jasmine-spec-reporter",
   "version": "2.7.0",
   "description": "Spec reporter for jasmine behavior-driven development framework",
-  "main": "built/jasmine-spec-reporter.js",
+  "main": "built/main.js",
   "scripts": {
     "tsc": "rm -rf built/* && node node_modules/typescript/bin/tsc",
     "test": "npm run tsc && node node_modules/jasmine/bin/jasmine.js",

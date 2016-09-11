@@ -8,7 +8,7 @@ Create a `jasmine-runner.js` file with the following content:
 
 ```node
 var Jasmine = require('jasmine');
-var SpecReporter = require('jasmine-spec-reporter');
+var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 var noop = function() {};
 
 var jrunner = new Jasmine();

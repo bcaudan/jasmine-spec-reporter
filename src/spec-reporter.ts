@@ -10,7 +10,7 @@ import { SuiteNumberingProcessor } from "./processors/suite-numbering-processor"
 
 import * as colors from "colors";
 
-module.exports = class SpecReporter {
+export class SpecReporter {
     private started: boolean = false;
     private finished: boolean = false;
     private display: SpecDisplay;
@@ -25,7 +25,7 @@ module.exports = class SpecReporter {
 
         this.display = new SpecDisplay(this.options, displayProcessors);
         this.metrics = new SpecMetrics();
-    };
+    }
 
     private static initColors(options: any): void {
         colors.setTheme({
@@ -108,4 +108,4 @@ module.exports = class SpecReporter {
             this.display.failed(spec);
         }
     }
-};
+}
