@@ -26,3 +26,14 @@ jasmineNodeOpts: {
    print: function() {}
 }
 ```
+
+## Example
+
+You can find an example in this directory:
+
+```sh
+npm install
+npm run webdriver-update # if needed
+npm run webdriver-start
+npm start
+```

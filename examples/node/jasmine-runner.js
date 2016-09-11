@@ -1,12 +1,10 @@
-require('coffee-script/register');
-var path = require('path');
 var Jasmine = require('jasmine');
-var SpecReporter = require('../built/main').SpecReporter;
+var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 var noop = function () {};
 
 var jrunner = new Jasmine();
 jrunner.configureDefaultReporter({print: noop});
-jasmine.getEnv().addReporter(new SpecReporter({
+jrunner.addReporter(new SpecReporter({
   displayStacktrace: 'none',
   displayFailuresSummary: true,
   displayPendingSummary: true,
@@ -28,8 +26,5 @@ jasmine.getEnv().addReporter(new SpecReporter({
   },
   customProcessors: []
 }));
-jrunner.projectBaseDir = '';
-jrunner.specDir = '';
-jrunner.randomizeTests(false);
-jrunner.addSpecFiles([path.resolve('example/example-spec.coffee')]);
+jrunner.loadConfigFile();
 jrunner.execute();

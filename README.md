@@ -16,8 +16,8 @@ Install `jasmine-spec-reporter` via npm:
     npm install jasmine-spec-reporter --save-dev
 
 ## Configuration
-* [Jasmine node tests](docs/jasmine-npm-configuration.md)
-* [Protractor tests](docs/protractor-configuration.md)
+* [Jasmine node tests](examples/node)
+* [Protractor tests](examples/protractor)
 
 ## Custom output
 You can customize the output of the reporter yourself: [see how](docs/customize-output.md).
@@ -59,14 +59,8 @@ To use Jasmine spec reporter with Jasmine 1.x, please see [jasmine1 branch](http
 # Developement
 
 * install dependencies: `npm install`
-* launch all unit tests: `npm test`
-* launch an output example: `npm run example`
-* launch a protractor example:
-```sh
-npm run webdriver-update # if needed
-npm run webdriver-start
-npm run protractor-example
-```
+* compile sources: `npm run tsc`
+* launch unit tests: `npm test`
 
 # Contribution
 

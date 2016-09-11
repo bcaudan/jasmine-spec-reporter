@@ -1,4 +1,4 @@
-var SpecReporter = require('../built/main').SpecReporter;
+var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
 exports.config = {
   framework: 'jasmine2',
@@ -10,7 +10,7 @@ exports.config = {
     }
   },
   specs: [
-    './protractor-spec.js'
+    './spec/protractor-spec.js'
   ],
   capabilities: {
     browserName: 'chrome',

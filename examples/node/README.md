@@ -13,7 +13,7 @@ var noop = function() {};
 
 var jrunner = new Jasmine();
 jrunner.configureDefaultReporter({print: noop});    // remove default reporter logs
-jasmine.getEnv().addReporter(new SpecReporter());   // add jasmine-spec-reporter
+jrunner.addReporter(new SpecReporter());            // add jasmine-spec-reporter
 jrunner.loadConfigFile();                           // load jasmine.json configuration
 jrunner.execute();
 ```
@@ -21,3 +21,10 @@ jrunner.execute();
 Then run your tests with:
 
     node jasmine-runner.js
+
+## Example
+
+You can find an example in this directory:
+
+    npm install
+    npm start

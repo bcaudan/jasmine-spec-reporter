@@ -4,15 +4,12 @@
   "description": "Spec reporter for jasmine behavior-driven development framework",
   "main": "built/main.js",
   "scripts": {
-    "tsc": "rm -rf built/* && node node_modules/typescript/bin/tsc",
+    "prepublish": "npm run tsc",
+    "tsc": "node node_modules/typescript/bin/tsc",
     "test": "npm run tsc && node node_modules/jasmine/bin/jasmine.js",
     "coverage": "npm run tsc && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
     "open-coverage": "npm run coverage && open ./coverage/lcov-report/index.html",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "example": "npm run tsc && node example/run-example.js",
-    "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update",
-    "webdriver-start": "node node_modules/protractor/bin/webdriver-manager start",
-    "protractor-example": "npm run tsc && node node_modules/protractor/bin/protractor example/protractor.conf.js"
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -40,7 +37,6 @@
     "istanbul": "0.4.4",
     "jasmine": "2.4.1",
     "jasmine-core": "2.4.1",
-    "protractor": "4.0.3",
     "tslint": "^3.15.1",
     "tslint-eslint-rules": "^1.5.0",
     "typescript": "^1.8.10"

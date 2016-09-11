@@ -8,5 +8,10 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "outDir": "built"
-  }
+  },
+  "exclude": [
+    "built",
+    "node_modules",
+    "examples"
+  ]
 }
