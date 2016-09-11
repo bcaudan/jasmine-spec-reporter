@@ -1,4 +1,4 @@
-var DisplayProcessor = require('../../dist/display-processor').DisplayProcessor;
+var DisplayProcessor = require('../../built/display-processor').DisplayProcessor;
 
 function TestProcessor(options) {
   this.test = options.test;

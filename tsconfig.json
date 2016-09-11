@@ -6,6 +6,6 @@
     "target": "es5",
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "outDir": "dist"
+    "outDir": "built"
   }
 }

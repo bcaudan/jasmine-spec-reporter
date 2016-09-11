@@ -1,4 +1,4 @@
-var SpecReporter = require('../dist/jasmine-spec-reporter.js');
+var SpecReporter = require('../built/jasmine-spec-reporter.js');
 
 exports.config = {
   framework: 'jasmine2',

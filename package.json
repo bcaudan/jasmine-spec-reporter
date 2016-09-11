@@ -2,9 +2,9 @@
   "name": "jasmine-spec-reporter",
   "version": "2.7.0",
   "description": "Spec reporter for jasmine behavior-driven development framework",
-  "main": "dist/jasmine-spec-reporter.js",
+  "main": "built/jasmine-spec-reporter.js",
   "scripts": {
-    "tsc": "rm -rf dist/* && node node_modules/typescript/bin/tsc",
+    "tsc": "rm -rf built/* && node node_modules/typescript/bin/tsc",
     "test": "npm run tsc && node node_modules/jasmine/bin/jasmine.js",
     "coverage": "npm run tsc && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
     "open-coverage": "npm run coverage && open ./coverage/lcov-report/index.html",
