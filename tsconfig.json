@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "listFiles": true,
     "pretty": true,
     "module": "CommonJS",
     "target": "es5",
@@ -12,6 +11,7 @@
   "exclude": [
     "built",
     "node_modules",
-    "examples"
+    "examples",
+    "spec"
   ]
 }
