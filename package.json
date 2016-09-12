@@ -8,8 +8,9 @@
     "prepublish": "npm run tsc",
     "tsc": "node node_modules/typescript/bin/tsc",
     "testc": "npm run tsc -- -p spec/tsconfig.json",
-    "test": "npm run tsc && npm run testc && node node_modules/jasmine/bin/jasmine.js",
-    "coverage": "npm run tsc && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
+    "pretest": "npm run tsc && npm run testc",
+    "test": "node node_modules/jasmine/bin/jasmine.js",
+    "coverage": "npm run pretest && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
     "open-coverage": "npm run coverage && open ./coverage/lcov-report/index.html",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
