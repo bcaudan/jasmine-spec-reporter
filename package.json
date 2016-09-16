@@ -37,8 +37,8 @@
     "coffee-script": "1.10.0",
     "coveralls": "2.11.13",
     "istanbul": "0.4.5",
-    "jasmine": "2.5.1",
-    "jasmine-core": "2.5.1",
+    "jasmine": "2.4.1",
+    "jasmine-core": "2.4.1",
     "protractor": "4.0.8"
   }
 }
