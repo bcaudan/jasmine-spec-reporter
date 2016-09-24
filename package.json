@@ -34,7 +34,7 @@
     "colors": "1.1.2"
   },
   "devDependencies": {
-    "coffee-script": "1.10.0",
+    "coffee-script": "1.11.0",
     "coveralls": "2.11.13",
     "istanbul": "0.4.5",
     "jasmine": "2.5.2",
