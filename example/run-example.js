@@ -4,7 +4,7 @@ var Jasmine = require('jasmine');
 var SpecReporter = require('../src/jasmine-spec-reporter.js');
 
 var jrunner = new Jasmine();
-jasmine.getEnv().clearReporters();
+jrunner.env.clearReporters();
 jrunner.addReporter(new SpecReporter({
   displayStacktrace: 'none',
   displayFailuresSummary: true,
