@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "coffee-script": "1.11.0",
-    "coveralls": "2.11.13",
+    "coveralls": "2.11.15",
     "istanbul": "0.4.5",
     "jasmine": "2.5.2",
     "jasmine-core": "2.5.2",
