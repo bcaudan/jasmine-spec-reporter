@@ -16,6 +16,7 @@ var SpecDisplay = function (options, displayProcessors) {
   this.displayWithoutColors = options.colors === false;
   this.hasCustomDisplaySpecStarted = options.hasCustomDisplaySpecStarted;
   this.displayProcessors = displayProcessors;
+  this.filterDomain = options.filterDomain;
 
   var displayStacktrace = options.displayStacktrace || 'none';
   this.displaySpecsWithStacktrace = displayStacktrace === 'all' || displayStacktrace === 'specs';
@@ -175,10 +176,17 @@ SpecDisplay.prototype = {
   filterStackTraces: function (traces) {
     var lines = traces.split('\n');
     var filtered = [];
-    for (var i = 1 ; i < lines.length ; i++) {
-      if (!/(jasmine[^\/]*\.js|Timer\.listOnTimeout)/.test(lines[i])) {
-        filtered.push(lines[i]);
-      }
+    for (var i = 1; i < lines.length; i++) {
+        if (!/(jasmine[^\/]*\.js|Timer\.listOnTimeout)/.test(lines[i])) {
+            if (this.filterDomain && lines[i].indexOf('at') !== -1) {
+                if (lines[i].indexOf(this.filterDomain) !== -1) {
+                    //only my domain stacktrace if starts with 'at'
+                    filtered.push(lines[i]);
+                }
+            } else {
+                filtered.push(lines[i]);
+            }
+        }
     }
     return filtered.join('\n' + this.currentIndent);
   },

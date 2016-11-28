@@ -35,6 +35,7 @@ You can customize the output of the reporter yourself: [see how](docs/customize-
   displayPendingSpec: false,      // display each pending spec
   displaySpecDuration: false,     // display each spec duration
   displaySuiteNumber: false,      // display each suite number (hierarchical)
+  filterDomain: 'src/e2e/', // filter to stack that contains src/e2e only
   colors: {
     success: 'green',
     failure: 'red',
@@ -82,4 +83,3 @@ If you want a new feature, you can do the same but some types of features would 
 * options to add extra information to specific sections (spec, suite, summary)
 
 There is already a lot of options, so to add your specific behavior to the reporter, please consider to [build and use your own display processor](docs/customize-output.md).
-
