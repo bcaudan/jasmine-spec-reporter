@@ -1,10 +1,10 @@
 {
   "spec_dir": "spec",
   "spec_files": [
+    "**/*.spec.js",
     "**/*.spec.coffee"
   ],
   "helpers": [
-    "helpers/**/*.js",
-    "helpers/**/*.coffee"
+    "helpers/**/*.js"
   ]
 }
