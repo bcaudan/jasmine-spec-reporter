@@ -294,6 +294,8 @@ declare namespace jasmine {
         toHaveBeenCalledWith(...params: any[]): boolean;
         toHaveBeenCalledTimes(expected: number): boolean;
         toContain(expected: any, expectationFailOutput?: any): boolean;
+        // TODO update me outisde
+        contains(expected: any, expectationFailOutput?: any): boolean;
         toBeLessThan(expected: number, expectationFailOutput?: any): boolean;
         toBeGreaterThan(expected: number, expectationFailOutput?: any): boolean;
         toBeCloseTo(expected: number, precision?: any, expectationFailOutput?: any): boolean;
