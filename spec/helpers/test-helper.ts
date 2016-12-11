@@ -19,6 +19,12 @@ let equalOrMatch = (actual, expected) => {
     return expected === actual || (expected.test && expected.test(actual));
 };
 
+namespace jasmine {
+    export interface Matchers {
+        contains(expected: any, expectationFailOutput?: any): boolean;
+    }
+}
+
 let addMatchers = () => {
     beforeEach(() => {
         jasmine.addMatchers({
