@@ -155,6 +155,7 @@ describe("with default display", () => {
                         this.passed();
                     });
                 });
+                // tslint:disable-next-line:no-empty
                 this.describe("empty suite", () => {
                 });
             }).outputs;

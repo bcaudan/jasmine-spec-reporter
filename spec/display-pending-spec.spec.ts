@@ -10,6 +10,7 @@ describe("with pending spec enabled", () => {
             expect(new Test(this.reporter, function () {
                 this.describe("suite", () => {
                     this.xit("pending spec", () => {
+                        this.passed();
                     });
                 });
             }).outputs).contains(/\* pending spec/);

@@ -10,6 +10,8 @@
     "testc": "npm run tsc -- -p spec/tsconfig.json",
     "pretest": "npm run tsc && npm run testc",
     "test": "node node_modules/jasmine/bin/jasmine.js",
+    "posttest": "npm run lint",
+    "lint": "node node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts' && node node_modules/tslint/bin/tslint -c tslint.json 'spec/**/*.ts'",
     "coverage": "npm run pretest && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
     "open-coverage": "npm run coverage && open ./coverage/lcov-report/index.html",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
