@@ -104,5 +104,11 @@ class Test {
     }
 }
 
+namespace NodeJS {
+    export interface Global {
+        Test;
+    }
+}
+
 global.Test = Test;
 exports.addMatchers = addMatchers;

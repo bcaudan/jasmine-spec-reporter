@@ -1,3 +1,10 @@
+namespace NodeJS {
+    export interface Global {
+        getJasmineRequireObj;
+        j$;
+    }
+}
+
 (function () {
     /**
      * Adaptation of jasmine `nodeDefineJasmineUnderTests.js` in order to test jasmine with jasmine.
