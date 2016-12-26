@@ -74,7 +74,6 @@
         "no-constant-condition": true,
         "no-control-regex": true,
         "no-debugger": true,
-        "no-duplicate-key": true,
         "no-duplicate-case": true,
         "no-empty": true,
         "no-empty-character-class": true,
@@ -89,7 +88,6 @@
         "no-regex-spaces": true,
         "no-sparse-arrays": true,
         "no-unexpected-multiline": true,
-        "no-unreachable": true,
         "use-isnan": true,
         "valid-jsdoc": [
             true,
@@ -109,7 +107,6 @@
         "no-arg": true,
         "radix": true,
         "no-shadowed-variable": true,
-        "no-unused-variable": true,
         "handle-callback-err": [
             true,
             "^(err|error|anySpecificError)$"

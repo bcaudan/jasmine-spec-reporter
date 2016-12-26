@@ -6,6 +6,7 @@
     "target": "es5",
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "noUnusedLocals": true,
     "outDir": "built"
   },
   "exclude": [
