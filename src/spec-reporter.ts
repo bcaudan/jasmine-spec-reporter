@@ -8,8 +8,6 @@ import { SpecDurationsProcessor } from "./processors/spec-durations-processor";
 import { SpecPrefixesProcessor } from "./processors/spec-prefixes-processor";
 import { SuiteNumberingProcessor } from "./processors/suite-numbering-processor";
 
-import colors = require("colors");
-
 export class SpecReporter {
     private started: boolean = false;
     private finished: boolean = false;
@@ -19,21 +17,11 @@ export class SpecReporter {
 
     constructor(options?: any) {
         this.options = options || {};
-        SpecReporter.initColors(this.options);
         let displayProcessors = SpecReporter.initProcessors(this.options);
         this.options.hasCustomDisplaySpecStarted = SpecReporter.hasCustomDisplaySpecStarted(displayProcessors);
 
         this.display = new ExecutionDisplay(this.options, displayProcessors);
         this.metrics = new ExecutionMetrics();
-    }
-
-    private static initColors(options: any): void {
-        colors.setTheme({
-            success: options.colors && options.colors.success ? options.colors.success : "green",
-            failure: options.colors && options.colors.failure ? options.colors.failure : "red",
-            pending: options.colors && options.colors.pending ? options.colors.pending : "yellow"
-        });
-        colors.enabled = true;
     }
 
     private static initProcessors(options: any): DisplayProcessor[] {

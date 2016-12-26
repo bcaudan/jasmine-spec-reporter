@@ -1,5 +1,6 @@
 import { DisplayProcessor } from "./display-processor";
 import { ExecutionMetrics } from "./execution-metrics";
+import { ColorsDisplay } from "./display/colors-display";
 
 export class ExecutionDisplay {
     private indent: string = "  ";
@@ -34,6 +35,8 @@ export class ExecutionDisplay {
         let displayStacktrace: string = options.displayStacktrace || "none";
         this.displaySpecsWithStacktrace = displayStacktrace === "all" || displayStacktrace === "specs";
         this.displaySummaryWithStacktrace = displayStacktrace === "all" || displayStacktrace === "summary";
+
+        ColorsDisplay.init(options);
     }
 
     jasmineStarted(runner: any): void {
