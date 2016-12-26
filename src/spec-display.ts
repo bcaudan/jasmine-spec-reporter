@@ -1,5 +1,5 @@
 import { DisplayProcessor } from "./display-processor";
-import { SpecMetrics } from "./spec-metrics";
+import { ExecutionMetrics } from "./execution-metrics";
 
 export class SpecDisplay {
     private indent: string = "  ";
@@ -44,7 +44,7 @@ export class SpecDisplay {
         this.log(log);
     }
 
-    summary(metrics: SpecMetrics): void {
+    summary(metrics: ExecutionMetrics): void {
         let execution: string = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${(metrics.totalSpecsDefined === 1 ? " spec " : " specs ")}`;
         let successful: string = (metrics.failedSpecs === 0) ? "SUCCESS " : "";
         let failed: string = (metrics.failedSpecs > 0) ? `(${metrics.failedSpecs} FAILED) ` : "";

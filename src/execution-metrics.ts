@@ -1,4 +1,4 @@
-export class SpecMetrics {
+export class ExecutionMetrics {
     private startTime: number;
     private specStartTime: number;
     private totalSpecs: number = 0;
@@ -43,26 +43,26 @@ export class SpecMetrics {
         let durationInMins: number;
         let durationInHrs: number;
         if (durationInSecs < 1) {
-            return `${durationInSecs} sec${SpecMetrics.pluralize(durationInSecs)}`;
+            return `${durationInSecs} sec${ExecutionMetrics.pluralize(durationInSecs)}`;
         }
         durationInSecs = Math.round(durationInSecs);
         if (durationInSecs < 60) {
-            return `${durationInSecs} sec${SpecMetrics.pluralize(durationInSecs)}`;
+            return `${durationInSecs} sec${ExecutionMetrics.pluralize(durationInSecs)}`;
         }
         durationInMins = Math.floor(durationInSecs / 60);
         durationInSecs = durationInSecs % 60;
         if (durationInSecs) {
-            duration = ` ${durationInSecs} sec${SpecMetrics.pluralize(durationInSecs)}`;
+            duration = ` ${durationInSecs} sec${ExecutionMetrics.pluralize(durationInSecs)}`;
         }
         if (durationInMins < 60) {
-            return `${durationInMins} min${SpecMetrics.pluralize(durationInMins)}${duration}`;
+            return `${durationInMins} min${ExecutionMetrics.pluralize(durationInMins)}${duration}`;
         }
         durationInHrs = Math.floor(durationInMins / 60);
         durationInMins = durationInMins % 60;
         if (durationInMins) {
-            duration = ` ${durationInMins} min${SpecMetrics.pluralize(durationInMins)}${duration}`;
+            duration = ` ${durationInMins} min${ExecutionMetrics.pluralize(durationInMins)}${duration}`;
         }
-        return `${durationInHrs} hour${SpecMetrics.pluralize(durationInHrs)}${duration}`;
+        return `${durationInHrs} hour${ExecutionMetrics.pluralize(durationInHrs)}${duration}`;
     }
 
     private static pluralize(count: number): string {

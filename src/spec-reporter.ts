@@ -1,5 +1,5 @@
 import { SpecDisplay } from "./spec-display";
-import { SpecMetrics } from "./spec-metrics";
+import { ExecutionMetrics } from "./execution-metrics";
 import { DisplayProcessor } from "./display-processor";
 
 import { DefaultProcessor } from "./processors/default-processor";
@@ -14,7 +14,7 @@ export class SpecReporter {
     private started: boolean = false;
     private finished: boolean = false;
     private display: SpecDisplay;
-    private metrics: SpecMetrics;
+    private metrics: ExecutionMetrics;
     private options: any;
 
     constructor(options?: any) {
@@ -24,7 +24,7 @@ export class SpecReporter {
         this.options.hasCustomDisplaySpecStarted = SpecReporter.hasCustomDisplaySpecStarted(displayProcessors);
 
         this.display = new SpecDisplay(this.options, displayProcessors);
-        this.metrics = new SpecMetrics();
+        this.metrics = new ExecutionMetrics();
     }
 
     private static initColors(options: any): void {
