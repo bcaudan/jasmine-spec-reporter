@@ -1,12 +1,5 @@
 import { ExecutionDisplay } from "./execution-display";
 import { ExecutionMetrics } from "./execution-metrics";
-import { DisplayProcessor } from "./display-processor";
-
-import { DefaultProcessor } from "./processors/default-processor";
-import { SpecColorsProcessor } from "./processors/spec-colors-processor";
-import { SpecDurationsProcessor } from "./processors/spec-durations-processor";
-import { SpecPrefixesProcessor } from "./processors/spec-prefixes-processor";
-import { SuiteNumberingProcessor } from "./processors/suite-numbering-processor";
 
 export class SpecReporter {
     private started: boolean = false;
@@ -17,45 +10,8 @@ export class SpecReporter {
 
     constructor(options?: any) {
         this.options = options || {};
-        let displayProcessors = SpecReporter.initProcessors(this.options);
-        this.options.hasCustomDisplaySpecStarted = SpecReporter.hasCustomDisplaySpecStarted(displayProcessors);
-
-        this.display = new ExecutionDisplay(this.options, displayProcessors);
+        this.display = new ExecutionDisplay(this.options);
         this.metrics = new ExecutionMetrics();
-    }
-
-    private static initProcessors(options: any): DisplayProcessor[] {
-        let displayProcessors: DisplayProcessor[] = [
-            new DefaultProcessor(),
-            new SpecPrefixesProcessor(options.prefixes),
-            new SpecColorsProcessor()
-        ];
-
-        if (options.displaySpecDuration) {
-            displayProcessors.push(new SpecDurationsProcessor());
-        }
-
-        if (options.displaySuiteNumber) {
-            displayProcessors.push(new SuiteNumberingProcessor());
-        }
-
-        if (options.customProcessors) {
-            options.customProcessors.forEach(<p extends DisplayProcessor>(Processor: {new(options: any): p; }) => {
-                displayProcessors.push(new Processor(options));
-            });
-        }
-
-        return displayProcessors;
-    }
-
-    private static hasCustomDisplaySpecStarted(processors: DisplayProcessor[]): boolean {
-        let isDisplayed: boolean = false;
-        processors.forEach((processor: DisplayProcessor) => {
-            let log: string = "foo";
-            let result = processor.displaySpecStarted({ id: "bar", description: "bar", fullName: "bar" }, log);
-            isDisplayed = isDisplayed || result !== log;
-        });
-        return isDisplayed;
     }
 
     jasmineStarted(info: any): void {

@@ -1,4 +1,9 @@
-import { DisplayProcessor } from "./display-processor";
+import { DefaultProcessor } from "./display/processors/default-processor";
+import { SpecColorsProcessor } from "./display/processors/spec-colors-processor";
+import { SpecDurationsProcessor } from "./display/processors/spec-durations-processor";
+import { SpecPrefixesProcessor } from "./display/processors/spec-prefixes-processor";
+import { SuiteNumberingProcessor } from "./display/processors/suite-numbering-processor";
+import { DisplayProcessor } from "./display/display-processor";
 import { ExecutionMetrics } from "./execution-metrics";
 import { ColorsDisplay } from "./display/colors-display";
 
@@ -21,8 +26,9 @@ export class ExecutionDisplay {
     private hasCustomDisplaySpecStarted: boolean;
     private displaySpecsWithStacktrace: boolean;
     private displaySummaryWithStacktrace: boolean;
+    private displayProcessors: DisplayProcessor[];
 
-    constructor(options: any, private displayProcessors: DisplayProcessor[]) {
+    constructor(options: any) {
         this.displaySuccessesSummary = options.displaySuccessesSummary || false;
         this.displayFailuresSummary = options.displayFailuresSummary !== false;
         this.displayPendingSummary = options.displayPendingSummary !== false;
@@ -30,13 +36,48 @@ export class ExecutionDisplay {
         this.displayFailedSpec = options.displayFailedSpec !== false;
         this.displayPendingSpec = options.displayPendingSpec || false;
         this.displayWithoutColors = options.colors === false;
-        this.hasCustomDisplaySpecStarted = options.hasCustomDisplaySpecStarted;
 
         let displayStacktrace: string = options.displayStacktrace || "none";
         this.displaySpecsWithStacktrace = displayStacktrace === "all" || displayStacktrace === "specs";
         this.displaySummaryWithStacktrace = displayStacktrace === "all" || displayStacktrace === "summary";
 
         ColorsDisplay.init(options);
+        this.displayProcessors = ExecutionDisplay.initProcessors(options);
+        this.hasCustomDisplaySpecStarted = ExecutionDisplay.hasCustomDisplaySpecStarted(this.displayProcessors);
+    }
+
+    private static initProcessors(options: any): DisplayProcessor[] {
+        let displayProcessors: DisplayProcessor[] = [
+            new DefaultProcessor(),
+            new SpecPrefixesProcessor(options.prefixes),
+            new SpecColorsProcessor()
+        ];
+
+        if (options.displaySpecDuration) {
+            displayProcessors.push(new SpecDurationsProcessor());
+        }
+
+        if (options.displaySuiteNumber) {
+            displayProcessors.push(new SuiteNumberingProcessor());
+        }
+
+        if (options.customProcessors) {
+            options.customProcessors.forEach(<p extends DisplayProcessor>(Processor: {new(options: any): p; }) => {
+                displayProcessors.push(new Processor(options));
+            });
+        }
+
+        return displayProcessors;
+    }
+
+    private static hasCustomDisplaySpecStarted(processors: DisplayProcessor[]): boolean {
+        let isDisplayed: boolean = false;
+        processors.forEach((processor: DisplayProcessor) => {
+            let log: string = "foo";
+            let result = processor.displaySpecStarted({ id: "bar", description: "bar", fullName: "bar" }, log);
+            isDisplayed = isDisplayed || result !== log;
+        });
+        return isDisplayed;
     }
 
     jasmineStarted(runner: any): void {
