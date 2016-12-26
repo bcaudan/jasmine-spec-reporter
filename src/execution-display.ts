@@ -1,7 +1,7 @@
 import { DisplayProcessor } from "./display-processor";
 import { ExecutionMetrics } from "./execution-metrics";
 
-export class SpecDisplay {
+export class ExecutionDisplay {
     private indent: string = "  ";
     private currentIndent: string = "";
     private suiteHierarchy: any[] = [];

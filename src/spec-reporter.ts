@@ -1,4 +1,4 @@
-import { SpecDisplay } from "./spec-display";
+import { ExecutionDisplay } from "./execution-display";
 import { ExecutionMetrics } from "./execution-metrics";
 import { DisplayProcessor } from "./display-processor";
 
@@ -13,7 +13,7 @@ import colors = require("colors");
 export class SpecReporter {
     private started: boolean = false;
     private finished: boolean = false;
-    private display: SpecDisplay;
+    private display: ExecutionDisplay;
     private metrics: ExecutionMetrics;
     private options: any;
 
@@ -23,7 +23,7 @@ export class SpecReporter {
         let displayProcessors = SpecReporter.initProcessors(this.options);
         this.options.hasCustomDisplaySpecStarted = SpecReporter.hasCustomDisplaySpecStarted(displayProcessors);
 
-        this.display = new SpecDisplay(this.options, displayProcessors);
+        this.display = new ExecutionDisplay(this.options, displayProcessors);
         this.metrics = new ExecutionMetrics();
     }
 
