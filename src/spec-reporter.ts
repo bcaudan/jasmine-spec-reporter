@@ -1,16 +1,18 @@
 import { ExecutionDisplay } from "./execution-display";
 import { ExecutionMetrics } from "./execution-metrics";
+import { Configuration } from "./configuration";
+import { ConfigurationParser } from "./configuration-parser";
 
 export class SpecReporter {
     private started: boolean = false;
     private finished: boolean = false;
     private display: ExecutionDisplay;
     private metrics: ExecutionMetrics;
-    private options: any;
+    private configuration: Configuration;
 
-    constructor(options?: any) {
-        this.options = options || {};
-        this.display = new ExecutionDisplay(this.options);
+    constructor(configuration?: Configuration) {
+        this.configuration = ConfigurationParser.parse(configuration);
+        this.display = new ExecutionDisplay(this.configuration);
         this.metrics = new ExecutionMetrics();
     }
 

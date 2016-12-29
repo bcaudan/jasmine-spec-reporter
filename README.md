@@ -15,47 +15,16 @@ Install `jasmine-spec-reporter` via npm:
 
     npm install jasmine-spec-reporter --save-dev
 
-## Configuration
+## Examples
 * [Jasmine node tests](examples/node)
 * [Protractor tests](examples/protractor)
 * [TypeScript support](examples/typescript)
 
+## Configuration
+See full configuration and features: [configuration.ts](src/configuration.ts)
+
 ## Custom output
 You can customize the output of the reporter yourself: [see how](docs/customize-output.md).
-
-# Default options
-
-```js
-{
-  displayStacktrace: 'none',      // display stacktrace for each failed assertion, values: (all|specs|summary|none)
-  displaySuccessesSummary: false, // display summary of all successes after execution
-  displayFailuresSummary: true,   // display summary of all failures after execution
-  displayPendingSummary: true,    // display summary of all pending specs after execution
-  displaySuccessfulSpec: true,    // display each successful spec
-  displayFailedSpec: true,        // display each failed spec
-  displayPendingSpec: false,      // display each pending spec
-  displaySpecDuration: false,     // display each spec duration
-  displaySuiteNumber: false,      // display each suite number (hierarchical)
-  colors: {
-    success: 'green',
-    failure: 'red',
-    pending: 'yellow'
-  },
-  prefixes: {
-    success: '✓ ',
-    failure: '✗ ',
-    pending: '* '
-  },
-  customProcessors: []
-}
-```
-
-Colors are displayed in the console via [colors](https://github.com/Marak/colors.js), you can see all available colors on the [project page](https://github.com/Marak/colors.js).
-You can also disable colors with the option: `colors: false`.
-
-# Compatibility with Jasmine 1.x
-
-To use Jasmine spec reporter with Jasmine 1.x, please see [jasmine1 branch](https://github.com/bcaudan/jasmine-spec-reporter/tree/jasmine1).
 
 # Developement
 

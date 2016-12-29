@@ -1,7 +1,9 @@
 describe("with suite number enabled", () => {
     beforeEach(() => {
         this.reporter = new global.SpecReporter({
-            displaySuiteNumber: true
+            suite: {
+                displayNumber: true
+            }
         });
     });
 

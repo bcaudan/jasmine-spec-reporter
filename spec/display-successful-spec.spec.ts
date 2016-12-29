@@ -1,7 +1,9 @@
 describe("with successful spec disabled", () => {
     beforeEach(() => {
         this.reporter = new global.SpecReporter({
-            displaySuccessfulSpec: false
+            spec: {
+                displaySuccessful: false
+            }
         });
     });
 

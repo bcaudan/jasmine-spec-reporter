@@ -3,32 +3,32 @@ import { DisplayProcessor } from "../../built/main";
 export class TestProcessor extends DisplayProcessor {
     private test: string;
 
-    constructor(protected options: any) {
-        super(options);
-        this.test = options.test;
+    constructor(configuration?: any) {
+        super(configuration);
+        this.test = configuration.customOptions.test;
     }
 
-    displayJasmineStarted(runner, log) {
+    displayJasmineStarted(info: any, log: String): String {
         return log + this.test;
     }
 
-    displaySuite(suite, log) {
+    displaySuite(suite: any, log: String): String {
         return log + this.test;
     }
 
-    displaySpecStarted(spec, log) {
+    displaySpecStarted(spec: any, log: String): String {
         return spec.description + this.test;
     }
 
-    displaySuccessfulSpec(spec, log) {
+    displaySuccessfulSpec(spec: any, log: String): String {
         return log + this.test;
     }
 
-    displayFailedSpec(spec, log) {
+    displayFailedSpec(spec: any, log: String): String {
         return log + this.test;
     }
 
-    displayPendingSpec(spec, log) {
+    displayPendingSpec(spec: any, log: String): String {
         return log + this.test;
     }
 }

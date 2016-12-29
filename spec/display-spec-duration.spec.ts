@@ -1,7 +1,9 @@
 describe("with spec duration enabled", () => {
     beforeEach(() => {
         this.reporter = new global.SpecReporter({
-            displaySpecDuration: true
+            spec: {
+                displayDuration: true
+            }
         });
     });
 

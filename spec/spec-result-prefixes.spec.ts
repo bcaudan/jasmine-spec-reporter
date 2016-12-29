@@ -2,10 +2,12 @@ describe("with spec result prefixes", () => {
     describe("set to empty strings", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
-                displayPendingSpec: true,
+                spec: {
+                    displayPending: true
+                },
                 prefixes: {
-                    success: "",
-                    failure: "",
+                    successful: "",
+                    failed: "",
                     pending: ""
                 }
             });
@@ -47,10 +49,12 @@ describe("with spec result prefixes", () => {
     describe("set to valid strings", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
-                displayPendingSpec: true,
+                spec: {
+                    displayPending: true
+                },
                 prefixes: {
-                    success: "Pass ",
-                    failure: "Fail ",
+                    successful: "Pass ",
+                    failed: "Fail ",
                     pending: "Pend "
                 }
             });

@@ -6,6 +6,7 @@ import { SuiteNumberingProcessor } from "./display/processors/suite-numbering-pr
 import { DisplayProcessor } from "./display/display-processor";
 import { ExecutionMetrics } from "./execution-metrics";
 import { ColorsDisplay } from "./display/colors-display";
+import { Configuration } from "./configuration";
 
 export class ExecutionDisplay {
     private indent: string = "  ";
@@ -16,54 +17,33 @@ export class ExecutionDisplay {
     private failedSpecs: any[] = [];
     private pendingSpecs: any[] = [];
     private lastWasNewLine: boolean = false;
-    private displaySuccessesSummary: boolean;
-    private displayFailuresSummary: boolean;
-    private displayPendingSummary: boolean;
-    private displaySuccessfulSpec: boolean;
-    private displayFailedSpec: boolean;
-    private displayPendingSpec: boolean;
-    private displayWithoutColors: boolean;
     private hasCustomDisplaySpecStarted: boolean;
-    private displaySpecsWithStacktrace: boolean;
-    private displaySummaryWithStacktrace: boolean;
     private displayProcessors: DisplayProcessor[];
 
-    constructor(options: any) {
-        this.displaySuccessesSummary = options.displaySuccessesSummary || false;
-        this.displayFailuresSummary = options.displayFailuresSummary !== false;
-        this.displayPendingSummary = options.displayPendingSummary !== false;
-        this.displaySuccessfulSpec = options.displaySuccessfulSpec !== false;
-        this.displayFailedSpec = options.displayFailedSpec !== false;
-        this.displayPendingSpec = options.displayPendingSpec || false;
-        this.displayWithoutColors = options.colors === false;
-
-        let displayStacktrace: string = options.displayStacktrace || "none";
-        this.displaySpecsWithStacktrace = displayStacktrace === "all" || displayStacktrace === "specs";
-        this.displaySummaryWithStacktrace = displayStacktrace === "all" || displayStacktrace === "summary";
-
-        ColorsDisplay.init(options);
-        this.displayProcessors = ExecutionDisplay.initProcessors(options);
+    constructor(private configuration: Configuration) {
+        ColorsDisplay.init(this.configuration);
+        this.displayProcessors = ExecutionDisplay.initProcessors(this.configuration);
         this.hasCustomDisplaySpecStarted = ExecutionDisplay.hasCustomDisplaySpecStarted(this.displayProcessors);
     }
 
-    private static initProcessors(options: any): DisplayProcessor[] {
+    private static initProcessors(configuration: Configuration): DisplayProcessor[] {
         let displayProcessors: DisplayProcessor[] = [
-            new DefaultProcessor(),
-            new SpecPrefixesProcessor(options.prefixes),
-            new SpecColorsProcessor()
+            new DefaultProcessor(configuration),
+            new SpecPrefixesProcessor(configuration),
+            new SpecColorsProcessor(configuration)
         ];
 
-        if (options.displaySpecDuration) {
-            displayProcessors.push(new SpecDurationsProcessor());
+        if (configuration.spec.displayDuration) {
+            displayProcessors.push(new SpecDurationsProcessor(configuration));
         }
 
-        if (options.displaySuiteNumber) {
-            displayProcessors.push(new SuiteNumberingProcessor());
+        if (configuration.suite.displayNumber) {
+            displayProcessors.push(new SuiteNumberingProcessor(configuration));
         }
 
-        if (options.customProcessors) {
-            options.customProcessors.forEach(<p extends DisplayProcessor>(Processor: {new(options: any): p; }) => {
-                displayProcessors.push(new Processor(options));
+        if (configuration.customProcessors) {
+            configuration.customProcessors.forEach(<p extends DisplayProcessor>(Processor: {new(configuration: Configuration): p; }) => {
+                displayProcessors.push(new Processor(configuration));
             });
         }
 
@@ -98,16 +78,16 @@ export class ExecutionDisplay {
 
         this.resetIndent();
         this.newLine();
-        if (this.displaySuccessesSummary && metrics.successfulSpecs > 0) {
+        if (this.configuration.summary.displaySuccessful && metrics.successfulSpecs > 0) {
             this.successesSummary();
         }
-        if (this.displayFailuresSummary && metrics.failedSpecs > 0) {
+        if (this.configuration.summary.displayFailed && metrics.failedSpecs > 0) {
             this.failuresSummary();
         }
-        if (this.displayPendingSummary && metrics.pendingSpecs > 0) {
+        if (this.configuration.summary.displayPending && metrics.pendingSpecs > 0) {
             this.pendingsSummary();
         }
-        this.log(execution + successful.success + failed.failure + pending.pending + skipped + duration);
+        this.log(execution + successful.successful + failed.failed + pending.pending + skipped + duration);
 
         if (metrics.random) {
             this.log(`Randomized with seed ${metrics.seed}.`);
@@ -146,7 +126,7 @@ export class ExecutionDisplay {
 
     failedSummary(spec: any, index: number): void {
         this.log(`${index}) ${spec.fullName}`);
-        this.displayErrorMessages(spec, this.displaySummaryWithStacktrace);
+        this.displayErrorMessages(spec, this.configuration.summary.displayStacktrace);
     }
 
     pendingsSummary(): void {
@@ -183,7 +163,7 @@ export class ExecutionDisplay {
 
     successful(spec: any): void {
         this.successfulSpecs.push(spec);
-        if (this.displaySuccessfulSpec) {
+        if (this.configuration.spec.displaySuccessful) {
             this.ensureSuiteDisplayed();
             let log: String = "";
             this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
@@ -195,20 +175,20 @@ export class ExecutionDisplay {
 
     failed(spec: any): void {
         this.failedSpecs.push(spec);
-        if (this.displayFailedSpec) {
+        if (this.configuration.spec.displayFailed) {
             this.ensureSuiteDisplayed();
             let log: String = "";
             this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
                 log = displayProcessor.displayFailedSpec(spec, log);
             });
             this.log(log);
-            this.displayErrorMessages(spec, this.displaySpecsWithStacktrace);
+            this.displayErrorMessages(spec, this.configuration.spec.displayStacktrace);
         }
     }
 
     pending(spec: any): void {
         this.pendingSpecs.push(spec);
-        if (this.displayPendingSpec) {
+        if (this.configuration.spec.displayPending) {
             this.ensureSuiteDisplayed();
             let log: String = "";
             this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
@@ -221,7 +201,7 @@ export class ExecutionDisplay {
     displayErrorMessages(spec: any, withStacktrace: boolean): void {
         this.increaseIndent();
         for (let i: number = 0; i < spec.failedExpectations.length; i++) {
-            this.log("- ".failure + spec.failedExpectations[i].message.failure);
+            this.log("- ".failed + spec.failedExpectations[i].message.failed);
             if (withStacktrace && spec.failedExpectations[i].stack) {
                 this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
             }
@@ -287,9 +267,6 @@ export class ExecutionDisplay {
 
     log(stuff: String): void {
         if (stuff !== null) {
-            if (this.displayWithoutColors) {
-                stuff = stuff.stripColors;
-            }
             console.log(this.currentIndent + stuff);
             this.lastWasNewLine = false;
         }

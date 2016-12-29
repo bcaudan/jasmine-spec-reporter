@@ -2,9 +2,13 @@ describe("spec reporter", () => {
     describe("with custom processor", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
-                displayPendingSpec: true,
+                spec: {
+                    displayPending: true
+                },
                 customProcessors: [global.TestProcessor],
-                test: " TEST"
+                customOptions: {
+                    test: " TEST"
+                }
             });
         });
 

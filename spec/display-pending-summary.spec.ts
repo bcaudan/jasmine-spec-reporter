@@ -1,7 +1,9 @@
 describe("with pending summary disabled", () => {
     beforeEach(() => {
         this.reporter = new global.SpecReporter({
-            displayPendingSummary: false
+            summary: {
+                displayPending: false
+            }
         });
     });
 

@@ -39,7 +39,7 @@ For our example:
 ```node
 var DisplayProcessor = require('jasmine-spec-reporter').DisplayProcessor;
 
-function TimeProcessor(options) {
+function TimeProcessor(configuration) {
 }
 
 function getTime() {

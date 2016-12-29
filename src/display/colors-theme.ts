@@ -1,5 +1,5 @@
 interface String {
-    success: String;
-    failure: String;
+    successful: String;
+    failed: String;
     pending: String;
 }

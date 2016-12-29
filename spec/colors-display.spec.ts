@@ -2,7 +2,9 @@ describe("with colors", () => {
     describe("default", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
-                displayPendingSpec: true
+                spec: {
+                    displayPending: true
+                }
             });
         });
 
@@ -48,10 +50,12 @@ describe("with colors", () => {
     describe("custom", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
-                displayPendingSpec: true,
+                spec: {
+                    displayPending: true
+                },
                 colors: {
-                    success: "magenta",
-                    failure: "white",
+                    successful: "magenta",
+                    failed: "white",
                     pending: "blue"
                 }
             });
@@ -93,8 +97,12 @@ describe("with colors", () => {
     describe("disabled", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
-                displayPendingSpec: true,
-                colors: false
+                spec: {
+                    displayPending: true
+                },
+                colors: {
+                    enabled: false
+                }
             });
         });
 

@@ -1,5 +1,7 @@
+import { Configuration } from "../configuration";
+
 export class DisplayProcessor {
-    constructor(protected options?: any) {}
+    constructor(configuration: Configuration) {}
 
     displayJasmineStarted(info: any, log: String): String {
         return log;
