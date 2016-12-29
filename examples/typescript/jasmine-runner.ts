@@ -8,10 +8,8 @@ class CustomProcessor extends DisplayProcessor {
 }
 
 let Jasmine = require("jasmine");
-let noop = () => {};
-
 let jrunner = new Jasmine();
-jrunner.configureDefaultReporter({ print: noop });
+jrunner.env.clearReporters();
 jrunner.addReporter(new SpecReporter({
     customProcessors: [CustomProcessor]
 }));

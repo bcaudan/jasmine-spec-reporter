@@ -1,30 +1,12 @@
-var Jasmine = require('jasmine');
-var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
-var noop = function () {};
+let Jasmine = require('jasmine');
+let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
-var jrunner = new Jasmine();
-jrunner.configureDefaultReporter({print: noop});
-jrunner.addReporter(new SpecReporter({
-  displayStacktrace: 'none',
-  displayFailuresSummary: true,
-  displayPendingSummary: true,
-  displaySuccessesSummary: false,
-  displaySuccessfulSpec: true,
-  displayFailedSpec: true,
-  displayPendingSpec: true,
-  displaySpecDuration: false,
-  displaySuiteNumber: false,
-  colors: {
-    success: 'green',
-    failure: 'red',
-    pending: 'yellow'
-  },
-  prefixes: {
-    success: '✓ ',
-    failure: '✗ ',
-    pending: '* '
-  },
-  customProcessors: []
+let jrunner = new Jasmine();
+jrunner.env.clearReporters();           // remove default reporter logs
+jrunner.addReporter(new SpecReporter({  // add jasmine-spec-reporter
+  spec: {
+    displayPending: true
+  }
 }));
-jrunner.loadConfigFile();
+jrunner.loadConfigFile();               // load jasmine.json configuration
 jrunner.execute();

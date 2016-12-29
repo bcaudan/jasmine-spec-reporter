@@ -6,14 +6,18 @@ The `jasmine-spec-reporter` can be used to enhance your [Protractor](https://git
 In your Protractor configuration file:
 
 ```node
+let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
+
 exports.config = {
    // your config here ...
 
-   onPrepare: function() {
-      var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
-      // add jasmine spec reporter
-      jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: 'all'}));
-   }
+  onPrepare: function () {
+    jasmine.getEnv().addReporter(new SpecReporter({
+      spec: {
+        displayStacktrace: true
+      }
+    }));
+  }
 }
 ```
 

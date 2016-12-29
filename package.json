@@ -38,12 +38,12 @@
   },
   "devDependencies": {
     "@types/colors": "0.6.33",
-    "@types/jasmine": "2.5.38",
-    "@types/node": "6.0.53",
-    "coveralls": "2.11.12",
-    "istanbul": "0.4.4",
-    "jasmine": "2.4.1",
-    "jasmine-core": "2.4.1",
+    "@types/jasmine": "2.5.40",
+    "@types/node": "6.0.54",
+    "coveralls": "2.11.15",
+    "istanbul": "0.4.5",
+    "jasmine": "2.5.2",
+    "jasmine-core": "2.5.2",
     "tslint": "4.2.0",
     "tslint-eslint-rules": "3.2.3",
     "typescript": "2.1.4"

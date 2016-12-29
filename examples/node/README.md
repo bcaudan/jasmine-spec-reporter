@@ -7,14 +7,17 @@ The `jasmine-spec-reporter` can be used to enhance your [jasmine node](https://g
 Create a `jasmine-runner.js` file with the following content:
 
 ```node
-var Jasmine = require('jasmine');
-var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
-var noop = function() {};
+let Jasmine = require('jasmine');
+let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
-var jrunner = new Jasmine();
-jrunner.configureDefaultReporter({print: noop});    // remove default reporter logs
-jrunner.addReporter(new SpecReporter());            // add jasmine-spec-reporter
-jrunner.loadConfigFile();                           // load jasmine.json configuration
+let jrunner = new Jasmine();
+jrunner.env.clearReporters();           // remove default reporter logs
+jrunner.addReporter(new SpecReporter({  // add jasmine-spec-reporter
+  spec: {
+    displayPending: true
+  }
+}));
+jrunner.loadConfigFile();               // load jasmine.json configuration
 jrunner.execute();
 ```
 
