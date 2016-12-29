@@ -1,0 +1,14 @@
+{
+  "name": "node-example",
+  "version": "1.0.0",
+  "description": "a node example",
+  "scripts": {
+    "start": "node jasmine-runner.js"
+  },
+  "author": "Bastien Caudan",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "jasmine": "2.5.2",
+    "jasmine-spec-reporter": "file:../../"
+  }
+}

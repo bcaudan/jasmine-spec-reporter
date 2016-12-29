@@ -2,16 +2,19 @@
   "name": "jasmine-spec-reporter",
   "version": "2.7.0",
   "description": "Spec reporter for jasmine behavior-driven development framework",
-  "main": "src/jasmine-spec-reporter.js",
+  "main": "built/main.js",
+  "typings": "built/main.d.ts",
   "scripts": {
+    "prepublish": "npm run tsc",
+    "tsc": "node node_modules/typescript/bin/tsc",
+    "testc": "npm run tsc -- -p spec/tsconfig.json",
+    "pretest": "npm run tsc && npm run testc",
     "test": "node node_modules/jasmine/bin/jasmine.js",
-    "coverage": "rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
+    "posttest": "npm run lint",
+    "lint": "node node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts' && node node_modules/tslint/bin/tslint -c tslint.json 'spec/**/*.ts'",
+    "coverage": "npm run pretest && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js",
     "open-coverage": "npm run coverage && open ./coverage/lcov-report/index.html",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "example": "node example/run-example.js",
-    "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update",
-    "webdriver-start": "node node_modules/protractor/bin/webdriver-manager start",
-    "protractor-example": "node node_modules/protractor/bin/protractor example/protractor.conf.js"
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -34,11 +37,15 @@
     "colors": "1.1.2"
   },
   "devDependencies": {
-    "coffee-script": "1.11.0",
-    "coveralls": "2.11.13",
+    "@types/colors": "0.6.33",
+    "@types/jasmine": "2.5.40",
+    "@types/node": "6.0.54",
+    "coveralls": "2.11.15",
     "istanbul": "0.4.5",
     "jasmine": "2.5.2",
     "jasmine-core": "2.5.2",
-    "protractor": "4.0.8"
+    "tslint": "4.2.0",
+    "tslint-eslint-rules": "3.2.3",
+    "typescript": "2.1.4"
   }
 }

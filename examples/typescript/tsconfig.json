@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "pretty": true,
+    "module": "CommonJS",
+    "target": "es5",
+    "noImplicitAny": true,
+    "noImplicitReturns": true
+  }
+}

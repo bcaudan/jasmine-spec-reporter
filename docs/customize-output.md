@@ -21,7 +21,7 @@ Let's say that you want to add the current time before each output of the report
 You need to require the display processor:
 
 ```node
-var DisplayProcessor = require('./node_modules/jasmine-spec-reporter/src/display-processor');
+var DisplayProcessor = require('jasmine-spec-reporter').DisplayProcessor;
 ```
 
 You can then customize the following methods:
@@ -37,9 +37,9 @@ The first argument is the jasmine object corresponding to the suite or the spec.
 For our example:
 
 ```node
-var DisplayProcessor = require('./node_modules/jasmine-spec-reporter/src/display-processor');
+var DisplayProcessor = require('jasmine-spec-reporter').DisplayProcessor;
 
-function TimeProcessor(options) {
+function TimeProcessor(configuration) {
 }
 
 function getTime() {
@@ -73,7 +73,7 @@ TimeProcessor.prototype.displayPendingSpec = function (spec, log) {
 Then you need to configure jasmine spec reporter to use your processor:
 
 ```node
-var SpecReporter = require('jasmine-spec-reporter');
+var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
 var reporter = new SpecReporter({
     customProcessors: [TimeProcessor]

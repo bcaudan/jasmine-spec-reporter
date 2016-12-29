@@ -1,0 +1,16 @@
+{
+  "name": "protractor-example",
+  "version": "1.0.0",
+  "description": "a protractor example",
+  "scripts": {
+    "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update",
+    "webdriver-start": "node node_modules/protractor/bin/webdriver-manager start",
+    "start": "node node_modules/protractor/bin/protractor protractor.conf.js"
+  },
+  "author": "Bastien Caudan",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "jasmine-spec-reporter": "file:../../",
+    "protractor": "4.0.14"
+  }
+}

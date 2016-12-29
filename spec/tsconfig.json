@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "es5"
+  },
+  "include": [
+    "./**/*.ts",
+    "../typings/**/*.ts"
+  ]
+}
