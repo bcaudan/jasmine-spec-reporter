@@ -1,3 +1,32 @@
+# 3.0.0
+
+## Breaking changes
+
+* Remove support for node 0.10
+* `jasmine-spec-reporter` module exports `SpecReporter` and `DisplayProcessor`, see [SpecReporter](./examples/node) and [DisplayProcessor](./docs/customize-output.md) usages.
+* Extract groups in configuration and rationalize property names, [see new structure](./src/configuration.ts). [#57](https://github.com/bcaudan/jasmine-spec-reporter/issues/57)
+* Colors deactivation is now achieved with this configuration:
+
+      {
+        colors: {
+          enabled: false
+        }
+      }
+
+* Custom options for custom processors must now be stored in this configuration field:
+
+      {
+        customOptions: {
+          foo: 'bar'
+        }
+      }
+
+## Other
+
+* Migrate code base to TypeScript
+* Add example for [TypeScript integration](./examples/typescript)
+* Extract each example in a dedicated node module, [see examples](./examples)
+
 # 2.7.0
 
 * Add successes summary. [#49](https://github.com/bcaudan/jasmine-spec-reporter/issues/49) 
