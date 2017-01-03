@@ -61,11 +61,9 @@ export class ExecutionDisplay {
     }
 
     jasmineStarted(runner: any): void {
-        let log: String = "";
-        this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
-            log = displayProcessor.displayJasmineStarted(runner, log);
+        this.process(runner, (displayProcessor: DisplayProcessor, runner: any, log: String): String => {
+            return displayProcessor.displayJasmineStarted(runner, log);
         });
-        this.log(log);
     }
 
     summary(metrics: ExecutionMetrics): void {
@@ -153,11 +151,9 @@ export class ExecutionDisplay {
     specStarted(spec: any): void {
         if (this.hasCustomDisplaySpecStarted) {
             this.ensureSuiteDisplayed();
-            let log: String = "";
-            this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
-                log = displayProcessor.displaySpecStarted(spec, log);
+            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
+                return displayProcessor.displaySpecStarted(spec, log);
             });
-            this.log(log);
         }
     }
 
@@ -165,11 +161,9 @@ export class ExecutionDisplay {
         this.successfulSpecs.push(spec);
         if (this.configuration.spec.displaySuccessful) {
             this.ensureSuiteDisplayed();
-            let log: String = "";
-            this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
-                log = displayProcessor.displaySuccessfulSpec(spec, log);
+            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
+                return displayProcessor.displaySuccessfulSpec(spec, log);
             });
-            this.log(log);
         }
     }
 
@@ -177,11 +171,9 @@ export class ExecutionDisplay {
         this.failedSpecs.push(spec);
         if (this.configuration.spec.displayFailed) {
             this.ensureSuiteDisplayed();
-            let log: String = "";
-            this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
-                log = displayProcessor.displayFailedSpec(spec, log);
+            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
+                return displayProcessor.displayFailedSpec(spec, log);
             });
-            this.log(log);
             this.displayErrorMessages(spec, this.configuration.spec.displayStacktrace);
         }
     }
@@ -190,11 +182,9 @@ export class ExecutionDisplay {
         this.pendingSpecs.push(spec);
         if (this.configuration.spec.displayPending) {
             this.ensureSuiteDisplayed();
-            let log: String = "";
-            this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
-                log = displayProcessor.displayPendingSpec(spec, log);
+            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
+                return displayProcessor.displayPendingSpec(spec, log);
             });
-            this.log(log);
         }
     }
 
@@ -250,12 +240,18 @@ export class ExecutionDisplay {
     displaySuite(suite: any): void {
         this.newLine();
         this.computeSuiteIndent();
+        this.process(suite, (displayProcessor: DisplayProcessor, suite: any, log: String): String => {
+            return displayProcessor.displaySuite(suite, log);
+        });
+        this.increaseIndent();
+    }
+
+    process(object: any, processFunction: (displayProcessor: DisplayProcessor, object: any, log: String) => String): void {
         let log: String = "";
-        this.displayProcessors.forEach((displayProcessor: DisplayProcessor): void => {
-            log = displayProcessor.displaySuite(suite, log);
+        this.displayProcessors.forEach((displayProcessor: DisplayProcessor) => {
+            log = processFunction(displayProcessor, object, log);
         });
         this.log(log);
-        this.increaseIndent();
     }
 
     computeSuiteIndent(): void {
