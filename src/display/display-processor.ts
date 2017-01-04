@@ -23,6 +23,14 @@ export class DisplayProcessor {
         return log;
     }
 
+    displaySpecErrorMessages(spec: any, log: String): String {
+        return log;
+    }
+
+    displaySummaryErrorMessages(spec: any, log: String): String {
+        return log;
+    }
+
     displayPendingSpec(spec: any, log: String): String {
         return log;
     }

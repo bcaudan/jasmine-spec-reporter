@@ -30,6 +30,8 @@ You can then customize the following methods:
 * displaySpecStarted(spec, log)
 * displaySuccessfulSpec(spec, log)
 * displayFailedSpec(spec, log)
+* displaySpecErrorMessages(spec, log)
+* displaySummaryErrorMessages(spec, log)
 * displayPendingSpec(spec, log)
 
 The first argument is the jasmine object corresponding to the suite or the spec. The second argument is the log to be displayed. Those methods should return the modified log.

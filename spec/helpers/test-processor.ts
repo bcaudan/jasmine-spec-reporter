@@ -28,6 +28,14 @@ export class TestProcessor extends DisplayProcessor {
         return log + this.test;
     }
 
+    displaySpecErrorMessages(spec: any, log: String): String {
+        return log + this.test;
+    }
+
+    displaySummaryErrorMessages(spec: any, log: String): String {
+        return log + this.test;
+    }
+
     displayPendingSpec(spec: any, log: String): String {
         return log + this.test;
     }

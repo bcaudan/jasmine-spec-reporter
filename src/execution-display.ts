@@ -124,7 +124,11 @@ export class ExecutionDisplay {
 
     failedSummary(spec: any, index: number): void {
         this.log(`${index}) ${spec.fullName}`);
-        this.displayErrorMessages(spec, this.configuration.summary.displayStacktrace);
+        this.increaseIndent();
+        this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
+            return displayProcessor.displaySummaryErrorMessages(spec, log);
+        });
+        this.decreaseIndent();
     }
 
     pendingsSummary(): void {
@@ -174,7 +178,11 @@ export class ExecutionDisplay {
             this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
                 return displayProcessor.displayFailedSpec(spec, log);
             });
-            this.displayErrorMessages(spec, this.configuration.spec.displayStacktrace);
+            this.increaseIndent();
+            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
+                return displayProcessor.displaySpecErrorMessages(spec, log);
+            });
+            this.decreaseIndent();
         }
     }
 
@@ -186,28 +194,6 @@ export class ExecutionDisplay {
                 return displayProcessor.displayPendingSpec(spec, log);
             });
         }
-    }
-
-    displayErrorMessages(spec: any, withStacktrace: boolean): void {
-        this.increaseIndent();
-        for (let i: number = 0; i < spec.failedExpectations.length; i++) {
-            this.log("- ".failed + spec.failedExpectations[i].message.failed);
-            if (withStacktrace && spec.failedExpectations[i].stack) {
-                this.log(this.filterStackTraces(spec.failedExpectations[i].stack));
-            }
-        }
-        this.decreaseIndent();
-    }
-
-    filterStackTraces(traces: string): string {
-        let lines: string[] = traces.split("\n");
-        let filtered: string[] = [];
-        for (let i: number = 1; i < lines.length; i++) {
-            if (!/(jasmine[^\/]*\.js|Timer\.listOnTimeout)/.test(lines[i])) {
-                filtered.push(lines[i]);
-            }
-        }
-        return filtered.join(`\n${this.currentIndent}`);
     }
 
     suiteStarted(suite: any): void {
@@ -263,7 +249,9 @@ export class ExecutionDisplay {
 
     log(stuff: String): void {
         if (stuff !== null) {
-            console.log(this.currentIndent + stuff);
+            stuff.split("\n").forEach((line: String) => {
+                console.log(line !== "" ? this.currentIndent + line : line);
+            });
             this.lastWasNewLine = false;
         }
     }
