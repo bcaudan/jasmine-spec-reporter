@@ -18,7 +18,7 @@ describe("with display stacktrace", () => {
                     });
                 }).outputs;
                 expect(outputs).not.contains(/passed assertion/);
-                expect(outputs).contains([ "    ✗ failed spec", "      - Expected true to be false.", /at Object\.<anonymous>/, "" ]);
+                expect(outputs).contains([ "    ✗ failed spec", "      - Expected true to be false.", /at Env\.env\.failed/, /at Object\.<anonymous>/, "" ]);
             });
         });
 

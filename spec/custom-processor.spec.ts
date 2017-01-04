@@ -66,7 +66,17 @@ describe("spec reporter", () => {
                             this.failed();
                         });
                     });
-                }).outputs).contains(/failed spec TEST/);
+                }).outputs).contains([/failed spec TEST/]);
+            });
+
+            it("should display spec error messages with custom display", () => {
+                expect(new Test(this.reporter, function ()  {
+                    this.describe("suite", () => {
+                        this.it("failed spec", () => {
+                            this.failed();
+                        });
+                    });
+                }).outputs).contains(["      - Expected true to be false. TEST"]);
             });
 
             it("should report pending with custom display", () => {
@@ -77,6 +87,18 @@ describe("spec reporter", () => {
                         });
                     });
                 }).outputs).contains(/pending spec TEST/);
+            });
+        });
+
+        describe("when summary", () => {
+            it("should display summary error messages with custom display", () => {
+                expect(new Test(this.reporter, function ()  {
+                    this.describe("suite", () => {
+                        this.it("failed spec", () => {
+                            this.failed();
+                        });
+                    });
+                }).summary).contains(["  - Expected true to be false. TEST"]);
             });
         });
     });
