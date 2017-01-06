@@ -44,7 +44,7 @@
     "istanbul": "0.4.5",
     "jasmine": "2.5.2",
     "jasmine-core": "2.5.2",
-    "tslint": "4.2.0",
+    "tslint": "4.3.0",
     "tslint-eslint-rules": "3.2.3",
     "typescript": "2.1.4"
   }
