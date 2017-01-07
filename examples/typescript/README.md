@@ -29,4 +29,4 @@ jrunner.execute();
 You can find an example in this directory:
 
     npm install
-    npm start
+    npm test

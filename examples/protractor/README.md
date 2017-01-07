@@ -5,7 +5,7 @@ The `jasmine-spec-reporter` can be used to enhance your [Protractor](https://git
 ## Protractor configuration
 In your Protractor configuration file:
 
-```node
+```javascript
 let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
 exports.config = {
@@ -24,7 +24,7 @@ exports.config = {
 ## Remove protractor dot reporter
 In your protractor configuration file, add the print function in the `jasmineNodeOpts` section:
 
-```node
+```javascript
 jasmineNodeOpts: {
    ...
    print: function() {}
@@ -35,9 +35,9 @@ jasmineNodeOpts: {
 
 You can find an example in this directory:
 
-```sh
+```bash
 npm install
 npm run webdriver-update # if needed
 npm run webdriver-start
-npm start
+npm test
 ```

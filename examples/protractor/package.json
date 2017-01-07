@@ -5,7 +5,7 @@
   "scripts": {
     "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update",
     "webdriver-start": "node node_modules/protractor/bin/webdriver-manager start",
-    "start": "node node_modules/protractor/bin/protractor protractor.conf.js"
+    "test": "node node_modules/protractor/bin/protractor protractor.conf.js"
   },
   "author": "Bastien Caudan",
   "license": "Apache-2.0",
