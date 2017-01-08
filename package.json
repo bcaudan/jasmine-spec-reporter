@@ -37,9 +37,9 @@
     "colors": "1.1.2"
   },
   "devDependencies": {
-    "@types/colors": "0.6.33",
+    "@types/colors": "1.1.1",
     "@types/jasmine": "2.5.40",
-    "@types/node": "6.0.54",
+    "@types/node": "6.0.58",
     "coveralls": "2.11.15",
     "istanbul": "0.4.5",
     "jasmine": "2.5.2",
