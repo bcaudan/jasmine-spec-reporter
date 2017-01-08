@@ -1,6 +1,7 @@
 # Unreleased
 
 * Add `displaySpecErrorMessages` and `displaySummaryErrorMessages` to DisplayProcessor [#85](https://github.com/bcaudan/jasmine-spec-reporter/issues/85)
+* Add an option to remove error messages [#62](https://github.com/bcaudan/jasmine-spec-reporter/issues/62)
 
 # 3.0.0
 

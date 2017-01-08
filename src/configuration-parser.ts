@@ -21,6 +21,7 @@ export class ConfigurationParser {
         },
         spec: {
             displayDuration: false,
+            displayErrorMessages: true,
             displayFailed: true,
             displayPending: false,
             displayStacktrace: false,
@@ -30,6 +31,7 @@ export class ConfigurationParser {
             displayNumber: false,
         },
         summary: {
+            displayErrorMessages: true,
             displayFailed: true,
             displayPending: true,
             displayStacktrace: false,

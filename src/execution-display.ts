@@ -123,11 +123,13 @@ export class ExecutionDisplay {
             this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
                 return displayProcessor.displayFailedSpec(object, log);
             });
-            this.increaseIndent();
-            this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
-                return displayProcessor.displaySpecErrorMessages(object, log);
-            });
-            this.decreaseIndent();
+            if (this.configuration.spec.displayErrorMessages) {
+                this.increaseIndent();
+                this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+                    return displayProcessor.displaySpecErrorMessages(object, log);
+                });
+                this.decreaseIndent();
+            }
         }
     }
 
@@ -186,11 +188,13 @@ export class ExecutionDisplay {
 
     private failedSummary(spec: any, index: number): void {
         this.log(`${index}) ${spec.fullName}`);
-        this.increaseIndent();
-        this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
-            return displayProcessor.displaySummaryErrorMessages(object, log);
-        });
-        this.decreaseIndent();
+        if (this.configuration.summary.displayErrorMessages) {
+            this.increaseIndent();
+            this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+                return displayProcessor.displaySummaryErrorMessages(object, log);
+            });
+            this.decreaseIndent();
+        }
     }
 
     private pendingsSummary(): void {

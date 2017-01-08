@@ -9,6 +9,11 @@ export class Configuration {
     };
     public spec?: {
         /**
+         * display error messages for each failed assertion
+         */
+        displayErrorMessages?: boolean;
+
+        /**
          * display stacktrace for each failed assertion
          */
         displayStacktrace?: boolean;
@@ -34,6 +39,11 @@ export class Configuration {
         displayDuration?: boolean;
     };
     public summary?: {
+        /**
+         * display error messages for each failed assertion
+         */
+        displayErrorMessages?: boolean;
+
         /**
          * display stacktrace for each failed assertion
          */
