@@ -1,6 +1,6 @@
 {
   "name": "jasmine-spec-reporter",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Spec reporter for jasmine behavior-driven development framework",
   "main": "built/main.js",
   "types": "built/main.d.ts",
