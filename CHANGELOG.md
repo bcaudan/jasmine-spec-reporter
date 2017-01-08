@@ -1,4 +1,4 @@
-# 3.1.0
+# Unreleased
 
 * Add `displaySpecErrorMessages` and `displaySummaryErrorMessages` to DisplayProcessor [#85](https://github.com/bcaudan/jasmine-spec-reporter/issues/85)
 
