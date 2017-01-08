@@ -4,11 +4,10 @@ interface String {
     stripTime: () => string;
 }
 
-String.prototype.stripTime = function (): string {
+String.prototype.stripTime = function(): string {
     return this.replace(/in (\d+\.?\d*|\.\d+) secs?/, "in {time}") // replace time in summary
         .replace(/\((\d+\.?\d*|\.\d+) secs?\)/, "({time})"); // replace time in specs
 };
-
 
 let isArray = (value) => {
     return {}.toString.call(value) === "[object Array]";
@@ -19,7 +18,7 @@ let equalOrMatch = (actual, expected) => {
     return expected === actual || (expected.test && expected.test(actual));
 };
 
-namespace jasmine {
+declare namespace jasmine {
     export interface Matchers {
         contains(expected: any, expectationFailOutput?: any): boolean;
     }
@@ -31,7 +30,8 @@ let addMatchers = () => {
             contains: () => {
                 return {
                     compare: (actual, sequence) => {
-                        let i, j;
+                        let i;
+                        let j;
                         if (!typeIsArray(sequence)) {
                             sequence = [sequence];
                         }
@@ -43,17 +43,17 @@ let addMatchers = () => {
                             }
                             if (j === sequence.length) {
                                 return {
-                                    pass: true
+                                    pass: true,
                                 };
                             }
                             i++;
                         }
                         return {
-                            pass: false
+                            pass: false,
                         };
-                    }
+                    },
                 };
-            }
+            },
         });
     });
 };
@@ -67,7 +67,7 @@ class Test {
         this.run(options);
     }
 
-    init(withColor) {
+    public init(withColor) {
         let logInSummary;
         this.outputs = [];
         this.summary = [];
@@ -87,8 +87,8 @@ class Test {
         };
     }
 
-    run(options) {
-        let env = new global.j$.Env();
+    public run(options) {
+        const env = new global.j$.Env();
         env.passed = () => {
             env.expect(true).toBe(true);
         };
@@ -104,7 +104,7 @@ class Test {
     }
 }
 
-namespace NodeJS {
+declare namespace NodeJS {
     export interface Global {
         Test;
     }

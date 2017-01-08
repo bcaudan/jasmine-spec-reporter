@@ -1,24 +1,24 @@
-namespace NodeJS {
+declare namespace NodeJS {
     export interface Global {
         getJasmineRequireObj;
         j$;
     }
 }
 
-(function () {
+(() => {
     /**
      * Adaptation of jasmine `nodeDefineJasmineUnderTests.js` in order to test jasmine with jasmine.
      * See https://github.com/jasmine/jasmine/blob/master/CONTRIBUTING.md#self-testing
      */
-    let j$Require = require("jasmine-core"),
-        jasmineConsole = require("../../node_modules/jasmine-core/lib/console/console.js");
+    const j$Require = require("jasmine-core");
+    const jasmineConsole = require("../../node_modules/jasmine-core/lib/console/console.js");
 
-    global.getJasmineRequireObj = function () {
+    global.getJasmineRequireObj = () => {
         return j$Require;
     };
 
     function extend(destination, source) {
-        for (let property in source) {
+        for (const property in source) {
             if ({}.hasOwnProperty.call(source, property)) {
                 destination[property] = source[property];
             }

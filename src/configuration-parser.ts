@@ -1,45 +1,45 @@
 import { Configuration } from "./configuration";
 
 export class ConfigurationParser {
-    private static isWindows: boolean = process && process.platform === "win32";
-    private static defaultConfiguration: Configuration = {
-        suite: {
-            displayNumber: false,
-        },
-        spec: {
-            displayStacktrace: false,
-            displaySuccessful: true,
-            displayFailed: true,
-            displayPending: false,
-            displayDuration: false,
-        },
-        summary: {
-            displayStacktrace: false,
-            displaySuccessful: false,
-            displayFailed: true,
-            displayPending: true,
-        },
-        colors: {
-            enabled: true,
-            successful: "green",
-            failed: "red",
-            pending: "yellow"
-        },
-        prefixes: {
-            successful: ConfigurationParser.isWindows ? "\u221A " : "✓ ",
-            failed: ConfigurationParser.isWindows ? "\u00D7 " : "✗ ",
-            pending: "* "
-        },
-        customProcessors: []
-    };
-
-    static parse(conf?: Configuration): Configuration {
+    public static parse(conf?: Configuration): Configuration {
         return ConfigurationParser.merge(ConfigurationParser.defaultConfiguration, conf);
     }
 
+    private static isWindows: boolean = process && process.platform === "win32";
+    private static defaultConfiguration: Configuration = {
+        colors: {
+            enabled: true,
+            failed: "red",
+            pending: "yellow",
+            successful: "green",
+        },
+        customProcessors: [],
+        prefixes: {
+            failed: ConfigurationParser.isWindows ? "\u00D7 " : "✗ ",
+            pending: "* ",
+            successful: ConfigurationParser.isWindows ? "\u221A " : "✓ ",
+        },
+        spec: {
+            displayDuration: false,
+            displayFailed: true,
+            displayPending: false,
+            displayStacktrace: false,
+            displaySuccessful: true,
+        },
+        suite: {
+            displayNumber: false,
+        },
+        summary: {
+            displayFailed: true,
+            displayPending: true,
+            displayStacktrace: false,
+            displaySuccessful: false,
+        },
+    };
+
     private static merge(template: any, override: any): Configuration {
-        let result: any = {};
-        for (let key in template) {
+        const result: any = {};
+        for (const key in template) {
             if (template[key] instanceof Object
                 && !(template[key] instanceof Array)
                 && override instanceof Object

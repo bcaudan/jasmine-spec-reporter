@@ -10,7 +10,7 @@ describe("with colors", () => {
 
         describe("when spec", () => {
             it("should report success", () => {
-                const outputs = new Test(this.reporter, function () {
+                const outputs = new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("successful spec", () => {
                             this.passed();
@@ -22,7 +22,7 @@ describe("with colors", () => {
             });
 
             it("should report failure", () => {
-                const outputs = new Test(this.reporter, function () {
+                const outputs = new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("failed spec", () => {
                             this.failed();
@@ -34,7 +34,7 @@ describe("with colors", () => {
             });
 
             it("should not report pending", () => {
-                const outputs = new Test(this.reporter, function () {
+                const outputs = new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.xit("pending spec", () => {
                             this.passed();
@@ -50,20 +50,20 @@ describe("with colors", () => {
     describe("custom", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
+                colors: {
+                    failed: "white",
+                    pending: "blue",
+                    successful: "magenta",
+                },
                 spec: {
                     displayPending: true
-                },
-                colors: {
-                    successful: "magenta",
-                    failed: "white",
-                    pending: "blue"
                 }
             });
         });
 
         describe("when spec", () => {
             it("should report success", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("successful spec", () => {
                             this.passed();
@@ -73,7 +73,7 @@ describe("with colors", () => {
             });
 
             it("should report failure", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("failed spec", () => {
                             this.failed();
@@ -83,7 +83,7 @@ describe("with colors", () => {
             });
 
             it("should not report pending", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.xit("pending spec", () => {
                             this.passed();
@@ -97,18 +97,18 @@ describe("with colors", () => {
     describe("disabled", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
-                spec: {
-                    displayPending: true
-                },
                 colors: {
                     enabled: false
+                },
+                spec: {
+                    displayPending: true
                 }
             });
         });
 
         describe("when spec", () => {
             it("should report success", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("successful spec", () => {
                             this.passed();
@@ -118,7 +118,7 @@ describe("with colors", () => {
             });
 
             it("should report failure", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("failed spec", () => {
                             this.failed();
@@ -128,7 +128,7 @@ describe("with colors", () => {
             });
 
             it("should not report pending", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.xit("pending spec", () => {
                             this.passed();

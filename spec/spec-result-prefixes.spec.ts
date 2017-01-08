@@ -2,20 +2,20 @@ describe("with spec result prefixes", () => {
     describe("set to empty strings", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
+                prefixes: {
+                    failed: "",
+                    pending: "",
+                    successful: ""
+                },
                 spec: {
                     displayPending: true
-                },
-                prefixes: {
-                    successful: "",
-                    failed: "",
-                    pending: ""
                 }
             });
         });
 
         describe("when spec", () => {
             it("should report success", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("successful spec", () => {
                             this.passed();
@@ -25,7 +25,7 @@ describe("with spec result prefixes", () => {
             });
 
             it("should report failure", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("failed spec", () => {
                             this.failed();
@@ -35,7 +35,7 @@ describe("with spec result prefixes", () => {
             });
 
             it("should report pending", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.xit("pending spec", () => {
                             this.passed();
@@ -49,20 +49,20 @@ describe("with spec result prefixes", () => {
     describe("set to valid strings", () => {
         beforeEach(() => {
             this.reporter = new global.SpecReporter({
+                prefixes: {
+                    failed: "Fail ",
+                    pending: "Pend ",
+                    successful: "Pass "
+                },
                 spec: {
                     displayPending: true
-                },
-                prefixes: {
-                    successful: "Pass ",
-                    failed: "Fail ",
-                    pending: "Pend "
                 }
             });
         });
 
         describe("when spec", () => {
             it("should report success", () => {
-                const outputs = new Test(this.reporter, function () {
+                const outputs = new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("successful spec", () => {
                             this.passed();
@@ -74,7 +74,7 @@ describe("with spec result prefixes", () => {
             });
 
             it("should report failure", () => {
-                const outputs = new Test(this.reporter, function () {
+                const outputs = new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("failed spec", () => {
                             this.failed();
@@ -86,7 +86,7 @@ describe("with spec result prefixes", () => {
             });
 
             it("should report pending", () => {
-                const outputs = new Test(this.reporter, function () {
+                const outputs = new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.xit("pending spec", () => {
                             this.passed();

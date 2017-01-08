@@ -1,37 +1,41 @@
 import { Configuration } from "../configuration";
 
 export class DisplayProcessor {
-    constructor(configuration: Configuration) {}
+    protected configuration: Configuration;
 
-    displayJasmineStarted(info: any, log: String): String {
+    constructor(configuration: Configuration) {
+        this.configuration = configuration;
+    }
+
+    public displayJasmineStarted(info: any, log: String): String {
         return log;
     }
 
-    displaySuite(suite: any, log: String): String {
+    public displaySuite(suite: any, log: String): String {
         return log;
     }
 
-    displaySpecStarted(spec: any, log: String): String {
+    public displaySpecStarted(spec: any, log: String): String {
         return log;
     }
 
-    displaySuccessfulSpec(spec: any, log: String): String {
+    public displaySuccessfulSpec(spec: any, log: String): String {
         return log;
     }
 
-    displayFailedSpec(spec: any, log: String): String {
+    public displayFailedSpec(spec: any, log: String): String {
         return log;
     }
 
-    displaySpecErrorMessages(spec: any, log: String): String {
+    public displaySpecErrorMessages(spec: any, log: String): String {
         return log;
     }
 
-    displaySummaryErrorMessages(spec: any, log: String): String {
+    public displaySummaryErrorMessages(spec: any, log: String): String {
         return log;
     }
 
-    displayPendingSpec(spec: any, log: String): String {
+    public displayPendingSpec(spec: any, log: String): String {
         return log;
     }
 }

@@ -10,7 +10,7 @@ describe("with display stacktrace", () => {
 
         describe("when failed spec", () => {
             it("should display with error messages with stacktraces", () => {
-                const outputs = new Test(this.reporter, function () {
+                const outputs = new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("failed spec", () => {
                             this.failed();
@@ -18,13 +18,18 @@ describe("with display stacktrace", () => {
                     });
                 }).outputs;
                 expect(outputs).not.contains(/passed assertion/);
-                expect(outputs).contains([ "    ✗ failed spec", "      - Expected true to be false.", /at Env\.env\.failed/, /at Object\.<anonymous>/, "" ]);
+                expect(outputs).contains([
+                    "    ✗ failed spec",
+                    "      - Expected true to be false.",
+                    /at Env\.env\.failed/, /at Object\.<anonymous>/,
+                    ""
+                ]);
             });
         });
 
         describe("when summary", () => {
             it("should not report stacktraces in failures summary", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite 1", () => {
                         this.it("spec 1", () => {
                             this.expect(true).toBe(false);
@@ -35,7 +40,17 @@ describe("with display stacktrace", () => {
                             });
                         });
                     });
-                }).summary).contains([ /.*/, /Failures/, /.*/, "", "1) suite 1 spec 1", "  - Expected true to be false.", "", "2) suite 1 suite 2 spec 2", "  - Expected 2 to be 1.", "" ]);
+                }).summary).contains([
+                    /.*/,
+                    /Failures/,
+                    /.*/,
+                    "",
+                    "1) suite 1 spec 1",
+                    "  - Expected true to be false.",
+                    "", "2) suite 1 suite 2 spec 2",
+                    "  - Expected 2 to be 1.",
+                    ""
+                ]);
             });
         });
     });
@@ -51,7 +66,7 @@ describe("with display stacktrace", () => {
 
         describe("when failed spec", () => {
             it("should not display stacktraces with error messages", () => {
-                const outputs = new Test(this.reporter, function () {
+                const outputs = new Test(this.reporter, function() {
                     this.describe("suite", () => {
                         this.it("failed spec", () => {
                             this.failed();
@@ -65,7 +80,7 @@ describe("with display stacktrace", () => {
 
         describe("when summary", () => {
             it("should report failures summary with stacktraces", () => {
-                expect(new Test(this.reporter, function () {
+                expect(new Test(this.reporter, function() {
                     this.describe("suite 1", () => {
                         this.it("spec 1", () => {
                             this.expect(true).toBe(false);
@@ -76,7 +91,20 @@ describe("with display stacktrace", () => {
                             });
                         });
                     });
-                }).summary).contains([ /.*/, /Failures/, /.*/, "", "1) suite 1 spec 1", "  - Expected true to be false.", /at Object\.<anonymous>/, "", "2) suite 1 suite 2 spec 2", "  - Expected 2 to be 1.", /at Object\.<anonymous>/, "" ]);
+                }).summary).contains([
+                    /.*/,
+                    /Failures/,
+                    /.*/,
+                    "",
+                    "1) suite 1 spec 1",
+                    "  - Expected true to be false.",
+                    /at Object\.<anonymous>/,
+                    "",
+                    "2) suite 1 suite 2 spec 2",
+                    "  - Expected 2 to be 1.",
+                    /at Object\.<anonymous>/,
+                    ""
+                ]);
             });
         });
     });

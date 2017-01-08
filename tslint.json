@@ -1,4 +1,5 @@
 {
+    "extends": "tslint:latest",
     "rulesDirectory": "node_modules/tslint-eslint-rules/dist/rules",
     "jsRules": {
         "class-name": true,
@@ -45,6 +46,13 @@
         ]
     },
     "rules": {
+        "no-console": false,
+        "no-var-requires": false,
+        "interface-name": [true, "never-prefix"],
+        "no-namespace": [true, "allow-declarations"],
+        "no-invalid-this": false,
+        "trailing-comma": false,
+        "only-arrow-functions": false,
         "class-name": true,
         "comment-format": [
             true,

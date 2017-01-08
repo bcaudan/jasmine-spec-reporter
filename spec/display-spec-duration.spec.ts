@@ -9,7 +9,7 @@ describe("with spec duration enabled", () => {
 
     describe("when spec", () => {
         it("should report success", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("successful spec", () => {
                         this.passed();
@@ -19,7 +19,7 @@ describe("with spec duration enabled", () => {
         });
 
         it("should report failure", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("failed spec", () => {
                         this.failed();

@@ -1,7 +1,7 @@
-import { ExecutionDisplay } from "./execution-display";
-import { ExecutionMetrics } from "./execution-metrics";
 import { Configuration } from "./configuration";
 import { ConfigurationParser } from "./configuration-parser";
+import { ExecutionDisplay } from "./execution-display";
+import { ExecutionMetrics } from "./execution-metrics";
 
 export class SpecReporter {
     private started: boolean = false;
@@ -16,32 +16,32 @@ export class SpecReporter {
         this.metrics = new ExecutionMetrics();
     }
 
-    jasmineStarted(info: any): void {
+    public jasmineStarted(info: any): void {
         this.started = true;
         this.metrics.start(info);
         this.display.jasmineStarted(info);
     }
 
-    jasmineDone(info: any): void {
+    public jasmineDone(info: any): void {
         this.metrics.stop(info);
         this.display.summary(this.metrics);
         this.finished = true;
     }
 
-    suiteStarted(suite: any): void {
+    public suiteStarted(suite: any): void {
         this.display.suiteStarted(suite);
     }
 
-    suiteDone(): void {
+    public suiteDone(): void {
         this.display.suiteDone();
     }
 
-    specStarted(spec: any): void {
+    public specStarted(spec: any): void {
         this.metrics.startSpec();
         this.display.specStarted(spec);
     }
 
-    specDone(spec: any): void {
+    public specDone(spec: any): void {
         this.metrics.stopSpec(spec);
         if (spec.status === "pending") {
             this.metrics.pendingSpecs++;

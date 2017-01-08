@@ -9,7 +9,7 @@ describe("with successful spec disabled", () => {
 
     describe("when spec", () => {
         it("should not report success", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("successful spec", () => {
                         this.passed();
@@ -21,7 +21,7 @@ describe("with successful spec disabled", () => {
 
     describe("when suite", () => {
         it("should not display fully successful suite", () => {
-            const outputs = new Test(this.reporter, function () {
+            const outputs = new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("spec 1", () => {
                         this.passed();
@@ -35,7 +35,7 @@ describe("with successful spec disabled", () => {
         });
 
         it("should display failed suite", () => {
-            const outputs = new Test(this.reporter, function () {
+            const outputs = new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("failed spec", () => {
                         this.failed();

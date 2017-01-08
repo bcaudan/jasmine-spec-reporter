@@ -9,7 +9,7 @@ describe("with pending spec enabled", () => {
 
     describe("when spec", () => {
         it("should report pending", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.xit("pending spec", () => {
                         this.passed();

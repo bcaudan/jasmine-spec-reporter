@@ -5,7 +5,7 @@ describe("with default display", () => {
 
     describe("when jasmine started", () => {
         it("should report start", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.it("successful spec", () => {
                     this.passed();
                 });
@@ -15,7 +15,7 @@ describe("with default display", () => {
 
     describe("when spec", () => {
         it("should report success", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("successful spec", () => {
                         this.passed();
@@ -25,7 +25,7 @@ describe("with default display", () => {
         });
 
         it("should report failure", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("failed spec", () => {
                         this.failed();
@@ -35,7 +35,7 @@ describe("with default display", () => {
         });
 
         it("should not report pending", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.xit("pending spec", () => {
                         this.passed();
@@ -47,7 +47,7 @@ describe("with default display", () => {
 
     describe("when failed spec", () => {
         it("should display with error messages", () => {
-            const outputs = new Test(this.reporter, function () {
+            const outputs = new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("failed spec", () => {
                         this.expect(true).toBe(false);
@@ -57,13 +57,18 @@ describe("with default display", () => {
                 });
             }).outputs;
             expect(outputs).not.contains(/passed assertion/);
-            expect(outputs).contains([ "    ✗ failed spec", "      - Expected true to be false.", "      - Expected 2 to be 1.", "" ]);
+            expect(outputs).contains([
+                "    ✗ failed spec",
+                "      - Expected true to be false.",
+                "      - Expected 2 to be 1.",
+                ""
+            ]);
         });
     });
 
     describe("when suite", () => {
         it("should display top level suite", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.it("spec 1", () => {
                     this.passed();
                 });
@@ -74,7 +79,7 @@ describe("with default display", () => {
         });
 
         it("should display multiple specs", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("spec 1", () => {
                         this.passed();
@@ -87,7 +92,7 @@ describe("with default display", () => {
         });
 
         it("should display multiple suites", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.it("spec 1", () => {
                         this.passed();
@@ -102,7 +107,7 @@ describe("with default display", () => {
         });
 
         it("should display nested suite at first position", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.describe("suite 2", () => {
                         this.it("spec 1", () => {
@@ -117,7 +122,7 @@ describe("with default display", () => {
         });
 
         it("should display nested suite at last position", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.it("spec 1", () => {
                         this.passed();
@@ -132,7 +137,7 @@ describe("with default display", () => {
         });
 
         it("should display multiple nested suites", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.describe("suite 2", () => {
                         this.it("spec 2", () => {
@@ -145,11 +150,21 @@ describe("with default display", () => {
                         });
                     });
                 });
-            }).outputs).contains([ "", "  suite 1", "", "    suite 2", "      ✓ spec 2", "", "    suite 3", "      ✓ spec 3", "" ]);
+            }).outputs).contains([
+                "",
+                "  suite 1",
+                "",
+                "    suite 2",
+                "      ✓ spec 2",
+                "",
+                "    suite 3",
+                "      ✓ spec 3",
+                ""
+            ]);
         });
 
         it("should not display empty suite", () => {
-            const outputs = new Test(this.reporter, function () {
+            const outputs = new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.it("spec 1", () => {
                         this.passed();
@@ -166,7 +181,7 @@ describe("with default display", () => {
 
     describe("summary", () => {
         it("should report success", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("spec", () => {
                         this.passed();
@@ -176,7 +191,7 @@ describe("with default display", () => {
         });
 
         it("should not report successes summary", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("spec", () => {
                         this.passed();
@@ -186,7 +201,7 @@ describe("with default display", () => {
         });
 
         it("should report failure", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("spec", () => {
                         this.failed();
@@ -196,7 +211,7 @@ describe("with default display", () => {
         });
 
         it("should report failures summary", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.it("spec 1", () => {
                         this.expect(true).toBe(false);
@@ -207,11 +222,22 @@ describe("with default display", () => {
                         });
                     });
                 });
-            }).summary).contains([ /.*/, /Failures/, /.*/, "", "1) suite 1 spec 1", "  - Expected true to be false.", "", "2) suite 1 suite 2 spec 2", "  - Expected 2 to be 1.", "" ]);
+            }).summary).contains([
+                /.*/,
+                /Failures/,
+                /.*/,
+                "",
+                "1) suite 1 spec 1",
+                "  - Expected true to be false.",
+                "",
+                "2) suite 1 suite 2 spec 2",
+                "  - Expected 2 to be 1.",
+                ""
+            ]);
         });
 
         it("should report failures summary", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.xit("spec 1", () => {
                         this.expect(true).toBe(false);
@@ -223,11 +249,22 @@ describe("with default display", () => {
                         });
                     });
                 });
-            }).summary).contains([ /.*/, /Pending/, /.*/, "", "1) suite 1 spec 1", "  Temporarily disabled with xit", "", "2) suite 1 suite 2 spec 2", "  Will work soon", "" ]);
+            }).summary).contains([
+                /.*/,
+                /Pending/,
+                /.*/,
+                "",
+                "1) suite 1 spec 1",
+                "  Temporarily disabled with xit",
+                "",
+                "2) suite 1 suite 2 spec 2",
+                "  Will work soon",
+                ""
+            ]);
         });
 
         it("should report pending with success", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.xit("spec", () => {
                         this.passed();
@@ -240,7 +277,7 @@ describe("with default display", () => {
         });
 
         it("should report pending with failure", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.xit("spec", () => {
                         this.passed();
@@ -253,7 +290,7 @@ describe("with default display", () => {
         });
 
         it("should report skipped with success", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("spec", () => {
                         this.passed();
@@ -266,7 +303,7 @@ describe("with default display", () => {
         });
 
         it("should report skipped with failure and pending", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.fdescribe("suite", () => {
                     this.xit("spec", () => {
                         this.passed();
@@ -287,7 +324,7 @@ describe("with default display", () => {
         });
 
         it("should report seed", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.it("spec 1", () => {
                         this.passed();

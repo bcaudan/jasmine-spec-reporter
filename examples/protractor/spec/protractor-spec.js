@@ -4,7 +4,7 @@ describe('angularjs homepage', () => {
 
     element(by.model('yourName')).sendKeys('Julie');
 
-    let greeting = element(by.binding('yourName'));
+    const greeting = element(by.binding('yourName'));
 
     expect(greeting.getText()).toEqual('Hello Julie!');
   })

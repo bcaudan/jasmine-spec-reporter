@@ -1,4 +1,4 @@
-import { ConfigurationParser } from "../src/configuration-parser";
+import { ConfigurationParser } from "../built/configuration-parser";
 import { TestProcessor } from "./helpers/test-processor";
 
 describe("Configuration parser", () => {
@@ -9,12 +9,14 @@ describe("Configuration parser", () => {
     });
 
     it("should extend given configuration with default properties", () => {
-        expect(ConfigurationParser.parse({customProcessors: [TestProcessor]}).customProcessors).toContain(TestProcessor);
+        expect(ConfigurationParser.parse({
+            customProcessors: [TestProcessor],
+        }).customProcessors).toContain(TestProcessor);
         expect(ConfigurationParser.parse().suite.displayNumber).toBe(false);
         expect(ConfigurationParser.parse({suite: {displayNumber: true}}).suite.displayNumber).toBe(true);
     });
 
-    it("should add custom options", function () {
+    it("should add custom options", () => {
         expect(ConfigurationParser.parse({customOptions: {test: "foo"}}).customOptions).toEqual({test: "foo"});
     });
 });

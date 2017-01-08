@@ -1,13 +1,13 @@
 import { DisplayProcessor } from "./display/display-processor";
 
 export class Configuration {
-    suite?: {
+    public suite?: {
         /**
          * display each suite number (hierarchical)
          */
         displayNumber?: boolean;
     };
-    spec?: {
+    public spec?: {
         /**
          * display stacktrace for each failed assertion
          */
@@ -33,7 +33,7 @@ export class Configuration {
          */
         displayDuration?: boolean;
     };
-    summary?: {
+    public summary?: {
         /**
          * display stacktrace for each failed assertion
          */
@@ -58,7 +58,7 @@ export class Configuration {
      * Colors are displayed in the console via colors package: https://github.com/Marak/colors.js.
      * You can see all available colors on the project page.
      */
-    colors?: {
+    public colors?: {
         /**
          * enable colors
          */
@@ -79,7 +79,7 @@ export class Configuration {
          */
         pending?: string
     };
-    prefixes?: {
+    public prefixes?: {
         /**
          * prefix for successful spec
          */
@@ -98,9 +98,9 @@ export class Configuration {
     /**
      * list of display processor to customize output
      */
-    customProcessors?: Array<typeof DisplayProcessor>;
+    public customProcessors?: Array<typeof DisplayProcessor>;
     /**
      * options for custom processors
      */
-    customOptions?: any;
+    public customOptions?: any;
 }

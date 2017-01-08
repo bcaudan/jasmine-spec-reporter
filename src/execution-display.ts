@@ -1,36 +1,21 @@
+import { Configuration } from "./configuration";
+import { ColorsDisplay } from "./display/colors-display";
+import { DisplayProcessor } from "./display/display-processor";
 import { DefaultProcessor } from "./display/processors/default-processor";
 import { SpecColorsProcessor } from "./display/processors/spec-colors-processor";
 import { SpecDurationsProcessor } from "./display/processors/spec-durations-processor";
 import { SpecPrefixesProcessor } from "./display/processors/spec-prefixes-processor";
 import { SuiteNumberingProcessor } from "./display/processors/suite-numbering-processor";
-import { DisplayProcessor } from "./display/display-processor";
 import { ExecutionMetrics } from "./execution-metrics";
-import { ColorsDisplay } from "./display/colors-display";
-import { Configuration } from "./configuration";
+
+type ProcessFunction = (displayProcessor: DisplayProcessor, object: any, log: String) => String;
 
 export class ExecutionDisplay {
-    private indent: string = "  ";
-    private currentIndent: string = "";
-    private suiteHierarchy: any[] = [];
-    private suiteHierarchyDisplayed: any[] = [];
-    private successfulSpecs: any[] = [];
-    private failedSpecs: any[] = [];
-    private pendingSpecs: any[] = [];
-    private lastWasNewLine: boolean = false;
-    private hasCustomDisplaySpecStarted: boolean;
-    private displayProcessors: DisplayProcessor[];
-
-    constructor(private configuration: Configuration) {
-        ColorsDisplay.init(this.configuration);
-        this.displayProcessors = ExecutionDisplay.initProcessors(this.configuration);
-        this.hasCustomDisplaySpecStarted = ExecutionDisplay.hasCustomDisplaySpecStarted(this.displayProcessors);
-    }
-
     private static initProcessors(configuration: Configuration): DisplayProcessor[] {
-        let displayProcessors: DisplayProcessor[] = [
+        const displayProcessors: DisplayProcessor[] = [
             new DefaultProcessor(configuration),
             new SpecPrefixesProcessor(configuration),
-            new SpecColorsProcessor(configuration)
+            new SpecColorsProcessor(configuration),
         ];
 
         if (configuration.spec.displayDuration) {
@@ -42,7 +27,7 @@ export class ExecutionDisplay {
         }
 
         if (configuration.customProcessors) {
-            configuration.customProcessors.forEach(<p extends DisplayProcessor>(Processor: {new(configuration: Configuration): p; }) => {
+            configuration.customProcessors.forEach((Processor: typeof DisplayProcessor) => {
                 displayProcessors.push(new Processor(configuration));
             });
         }
@@ -53,26 +38,46 @@ export class ExecutionDisplay {
     private static hasCustomDisplaySpecStarted(processors: DisplayProcessor[]): boolean {
         let isDisplayed: boolean = false;
         processors.forEach((processor: DisplayProcessor) => {
-            let log: string = "foo";
-            let result = processor.displaySpecStarted({ id: "bar", description: "bar", fullName: "bar" }, log);
+            const log: string = "foo";
+            const result = processor.displaySpecStarted({ id: "bar", description: "bar", fullName: "bar" }, log);
             isDisplayed = isDisplayed || result !== log;
         });
         return isDisplayed;
     }
 
-    jasmineStarted(runner: any): void {
-        this.process(runner, (displayProcessor: DisplayProcessor, runner: any, log: String): String => {
-            return displayProcessor.displayJasmineStarted(runner, log);
+    private indent: string = "  ";
+    private currentIndent: string = "";
+    private suiteHierarchy: any[] = [];
+    private suiteHierarchyDisplayed: any[] = [];
+    private successfulSpecs: any[] = [];
+    private failedSpecs: any[] = [];
+    private pendingSpecs: any[] = [];
+    private lastWasNewLine: boolean = false;
+
+    private hasCustomDisplaySpecStarted: boolean;
+
+    private displayProcessors: DisplayProcessor[];
+
+    constructor(private configuration: Configuration) {
+        ColorsDisplay.init(this.configuration);
+        this.displayProcessors = ExecutionDisplay.initProcessors(this.configuration);
+        this.hasCustomDisplaySpecStarted = ExecutionDisplay.hasCustomDisplaySpecStarted(this.displayProcessors);
+    }
+
+    public jasmineStarted(runner: any): void {
+        this.process(runner, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+            return displayProcessor.displayJasmineStarted(object, log);
         });
     }
 
-    summary(metrics: ExecutionMetrics): void {
-        let execution: string = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${(metrics.totalSpecsDefined === 1 ? " spec " : " specs ")}`;
-        let successful: string = (metrics.failedSpecs === 0) ? "SUCCESS " : "";
-        let failed: string = (metrics.failedSpecs > 0) ? `(${metrics.failedSpecs} FAILED) ` : "";
-        let pending: string = (metrics.pendingSpecs > 0) ? `(${metrics.pendingSpecs} PENDING) ` : "";
-        let skipped: string = (metrics.skippedSpecs > 0) ? `(${metrics.skippedSpecs} SKIPPED) ` : "";
-        let duration: string = `in ${metrics.duration}.`;
+    public summary(metrics: ExecutionMetrics): void {
+        const pluralizedSpec: string = (metrics.totalSpecsDefined === 1 ? " spec " : " specs ");
+        const execution: string = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${pluralizedSpec}`;
+        const successful: string = (metrics.failedSpecs === 0) ? "SUCCESS " : "";
+        const failed: string = (metrics.failedSpecs > 0) ? `(${metrics.failedSpecs} FAILED) ` : "";
+        const pending: string = (metrics.pendingSpecs > 0) ? `(${metrics.pendingSpecs} PENDING) ` : "";
+        const skipped: string = (metrics.skippedSpecs > 0) ? `(${metrics.skippedSpecs} SKIPPED) ` : "";
+        const duration: string = `in ${metrics.duration}.`;
 
         this.resetIndent();
         this.newLine();
@@ -92,7 +97,64 @@ export class ExecutionDisplay {
         }
     }
 
-    successesSummary(): void {
+    public specStarted(spec: any): void {
+        if (this.hasCustomDisplaySpecStarted) {
+            this.ensureSuiteDisplayed();
+            this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+                return displayProcessor.displaySpecStarted(object, log);
+            });
+        }
+    }
+
+    public successful(spec: any): void {
+        this.successfulSpecs.push(spec);
+        if (this.configuration.spec.displaySuccessful) {
+            this.ensureSuiteDisplayed();
+            this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+                return displayProcessor.displaySuccessfulSpec(object, log);
+            });
+        }
+    }
+
+    public failed(spec: any): void {
+        this.failedSpecs.push(spec);
+        if (this.configuration.spec.displayFailed) {
+            this.ensureSuiteDisplayed();
+            this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+                return displayProcessor.displayFailedSpec(object, log);
+            });
+            this.increaseIndent();
+            this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+                return displayProcessor.displaySpecErrorMessages(object, log);
+            });
+            this.decreaseIndent();
+        }
+    }
+
+    public pending(spec: any): void {
+        this.pendingSpecs.push(spec);
+        if (this.configuration.spec.displayPending) {
+            this.ensureSuiteDisplayed();
+            this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+                return displayProcessor.displayPendingSpec(object, log);
+            });
+        }
+    }
+
+    public suiteStarted(suite: any): void {
+        this.suiteHierarchy.push(suite);
+    }
+
+    public suiteDone(): void {
+        const suite = this.suiteHierarchy.pop();
+        if (this.suiteHierarchyDisplayed[this.suiteHierarchyDisplayed.length - 1] === suite) {
+            this.suiteHierarchyDisplayed.pop();
+        }
+        this.newLine();
+        this.decreaseIndent();
+    }
+
+    private successesSummary(): void {
         this.log("**************************************************");
         this.log("*                   Successes                    *");
         this.log("**************************************************");
@@ -105,11 +167,11 @@ export class ExecutionDisplay {
         this.resetIndent();
     }
 
-    successfulSummary(spec: any, index: number): void {
+    private successfulSummary(spec: any, index: number): void {
         this.log(`${index}) ${spec.fullName}`);
     }
 
-    failuresSummary(): void {
+    private failuresSummary(): void {
         this.log("**************************************************");
         this.log("*                    Failures                    *");
         this.log("**************************************************");
@@ -122,16 +184,16 @@ export class ExecutionDisplay {
         this.resetIndent();
     }
 
-    failedSummary(spec: any, index: number): void {
+    private failedSummary(spec: any, index: number): void {
         this.log(`${index}) ${spec.fullName}`);
         this.increaseIndent();
-        this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
-            return displayProcessor.displaySummaryErrorMessages(spec, log);
+        this.process(spec, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+            return displayProcessor.displaySummaryErrorMessages(object, log);
         });
         this.decreaseIndent();
     }
 
-    pendingsSummary(): void {
+    private pendingsSummary(): void {
         this.log("**************************************************");
         this.log("*                    Pending                     *");
         this.log("**************************************************");
@@ -144,95 +206,38 @@ export class ExecutionDisplay {
         this.resetIndent();
     }
 
-    pendingSummary(spec: any, index: number) {
+    private pendingSummary(spec: any, index: number) {
         this.log(`${index}) ${spec.fullName}`);
         this.increaseIndent();
-        let pendingReason = spec.pendingReason ? spec.pendingReason : "No reason given";
+        const pendingReason = spec.pendingReason ? spec.pendingReason : "No reason given";
         this.log(pendingReason.pending);
         this.resetIndent();
     }
 
-    specStarted(spec: any): void {
-        if (this.hasCustomDisplaySpecStarted) {
-            this.ensureSuiteDisplayed();
-            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
-                return displayProcessor.displaySpecStarted(spec, log);
-            });
-        }
-    }
-
-    successful(spec: any): void {
-        this.successfulSpecs.push(spec);
-        if (this.configuration.spec.displaySuccessful) {
-            this.ensureSuiteDisplayed();
-            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
-                return displayProcessor.displaySuccessfulSpec(spec, log);
-            });
-        }
-    }
-
-    failed(spec: any): void {
-        this.failedSpecs.push(spec);
-        if (this.configuration.spec.displayFailed) {
-            this.ensureSuiteDisplayed();
-            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
-                return displayProcessor.displayFailedSpec(spec, log);
-            });
-            this.increaseIndent();
-            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
-                return displayProcessor.displaySpecErrorMessages(spec, log);
-            });
-            this.decreaseIndent();
-        }
-    }
-
-    pending(spec: any): void {
-        this.pendingSpecs.push(spec);
-        if (this.configuration.spec.displayPending) {
-            this.ensureSuiteDisplayed();
-            this.process(spec, (displayProcessor: DisplayProcessor, spec: any, log: String): String => {
-                return displayProcessor.displayPendingSpec(spec, log);
-            });
-        }
-    }
-
-    suiteStarted(suite: any): void {
-        this.suiteHierarchy.push(suite);
-    }
-
-    suiteDone(): void {
-        let suite = this.suiteHierarchy.pop();
-        if (this.suiteHierarchyDisplayed[this.suiteHierarchyDisplayed.length - 1] === suite) {
-            this.suiteHierarchyDisplayed.pop();
-        }
-        this.newLine();
-        this.decreaseIndent();
-    }
-
-    ensureSuiteDisplayed(): void {
+    private ensureSuiteDisplayed(): void {
         if (this.suiteHierarchy.length !== 0) {
             for (let i: number = this.suiteHierarchyDisplayed.length; i < this.suiteHierarchy.length; i++) {
                 this.suiteHierarchyDisplayed.push(this.suiteHierarchy[i]);
                 this.displaySuite(this.suiteHierarchy[i]);
             }
         } else {
-            let topLevelSuite: any = { description: "Top level suite" };
+            const topLevelSuite: any = { description: "Top level suite" };
             this.suiteHierarchy.push(topLevelSuite);
             this.suiteHierarchyDisplayed.push(topLevelSuite);
             this.displaySuite(topLevelSuite);
         }
     }
 
-    displaySuite(suite: any): void {
+    private displaySuite(suite: any): void {
         this.newLine();
         this.computeSuiteIndent();
-        this.process(suite, (displayProcessor: DisplayProcessor, suite: any, log: String): String => {
-            return displayProcessor.displaySuite(suite, log);
+        this.process(suite, (displayProcessor: DisplayProcessor, object: any, log: String): String => {
+            return displayProcessor.displaySuite(object, log);
         });
         this.increaseIndent();
     }
 
-    process(object: any, processFunction: (displayProcessor: DisplayProcessor, object: any, log: String) => String): void {
+    private process(object: any, processFunction: ProcessFunction): void {
         let log: String = "";
         this.displayProcessors.forEach((displayProcessor: DisplayProcessor) => {
             log = processFunction(displayProcessor, object, log);
@@ -240,14 +245,14 @@ export class ExecutionDisplay {
         this.log(log);
     }
 
-    computeSuiteIndent(): void {
+    private computeSuiteIndent(): void {
         this.resetIndent();
         for (let i: number = 0; i < this.suiteHierarchyDisplayed.length; i++) {
             this.increaseIndent();
         }
     }
 
-    log(stuff: String): void {
+    private log(stuff: String): void {
         if (stuff !== null) {
             stuff.split("\n").forEach((line: String) => {
                 console.log(line !== "" ? this.currentIndent + line : line);
@@ -256,22 +261,22 @@ export class ExecutionDisplay {
         }
     }
 
-    newLine(): void {
+    private newLine(): void {
         if (!this.lastWasNewLine) {
             console.log("");
             this.lastWasNewLine = true;
         }
     }
 
-    resetIndent(): void {
+    private resetIndent(): void {
         this.currentIndent = "";
     }
 
-    increaseIndent(): void {
+    private increaseIndent(): void {
         this.currentIndent += this.indent;
     }
 
-    decreaseIndent(): void {
+    private decreaseIndent(): void {
         this.currentIndent = this.currentIndent.substr(0, this.currentIndent.length - this.indent.length);
     }
 }

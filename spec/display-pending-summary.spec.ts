@@ -9,7 +9,7 @@ describe("with pending summary disabled", () => {
 
     describe("when summary", () => {
         it("should not report pending summary", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite 1", () => {
                     this.xit("spec 1", () => {
                         this.failed();

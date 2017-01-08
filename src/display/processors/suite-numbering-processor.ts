@@ -1,9 +1,13 @@
 import { DisplayProcessor } from "../display-processor";
 
 export class SuiteNumberingProcessor extends DisplayProcessor {
+    private static getParentName(element: any): String {
+        return element.fullName.replace(element.description, "").trim();
+    }
+
     private suiteHierarchy: any[] = [];
 
-    displaySuite(suite: any, log: String): String {
+    public displaySuite(suite: any, log: String): String {
         return `${this.computeNumber(suite)} ${log}`;
     }
 
@@ -13,7 +17,7 @@ export class SuiteNumberingProcessor extends DisplayProcessor {
     }
 
     private computeHierarchy(suite: any): void {
-        let parentName = SuiteNumberingProcessor.getParentName(suite);
+        const parentName = SuiteNumberingProcessor.getParentName(suite);
         let i = 0;
         for (; i < this.suiteHierarchy.length; i++) {
             if (this.suiteHierarchy[i].name === parentName) {
@@ -29,13 +33,9 @@ export class SuiteNumberingProcessor extends DisplayProcessor {
 
     private computeHierarchyNumber(): String {
         let hierarchyNumber: String = "";
-        for (let i = 0; i < this.suiteHierarchy.length; i++) {
-            hierarchyNumber += this.suiteHierarchy[i].number + ".";
+        for (const suite of this.suiteHierarchy) {
+            hierarchyNumber += suite.number + ".";
         }
         return hierarchyNumber.substring(0, hierarchyNumber.length - 1);
-    }
-
-    private static getParentName(element: any): String {
-        return element.fullName.replace(element.description, "").trim();
     }
 }

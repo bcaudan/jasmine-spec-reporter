@@ -9,7 +9,7 @@ describe("with suite number enabled", () => {
 
     describe("when single suite", () => {
         it("should add suite number", () => {
-            expect(new Test(this.reporter, function () {
+            expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("successful spec", () => {
                         this.passed();
@@ -21,7 +21,7 @@ describe("with suite number enabled", () => {
 
     describe("when multiple suite", () => {
         it("should add suite number", () => {
-            const outputs = new Test(this.reporter, function () {
+            const outputs = new Test(this.reporter, function() {
                 this.describe("first suite", () => {
                     this.it("successful spec", () => {
                         this.passed();
@@ -46,7 +46,7 @@ describe("with suite number enabled", () => {
 
     describe("when multiple nested suite", () => {
         it("should add suite number", () => {
-            const outputs = new Test(this.reporter, function () {
+            const outputs = new Test(this.reporter, function() {
                 this.describe("first suite", () => {
                     this.describe("first child suite", () => {
                         this.describe("first grandchild suite", () => {
