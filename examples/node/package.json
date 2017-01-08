@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "a node example",
   "scripts": {
-    "start": "node jasmine-runner.js"
+    "test": "jasmine"
   },
   "author": "Bastien Caudan",
   "license": "Apache-2.0",
