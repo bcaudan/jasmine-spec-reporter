@@ -27,6 +27,18 @@ export class ConfigurationParser {
             displayStacktrace: false,
             displaySuccessful: true,
         },
+        stacktrace: {
+            filter: (stacktrace) => {
+                const lines: string[] = stacktrace.split("\n");
+                const filtered: string[] = [];
+                for (let i: number = 1; i < lines.length; i++) {
+                    if (!/(jasmine[^\/]*\.js|Timer\.listOnTimeout)/.test(lines[i])) {
+                        filtered.push(lines[i]);
+                    }
+                }
+                return filtered.join("\n");
+            }
+        },
         suite: {
             displayNumber: false,
         },
@@ -44,9 +56,11 @@ export class ConfigurationParser {
         for (const key in template) {
             if (template[key] instanceof Object
                 && !(template[key] instanceof Array)
+                && !(template[key] instanceof Function)
                 && override instanceof Object
                 && override[key] instanceof Object
-                && !(override[key] instanceof Array)) {
+                && !(override[key] instanceof Array)
+                && !(override[key] instanceof Function)) {
                 result[key] = ConfigurationParser.merge(template[key], override[key]);
             } else if (override instanceof Object
                         && Object.keys(override).indexOf(key) !== -1) {

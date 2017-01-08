@@ -105,6 +105,12 @@ export class Configuration {
          */
         pending?: string
     };
+    public stacktrace?: {
+        /**
+         * Customize stacktrace filtering
+         */
+        filter?: (stacktrace: String) => String;
+    };
     /**
      * list of display processor to customize output
      */
