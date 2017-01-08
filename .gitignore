@@ -4,3 +4,4 @@ built
 spec/**/*.js
 src/**/*.js
 *.log
+*.map

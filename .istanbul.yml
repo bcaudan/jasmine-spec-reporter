@@ -1,2 +1,2 @@
 instrumentation:
-    excludes: ['spec/helpers/*']
+    excludes: ['spec/**']

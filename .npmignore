@@ -16,4 +16,5 @@ screenshot.png
 tsconfig.json
 tslint.json
 
+*.map
 *~
