@@ -43,7 +43,7 @@
     "@types/node": "6.0.58",
     "coveralls": "2.11.15",
     "istanbul": "0.4.5",
-    "jasmine": "2.5.2",
+    "jasmine": "2.5.3",
     "jasmine-core": "2.5.2",
     "remap-istanbul": "0.8.4",
     "tslint": "4.3.1",
