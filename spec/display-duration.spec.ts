@@ -29,3 +29,25 @@ describe("with spec duration enabled", () => {
         });
     });
 });
+
+describe("with summary duration disabled", () => {
+    beforeEach(() => {
+        this.reporter = new global.SpecReporter({
+            summary: {
+                displayDuration: false
+            }
+        });
+    });
+
+    describe("when summary", () => {
+        it("should not display execution duration", () => {
+            expect(new Test(this.reporter, function() {
+                this.describe("suite", () => {
+                    this.it("successful spec", () => {
+                        this.passed();
+                    });
+                });
+            }).summary).contains("Executed 1 of 1 spec SUCCESS.");
+        });
+    });
+});

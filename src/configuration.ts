@@ -63,6 +63,11 @@ export class Configuration {
          * display summary of all pending specs after execution
          */
         displayPending?: boolean;
+
+        /**
+         * display execution duration
+         */
+        displayDuration?: boolean;
     };
     /**
      * Colors are displayed in the console via colors package: https://github.com/Marak/colors.js.

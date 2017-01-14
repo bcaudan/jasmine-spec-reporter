@@ -43,6 +43,7 @@ export class ConfigurationParser {
             displayNumber: false,
         },
         summary: {
+            displayDuration: true,
             displayErrorMessages: true,
             displayFailed: true,
             displayPending: true,

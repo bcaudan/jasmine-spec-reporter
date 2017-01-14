@@ -1,3 +1,7 @@
+# Unreleased
+
+* Add an option to remove duration from execution summary.
+
 # 3.1.0
 
 * Add `displaySpecErrorMessages` and `displaySummaryErrorMessages` to DisplayProcessor [#85](https://github.com/bcaudan/jasmine-spec-reporter/issues/85)
