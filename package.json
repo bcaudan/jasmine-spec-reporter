@@ -5,17 +5,15 @@
   "main": "built/main.js",
   "types": "built/main.d.ts",
   "scripts": {
-    "prepublish": "npm run tsc",
-    "tsc": "node node_modules/typescript/bin/tsc",
-    "testc": "npm run tsc -- -p spec/tsconfig.json",
-    "pretest": "npm run tsc && npm run testc",
-    "test": "node node_modules/jasmine/bin/jasmine.js",
+    "prepublish": "tsc",
+    "pretest": "tsc && tsc -p spec/tsconfig.json",
+    "test": "jasmine",
     "posttest": "npm run lint",
-    "lint": "node node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts' && node node_modules/tslint/bin/tslint -c tslint.json 'spec/**/*.ts'",
-    "coverage": "npm run pretest && rm -rf coverage && node node_modules/istanbul/lib/cli.js cover node_modules/jasmine/bin/jasmine.js && npm run remap-coverage",
-    "remap-coverage": "./node_modules/.bin/remap-istanbul -i coverage/coverage.json -o coverage/lcov-ts.info -t lcovonly && ./node_modules/.bin/remap-istanbul -i coverage/coverage.json -o coverage/html-report -t html",
+    "lint": "tslint -c tslint.json 'src/**/*.ts' && tslint -c tslint.json 'spec/**/*.ts'",
+    "coverage": "npm run pretest && rm -rf coverage && istanbul cover jasmine && npm run remap-coverage",
+    "remap-coverage": "remap-istanbul -i coverage/coverage.json -o coverage/lcov-ts.info -t lcovonly && remap-istanbul -i coverage/coverage.json -o coverage/html-report -t html",
     "open-coverage": "npm run coverage && open ./coverage/html-report/index.html",
-    "coveralls": "npm run coverage && cat ./coverage/lcov-ts.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coveralls": "npm run coverage && cat ./coverage/lcov-ts.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
