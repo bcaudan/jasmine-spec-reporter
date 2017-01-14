@@ -71,13 +71,13 @@ export class ExecutionDisplay {
     }
 
     public summary(metrics: ExecutionMetrics): void {
-        const pluralizedSpec: string = (metrics.totalSpecsDefined === 1 ? " spec " : " specs ");
+        const pluralizedSpec: string = (metrics.totalSpecsDefined === 1 ? " spec" : " specs");
         const execution: string = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${pluralizedSpec}`;
-        const successful: string = (metrics.failedSpecs === 0) ? "SUCCESS " : "";
-        const failed: string = (metrics.failedSpecs > 0) ? `(${metrics.failedSpecs} FAILED) ` : "";
-        const pending: string = (metrics.pendingSpecs > 0) ? `(${metrics.pendingSpecs} PENDING) ` : "";
-        const skipped: string = (metrics.skippedSpecs > 0) ? `(${metrics.skippedSpecs} SKIPPED) ` : "";
-        const duration: string = `in ${metrics.duration}.`;
+        const successful: string = (metrics.failedSpecs === 0) ? " SUCCESS" : "";
+        const failed: string = (metrics.failedSpecs > 0) ? ` (${metrics.failedSpecs} FAILED)` : "";
+        const pending: string = (metrics.pendingSpecs > 0) ? ` (${metrics.pendingSpecs} PENDING)` : "";
+        const skipped: string = (metrics.skippedSpecs > 0) ? ` (${metrics.skippedSpecs} SKIPPED)` : "";
+        const duration: string = this.configuration.summary.displayDuration ? ` in ${metrics.duration}` : "";
 
         this.resetIndent();
         this.newLine();
@@ -90,7 +90,7 @@ export class ExecutionDisplay {
         if (this.configuration.summary.displayPending && metrics.pendingSpecs > 0) {
             this.pendingsSummary();
         }
-        this.log(execution + successful.successful + failed.failed + pending.pending + skipped + duration);
+        this.log(execution + successful.successful + failed.failed + pending.pending + skipped + duration + ".");
 
         if (metrics.random) {
             this.log(`Randomized with seed ${metrics.seed}.`);
