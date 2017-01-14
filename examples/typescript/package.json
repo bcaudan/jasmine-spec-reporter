@@ -10,8 +10,8 @@
   "author": "Bastien Caudan",
   "license": "Apache-2.0",
   "dependencies": {
-    "jasmine": "2.5.2",
+    "jasmine": "file:../../node_modules/jasmine",
     "jasmine-spec-reporter": "file:../../",
-    "typescript": "2.1.4"
+    "typescript": "file:../../node_modules/typescript"
   }
 }
