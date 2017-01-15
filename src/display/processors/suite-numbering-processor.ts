@@ -1,23 +1,29 @@
+import { CustomReporterResult } from "../../custom-reporter-result";
 import { DisplayProcessor } from "../display-processor";
 
+interface SuiteHierarchyInfo {
+    name: String;
+    number: number;
+}
+
 export class SuiteNumberingProcessor extends DisplayProcessor {
-    private static getParentName(element: any): String {
+    private static getParentName(element: CustomReporterResult): String {
         return element.fullName.replace(element.description, "").trim();
     }
 
-    private suiteHierarchy: any[] = [];
+    private suiteHierarchy: SuiteHierarchyInfo[] = [];
 
-    public displaySuite(suite: any, log: String): String {
+    public displaySuite(suite: CustomReporterResult, log: String): String {
         return `${this.computeNumber(suite)} ${log}`;
     }
 
-    private computeNumber(suite: any): String {
+    private computeNumber(suite: CustomReporterResult): String {
         this.computeHierarchy(suite);
         return this.computeHierarchyNumber();
     }
 
-    private computeHierarchy(suite: any): void {
-        const parentName = SuiteNumberingProcessor.getParentName(suite);
+    private computeHierarchy(suite: CustomReporterResult): void {
+        const parentName: String = SuiteNumberingProcessor.getParentName(suite);
         let i = 0;
         for (; i < this.suiteHierarchy.length; i++) {
             if (this.suiteHierarchy[i].name === parentName) {
