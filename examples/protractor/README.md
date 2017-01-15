@@ -37,7 +37,5 @@ You can find an example in this directory:
 
 ```bash
 npm install
-npm run webdriver-update # if needed
-npm run webdriver-start
 npm test
 ```
