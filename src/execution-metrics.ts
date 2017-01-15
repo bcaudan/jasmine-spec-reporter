@@ -1,3 +1,7 @@
+import { CustomReporterResult } from "./custom-reporter-result";
+import SuiteInfo = jasmine.SuiteInfo;
+import RunDetails = jasmine.RunDetails;
+
 export class ExecutionMetrics {
     private static pluralize(count: number): string {
         return count > 1 ? "s" : "";
@@ -11,32 +15,32 @@ export class ExecutionMetrics {
     public executedSpecs: number = 0;
     public duration: string;
     public random: boolean = false;
-    public seed: number;
+    public seed: string;
 
     private startTime: number;
     private specStartTime: number;
 
-    public start(info: any): void {
+    public start(suiteInfo: SuiteInfo): void {
         this.startTime = (new Date()).getTime();
-        this.totalSpecsDefined = info && info.totalSpecsDefined ? info.totalSpecsDefined : 0;
+        this.totalSpecsDefined = suiteInfo && suiteInfo.totalSpecsDefined ? suiteInfo.totalSpecsDefined : 0;
     }
 
-    public stop(info: any): void {
+    public stop(runDetails: RunDetails): void {
         const totalSpecs = this.failedSpecs + this.successfulSpecs + this.pendingSpecs;
         this.duration = this.formatDuration((new Date()).getTime() - this.startTime);
         this.executedSpecs = this.failedSpecs + this.successfulSpecs;
         this.totalSpecsDefined = this.totalSpecsDefined ? this.totalSpecsDefined : totalSpecs;
         this.skippedSpecs = this.totalSpecsDefined - totalSpecs;
-        this.random = info && info.order && info.order.random;
-        this.seed = info && info.order && info.order.seed;
+        this.random = runDetails.order.random;
+        this.seed = runDetails.order.seed;
     }
 
     public startSpec(): void {
         this.specStartTime = (new Date()).getTime();
     }
 
-    public stopSpec(spec: any): void {
-        spec.duration = this.formatDuration((new Date()).getTime() - this.specStartTime);
+    public stopSpec(result: CustomReporterResult): void {
+        result.duration = this.formatDuration((new Date()).getTime() - this.specStartTime);
     }
 
     private formatDuration(durationInMs: number): string {

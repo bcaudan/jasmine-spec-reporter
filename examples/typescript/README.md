@@ -7,9 +7,10 @@ Use jasmine-spec-reporter with TypeScript
 import { SpecReporter } from "jasmine-spec-reporter";
 import { DisplayProcessor } from "jasmine-spec-reporter";
 const Jasmine = require("jasmine");
+import SuiteInfo = jasmine.SuiteInfo;
 
 class CustomProcessor extends DisplayProcessor {
-    public displayJasmineStarted(info: any, log: String): String {
+    public displayJasmineStarted(info: SuiteInfo, log: String): String {
         return `TypeScript ${log}`;
     }
 }
@@ -21,7 +22,6 @@ jrunner.addReporter(new SpecReporter({
 }));
 jrunner.loadConfigFile();
 jrunner.execute();
-
 ```
 
 ## Example

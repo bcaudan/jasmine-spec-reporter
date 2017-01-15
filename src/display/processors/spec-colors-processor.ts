@@ -1,15 +1,16 @@
+import { CustomReporterResult } from "../../custom-reporter-result";
 import { DisplayProcessor } from "../display-processor";
 
 export class SpecColorsProcessor extends DisplayProcessor {
-    public displaySuccessfulSpec(spec: any, log: String): String {
+    public displaySuccessfulSpec(spec: CustomReporterResult, log: String): String {
         return log.successful;
     }
 
-    public displayFailedSpec(spec: any, log: String): String {
+    public displayFailedSpec(spec: CustomReporterResult, log: String): String {
         return log.failed;
     }
 
-    public displayPendingSpec(spec: any, log: String): String {
+    public displayPendingSpec(spec: CustomReporterResult, log: String): String {
         return log.pending;
     }
 }

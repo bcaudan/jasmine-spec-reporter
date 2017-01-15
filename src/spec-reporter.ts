@@ -1,9 +1,13 @@
 import { Configuration } from "./configuration";
 import { ConfigurationParser } from "./configuration-parser";
+import { CustomReporterResult } from "./custom-reporter-result";
 import { ExecutionDisplay } from "./execution-display";
 import { ExecutionMetrics } from "./execution-metrics";
+import CustomReporter = jasmine.CustomReporter;
+import SuiteInfo = jasmine.SuiteInfo;
+import RunDetails = jasmine.RunDetails;
 
-export class SpecReporter {
+export class SpecReporter implements CustomReporter {
     private started: boolean = false;
     private finished: boolean = false;
     private display: ExecutionDisplay;
@@ -16,42 +20,42 @@ export class SpecReporter {
         this.metrics = new ExecutionMetrics();
     }
 
-    public jasmineStarted(info: any): void {
+    public jasmineStarted(suiteInfo: SuiteInfo): void {
         this.started = true;
-        this.metrics.start(info);
-        this.display.jasmineStarted(info);
+        this.metrics.start(suiteInfo);
+        this.display.jasmineStarted(suiteInfo);
     }
 
-    public jasmineDone(info: any): void {
-        this.metrics.stop(info);
+    public jasmineDone(runDetails: RunDetails): void {
+        this.metrics.stop(runDetails);
         this.display.summary(this.metrics);
         this.finished = true;
     }
 
-    public suiteStarted(suite: any): void {
-        this.display.suiteStarted(suite);
+    public suiteStarted(result: CustomReporterResult): void {
+        this.display.suiteStarted(result);
     }
 
-    public suiteDone(): void {
+    public suiteDone(result: CustomReporterResult): void {
         this.display.suiteDone();
     }
 
-    public specStarted(spec: any): void {
+    public specStarted(result: CustomReporterResult): void {
         this.metrics.startSpec();
-        this.display.specStarted(spec);
+        this.display.specStarted(result);
     }
 
-    public specDone(spec: any): void {
-        this.metrics.stopSpec(spec);
-        if (spec.status === "pending") {
+    public specDone(result: CustomReporterResult): void {
+        this.metrics.stopSpec(result);
+        if (result.status === "pending") {
             this.metrics.pendingSpecs++;
-            this.display.pending(spec);
-        } else if (spec.status === "passed") {
+            this.display.pending(result);
+        } else if (result.status === "passed") {
             this.metrics.successfulSpecs++;
-            this.display.successful(spec);
-        } else if (spec.status === "failed") {
+            this.display.successful(result);
+        } else if (result.status === "failed") {
             this.metrics.failedSpecs++;
-            this.display.failed(spec);
+            this.display.failed(result);
         }
     }
 }

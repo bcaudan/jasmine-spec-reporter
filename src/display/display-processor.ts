@@ -1,4 +1,6 @@
 import { Configuration } from "../configuration";
+import { CustomReporterResult } from "../custom-reporter-result";
+import SuiteInfo = jasmine.SuiteInfo;
 
 export class DisplayProcessor {
     protected configuration: Configuration;
@@ -7,35 +9,35 @@ export class DisplayProcessor {
         this.configuration = configuration;
     }
 
-    public displayJasmineStarted(info: any, log: String): String {
+    public displayJasmineStarted(info: SuiteInfo, log: String): String {
         return log;
     }
 
-    public displaySuite(suite: any, log: String): String {
+    public displaySuite(suite: CustomReporterResult, log: String): String {
         return log;
     }
 
-    public displaySpecStarted(spec: any, log: String): String {
+    public displaySpecStarted(spec: CustomReporterResult, log: String): String {
         return log;
     }
 
-    public displaySuccessfulSpec(spec: any, log: String): String {
+    public displaySuccessfulSpec(spec: CustomReporterResult, log: String): String {
         return log;
     }
 
-    public displayFailedSpec(spec: any, log: String): String {
+    public displayFailedSpec(spec: CustomReporterResult, log: String): String {
         return log;
     }
 
-    public displaySpecErrorMessages(spec: any, log: String): String {
+    public displaySpecErrorMessages(spec: CustomReporterResult, log: String): String {
         return log;
     }
 
-    public displaySummaryErrorMessages(spec: any, log: String): String {
+    public displaySummaryErrorMessages(spec: CustomReporterResult, log: String): String {
         return log;
     }
 
-    public displayPendingSpec(spec: any, log: String): String {
+    public displayPendingSpec(spec: CustomReporterResult, log: String): String {
         return log;
     }
 }
