@@ -1,0 +1,56 @@
+Spec started
+
+  first suite
+    [32m✓ should be ok[39m
+    [33m* should be pending[39m
+    [31m✗ should failed[39m
+      [31m- [39m[31mExpected true to be false.[39m
+    [32m✓ should be ok[39m
+
+  second suite
+    [33m* should be pending[39m
+    [32m✓ should be ok[39m
+
+    first child suite
+
+      first grandchild suite
+        [31m✗ should failed[39m
+          [31m- [39m[31mExpected true to be false.[39m
+          [31m- [39m[31mExpected true to be false.[39m
+        [31m✗ should failed[39m
+          [31m- [39m[31mExpected true to be false.[39m
+        [32m✓ should be ok[39m
+
+      second grandchild suite
+        [31m✗ should failed[39m
+          [31m- [39m[31mExpected true to be false.[39m
+        [32m✓ should be ok[39m
+
+**************************************************
+*                    Failures                    *
+**************************************************
+
+1) first suite should failed
+  [31m- [39m[31mExpected true to be false.[39m
+
+2) second suite first child suite first grandchild suite should failed
+  [31m- [39m[31mExpected true to be false.[39m
+  [31m- [39m[31mExpected true to be false.[39m
+
+3) second suite first child suite first grandchild suite should failed
+  [31m- [39m[31mExpected true to be false.[39m
+
+4) second suite first child suite second grandchild suite should failed
+  [31m- [39m[31mExpected true to be false.[39m
+
+**************************************************
+*                    Pending                     *
+**************************************************
+
+1) first suite should be pending
+  [33mwill work soon[39m
+
+2) second suite should be pending
+  [33mTemporarily disabled with xit[39m
+
+Executed 9 of 11 specs[31m (4 FAILED)[39m[33m (2 PENDING)[39m.

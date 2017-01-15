@@ -1,6 +1,7 @@
 # Unreleased
 
 * Add an option to remove duration from execution summary.
+* Add jasmine & protractor integration tests [#82](https://github.com/bcaudan/jasmine-spec-reporter/issues/82)
 
 # 3.1.0
 
