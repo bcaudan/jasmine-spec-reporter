@@ -46,6 +46,21 @@
         ]
     },
     "rules": {
+        // start type checked methods
+        // not supported by the IDE
+        "no-unbound-method": true,
+        "no-boolean-literal-compare": true,
+        "no-unnecessary-qualifier": true,
+        "strict-type-predicates": true,
+        // end type checked methods
+        "align": [true, "parameters", "statements", "arguments"],
+        "eofline": true,
+        "curly": true,
+        "no-misused-new": true,
+        "prefer-method-signature": true,
+        "no-unnecessary-initializer": true,
+        "import-spacing": true,
+        "arrow-parens": [true, "ban-single-arg-parens"],
         "no-console": false,
         "no-var-requires": false,
         "interface-name": [true, "never-prefix"],
@@ -56,8 +71,10 @@
         "class-name": true,
         "comment-format": [
             true,
-            "check-space"
+            "check-space",
+            "check-lowercase"
         ],
+        "jsdoc-format": true,
         "indent": [
             true,
             "spaces"

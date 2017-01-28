@@ -114,7 +114,7 @@ export class Configuration {
         /**
          * Customize stacktrace filtering
          */
-        filter?: (stacktrace: String) => String;
+        filter?(stacktrace: String): String;
     };
     /**
      * list of display processor to customize output

@@ -115,7 +115,7 @@ describe("With custom stacktrace filter function", () => {
                 displayStacktrace: true
             },
             stacktrace: {
-                filter: (stacktrace) => {
+                filter: stacktrace => {
                     return "Updated stacktrace";
                 }
             },

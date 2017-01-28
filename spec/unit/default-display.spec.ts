@@ -324,15 +324,18 @@ describe("with default display", () => {
         });
 
         it("should report seed", () => {
-            expect(new Test(this.reporter, function() {
-                this.describe("suite 1", () => {
-                    this.it("spec 1", () => {
-                        this.passed();
+            expect(new Test(
+                this.reporter,
+                function() {
+                    this.describe("suite 1", () => {
+                        this.it("spec 1", () => {
+                            this.passed();
+                        });
                     });
-                });
-            }, false, {
-                random: true
-            }).summary).contains(/Randomized with seed \d+\./);
+                },
+                false,
+                { random: true }
+            ).summary).contains(/Randomized with seed \d+\./);
         });
     });
 });

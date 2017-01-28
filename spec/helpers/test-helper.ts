@@ -1,18 +1,18 @@
 require("colors");
 
 interface String {
-    stripTime: () => string;
+    stripTime(): string;
 }
 
+// tslint:disable-next-line:no-unbound-method
 String.prototype.stripTime = function(): string {
     return this.replace(/in (\d+\.?\d*|\.\d+) secs?/, "in {time}") // replace time in summary
         .replace(/\((\d+\.?\d*|\.\d+) secs?\)/, "({time})"); // replace time in specs
 };
 
-let isArray = (value) => {
-    return {}.toString.call(value) === "[object Array]";
-};
-let typeIsArray = Array.isArray || isArray;
+let isArray = value => value.toString() === "[object Array]";
+
+let typeIsArray = value => Array.isArray(value) || isArray(value);
 
 let equalOrMatch = (actual, expected) => {
     return expected === actual || (expected.test && expected.test(actual));
@@ -72,7 +72,8 @@ class Test {
         this.outputs = [];
         this.summary = [];
         logInSummary = false;
-        console.log = (stuff) => {
+        // tslint:disable-next-line:no-unbound-method
+        console.log = stuff => {
             if (!withColor) {
                 stuff = stuff.stripColors.stripTime();
             }
