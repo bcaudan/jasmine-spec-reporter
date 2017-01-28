@@ -103,7 +103,8 @@ export class ExecutionDisplay {
     public specStarted(result: CustomReporterResult): void {
         if (this.hasCustomDisplaySpecStarted) {
             this.ensureSuiteDisplayed();
-            this.process(result,
+            this.process(
+                result,
                 (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: String): String => {
                     return displayProcessor.displaySpecStarted(object, log);
                 }
@@ -115,7 +116,8 @@ export class ExecutionDisplay {
         this.successfulSpecs.push(result);
         if (this.configuration.spec.displaySuccessful) {
             this.ensureSuiteDisplayed();
-            this.process(result,
+            this.process(
+                result,
                 (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: String): String => {
                     return displayProcessor.displaySuccessfulSpec(object, log);
                 }
@@ -127,14 +129,16 @@ export class ExecutionDisplay {
         this.failedSpecs.push(result);
         if (this.configuration.spec.displayFailed) {
             this.ensureSuiteDisplayed();
-            this.process(result,
+            this.process(
+                result,
                 (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: String): String => {
                     return displayProcessor.displayFailedSpec(object, log);
                 }
             );
             if (this.configuration.spec.displayErrorMessages) {
                 this.increaseIndent();
-                this.process(result,
+                this.process(
+                    result,
                     (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: String): String => {
                         return displayProcessor.displaySpecErrorMessages(object, log);
                     }
@@ -148,7 +152,8 @@ export class ExecutionDisplay {
         this.pendingSpecs.push(result);
         if (this.configuration.spec.displayPending) {
             this.ensureSuiteDisplayed();
-            this.process(result,
+            this.process(
+                result,
                 (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: String): String => {
                     return displayProcessor.displayPendingSpec(object, log);
                 }
@@ -203,7 +208,8 @@ export class ExecutionDisplay {
         this.log(`${index}) ${spec.fullName}`);
         if (this.configuration.summary.displayErrorMessages) {
             this.increaseIndent();
-            this.process(spec,
+            this.process(
+                spec,
                 (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: String): String => {
                     return displayProcessor.displaySummaryErrorMessages(object, log);
                 }
@@ -277,12 +283,10 @@ export class ExecutionDisplay {
     }
 
     private log(stuff: String): void {
-        if (stuff !== null) {
-            stuff.split("\n").forEach((line: String) => {
-                console.log(line !== "" ? this.currentIndent + line : line);
-            });
-            this.lastWasNewLine = false;
-        }
+        stuff.split("\n").forEach((line: String) => {
+            console.log(line !== "" ? this.currentIndent + line : line);
+        });
+        this.lastWasNewLine = false;
     }
 
     private newLine(): void {

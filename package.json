@@ -10,7 +10,7 @@
     "test": "jasmine",
     "test:integration": "npm run pretest && npm run examples:update && jasmine JASMINE_CONFIG_PATH=spec/support/jasmine-integration.json",
     "posttest": "npm run lint",
-    "lint": "tslint -c tslint.json 'src/**/*.ts' && tslint -c tslint.json 'spec/**/*.ts'",
+    "lint": "tslint -c tslint.json --type-check --project tsconfig.json && tslint -c tslint.json --type-check --project spec/tsconfig.json",
     "examples:update": "npm run examples:update:node && npm run examples:update:protractor && npm run examples:update:typescript",
     "examples:update:node": "cd examples/node && rm -rf node_modules && npm install",
     "examples:update:protractor": "cd examples/protractor && rm -rf node_modules && npm install",
@@ -54,7 +54,7 @@
     "jasmine-core": "2.5.2",
     "protractor": "5.0.0",
     "remap-istanbul": "0.8.4",
-    "tslint": "4.3.1",
+    "tslint": "4.4.2",
     "tslint-eslint-rules": "3.2.3",
     "typescript": "2.1.5"
   }

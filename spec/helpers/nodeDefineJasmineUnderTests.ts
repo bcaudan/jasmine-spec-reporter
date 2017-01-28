@@ -19,7 +19,7 @@ declare namespace NodeJS {
 
     function extend(destination, source) {
         for (const property in source) {
-            if ({}.hasOwnProperty.call(source, property)) {
+            if (source.hasOwnProperty(property)) {
                 destination[property] = source[property];
             }
         }

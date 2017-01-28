@@ -28,7 +28,7 @@ export class ConfigurationParser {
             displaySuccessful: true,
         },
         stacktrace: {
-            filter: (stacktrace) => {
+            filter: stacktrace => {
                 const lines: string[] = stacktrace.split("\n");
                 const filtered: string[] = [];
                 for (let i: number = 1; i < lines.length; i++) {

@@ -10,37 +10,46 @@ describe("with colors", () => {
 
         describe("when spec", () => {
             it("should report success", () => {
-                const outputs = new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.it("successful spec", () => {
-                            this.passed();
+                const outputs = new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.it("successful spec", () => {
+                                this.passed();
+                            });
                         });
-                    });
-                }, true).outputs;
+                    },
+                    true).outputs;
                 expect(outputs).not.contains("    ✓ successful spec");
                 expect(outputs).contains("    " + "✓ successful spec".green);
             });
 
             it("should report failure", () => {
-                const outputs = new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.it("failed spec", () => {
-                            this.failed();
+                const outputs = new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.it("failed spec", () => {
+                                this.failed();
+                            });
                         });
-                    });
-                }, true).outputs;
+                    },
+                    true).outputs;
                 expect(outputs).not.contains("    ✗ failed spec");
                 expect(outputs).contains("    " + "✗ failed spec".red);
             });
 
             it("should not report pending", () => {
-                const outputs = new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.xit("pending spec", () => {
-                            this.passed();
+                const outputs = new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.xit("pending spec", () => {
+                                this.passed();
+                            });
                         });
-                    });
-                }, true).outputs;
+                    },
+                    true).outputs;
                 expect(outputs).not.contains("    * pending spec");
                 expect(outputs).contains("    " + "* pending spec".yellow);
             });
@@ -63,33 +72,42 @@ describe("with colors", () => {
 
         describe("when spec", () => {
             it("should report success", () => {
-                expect(new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.it("successful spec", () => {
-                            this.passed();
+                expect(new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.it("successful spec", () => {
+                                this.passed();
+                            });
                         });
-                    });
-                }, true).outputs).contains("    " + "✓ successful spec".magenta);
+                    },
+                    true).outputs).contains("    " + "✓ successful spec".magenta);
             });
 
             it("should report failure", () => {
-                expect(new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.it("failed spec", () => {
-                            this.failed();
+                expect(new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.it("failed spec", () => {
+                                this.failed();
+                            });
                         });
-                    });
-                }, true).outputs).contains("    " + "✗ failed spec".white);
+                    },
+                    true).outputs).contains("    " + "✗ failed spec".white);
             });
 
             it("should not report pending", () => {
-                expect(new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.xit("pending spec", () => {
-                            this.passed();
+                expect(new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.xit("pending spec", () => {
+                                this.passed();
+                            });
                         });
-                    });
-                }, true).outputs).contains("    " + "* pending spec".blue);
+                    },
+                    true).outputs).contains("    " + "* pending spec".blue);
             });
         });
     });
@@ -108,33 +126,42 @@ describe("with colors", () => {
 
         describe("when spec", () => {
             it("should report success", () => {
-                expect(new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.it("successful spec", () => {
-                            this.passed();
+                expect(new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.it("successful spec", () => {
+                                this.passed();
+                            });
                         });
-                    });
-                }, true).outputs).contains("    ✓ successful spec");
+                    },
+                    true).outputs).contains("    ✓ successful spec");
             });
 
             it("should report failure", () => {
-                expect(new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.it("failed spec", () => {
-                            this.failed();
+                expect(new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.it("failed spec", () => {
+                                this.failed();
+                            });
                         });
-                    });
-                }, true).outputs).contains("    ✗ failed spec");
+                    },
+                    true).outputs).contains("    ✗ failed spec");
             });
 
             it("should not report pending", () => {
-                expect(new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.xit("pending spec", () => {
-                            this.passed();
+                expect(new Test(
+                    this.reporter,
+                    function() {
+                        this.describe("suite", () => {
+                            this.xit("pending spec", () => {
+                                this.passed();
+                            });
                         });
-                    });
-                }, true).outputs).contains("    * pending spec");
+                    },
+                    true).outputs).contains("    * pending spec");
             });
         });
     });
