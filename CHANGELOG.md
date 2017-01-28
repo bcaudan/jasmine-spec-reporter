@@ -1,3 +1,7 @@
+# Unreleased
+
+* Type jasmine objects [#84](https://github.com/bcaudan/jasmine-spec-reporter/issues/84)  
+
 # 3.2.0
 
 * Add an option to remove duration from execution summary.
