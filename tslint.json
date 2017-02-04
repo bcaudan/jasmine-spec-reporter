@@ -1,6 +1,8 @@
 {
-    "extends": "tslint:latest",
-    "rulesDirectory": "node_modules/tslint-eslint-rules/dist/rules",
+    "extends": [
+        "tslint:latest",
+        "tslint-eslint-rules"
+    ],
     "jsRules": {
         "class-name": true,
         "comment-format": [
