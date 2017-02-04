@@ -55,7 +55,7 @@
     "protractor": "5.1.0",
     "remap-istanbul": "0.8.4",
     "tslint": "4.4.2",
-    "tslint-eslint-rules": "3.2.3",
+    "tslint-eslint-rules": "3.3.0",
     "typescript": "2.1.5"
   }
 }
