@@ -56,6 +56,6 @@
     "remap-istanbul": "0.9.0",
     "tslint": "4.4.2",
     "tslint-eslint-rules": "3.3.0",
-    "typescript": "2.1.5"
+    "typescript": "2.1.6"
   }
 }
