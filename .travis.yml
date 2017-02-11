@@ -10,7 +10,7 @@ language: node_js
 node_js:
   - '6.5'
 script:
-  -  npm run coveralls && npm run test:integration
+  -  npm run coverage:codecov && npm run test:integration
 before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start

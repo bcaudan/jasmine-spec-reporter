@@ -18,10 +18,13 @@
     "examples:test:node": "cd examples/node && npm test",
     "examples:test:protractor": "cd examples/protractor && npm test",
     "examples:test:typescript": "cd examples/typescript && npm test",
-    "coverage": "npm run pretest && rm -rf coverage && istanbul cover jasmine && npm run coverage:remap",
-    "coverage:remap": "remap-istanbul -i coverage/coverage.json -o coverage/lcov-ts.info -t lcovonly && remap-istanbul -i coverage/coverage.json -o coverage/html-report -t html",
-    "coverage:open": "npm run coverage && open ./coverage/html-report/index.html",
-    "coveralls": "npm run coverage && cat ./coverage/lcov-ts.info | coveralls && rm -rf ./coverage"
+    "coverage": "npm run pretest && nyc jasmine",
+    "coverage:codecov": "npm run coverage && nyc report --reporter=json && codecov -f coverage/*.json"
+  },
+  "nyc": {
+    "exclude": [
+      "spec"
+    ]
   },
   "repository": {
     "type": "git",
@@ -45,15 +48,14 @@
   },
   "devDependencies": {
     "@types/colors": "1.1.1",
-    "@types/jasmine": "^2.5.41",
+    "@types/jasmine": "2.5.41",
     "@types/node": "7.0.0",
-    "coveralls": "2.11.15",
+    "codecov": "1.0.1",
     "diff": "3.2.0",
-    "istanbul": "0.4.5",
     "jasmine": "2.5.3",
     "jasmine-core": "2.5.2",
+    "nyc": "10.1.2",
     "protractor": "5.1.1",
-    "remap-istanbul": "0.9.1",
     "tslint": "4.4.2",
     "tslint-eslint-rules": "3.3.0",
     "typescript": "2.1.6"
