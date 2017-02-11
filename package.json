@@ -53,7 +53,7 @@
     "jasmine": "2.5.3",
     "jasmine-core": "2.5.2",
     "protractor": "5.1.1",
-    "remap-istanbul": "0.9.0",
+    "remap-istanbul": "0.9.1",
     "tslint": "4.4.2",
     "tslint-eslint-rules": "3.3.0",
     "typescript": "2.1.6"
