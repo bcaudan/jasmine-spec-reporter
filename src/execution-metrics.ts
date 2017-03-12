@@ -1,4 +1,5 @@
-import { CustomReporterResult } from "./custom-reporter-result";
+import {CustomReporterResult} from "./spec-reporter";
+
 import SuiteInfo = jasmine.SuiteInfo;
 import RunDetails = jasmine.RunDetails;
 

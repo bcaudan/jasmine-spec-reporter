@@ -1,5 +1,5 @@
-import { Configuration } from "../configuration";
-import { CustomReporterResult } from "../custom-reporter-result";
+import {Configuration} from "./configuration";
+import {CustomReporterResult} from "./spec-reporter";
 import SuiteInfo = jasmine.SuiteInfo;
 
 export class DisplayProcessor {

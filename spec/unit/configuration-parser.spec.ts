@@ -1,5 +1,5 @@
-import { ConfigurationParser } from "../../built/configuration-parser";
-import { TestProcessor } from "../helpers/test-processor";
+import {ConfigurationParser} from "../../built/configuration-parser";
+import {TestProcessor} from "../helpers/test-processor";
 
 describe("Configuration parser", () => {
     it("should have a default configuration", () => {

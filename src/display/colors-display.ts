@@ -1,5 +1,5 @@
 import colors = require("colors");
-import { Configuration } from "../configuration";
+import {Configuration} from "../configuration";
 
 export class ColorsDisplay {
     public static init(configuration: Configuration): void {

@@ -1,5 +1,5 @@
-import { CustomReporterResult } from "../../custom-reporter-result";
-import { DisplayProcessor } from "../display-processor";
+import {DisplayProcessor} from "../display-processor";
+import {CustomReporterResult} from "../spec-reporter";
 
 interface SuiteHierarchyInfo {
     name: String;
@@ -33,7 +33,7 @@ export class SuiteNumberingProcessor extends DisplayProcessor {
             }
         }
         if (i === this.suiteHierarchy.length) {
-            this.suiteHierarchy.push({ name: parentName, number: 1 });
+            this.suiteHierarchy.push({name: parentName, number: 1});
         }
     }
 

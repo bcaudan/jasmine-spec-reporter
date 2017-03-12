@@ -1,5 +1,5 @@
-import { exec } from "child_process";
-import { readFileSync } from "fs";
+import {exec} from "child_process";
+import {readFileSync} from "fs";
 const JsDiff = require("diff");
 
 // https://github.com/jasmine/jasmine-npm/issues/85
@@ -16,14 +16,14 @@ const filter = diff => {
     const removed = diff.filter(element => {
         return element.removed === true;
     }).map(value);
-    return { added, removed };
+    return {added, removed};
 };
 
 describe("Integration", () => {
     it("with jasmine-npm should be ok", done => {
         exec("cd examples/node && npm test -s", (error, stdout) => {
-            const expected = readFileSync("spec/resources/node-example.out", { encoding: "utf-8" });
-            const { added, removed } = filter(JsDiff.diffLines(expected, stdout));
+            const expected = readFileSync("spec/resources/node-example.out", {encoding: "utf-8"});
+            const {added, removed} = filter(JsDiff.diffLines(expected, stdout));
             expect(added).toEqual(removed);
             done();
         });
@@ -31,8 +31,8 @@ describe("Integration", () => {
 
     it("with protractor should be ok", done => {
         exec("cd examples/protractor && npm test -s", (error, stdout) => {
-            const expected = readFileSync("spec/resources/node-protractor.out", { encoding: "utf-8" });
-            const { added, removed } = filter(JsDiff.diffLines(expected, stdout));
+            const expected = readFileSync("spec/resources/node-protractor.out", {encoding: "utf-8"});
+            const {added, removed} = filter(JsDiff.diffLines(expected, stdout));
             expect(added).toEqual(removed);
             done();
         });

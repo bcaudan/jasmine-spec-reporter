@@ -1,4 +1,4 @@
-import { DisplayProcessor } from "./display/display-processor";
+import {DisplayProcessor} from "./display-processor";
 
 export class Configuration {
     public suite?: {
