@@ -1,5 +1,5 @@
-import { SpecReporter } from "jasmine-spec-reporter";
-import { DisplayProcessor } from "jasmine-spec-reporter";
+import {SpecReporter} from "jasmine-spec-reporter";
+import {DisplayProcessor} from "jasmine-spec-reporter";
 const Jasmine = require("jasmine");
 import SuiteInfo = jasmine.SuiteInfo;
 

@@ -1,5 +1,5 @@
-import { CustomReporterResult } from "../../custom-reporter-result";
-import { DisplayProcessor } from "../display-processor";
+import {DisplayProcessor} from "../display-processor";
+import {CustomReporterResult} from "../spec-reporter";
 
 export class SpecDurationsProcessor extends DisplayProcessor {
     private static displayDuration(spec: CustomReporterResult, log: String): String {

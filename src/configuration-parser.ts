@@ -1,4 +1,4 @@
-import { Configuration } from "./configuration";
+import {Configuration} from "./configuration";
 
 export class ConfigurationParser {
     public static parse(conf?: Configuration): Configuration {
@@ -64,7 +64,7 @@ export class ConfigurationParser {
                 && !(override[key] instanceof Function)) {
                 result[key] = ConfigurationParser.merge(template[key], override[key]);
             } else if (override instanceof Object
-                        && Object.keys(override).indexOf(key) !== -1) {
+                && Object.keys(override).indexOf(key) !== -1) {
                 result[key] = override[key];
             } else {
                 result[key] = template[key];

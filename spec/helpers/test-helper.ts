@@ -62,7 +62,7 @@ class Test {
     public outputs;
     public summary;
 
-    constructor(private reporter, private testFn, withColor = false, options = { random: false }) {
+    constructor(private reporter, private testFn, withColor = false, options = {random: false}) {
         this.init(withColor);
         this.run(options);
     }

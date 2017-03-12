@@ -1,5 +1,5 @@
-import { Configuration } from "../../built/configuration";
-import { DisplayProcessor } from "../../built/main";
+import {Configuration} from "../../built/configuration";
+import {DisplayProcessor} from "../../built/main";
 
 export class TestProcessor extends DisplayProcessor {
     private test: string;
