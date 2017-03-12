@@ -36,10 +36,10 @@ export class DefaultProcessor extends DisplayProcessor {
 
     private displayErrorMessages(spec: CustomReporterResult, withStacktrace: boolean): String {
         const logs: String[] = [];
-        for (let i: number = 0; i < spec.failedExpectations.length; i++) {
-            logs.push("- ".failed + spec.failedExpectations[i].message.failed);
-            if (withStacktrace && spec.failedExpectations[i].stack) {
-                logs.push(this.configuration.stacktrace.filter(spec.failedExpectations[i].stack));
+        for (const failedExpectation of spec.failedExpectations) {
+            logs.push("- ".failed + failedExpectation.message.failed);
+            if (withStacktrace && failedExpectation.stack) {
+                logs.push(this.configuration.stacktrace.filter(failedExpectation.stack));
             }
         }
         return logs.join("\n");

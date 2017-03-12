@@ -8,8 +8,8 @@ import SuiteInfo = jasmine.SuiteInfo;
 import RunDetails = jasmine.RunDetails;
 
 export class SpecReporter implements CustomReporter {
-    private started: boolean = false;
-    private finished: boolean = false;
+    private started = false;
+    private finished = false;
     private display: ExecutionDisplay;
     private metrics: ExecutionMetrics;
     private configuration: Configuration;

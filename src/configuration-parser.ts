@@ -31,7 +31,7 @@ export class ConfigurationParser {
             filter: stacktrace => {
                 const lines: string[] = stacktrace.split("\n");
                 const filtered: string[] = [];
-                for (let i: number = 1; i < lines.length; i++) {
+                for (let i = 1; i < lines.length; i++) {
                     if (!/(jasmine[^\/]*\.js|Timer\.listOnTimeout)/.test(lines[i])) {
                         filtered.push(lines[i]);
                     }

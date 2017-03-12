@@ -57,6 +57,7 @@
         // end type checked methods
         "align": [true, "parameters", "statements", "arguments"],
         "ban-types": [true, ["Object", "Use {} instead."]],
+        "no-inferrable-types": true,
         "eofline": true,
         "curly": true,
         "no-misused-new": true,

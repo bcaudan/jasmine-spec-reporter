@@ -7,14 +7,14 @@ export class ExecutionMetrics {
         return count > 1 ? "s" : "";
     }
 
-    public successfulSpecs: number = 0;
-    public failedSpecs: number = 0;
-    public pendingSpecs: number = 0;
-    public skippedSpecs: number = 0;
-    public totalSpecsDefined: number = 0;
-    public executedSpecs: number = 0;
+    public successfulSpecs = 0;
+    public failedSpecs = 0;
+    public pendingSpecs = 0;
+    public skippedSpecs = 0;
+    public totalSpecsDefined = 0;
+    public executedSpecs = 0;
     public duration: string;
-    public random: boolean = false;
+    public random = false;
     public seed: string;
 
     private startTime: number;
@@ -44,8 +44,8 @@ export class ExecutionMetrics {
     }
 
     private formatDuration(durationInMs: number): string {
-        let duration: string = "";
-        let durationInSecs: number = durationInMs / 1000;
+        let duration = "";
+        let durationInSecs = durationInMs / 1000;
         let durationInMins: number;
         let durationInHrs: number;
         if (durationInSecs < 1) {
