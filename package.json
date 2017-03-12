@@ -18,7 +18,7 @@
     "examples:test:node": "cd examples/node && npm test",
     "examples:test:protractor": "cd examples/protractor && npm test",
     "examples:test:typescript": "cd examples/typescript && npm test",
-    "coverage": "npm run pretest && nyc jasmine",
+    "coverage": "nyc npm test",
     "coverage:codecov": "npm run coverage && nyc report --reporter=json && codecov -f coverage/*.json"
   },
   "nyc": {
