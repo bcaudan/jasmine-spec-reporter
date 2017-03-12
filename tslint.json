@@ -56,6 +56,7 @@
         "strict-type-predicates": true,
         // end type checked methods
         "align": [true, "parameters", "statements", "arguments"],
+        "ban-types": [true, ["Object", "Use {} instead."]],
         "eofline": true,
         "curly": true,
         "no-misused-new": true,
