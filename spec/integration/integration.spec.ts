@@ -4,7 +4,7 @@ const JsDiff = require("diff");
 
 // https://github.com/jasmine/jasmine-npm/issues/85
 process.env.JASMINE_CONFIG_PATH = "spec/support/jasmine.json";
-const TIMEOUT_INCREASED = 120000;
+const TIMEOUT_INCREASED = 240000;
 
 const filter = diff => {
     const value = element => {
