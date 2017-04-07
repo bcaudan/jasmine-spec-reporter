@@ -125,4 +125,10 @@ export class Configuration {
      * options for custom processors
      */
     public customOptions?: any;
+    /**
+     * Low-level printing function, defaults to console.log.
+     * Use process.stdout.write(log + '\n'); to avoid output to
+     * devtools console while still reporting to command line.
+     */
+    public print?: (log: String) => void;
 }

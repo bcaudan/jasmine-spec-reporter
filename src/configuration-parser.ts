@@ -19,6 +19,7 @@ export class ConfigurationParser {
             pending: "* ",
             successful: ConfigurationParser.isWindows ? "\u221A " : "✓ ",
         },
+        print: stuff => console.log(stuff),
         spec: {
             displayDuration: false,
             displayErrorMessages: true,

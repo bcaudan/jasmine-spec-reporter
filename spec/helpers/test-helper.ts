@@ -72,7 +72,6 @@ class Test {
         this.outputs = [];
         this.summary = [];
         logInSummary = false;
-        // tslint:disable-next-line:no-unbound-method
         console.log = stuff => {
             if (!withColor) {
                 stuff = stuff.stripColors.stripTime();
