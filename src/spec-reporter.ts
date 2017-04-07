@@ -64,7 +64,8 @@ export class SpecReporter implements CustomReporter {
     constructor(configuration?: Configuration) {
         this.configuration = ConfigurationParser.parse(configuration);
         const displayProcessors = SpecReporter.initProcessors(this.configuration);
-        this.logger = new Logger(displayProcessors);
+        const print = this.configuration.print;
+        this.logger = new Logger(displayProcessors, print);
         this.display = new ExecutionDisplay(this.configuration, this.logger, this.specs, displayProcessors);
         this.summary = new SummaryDisplay(this.logger, this.configuration, this.specs);
         this.metrics = new ExecutionMetrics();

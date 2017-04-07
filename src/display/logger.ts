@@ -10,12 +10,12 @@ export class Logger {
     private currentIndent = "";
     private lastWasNewLine = false;
 
-    constructor(private displayProcessors: DisplayProcessor[]) {
+    constructor(private displayProcessors: DisplayProcessor[], private print: (line: String) => void) {
     }
 
     public log(stuff: String): void {
         stuff.split("\n").forEach((line: String) => {
-            console.log(line !== "" ? this.currentIndent + line : line);
+            this.print(line !== "" ? this.currentIndent + line : line);
         });
         this.lastWasNewLine = false;
     }
@@ -30,7 +30,7 @@ export class Logger {
 
     public newLine(): void {
         if (!this.lastWasNewLine) {
-            console.log("");
+            this.log("");
             this.lastWasNewLine = true;
         }
     }
