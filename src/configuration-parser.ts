@@ -74,5 +74,5 @@ export class ConfigurationParser {
             result.customOptions = override.customOptions;
         }
         return result;
-    };
+    }
 }
