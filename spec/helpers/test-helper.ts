@@ -19,7 +19,7 @@ let equalOrMatch = (actual, expected) => {
 };
 
 declare namespace jasmine {
-    export interface Matchers {
+    export interface Matchers<T> {
         contains(expected: any, expectationFailOutput?: any): boolean;
     }
 }
