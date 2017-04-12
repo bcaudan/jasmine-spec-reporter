@@ -3,4 +3,11 @@ Spec started
   angularjs homepage
     [32m✓ should greet the named user[39m
 
-Executed 1 of 1 spec[32m SUCCESS[39m.
+**************************************************
+*                    Pending                     *
+**************************************************
+
+1) angularjs homepage should handle pending specs correctly
+  [33mNo reason given[39m
+
+Executed 1 of 2 specs[32m SUCCESS[39m[33m (1 PENDING)[39m.

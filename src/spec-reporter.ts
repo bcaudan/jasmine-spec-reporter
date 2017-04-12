@@ -96,7 +96,16 @@ export class SpecReporter implements CustomReporter {
 
     public specDone(result: CustomReporterResult): void {
         this.metrics.stopSpec(result);
-        if (result.status === "pending") {
+
+        // remove one protractor can handle "pending" itself
+        let pending = false;
+        for (const failedExpect of result.failedExpectations) {
+            if (failedExpect.message.toLowerCase().indexOf("pending") >= 0) {
+                pending = true;
+            }
+        }
+
+        if (result.status === "pending" || pending) {
             this.metrics.pendingSpecs++;
             this.display.pending(result);
         } else if (result.status === "passed") {

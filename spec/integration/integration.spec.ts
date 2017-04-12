@@ -31,6 +31,9 @@ describe("Integration", () => {
 
     it("with protractor should be ok", done => {
         exec("cd examples/protractor && npm test -s", (error, stdout) => {
+            // workaround for protractor pending error output
+            stdout = stdout.replace(/\[\d+:\d+:\d+\].*\n/, "");
+
             const expected = readFileSync("spec/resources/node-protractor.out", {encoding: "utf-8"});
             const {added, removed} = filter(JsDiff.diffLines(expected, stdout));
             expect(added).toEqual(removed);

@@ -8,4 +8,9 @@ describe('angularjs homepage', () => {
 
     expect(greeting.getText()).toEqual('Hello Julie!');
   })
+
+  it('should handle pending specs correctly', () => {
+    pending();
+  })
+
 });
