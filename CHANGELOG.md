@@ -1,6 +1,6 @@
-# Unreleased
+# 3.3.0
 
-* Type jasmine objects [#84](https://github.com/bcaudan/jasmine-spec-reporter/issues/84)  
+* Add low-level print configuration option [#129](https://github.com/bcaudan/jasmine-spec-reporter/issues/129), [#130](https://github.com/bcaudan/jasmine-spec-reporter/issues/130)  
 
 # 3.2.0
 
