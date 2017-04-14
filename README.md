@@ -29,7 +29,6 @@ You can customize the output of the reporter yourself: [see how](docs/customize-
 # Developement
 
 * install dependencies: `npm install`
-* compile sources: `npm run tsc`
 * launch unit tests: `npm test`
 * launch integration tests: `npm test:integration`
 
