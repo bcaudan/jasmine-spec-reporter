@@ -28,9 +28,16 @@ You can customize the output of the reporter yourself: [see how](docs/customize-
 
 # Developement
 
-* install dependencies: `npm install`
-* launch unit tests: `npm test`
-* launch integration tests: `npm test:integration`
+## Requirements
+
+* node >= 6.9
+* yarn
+
+## Commands
+
+* install dependencies: `yarn`
+* launch unit tests: `yarn test`
+* launch integration tests: `yarn test:integration`
 
 # Contribution
 

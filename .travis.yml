@@ -7,11 +7,12 @@ addons:
     packages:
       - google-chrome-stable
 language: node_js
+cache: yarn
 node_js:
   - '7'
   - '6'
 script:
-  -  npm run coverage:codecov && npm run test:integration
+  -  yarn coverage:codecov && yarn test:integration
 before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
