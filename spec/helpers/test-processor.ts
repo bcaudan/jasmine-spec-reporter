@@ -9,35 +9,35 @@ export class TestProcessor extends DisplayProcessor {
         this.test = configuration.customOptions.test;
     }
 
-    public displayJasmineStarted(info: any, log: String): String {
+    public displayJasmineStarted(info: any, log: string): string {
         return log + this.test;
     }
 
-    public displaySuite(suite: any, log: String): String {
+    public displaySuite(suite: any, log: string): string {
         return log + this.test;
     }
 
-    public displaySpecStarted(spec: any, log: String): String {
+    public displaySpecStarted(spec: any, log: string): string {
         return spec.description + this.test;
     }
 
-    public displaySuccessfulSpec(spec: any, log: String): String {
+    public displaySuccessfulSpec(spec: any, log: string): string {
         return log + this.test;
     }
 
-    public displayFailedSpec(spec: any, log: String): String {
+    public displayFailedSpec(spec: any, log: string): string {
         return log + this.test;
     }
 
-    public displaySpecErrorMessages(spec: any, log: String): String {
+    public displaySpecErrorMessages(spec: any, log: string): string {
         return log + this.test;
     }
 
-    public displaySummaryErrorMessages(spec: any, log: String): String {
+    public displaySummaryErrorMessages(spec: any, log: string): string {
         return log + this.test;
     }
 
-    public displayPendingSpec(spec: any, log: String): String {
+    public displayPendingSpec(spec: any, log: string): string {
         return log + this.test;
     }
 }

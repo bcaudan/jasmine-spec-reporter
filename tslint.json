@@ -53,7 +53,6 @@
         "no-unnecessary-qualifier": true,
         "strict-type-predicates": true,
         "align": [true, "parameters", "statements", "arguments"],
-        "ban-types": [true, ["Object", "Use {} instead."]],
         "no-inferrable-types": true,
         "eofline": true,
         "curly": true,

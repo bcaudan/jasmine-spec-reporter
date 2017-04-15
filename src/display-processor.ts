@@ -9,35 +9,35 @@ export class DisplayProcessor {
         this.configuration = configuration;
     }
 
-    public displayJasmineStarted(info: SuiteInfo, log: String): String {
+    public displayJasmineStarted(info: SuiteInfo, log: string): string {
         return log;
     }
 
-    public displaySuite(suite: CustomReporterResult, log: String): String {
+    public displaySuite(suite: CustomReporterResult, log: string): string {
         return log;
     }
 
-    public displaySpecStarted(spec: CustomReporterResult, log: String): String {
+    public displaySpecStarted(spec: CustomReporterResult, log: string): string {
         return log;
     }
 
-    public displaySuccessfulSpec(spec: CustomReporterResult, log: String): String {
+    public displaySuccessfulSpec(spec: CustomReporterResult, log: string): string {
         return log;
     }
 
-    public displayFailedSpec(spec: CustomReporterResult, log: String): String {
+    public displayFailedSpec(spec: CustomReporterResult, log: string): string {
         return log;
     }
 
-    public displaySpecErrorMessages(spec: CustomReporterResult, log: String): String {
+    public displaySpecErrorMessages(spec: CustomReporterResult, log: string): string {
         return log;
     }
 
-    public displaySummaryErrorMessages(spec: CustomReporterResult, log: String): String {
+    public displaySummaryErrorMessages(spec: CustomReporterResult, log: string): string {
         return log;
     }
 
-    public displayPendingSpec(spec: CustomReporterResult, log: String): String {
+    public displayPendingSpec(spec: CustomReporterResult, log: string): string {
         return log;
     }
 }
