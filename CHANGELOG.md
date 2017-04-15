@@ -1,3 +1,19 @@
+# 4.0.0
+
+* Use string primitive instead of String wrapper object [#134](https://github.com/bcaudan/jasmine-spec-reporter/issues/134), [#137](https://github.com/bcaudan/jasmine-spec-reporter/issues/137)
+
+## Breaking change
+
+It only impacts TypeScript integrations, `DisplayProcessor` methods signature now use `string` instead of `String`.
+
+Before:
+
+    displaySuite(suite: CustomReporterResult, log: String): String;
+
+Now:
+
+    displaySuite(suite: CustomReporterResult, log: string): string;
+
 # 3.3.0
 
 * Add low-level print configuration option [#129](https://github.com/bcaudan/jasmine-spec-reporter/issues/129), [#130](https://github.com/bcaudan/jasmine-spec-reporter/issues/130)  

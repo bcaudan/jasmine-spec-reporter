@@ -114,7 +114,7 @@ export class Configuration {
         /**
          * Customize stacktrace filtering
          */
-        filter?(stacktrace: String): String;
+        filter?(stacktrace: string): string;
     };
     /**
      * list of display processor to customize output
@@ -130,5 +130,5 @@ export class Configuration {
      * Use process.stdout.write(log + '\n'); to avoid output to
      * devtools console while still reporting to command line.
      */
-    public print?: (log: String) => void;
+    public print?: (log: string) => void;
 }

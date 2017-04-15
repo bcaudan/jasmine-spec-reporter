@@ -2,28 +2,28 @@ import {DisplayProcessor} from "../display-processor";
 import {CustomReporterResult} from "../spec-reporter";
 
 interface SuiteHierarchyInfo {
-    name: String;
+    name: string;
     number: number;
 }
 
 export class SuiteNumberingProcessor extends DisplayProcessor {
-    private static getParentName(element: CustomReporterResult): String {
+    private static getParentName(element: CustomReporterResult): string {
         return element.fullName.replace(element.description, "").trim();
     }
 
     private suiteHierarchy: SuiteHierarchyInfo[] = [];
 
-    public displaySuite(suite: CustomReporterResult, log: String): String {
+    public displaySuite(suite: CustomReporterResult, log: string): string {
         return `${this.computeNumber(suite)} ${log}`;
     }
 
-    private computeNumber(suite: CustomReporterResult): String {
+    private computeNumber(suite: CustomReporterResult): string {
         this.computeHierarchy(suite);
         return this.computeHierarchyNumber();
     }
 
     private computeHierarchy(suite: CustomReporterResult): void {
-        const parentName: String = SuiteNumberingProcessor.getParentName(suite);
+        const parentName: string = SuiteNumberingProcessor.getParentName(suite);
         let i = 0;
         for (; i < this.suiteHierarchy.length; i++) {
             if (this.suiteHierarchy[i].name === parentName) {
@@ -37,8 +37,8 @@ export class SuiteNumberingProcessor extends DisplayProcessor {
         }
     }
 
-    private computeHierarchyNumber(): String {
-        let hierarchyNumber: String = "";
+    private computeHierarchyNumber(): string {
+        let hierarchyNumber = "";
         for (const suite of this.suiteHierarchy) {
             hierarchyNumber += suite.number + ".";
         }

@@ -71,7 +71,7 @@ export class SummaryDisplay {
             this.logger.increaseIndent();
             this.logger.process(
                 spec,
-                (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: String) => {
+                (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: string) => {
                     return displayProcessor.displaySummaryErrorMessages(object, log);
                 }
             );
