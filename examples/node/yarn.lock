@@ -51,9 +51,9 @@ inherits@2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
-jasmine-core@~2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.5.2.tgz#6f61bd79061e27f43e6f9355e44b3c6cab6ff297"
+jasmine-core@~2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.6.0.tgz#95e80740cc4d2c16741750e8b79e53c7ee15056a"
 
 "jasmine-spec-reporter@file:../../":
   version "4.0.0"
@@ -61,11 +61,11 @@ jasmine-core@~2.5.2:
     colors "1.1.2"
 
 "jasmine@file:../../node_modules/jasmine":
-  version "2.5.3"
+  version "2.6.0"
   dependencies:
     exit "^0.1.2"
     glob "^7.0.6"
-    jasmine-core "~2.5.2"
+    jasmine-core "~2.6.0"
 
 minimatch@^3.0.2:
   version "3.0.3"
