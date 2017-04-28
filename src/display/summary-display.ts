@@ -11,7 +11,11 @@ export class SummaryDisplay {
     public display(metrics: ExecutionMetrics) {
         const pluralizedSpec = (metrics.totalSpecsDefined === 1 ? " spec" : " specs");
         const execution = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${pluralizedSpec}`;
-        const successful = (metrics.failedSpecs === 0) ? " SUCCESS" : "";
+        let status = "";
+        if (metrics.failedSpecs === 0) {
+            status = (metrics.totalSpecsDefined === metrics.executedSpecs) ?
+                " SUCCESS".successful : " INCOMPLETE".pending;
+        }
         const failed = (metrics.failedSpecs > 0) ? ` (${metrics.failedSpecs} FAILED)` : "";
         const pending = (metrics.pendingSpecs > 0) ? ` (${metrics.pendingSpecs} PENDING)` : "";
         const skipped = (metrics.skippedSpecs > 0) ? ` (${metrics.skippedSpecs} SKIPPED)` : "";
@@ -28,7 +32,7 @@ export class SummaryDisplay {
         if (this.configuration.summary.displayPending && metrics.pendingSpecs > 0) {
             this.pendingsSummary();
         }
-        this.logger.log(execution + successful.successful + failed.failed + pending.pending + skipped + duration + ".");
+        this.logger.log(execution + status + failed.failed + pending.pending + skipped.pending + duration + ".");
 
         if (metrics.random) {
             this.logger.log(`Randomized with seed ${metrics.seed}.`);

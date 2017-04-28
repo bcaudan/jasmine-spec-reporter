@@ -263,7 +263,7 @@ describe("with default display", () => {
             ]);
         });
 
-        it("should report pending with success", () => {
+        it("should report pending with incomplete", () => {
             expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.xit("spec", () => {
@@ -273,7 +273,7 @@ describe("with default display", () => {
                         this.pending();
                     });
                 });
-            }).summary).contains("Executed 0 of 2 specs SUCCESS (2 PENDING) in {time}.");
+            }).summary).contains("Executed 0 of 2 specs INCOMPLETE (2 PENDING) in {time}.");
         });
 
         it("should report pending with failure", () => {
@@ -289,7 +289,7 @@ describe("with default display", () => {
             }).summary).toContain("Executed 1 of 2 specs (1 FAILED) (1 PENDING) in {time}.");
         });
 
-        it("should report skipped with success", () => {
+        it("should report skipped with incomplete", () => {
             expect(new Test(this.reporter, function() {
                 this.describe("suite", () => {
                     this.it("spec", () => {
@@ -299,7 +299,7 @@ describe("with default display", () => {
                         this.passed();
                     });
                 });
-            }).summary).toContain("Executed 1 of 2 specs SUCCESS (1 SKIPPED) in {time}.");
+            }).summary).toContain("Executed 1 of 2 specs INCOMPLETE (1 SKIPPED) in {time}.");
         });
 
         it("should report skipped with failure and pending", () => {
