@@ -8,14 +8,21 @@ describe("with pending spec enabled", () => {
     });
 
     describe("when spec", () => {
-        it("should report pending", () => {
-            expect(new Test(this.reporter, function() {
-                this.describe("suite", () => {
-                    this.xit("pending spec", () => {
-                        this.passed();
+        it("should report pending", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.xit("pending spec", () => {
+                            env.passed();
+                        });
                     });
-                });
-            }).outputs).contains(/\* pending spec/);
+                },
+                outputs => {
+                    expect(outputs).contains(/\* pending spec/);
+                    done();
+                }
+            );
         });
     });
 });

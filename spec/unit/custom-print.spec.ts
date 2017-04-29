@@ -1,16 +1,16 @@
 describe("spec reporter", () => {
 
-    let outputs: string[];
+    let customOutpouts: string[];
 
     describe("with custom print", () => {
         beforeEach(() => {
-            outputs = [];
+            customOutpouts = [];
             this.reporter = new global.SpecReporter({
                 colors: {
                     enabled: false,
                     },
                 print: line => {
-                    outputs.push(line);
+                    customOutpouts.push(line);
                 },
                 spec: {
                     displayPending: true
@@ -19,103 +19,159 @@ describe("spec reporter", () => {
         });
 
         describe("when jasmine started", () => {
-            it("should report start with ", () => {
-                expect(new Test(this.reporter, function() {
-                    this.describe("suite", () => {
-                        this.it("successful spec", () => {
-                            this.passed();
+            it("should report start with ", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("successful spec", () => {
+                                env.passed();
+                            });
                         });
-                    });
-                }).outputs.length).toEqual(0);
-                expect(outputs).contains(/Spec started/);
+                    },
+                    outputs => {
+                        expect(outputs.length).toEqual(0);
+                        expect(customOutpouts).contains(/Spec started/);
+                        done();
+                    }
+                );
             });
         });
 
         describe("when suite", () => {
-            it("should report suite with custom print", () => {
-                expect(new Test(this.reporter, function()  {
-                    this.describe("suite", () => {
-                        this.it("successful spec", () => {
-                            this.passed();
+            it("should report suite with custom print", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("successful spec", () => {
+                                env.passed();
+                            });
                         });
-                    });
-                }).outputs.length).toEqual(0);
-                expect(outputs).contains(/suite/);
+                    },
+                    outputs => {
+                        expect(outputs.length).toEqual(0);
+                        expect(customOutpouts).contains(/suite/);
+                        done();
+                    }
+                );
             });
         });
 
         describe("when spec started", () => {
-            it("should report start", () => {
-                expect(new Test(this.reporter, function()  {
-                    this.describe("suite", () => {
-                        this.it("spec to be started", () => {
-                            this.passed();
+            it("should report start", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("spec to be started", () => {
+                                env.passed();
+                            });
                         });
-                    });
-                }).outputs.length).toEqual(0);
-                expect(outputs).contains([
-                    "  suite",
-                    "    " + "✓ spec to be started".green
-                ]);
+                    },
+                    outputs => {
+                        expect(outputs.length).toEqual(0);
+                        expect(customOutpouts).contains([
+                            "  suite",
+                            "    " + "✓ spec to be started".green
+                        ]);
+                        done();
+                    }
+                );
             });
         });
 
         describe("when spec done", () => {
-            it("should report success with custom print", () => {
-                expect(new Test(this.reporter, function()  {
-                    this.describe("suite", () => {
-                        this.it("successful spec", () => {
-                            this.passed();
+            it("should report success with custom print", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("successful spec", () => {
+                                env.passed();
+                            });
                         });
-                    });
-                }).outputs.length).toEqual(0);
-                expect(outputs).contains(/successful spec/);
+                    },
+                    outputs => {
+                        expect(outputs.length).toEqual(0);
+                        expect(customOutpouts).contains(/successful spec/);
+                        done();
+                    }
+                );
             });
 
-            it("should report failure with custom print", () => {
-                expect(new Test(this.reporter, function()  {
-                    this.describe("suite", () => {
-                        this.it("failed spec", () => {
-                            this.failed();
+            it("should report failure with custom print", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("failed spec", () => {
+                                env.failed();
+                            });
                         });
-                    });
-                }).outputs.length).toEqual(0);
-                expect(outputs).contains([/failed spec/]);
+                    },
+                    outputs => {
+                        expect(outputs.length).toEqual(0);
+                        expect(customOutpouts).contains([/failed spec/]);
+                        done();
+                    }
+                );
             });
 
-            it("should display spec error messages with custom print", () => {
-                expect(new Test(this.reporter, function()  {
-                    this.describe("suite", () => {
-                        this.it("failed spec", () => {
-                            this.failed();
+            it("should display spec error messages with custom print", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("failed spec", () => {
+                                env.failed();
+                            });
                         });
-                    });
-                }).outputs.length).toEqual(0);
-                expect(outputs).contains(["      - Expected true to be false."]);
+                    },
+                    outputs => {
+                        expect(outputs.length).toEqual(0);
+                        expect(customOutpouts).contains(["      - Expected true to be false."]);
+                        done();
+                    }
+                );
             });
 
-            it("should report pending with custom print", () => {
-                expect(new Test(this.reporter, function()  {
-                    this.describe("suite", () => {
-                        this.xit("pending spec", () => {
-                            this.passed();
+            it("should report pending with custom print", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.xit("pending spec", () => {
+                                env.passed();
+                            });
                         });
-                    });
-                }).outputs.length).toEqual(0);
-                expect(outputs).contains(/pending spec/);
+                    },
+                    outputs => {
+                        expect(outputs.length).toEqual(0);
+                        expect(customOutpouts).contains(/pending spec/);
+                        done();
+                    }
+                );
             });
         });
 
         describe("when summary", () => {
-            it("should display summary error messages with custom print", () => {
-                expect(new Test(this.reporter, function()  {
-                    this.describe("suite", () => {
-                        this.it("failed spec", () => {
-                            this.failed();
+            it("should display summary error messages with custom print", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("failed spec", () => {
+                                env.failed();
+                            });
                         });
-                    });
-                }).summary.length).toEqual(0);
-                expect(outputs).contains(["  - Expected true to be false."]);
+                    },
+                    outputs => {
+                        expect(outputs.length).toEqual(0);
+                        expect(customOutpouts).contains(["  - Expected true to be false."]);
+                        done();
+                    }
+                );
             });
         });
     });

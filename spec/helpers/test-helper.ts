@@ -58,36 +58,34 @@ let addMatchers = () => {
     });
 };
 
-class Test {
-    public outputs;
-    public summary;
-
-    constructor(private reporter, private testFn, withColor = false, options = {random: false}) {
-        this.init(withColor);
-        this.run(options);
+class JasmineEnv {
+    public static execute(reporter, testFn, assertionsFn, options: {withColor?: boolean, random?: boolean} = {}) {
+        const {outputs, summary} = JasmineEnv.init(options);
+        JasmineEnv.run(reporter, testFn, assertionsFn, options, outputs, summary);
     }
 
-    public init(withColor) {
+    public static init(options) {
         let logInSummary;
-        this.outputs = [];
-        this.summary = [];
+        const outputs = [];
+        const summary = [];
         logInSummary = false;
         console.log = stuff => {
-            if (!withColor) {
+            if (!options.withColor) {
                 stuff = stuff.stripColors.stripTime();
             }
             if (/^(Executed|\*\*\*\*\*\*\*)/.test(stuff)) {
                 logInSummary = true;
             }
             if (!logInSummary) {
-                return this.outputs.push(stuff);
+                return outputs.push(stuff);
             } else {
-                return this.summary.push(stuff);
+                return summary.push(stuff);
             }
         };
+        return {outputs, summary};
     }
 
-    public run(options) {
+    public static run(reporter, testFn, assertionsFn, options, outputs, summary) {
         const env = new global.j$.Env();
         env.passed = () => {
             env.expect(true).toBe(true);
@@ -95,8 +93,13 @@ class Test {
         env.failed = () => {
             env.expect(true).toBe(false);
         };
-        this.testFn.apply(env);
-        env.addReporter(this.reporter);
+        testFn(env);
+        env.addReporter(reporter);
+        env.addReporter({
+            jasmineDone: () => {
+                assertionsFn(outputs, summary);
+            }
+        });
         if (options.random) {
             env.randomizeTests(true);
         }
@@ -106,9 +109,9 @@ class Test {
 
 declare namespace NodeJS {
     export interface Global {
-        Test;
+        JasmineEnv;
     }
 }
 
-global.Test = Test;
+global.JasmineEnv = JasmineEnv;
 exports.addMatchers = addMatchers;

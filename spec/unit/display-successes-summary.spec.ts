@@ -8,14 +8,21 @@ describe("with successes summary enabled", () => {
     });
 
     describe("when summary", () => {
-        it("should report successes summary", () => {
-            expect(new Test(this.reporter, function() {
-                this.describe("suite 1", () => {
-                    this.it("spec 1", () => {
-                        this.passed();
+        it("should report successes summary", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite 1", () => {
+                        env.it("spec 1", () => {
+                            env.passed();
+                        });
                     });
-                });
-            }).summary).contains(/Successes/);
+                },
+                (outputs, summary) => {
+                    expect(summary).contains(/Successes/);
+                    done();
+                }
+            );
         });
     });
 });

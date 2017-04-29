@@ -8,24 +8,38 @@ describe("with spec duration enabled", () => {
     });
 
     describe("when spec", () => {
-        it("should report success", () => {
-            expect(new Test(this.reporter, function() {
-                this.describe("suite", () => {
-                    this.it("successful spec", () => {
-                        this.passed();
+        it("should report success", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.it("successful spec", () => {
+                            env.passed();
+                        });
                     });
-                });
-            }).outputs).contains(/✓ successful spec \({time}\)/);
+                },
+                outputs => {
+                    expect(outputs).contains(/✓ successful spec \({time}\)/);
+                    done();
+                }
+            );
         });
 
-        it("should report failure", () => {
-            expect(new Test(this.reporter, function() {
-                this.describe("suite", () => {
-                    this.it("failed spec", () => {
-                        this.failed();
+        it("should report failure", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.it("failed spec", () => {
+                            env.failed();
+                        });
                     });
-                });
-            }).outputs).contains(/✗ failed spec \({time}\)/);
+                },
+                outputs => {
+                    expect(outputs).contains(/✗ failed spec \({time}\)/);
+                    done();
+                }
+            );
         });
     });
 });
@@ -40,14 +54,21 @@ describe("with summary duration disabled", () => {
     });
 
     describe("when summary", () => {
-        it("should not display execution duration", () => {
-            expect(new Test(this.reporter, function() {
-                this.describe("suite", () => {
-                    this.it("successful spec", () => {
-                        this.passed();
+        it("should not display execution duration", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.it("successful spec", () => {
+                            env.passed();
+                        });
                     });
-                });
-            }).summary).contains("Executed 1 of 1 spec SUCCESS.");
+                },
+                (outputs, summary) => {
+                    expect(summary).contains("Executed 1 of 1 spec SUCCESS.");
+                    done();
+                }
+            );
         });
     });
 });

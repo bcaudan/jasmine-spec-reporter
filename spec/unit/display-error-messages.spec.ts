@@ -7,14 +7,21 @@ describe("with spec error messages disabled", () => {
         });
     });
 
-    it("should not display error messages", () => {
-        expect(new Test(this.reporter, function() {
-            this.describe("suite", () => {
-                this.it("failed spec", () => {
-                    this.failed();
+    it("should not display error messages", done => {
+        JasmineEnv.execute(
+            this.reporter,
+            env => {
+                env.describe("suite", () => {
+                    env.it("failed spec", () => {
+                        env.failed();
+                    });
                 });
-            });
-        }).outputs).not.contains(/Expected true to be false/);
+            },
+            outputs => {
+                expect(outputs).not.contains(/Expected true to be false/);
+                done();
+            }
+        );
     });
 });
 
@@ -27,13 +34,20 @@ describe("with summary error messages disabled", () => {
         });
     });
 
-    it("should not display error messages", () => {
-        expect(new Test(this.reporter, function() {
-            this.describe("suite", () => {
-                this.it("failed spec", () => {
-                    this.failed();
+    it("should not display error messages", done => {
+        JasmineEnv.execute(
+            this.reporter,
+            env => {
+                env.describe("suite", () => {
+                    env.it("failed spec", () => {
+                        env.failed();
+                    });
                 });
-            });
-        }).summary).not.contains(/Expected true to be false/);
+            },
+            (outputs, summary) => {
+                expect(summary).not.contains(/Expected true to be false/);
+                done();
+            }
+        );
     });
 });
