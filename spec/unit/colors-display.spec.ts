@@ -9,49 +9,61 @@ describe("with colors", () => {
         });
 
         describe("when spec", () => {
-            it("should report success", () => {
-                const outputs = new Test(
+            it("should report success", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.it("successful spec", () => {
-                                this.passed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("successful spec", () => {
+                                env.passed();
                             });
                         });
                     },
-                    true).outputs;
-                expect(outputs).not.contains("    ✓ successful spec");
-                expect(outputs).contains("    " + "✓ successful spec".green);
+                    outputs => {
+                        expect(outputs).not.contains("    ✓ successful spec");
+                        expect(outputs).contains("    " + "✓ successful spec".green);
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
 
-            it("should report failure", () => {
-                const outputs = new Test(
+            it("should report failure", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.it("failed spec", () => {
-                                this.failed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("failed spec", () => {
+                                env.failed();
                             });
                         });
                     },
-                    true).outputs;
-                expect(outputs).not.contains("    ✗ failed spec");
-                expect(outputs).contains("    " + "✗ failed spec".red);
+                    outputs => {
+                        expect(outputs).not.contains("    ✗ failed spec");
+                        expect(outputs).contains("    " + "✗ failed spec".red);
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
 
-            it("should not report pending", () => {
-                const outputs = new Test(
+            it("should not report pending", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.xit("pending spec", () => {
-                                this.passed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.xit("pending spec", () => {
+                                env.passed();
                             });
                         });
                     },
-                    true).outputs;
-                expect(outputs).not.contains("    * pending spec");
-                expect(outputs).contains("    " + "* pending spec".yellow);
+                    outputs => {
+                        expect(outputs).not.contains("    * pending spec");
+                        expect(outputs).contains("    " + "* pending spec".yellow);
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
         });
     });
@@ -71,43 +83,58 @@ describe("with colors", () => {
         });
 
         describe("when spec", () => {
-            it("should report success", () => {
-                expect(new Test(
+            it("should report success", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.it("successful spec", () => {
-                                this.passed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("successful spec", () => {
+                                env.passed();
                             });
                         });
                     },
-                    true).outputs).contains("    " + "✓ successful spec".magenta);
+                    outputs => {
+                        expect(outputs).contains("    " + "✓ successful spec".magenta);
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
 
-            it("should report failure", () => {
-                expect(new Test(
+            it("should report failure", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.it("failed spec", () => {
-                                this.failed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("failed spec", () => {
+                                env.failed();
                             });
                         });
                     },
-                    true).outputs).contains("    " + "✗ failed spec".white);
+                    outputs => {
+                        expect(outputs).contains("    " + "✗ failed spec".white);
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
 
-            it("should not report pending", () => {
-                expect(new Test(
+            it("should not report pending", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.xit("pending spec", () => {
-                                this.passed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.xit("pending spec", () => {
+                                env.passed();
                             });
                         });
                     },
-                    true).outputs).contains("    " + "* pending spec".blue);
+                    outputs => {
+                        expect(outputs).contains("    " + "* pending spec".blue);
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
         });
     });
@@ -125,43 +152,58 @@ describe("with colors", () => {
         });
 
         describe("when spec", () => {
-            it("should report success", () => {
-                expect(new Test(
+            it("should report success", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.it("successful spec", () => {
-                                this.passed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("successful spec", () => {
+                                env.passed();
                             });
                         });
                     },
-                    true).outputs).contains("    ✓ successful spec");
+                    outputs => {
+                        expect(outputs).contains("    ✓ successful spec");
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
 
-            it("should report failure", () => {
-                expect(new Test(
+            it("should report failure", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.it("failed spec", () => {
-                                this.failed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("failed spec", () => {
+                                env.failed();
                             });
                         });
                     },
-                    true).outputs).contains("    ✗ failed spec");
+                    outputs => {
+                        expect(outputs).contains("    ✗ failed spec");
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
 
-            it("should not report pending", () => {
-                expect(new Test(
+            it("should not report pending", done => {
+                JasmineEnv.execute(
                     this.reporter,
-                    function() {
-                        this.describe("suite", () => {
-                            this.xit("pending spec", () => {
-                                this.passed();
+                    env => {
+                        env.describe("suite", () => {
+                            env.xit("pending spec", () => {
+                                env.passed();
                             });
                         });
                     },
-                    true).outputs).contains("    * pending spec");
+                    outputs => {
+                        expect(outputs).contains("    * pending spec");
+                        done();
+                    },
+                    { withColor: true }
+                );
             });
         });
     });

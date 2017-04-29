@@ -8,45 +8,65 @@ describe("with failed spec disabled", () => {
     });
 
     describe("when spec", () => {
-        it("should not report failed", () => {
-            expect(new Test(this.reporter, function() {
-                this.describe("suite", () => {
-                    this.it("failed spec", () => {
-                        this.failed();
+        it("should not report failed", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.it("failed spec", () => {
+                            env.failed();
+                        });
                     });
-                });
-            }).outputs).not.contains(/failed spec/);
+                },
+                outputs => {
+                    expect(outputs).not.contains(/failed spec/);
+                    done();
+                }
+            );
         });
     });
 
     describe("when suite", () => {
-        it("should not display fully failed suite", () => {
-            expect(new Test(this.reporter, function() {
-                this.describe("failed suite", () => {
-                    this.it("spec 1", () => {
-                        this.failed();
+        it("should not display fully failed suite", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("failed suite", () => {
+                        env.it("spec 1", () => {
+                            env.failed();
+                        });
+                        env.it("spec 2", () => {
+                            env.failed();
+                        });
                     });
-                    this.it("spec 2", () => {
-                        this.failed();
-                    });
-                });
-            }).outputs).not.contains(/failed suite/);
+                },
+                outputs => {
+                    expect(outputs).not.contains(/failed suite/);
+                    done();
+                }
+            );
         });
 
-        it("should display not fully failed suite", () => {
-            const outputs = new Test(this.reporter, function() {
-                this.describe("failed suite", () => {
-                    this.it("successful spec", () => {
-                        this.passed();
+        it("should display not fully failed suite", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("failed suite", () => {
+                        env.it("successful spec", () => {
+                            env.passed();
+                        });
+                        env.it("failed spec", () => {
+                            env.failed();
+                        });
                     });
-                    this.it("failed spec", () => {
-                        this.failed();
-                    });
-                });
-            }).outputs;
-            expect(outputs).contains(/failed suite/);
-            expect(outputs).contains(/successful spec/);
-            expect(outputs).not.contains(/failed spec/);
+                },
+                outputs => {
+                    expect(outputs).contains(/failed suite/);
+                    expect(outputs).contains(/successful spec/);
+                    expect(outputs).not.contains(/failed spec/);
+                    done();
+                }
+            );
         });
     });
 });
