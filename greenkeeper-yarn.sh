@@ -19,13 +19,18 @@ git log --name-status HEAD^..HEAD | grep "update" || exit 0
 echo "Updating lockfiles"
 yarn
 
-cd examples/node && yarn upgrade
+PACKAGE=`echo "$TRAVIS_PULL_REQUEST_BRANCH" | sed 's/[^-]*-\(.*\)/\1/' | sed 's/\(.*\)-[^-]*/\1/'`
+
+cd examples/node
+yarn list | grep $PACKAGE && yarn upgrade $PACKAGE
 cd -
 
-cd examples/protractor && yarn upgrade
+cd examples/protractor
+yarn list | grep $PACKAGE && yarn upgrade $PACKAGE
 cd -
 
-cd examples/typescript && yarn upgrade
+cd examples/typescript
+yarn list | grep $PACKAGE && yarn upgrade $PACKAGE
 cd -
 
 echo "Commit and push yarn.lock"
