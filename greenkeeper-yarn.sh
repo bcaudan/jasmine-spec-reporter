@@ -19,17 +19,17 @@ git log --name-status HEAD^..HEAD | grep "chore(package)" || exit 0
 echo "Updating lockfiles"
 yarn
 
-PACKAGE=`echo "$TRAVIS_PULL_REQUEST_BRANCH" | sed 's/[^-]*-\(.*\)/\1/' | sed 's/\(.*\)-[^-]*/\1/'`
+PACKAGE=`echo "$TRAVIS_PULL_REQUEST_BRANCH" | sed 's/[^/]*\/\(.*\)/\1/' | sed 's/\(.*\)-[^-]*/\1/'`
 
-cd examples/node && echo "Check examples/node"
+cd examples/node && echo "Check $PACKAGE in examples/node"
 cat package.json | grep "\"$PACKAGE\":" && yarn upgrade $PACKAGE
 cd -
 
-cd examples/protractor && echo "Check examples/protractor"
+cd examples/protractor && echo "Check $PACKAGE in examples/protractor"
 cat package.json | grep "\"$PACKAGE\":" && yarn upgrade $PACKAGE
 cd -
 
-cd examples/typescript && echo "Check examples/typescript"
+cd examples/typescript && echo "Check $PACKAGE in examples/typescript"
 cat package.json | grep "\"$PACKAGE\":" && yarn upgrade $PACKAGE
 cd -
 
