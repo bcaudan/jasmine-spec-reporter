@@ -55,7 +55,7 @@
     "jasmine": "2.6.0",
     "jasmine-core": "2.6.1",
     "nyc": "10.3.2",
-    "protractor": "5.1.1",
+    "protractor": "5.1.2",
     "tslint": "5.2.0",
     "tslint-eslint-rules": "4.0.0",
     "typescript": "2.3.2"
