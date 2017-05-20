@@ -10,9 +10,9 @@
   version "2.5.47"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.47.tgz#bbba9bcf0e95e7890c6f4a47394e8bacaa960eb6"
 
-"@types/node@7.0.18":
-  version "7.0.18"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.18.tgz#cd67f27d3dc0cfb746f0bdd5e086c4c5d55be173"
+"@types/node@7.0.19":
+  version "7.0.19"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.19.tgz#7086080a43304449418b37390733384657bb4b0c"
 
 "@types/node@^6.0.46":
   version "6.0.68"
@@ -872,13 +872,9 @@ istanbul-reports@^1.1.0:
   dependencies:
     handlebars "^4.0.3"
 
-jasmine-core@2.6.2:
+jasmine-core@2.6.2, jasmine-core@~2.6.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.6.2.tgz#74ea1f7cf428691af201107d631234027a09daab"
-
-jasmine-core@~2.6.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.6.1.tgz#66a61cddb699958e3613edef346c996f6311fc3b"
 
 jasmine@2.6.0, jasmine@^2.5.3:
   version "2.6.0"
