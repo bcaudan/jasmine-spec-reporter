@@ -10,9 +10,9 @@
   version "2.5.47"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.47.tgz#bbba9bcf0e95e7890c6f4a47394e8bacaa960eb6"
 
-"@types/node@7.0.21":
-  version "7.0.21"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.21.tgz#22a890f19b26cff9b6699b493dea1bcee4410da1"
+"@types/node@7.0.22":
+  version "7.0.22"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.22.tgz#4593f4d828bdd612929478ea40c67b4f403ca255"
 
 "@types/node@^6.0.46":
   version "6.0.68"
