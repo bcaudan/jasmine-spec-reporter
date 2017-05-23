@@ -59,7 +59,7 @@ jasmine-core@~2.6.0:
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.6.0.tgz#95e80740cc4d2c16741750e8b79e53c7ee15056a"
 
 "jasmine-spec-reporter@file:../../":
-  version "4.0.0"
+  version "4.1.0"
   dependencies:
     colors "1.1.2"
 
@@ -87,7 +87,7 @@ path-is-absolute@^1.0.0:
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
 
 "typescript@file:../../node_modules/typescript":
-  version "2.3.2"
+  version "2.3.3"
 
 wrappy@1:
   version "1.0.2"
