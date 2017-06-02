@@ -3,7 +3,7 @@
 
 
 "@types/jasmine@file:../../node_modules/@types/jasmine":
-  version "2.5.48"
+  version "2.5.49"
 
 balanced-match@^0.4.1:
   version "0.4.2"
