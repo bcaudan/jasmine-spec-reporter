@@ -893,7 +893,11 @@ istanbul-reports@^1.1.1:
   dependencies:
     handlebars "^4.0.3"
 
-jasmine-core@2.6.2, jasmine-core@~2.6.0:
+jasmine-core@2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.6.3.tgz#45072950e4a42b1e322fe55c001100a465d77815"
+
+jasmine-core@~2.6.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.6.2.tgz#74ea1f7cf428691af201107d631234027a09daab"
 
