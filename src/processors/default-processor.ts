@@ -7,7 +7,7 @@ export class DefaultProcessor extends DisplayProcessor {
     }
 
     public displayJasmineStarted(): string {
-        return "Spec started";
+        return "Jasmine started";
     }
 
     public displaySuite(suite: CustomReporterResult): string {
