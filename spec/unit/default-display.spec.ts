@@ -13,7 +13,7 @@ describe("with default display", () => {
                     });
                 },
                 outputs => {
-                    expect(outputs).contains(/Spec started/);
+                    expect(outputs).contains(/Jasmine started/);
                     done();
                 }
             );

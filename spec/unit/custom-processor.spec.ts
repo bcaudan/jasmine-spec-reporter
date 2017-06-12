@@ -24,7 +24,7 @@ describe("spec reporter", () => {
                         });
                     },
                     outputs => {
-                        expect(outputs).contains(/Spec started TEST/);
+                        expect(outputs).contains(/Jasmine started TEST/);
                         done();
                     }
                 );
