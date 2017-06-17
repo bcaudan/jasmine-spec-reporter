@@ -5,9 +5,9 @@ jasmine-spec-reporter
 [![Build Status](https://travis-ci.org/bcaudan/jasmine-spec-reporter.svg?branch=master)](https://travis-ci.org/bcaudan/jasmine-spec-reporter)
 [![codecov](https://codecov.io/gh/bcaudan/jasmine-spec-reporter/branch/master/graph/badge.svg)](https://codecov.io/gh/bcaudan/jasmine-spec-reporter)
 
-Real time console spec reporter for jasmine behavior-driven development testing framework.
+Real time console spec reporter for jasmine testing framework.
 
-![](screenshot.png)
+![](screenshot.gif)
 
 # Usage
 
