@@ -1,3 +1,9 @@
+# 4.1.1
+
+## Bugfix
+
+* Correct report from jasmineStarted event [#185](https://github.com/bcaudan/jasmine-spec-reporter/issues/185)
+
 # 4.1.0
 
 ## Feature
