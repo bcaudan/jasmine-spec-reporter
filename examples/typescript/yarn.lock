@@ -3,7 +3,7 @@
 
 
 "@types/jasmine@file:../../node_modules/@types/jasmine":
-  version "2.5.51"
+  version "2.5.53"
 
 balanced-match@^0.4.1:
   version "0.4.2"
@@ -59,7 +59,7 @@ jasmine-core@~2.6.0:
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.6.0.tgz#95e80740cc4d2c16741750e8b79e53c7ee15056a"
 
 "jasmine-spec-reporter@file:../../":
-  version "4.1.0"
+  version "4.1.1"
   dependencies:
     colors "1.1.2"
 
