@@ -9,7 +9,7 @@ addons:
 language: node_js
 cache: yarn
 node_js:
-  - '7'
+  - '8'
   - '6'
 script:
   -  yarn coverage:codecov && yarn test:integration
