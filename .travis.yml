@@ -9,6 +9,7 @@ addons:
 language: node_js
 cache: yarn
 node_js:
+  - '8'
   - '7'
   - '6'
 script:
