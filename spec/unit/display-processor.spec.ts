@@ -139,6 +139,50 @@ describe("spec reporter", () => {
             });
         });
 
+        describe("when suite done", () => {
+            it("should report errors in afterAll", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("passing spec", () => {
+                                env.passed();
+                            });
+                            env.afterAll(() => {
+                                throw new Error("throw in afterAll in suite");
+                            });
+                        });
+                    },
+                    outputs => {
+                        expect(outputs).contains(/throw in afterAll/);
+                        done();
+                    }
+                );
+            });
+        });
+
+        describe("when jasmine done", () => {
+            it("should report errors in afterAll", done => {
+                JasmineEnv.execute(
+                    this.reporter,
+                    env => {
+                        env.describe("suite", () => {
+                            env.it("passing spec", () => {
+                                env.passed();
+                            });
+                        });
+                        env.afterAll(() => {
+                            throw new Error("throw in afterAll");
+                        });
+                    },
+                    outputs => {
+                        expect(outputs).contains(/throw in afterAll/);
+                        done();
+                    }
+                );
+            });
+        });
+
         describe("when summary", () => {
             it("should display summary error messages", done => {
                 JasmineEnv.execute(

@@ -78,6 +78,11 @@ export class SpecReporter implements CustomReporter {
 
     public jasmineDone(runDetails: RunDetails): void {
         this.metrics.stop(runDetails);
+        if (runDetails.failedExpectations.length) {
+            const error = this.runDetailsToResult(runDetails);
+            this.metrics.globalErrors.push(error);
+            this.display.failed(error);
+        }
         this.summary.display(this.metrics);
     }
 
@@ -86,7 +91,10 @@ export class SpecReporter implements CustomReporter {
     }
 
     public suiteDone(result: CustomReporterResult): void {
-        this.display.suiteDone();
+        this.display.suiteDone(result);
+        if (result.failedExpectations.length) {
+            this.metrics.globalErrors.push(result);
+        }
     }
 
     public specStarted(result: CustomReporterResult): void {
@@ -107,4 +115,23 @@ export class SpecReporter implements CustomReporter {
             this.display.failed(result);
         }
     }
+
+    private runDetailsToResult(runDetails: RunDetails): CustomReporterResult {
+        return {
+            description: "Non-spec failure",
+            failedExpectations: runDetails.failedExpectations.map(expectation => {
+                return {
+                    actual: "",
+                    expected: "",
+                    matcherName: "",
+                    message: expectation.message,
+                    passed: false,
+                    stack: (expectation as any).stack,
+                };
+            }),
+            fullName: "Non-spec failure",
+            id: "Non-spec failure",
+        };
+    }
+
 }
