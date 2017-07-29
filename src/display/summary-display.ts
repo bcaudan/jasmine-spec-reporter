@@ -12,13 +12,15 @@ export class SummaryDisplay {
         const pluralizedSpec = (metrics.totalSpecsDefined === 1 ? " spec" : " specs");
         const execution = `Executed ${metrics.executedSpecs} of ${metrics.totalSpecsDefined}${pluralizedSpec}`;
         let status = "";
-        if (metrics.failedSpecs === 0) {
+        if (metrics.failedSpecs === 0 && metrics.globalErrors.length === 0) {
             status = (metrics.totalSpecsDefined === metrics.executedSpecs) ?
                 " SUCCESS".successful : " INCOMPLETE".pending;
         }
         const failed = (metrics.failedSpecs > 0) ? ` (${metrics.failedSpecs} FAILED)` : "";
         const pending = (metrics.pendingSpecs > 0) ? ` (${metrics.pendingSpecs} PENDING)` : "";
         const skipped = (metrics.skippedSpecs > 0) ? ` (${metrics.skippedSpecs} SKIPPED)` : "";
+        let errors = (metrics.globalErrors.length > 1) ? ` (${metrics.globalErrors.length} ERRORS)` : "";
+        errors = (metrics.globalErrors.length === 1) ? ` (${metrics.globalErrors.length} ERROR)` : errors;
         const duration = this.configuration.summary.displayDuration ? ` in ${metrics.duration}` : "";
 
         this.logger.resetIndent();
@@ -29,10 +31,14 @@ export class SummaryDisplay {
         if (this.configuration.summary.displayFailed && metrics.failedSpecs > 0) {
             this.failuresSummary();
         }
+        if (this.configuration.summary.displayFailed && metrics.globalErrors.length > 0) {
+            this.errorsSummary(metrics.globalErrors);
+        }
         if (this.configuration.summary.displayPending && metrics.pendingSpecs > 0) {
             this.pendingsSummary();
         }
-        this.logger.log(execution + status + failed.failed + pending.pending + skipped.pending + duration + ".");
+        this.logger.log(execution + status + errors.failed + failed.failed
+            + pending.pending + skipped.pending + duration + ".");
 
         if (metrics.random) {
             this.logger.log(`Randomized with seed ${metrics.seed}.`);
@@ -103,4 +109,30 @@ export class SummaryDisplay {
         this.logger.log(pendingReason.pending);
         this.logger.resetIndent();
     }
+
+    private errorsSummary(errors: CustomReporterResult[]): void {
+        this.logger.log("**************************************************");
+        this.logger.log("*                     Errors                     *");
+        this.logger.log("**************************************************");
+        this.logger.newLine();
+        for (let i = 0; i < errors.length; i++) {
+            this.errorSummary(errors[i], i + 1);
+            this.logger.newLine();
+        }
+        this.logger.newLine();
+        this.logger.resetIndent();
+    }
+
+    private errorSummary(error: CustomReporterResult, index: number): void {
+        this.logger.log(`${index}) ${error.fullName}`);
+        this.logger.increaseIndent();
+        this.logger.process(
+            error,
+            (displayProcessor: DisplayProcessor, object: CustomReporterResult, log: string) => {
+                return displayProcessor.displaySummaryErrorMessages(object, log);
+            }
+        );
+        this.logger.decreaseIndent();
+    }
+
 }

@@ -98,7 +98,10 @@ export class ExecutionDisplay {
         this.suiteHierarchy.push(result);
     }
 
-    public suiteDone(): void {
+    public suiteDone(result: CustomReporterResult): void {
+        if (result && result.failedExpectations && result.failedExpectations.length) {
+            this.failed(result);
+        }
         const suite: CustomReporterResult = this.suiteHierarchy.pop();
         if (this.suiteHierarchyDisplayed[this.suiteHierarchyDisplayed.length - 1] === suite) {
             this.suiteHierarchyDisplayed.pop();

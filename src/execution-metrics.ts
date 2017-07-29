@@ -14,6 +14,7 @@ export class ExecutionMetrics {
     public skippedSpecs = 0;
     public totalSpecsDefined = 0;
     public executedSpecs = 0;
+    public globalErrors: CustomReporterResult[] = [];
     public duration: string;
     public random = false;
     public seed: string;

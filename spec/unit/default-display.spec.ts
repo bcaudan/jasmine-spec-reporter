@@ -457,6 +457,49 @@ describe("with default display", () => {
             );
         });
 
+        it("should report ERRORS when afterAll in suite throws", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.it("spec", () => {
+                            env.passed();
+                        });
+                        env.afterAll(() => {
+                            throw new Error("afterAll threw");
+                        });
+                    });
+                },
+                (outputs, summary) => {
+                    expect(summary).toContain("Executed 1 of 1 spec (1 ERROR) in {time}.");
+                    done();
+                }
+            );
+        });
+
+        it("should report ERRORS when afterAll throws", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.it("spec", () => {
+                            env.passed();
+                        });
+                        env.afterAll(() => {
+                            throw new Error("afterAll in suite threw");
+                        });
+                    });
+                    env.afterAll(() => {
+                        throw new Error("afterAll threw");
+                    });
+                },
+                (outputs, summary) => {
+                    expect(summary).toContain("Executed 1 of 1 spec (2 ERRORS) in {time}.");
+                    done();
+                }
+            );
+        });
+
         it("should report skipped with failure and pending", done => {
             JasmineEnv.execute(
                 this.reporter,
