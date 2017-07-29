@@ -39,3 +39,7 @@ You can customize the output of the reporter yourself: [see how](docs/customize-
 * install dependencies: `yarn`
 * launch unit tests: `yarn test`
 * launch integration tests: `yarn test:integration`
+
+## Debugging
+
+Unit tests hijack `console.log` to verify output; use `console.warn` to debug.
