@@ -23,7 +23,7 @@ describe("With spec display stacktrace enabled", () => {
                     expect(outputs).contains([
                         "    ✗ failed spec",
                         "      - Expected true to be false.",
-                        /at Env\.env\.failed/, /at Object\.<anonymous>/,
+                        /at Env\.env\.failed/, /at UserContext\.<anonymous>/,
                         ""
                     ]);
                     done();
@@ -120,11 +120,11 @@ describe("With summary display stacktrace enabled", () => {
                         "",
                         "1) suite 1 spec 1",
                         "  - Expected true to be false.",
-                        /at Object\.<anonymous>/,
+                        /at UserContext\.<anonymous>/,
                         "",
                         "2) suite 1 suite 2 spec 2",
                         "  - Expected 2 to be 1.",
-                        /at Object\.<anonymous>/,
+                        /at UserContext\.<anonymous>/,
                         ""
                     ]);
                     done();
