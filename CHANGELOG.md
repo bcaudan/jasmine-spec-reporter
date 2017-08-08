@@ -1,3 +1,9 @@
+# 4.2.0
+
+## Feature
+
+* Support reporting errors in afterAll [#210](https://github.com/bcaudan/jasmine-spec-reporter/issues/210), [#214](https://github.com/bcaudan/jasmine-spec-reporter/issues/214)
+
 # 4.1.1
 
 ## Bugfix
@@ -8,7 +14,7 @@
 
 ## Feature
 
-* If any defined spec is not executed, report INCOMPLETE rather than SUCCESS [#142](https://github.com/bcaudan/jasmine-spec-reporter/issues/142), [#145](https://github.com/bcaudan/jasmine-spec-reporter/issues/145) 
+* If any defined spec is not executed, report INCOMPLETE rather than SUCCESS [#142](https://github.com/bcaudan/jasmine-spec-reporter/issues/142), [#145](https://github.com/bcaudan/jasmine-spec-reporter/issues/145)
 
 ## Other
 
@@ -34,7 +40,7 @@ Now:
 
 # 3.3.0
 
-* Add low-level print configuration option [#129](https://github.com/bcaudan/jasmine-spec-reporter/issues/129), [#130](https://github.com/bcaudan/jasmine-spec-reporter/issues/130)  
+* Add low-level print configuration option [#129](https://github.com/bcaudan/jasmine-spec-reporter/issues/129), [#130](https://github.com/bcaudan/jasmine-spec-reporter/issues/130)
 
 # 3.2.0
 
@@ -78,11 +84,11 @@ Now:
 
 # 2.7.0
 
-* Add successes summary. [#49](https://github.com/bcaudan/jasmine-spec-reporter/issues/49) 
+* Add successes summary. [#49](https://github.com/bcaudan/jasmine-spec-reporter/issues/49)
 
 # 2.6.0
 
-* Display seed used if specs are randomized. [#55](https://github.com/bcaudan/jasmine-spec-reporter/issues/55) 
+* Display seed used if specs are randomized. [#55](https://github.com/bcaudan/jasmine-spec-reporter/issues/55)
 
 # 2.5.0
 
@@ -129,12 +135,12 @@ Ensure that colors are always enabled. [#36](https://github.com/bcaudan/jasmine-
 ## Feature
 
 * **stacktrace**: `displayStacktrace` option has now 4 modes available [#26](https://github.com/bcaudan/jasmine-spec-reporter/issues/26):
-    * all: display stacktraces for failed specs and in failures summary.  
+    * all: display stacktraces for failed specs and in failures summary.
     * specs: display stacktraces for failed specs only.
-    * summary: display stacktraces in failures summary only. 
+    * summary: display stacktraces in failures summary only.
     * none: do not display stacktraces.
 
-* **processor**: 
+* **processor**:
     * add `displayJasmineStarted` hook
     * add `displaySpecStarted` hook [#23](https://github.com/bcaudan/jasmine-spec-reporter/issues/23)
 
@@ -145,7 +151,7 @@ Ensure that colors are always enabled. [#36](https://github.com/bcaudan/jasmine-
 ## Other
 
 * Bump dependencies versions
-* Rework documentation 
+* Rework documentation
 
 # 2.1.0
 
@@ -168,9 +174,9 @@ Add support for jasmine 2.x [#10](https://github.com/bcaudan/jasmine-spec-report
 ## Feature
 
 * **stacktrace**: `displayStacktrace` option has now 4 modes available:
-    * all: display stacktraces for failed specs and in failures summary.  
+    * all: display stacktraces for failed specs and in failures summary.
     * specs: display stacktraces for failed specs only.
-    * summary: display stacktraces in failures summary only. 
+    * summary: display stacktraces in failures summary only.
     * none: do not display stacktraces.
 
 * **processor**: add `displayJasmineStarted` hook
