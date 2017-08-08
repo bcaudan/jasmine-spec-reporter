@@ -78,7 +78,7 @@ export class SpecReporter implements CustomReporter {
 
     public jasmineDone(runDetails: RunDetails): void {
         this.metrics.stop(runDetails);
-        if (runDetails.failedExpectations.length) {
+        if (runDetails.failedExpectations && runDetails.failedExpectations.length) {
             const error = this.runDetailsToResult(runDetails);
             this.metrics.globalErrors.push(error);
             this.display.failed(error);
