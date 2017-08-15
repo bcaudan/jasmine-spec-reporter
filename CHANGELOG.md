@@ -1,3 +1,9 @@
+# 4.2.1
+
+## Bugfix
+
+* Restore compatibility with jasmine < 2.5.0 [#222](https://github.com/bcaudan/jasmine-spec-reporter/pull/222), [#223](https://github.com/bcaudan/jasmine-spec-reporter/pull/223)
+
 # 4.2.0
 
 ## Feature
