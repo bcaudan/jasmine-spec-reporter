@@ -53,7 +53,7 @@
     "codecov": "2.3.0",
     "diff": "3.3.0",
     "jasmine": "2.7.0",
-    "jasmine-core": "2.7.0",
+    "jasmine-core": "2.8.0",
     "nyc": "11.1.0",
     "protractor": "5.1.2",
     "tslint": "5.6.0",
