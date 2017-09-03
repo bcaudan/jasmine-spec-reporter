@@ -51,7 +51,7 @@
     "@types/jasmine": "2.5.53",
     "@types/node": "8.0.25",
     "codecov": "2.3.0",
-    "diff": "3.3.0",
+    "diff": "3.3.1",
     "jasmine": "2.7.0",
     "jasmine-core": "2.7.0",
     "nyc": "11.1.0",
