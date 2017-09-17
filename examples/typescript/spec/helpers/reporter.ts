@@ -1,9 +1,3 @@
-Use jasmine-spec-reporter with TypeScript
-=========================================
-
-## Configuration
-
-```typescript
 import {DisplayProcessor, SpecReporter} from "jasmine-spec-reporter";
 import SuiteInfo = jasmine.SuiteInfo;
 
@@ -17,11 +11,3 @@ jasmine.getEnv().clearReporters();
 jasmine.getEnv().addReporter(new SpecReporter({
     customProcessors: [CustomProcessor],
 }));
-```
-
-## Example
-
-You can find an example in this directory:
-
-    npm install
-    npm test
