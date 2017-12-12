@@ -1318,9 +1318,9 @@ process-nextick-args@~1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
 
-protractor@5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/protractor/-/protractor-5.2.1.tgz#b4e4b6145c71f94e617b006ee353e05651eab88d"
+protractor@5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/protractor/-/protractor-5.2.2.tgz#80eff170761455eff6e2f111088a03c438844a41"
   dependencies:
     "@types/node" "^6.0.46"
     "@types/q" "^0.0.32"
