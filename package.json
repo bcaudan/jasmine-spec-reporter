@@ -52,7 +52,7 @@
     "@types/node": "8.5.8",
     "codecov": "3.0.0",
     "diff": "3.4.0",
-    "jasmine": "2.8.0",
+    "jasmine": "2.9.0",
     "jasmine-core": "2.8.0",
     "nyc": "11.4.1",
     "protractor": "5.2.2",
