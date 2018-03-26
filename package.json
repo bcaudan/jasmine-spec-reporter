@@ -54,7 +54,7 @@
     "diff": "3.5.0",
     "jasmine": "2.8.0",
     "jasmine-core": "2.99.0",
-    "nyc": "11.4.1",
+    "nyc": "^11.6.0",
     "protractor": "5.3.0",
     "tslint": "5.7.0",
     "tslint-eslint-rules": "5.0.0",
