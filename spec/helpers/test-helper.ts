@@ -83,6 +83,7 @@ const JasmineEnv = {
     },
     run(reporter, testFn, assertionsFn, options, outputs, summary) {
         const env = new global.jasmineUnderTest.Env();
+        env.randomizeTests(false);
         env.passed = () => {
             env.expect(true).toBe(true);
         };
