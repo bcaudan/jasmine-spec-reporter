@@ -25,36 +25,34 @@ declare namespace jasmine {
 }
 
 let addMatchers = () => {
-    beforeEach(() => {
-        jasmine.addMatchers({
-            contains: () => {
-                return {
-                    compare: (actual, sequence) => {
-                        let i;
-                        let j;
-                        if (!typeIsArray(sequence)) {
-                            sequence = [sequence];
+    jasmine.addMatchers({
+        contains: () => {
+            return {
+                compare: (actual, sequence) => {
+                    let i;
+                    let j;
+                    if (!typeIsArray(sequence)) {
+                        sequence = [sequence];
+                    }
+                    i = 0;
+                    while (i < actual.length - sequence.length + 1) {
+                        j = 0;
+                        while (j < sequence.length && equalOrMatch(actual[i + j], sequence[j])) {
+                            j++;
                         }
-                        i = 0;
-                        while (i < actual.length - sequence.length + 1) {
-                            j = 0;
-                            while (j < sequence.length && equalOrMatch(actual[i + j], sequence[j])) {
-                                j++;
-                            }
-                            if (j === sequence.length) {
-                                return {
-                                    pass: true,
-                                };
-                            }
-                            i++;
+                        if (j === sequence.length) {
+                            return {
+                                pass: true,
+                            };
                         }
-                        return {
-                            pass: false,
-                        };
-                    },
-                };
-            },
-        });
+                        i++;
+                    }
+                    return {
+                        pass: false,
+                    };
+                },
+            };
+        },
     });
 };
 
@@ -84,7 +82,7 @@ const JasmineEnv = {
         return {outputs, summary};
     },
     run(reporter, testFn, assertionsFn, options, outputs, summary) {
-        const env = new global.j$.Env();
+        const env = new global.jasmineUnderTest.Env();
         env.passed = () => {
             env.expect(true).toBe(true);
         };
