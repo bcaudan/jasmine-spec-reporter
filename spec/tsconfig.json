@@ -4,6 +4,7 @@
     "target": "es5"
   },
   "include": [
-    "./**/*.ts"
+    "./**/*.ts",
+    "../node_modules/colors/**/*.ts"
   ]
 }
