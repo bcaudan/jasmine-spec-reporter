@@ -319,7 +319,11 @@ codecov@3.0.0:
     request "2.81.0"
     urlgrey "0.4.4"
 
-colors@1.1.2, colors@^1.1.2:
+colors@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.2.1.tgz#f4a3d302976aaf042356ba1ade3b1a2c62d9d794"
+
+colors@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
 
