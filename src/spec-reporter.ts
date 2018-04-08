@@ -1,5 +1,5 @@
 import {Configuration} from "./configuration";
-import {ConfigurationParser} from "./configuration-parser";
+import * as ConfigurationParser from "./configuration-parser";
 import {DisplayProcessor} from "./display-processor";
 import {ExecutionDisplay} from "./display/execution-display";
 import {Logger} from "./display/logger";
