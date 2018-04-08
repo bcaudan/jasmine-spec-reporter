@@ -1,6 +1,4 @@
 let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
-// https://github.com/angular/protractor/issues/1451
-require('protractor/built/logger').Logger.logLevel = 1;
 
 exports.config = {
   framework: 'jasmine2',
@@ -20,6 +18,7 @@ exports.config = {
       args: ['--test-type']
     }
   },
+  logLevel: 'WARN',
   onPrepare: function () {
     jasmine.getEnv().addReporter(new SpecReporter({
       spec: {
