@@ -1,12 +1,11 @@
 import {Configuration} from "./configuration";
 
-export class ConfigurationParser {
-    public static parse(conf?: Configuration): Configuration {
-        return ConfigurationParser.merge(ConfigurationParser.defaultConfiguration, conf);
-    }
+export function parse(conf?: Configuration): Configuration {
+    return merge(defaultConfiguration, conf);
+}
 
-    private static isWindows: boolean = process && process.platform === "win32";
-    private static defaultConfiguration: Configuration = {
+const isWindows: boolean = process && process.platform === "win32";
+const defaultConfiguration: Configuration = {
         colors: {
             enabled: true,
             failed: "red",
@@ -15,9 +14,9 @@ export class ConfigurationParser {
         },
         customProcessors: [],
         prefixes: {
-            failed: ConfigurationParser.isWindows ? "\u00D7 " : "✗ ",
+            failed: isWindows ? "\u00D7 " : "✗ ",
             pending: "* ",
-            successful: ConfigurationParser.isWindows ? "\u221A " : "✓ ",
+            successful: isWindows ? "\u221A " : "✓ ",
         },
         print: stuff => console.log(stuff),
         spec: {
@@ -53,27 +52,26 @@ export class ConfigurationParser {
         },
     };
 
-    private static merge(template: any, override: any): Configuration {
-        const result: any = {};
-        for (const key in template) {
-            if (template[key] instanceof Object
-                && !(template[key] instanceof Array)
-                && !(template[key] instanceof Function)
-                && override instanceof Object
-                && override[key] instanceof Object
-                && !(override[key] instanceof Array)
-                && !(override[key] instanceof Function)) {
-                result[key] = ConfigurationParser.merge(template[key], override[key]);
-            } else if (override instanceof Object
-                && Object.keys(override).indexOf(key) !== -1) {
-                result[key] = override[key];
-            } else {
-                result[key] = template[key];
-            }
+function merge(template: any, override: any): Configuration {
+    const result: any = {};
+    for (const key in template) {
+        if (template[key] instanceof Object
+            && !(template[key] instanceof Array)
+            && !(template[key] instanceof Function)
+            && override instanceof Object
+            && override[key] instanceof Object
+            && !(override[key] instanceof Array)
+            && !(override[key] instanceof Function)) {
+            result[key] = merge(template[key], override[key]);
+        } else if (override instanceof Object
+            && Object.keys(override).indexOf(key) !== -1) {
+            result[key] = override[key];
+        } else {
+            result[key] = template[key];
         }
-        if (override instanceof Object && override.customOptions) {
-            result.customOptions = override.customOptions;
-        }
-        return result;
     }
+    if (override instanceof Object && override.customOptions) {
+        result.customOptions = override.customOptions;
+    }
+    return result;
 }

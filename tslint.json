@@ -48,6 +48,7 @@
         ]
     },
     "rules": {
+        "no-unnecessary-class": true,
         "no-implicit-dependencies": [true, "dev"],
         "no-unbound-method": true,
         "prefer-conditional-expression": false,

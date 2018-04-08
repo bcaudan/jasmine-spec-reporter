@@ -1,4 +1,4 @@
-import {ConfigurationParser} from "../../built/configuration-parser";
+import * as ConfigurationParser from "../../built/configuration-parser";
 import {TestProcessor} from "../helpers/test-processor";
 
 describe("Configuration parser", () => {

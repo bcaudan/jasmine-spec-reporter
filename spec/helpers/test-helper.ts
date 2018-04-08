@@ -58,13 +58,12 @@ let addMatchers = () => {
     });
 };
 
-class JasmineEnv {
-    public static execute(reporter, testFn, assertionsFn, options: {withColor?: boolean, random?: boolean} = {}) {
+const JasmineEnv = {
+    execute(reporter, testFn, assertionsFn, options: {withColor?: boolean, random?: boolean} = {}) {
         const {outputs, summary} = JasmineEnv.init(options);
         JasmineEnv.run(reporter, testFn, assertionsFn, options, outputs, summary);
-    }
-
-    public static init(options) {
+    },
+    init(options) {
         let logInSummary;
         const outputs = [];
         const summary = [];
@@ -83,9 +82,8 @@ class JasmineEnv {
             }
         };
         return {outputs, summary};
-    }
-
-    public static run(reporter, testFn, assertionsFn, options, outputs, summary) {
+    },
+    run(reporter, testFn, assertionsFn, options, outputs, summary) {
         const env = new global.j$.Env();
         env.passed = () => {
             env.expect(true).toBe(true);
@@ -105,7 +103,7 @@ class JasmineEnv {
         }
         env.execute();
     }
-}
+};
 
 declare namespace NodeJS {
     export interface Global {

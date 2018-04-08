@@ -1,7 +1,7 @@
 import {Configuration} from "../configuration";
 import {DisplayProcessor} from "../display-processor";
 import {CustomReporterResult, ExecutedSpecs} from "../spec-reporter";
-import {ColorsDisplay} from "./colors-display";
+import * as ColorsDisplay from "./colors-display";
 import {Logger} from "./logger";
 
 import SuiteInfo = jasmine.SuiteInfo;
