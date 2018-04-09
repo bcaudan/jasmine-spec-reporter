@@ -31,14 +31,13 @@ You can customize the output of the reporter yourself: [see how](docs/customize-
 
 ## Requirements
 
-* node >= 6.9
-* yarn
+* npm >= 5
 
 ## Commands
 
-* install dependencies: `yarn`
-* launch unit tests: `yarn test`
-* launch integration tests: `yarn test:integration`
+* install dependencies: `npm install`
+* launch unit tests: `npm test`
+* launch integration tests: `npm run test:integration`
 
 ## Debugging
 
