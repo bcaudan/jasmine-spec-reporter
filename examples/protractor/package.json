@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "a protractor example",
   "scripts": {
-    "install-local-jsr": "rm -rf node_modules/jasmine-spec-reporter && npm install jasmine-spec-reporter",
-    "postinstall": "yarn install-local-jsr && webdriver-manager update --gecko false",
+    "postinstall": "webdriver-manager update --gecko false",
     "test": "protractor protractor.conf.js"
   },
   "author": "Bastien Caudan",
