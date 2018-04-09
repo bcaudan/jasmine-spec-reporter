@@ -8,7 +8,7 @@
     "prepare": "tsc",
     "pretest": "tsc && tsc -p spec/tsconfig.json",
     "test": "jasmine",
-    "test:integration": "npm run pretest && npm run examples:update && jasmine JASMINE_CONFIG_PATH=spec/support/jasmine-integration.json",
+    "test:integration": "npm run pretest && npm run examples:update && jasmine --config=spec/support/jasmine-integration.json",
     "posttest": "npm run lint",
     "lint": "tslint -c tslint.json --project tsconfig.json && tslint -c tslint.json --project spec/tsconfig.json",
     "examples:update": "npm run examples:update:node && npm run examples:update:protractor && npm run examples:update:typescript",
