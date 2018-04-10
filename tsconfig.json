@@ -10,10 +10,5 @@
     "noUnusedLocals": true,
     "outDir": "built"
   },
-  "exclude": [
-    "built",
-    "node_modules",
-    "examples",
-    "spec"
-  ]
+  "exclude": ["built", "node_modules", "examples", "spec"]
 }

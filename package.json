@@ -1,42 +1,41 @@
 {
   "name": "jasmine-spec-reporter",
   "version": "4.2.1",
-  "description": "Spec reporter for jasmine behavior-driven development framework",
+  "description":
+    "Spec reporter for jasmine behavior-driven development framework",
   "main": "built/main.js",
   "types": "built/main.d.ts",
   "scripts": {
     "prepare": "tsc",
     "pretest": "tsc && tsc -p spec/tsconfig.json",
     "test": "jasmine",
-    "test:integration": "npm run pretest && npm run examples:update && jasmine --config=spec/support/jasmine-integration.json",
+    "test:integration":
+      "npm run pretest && npm run examples:update && jasmine --config=spec/support/jasmine-integration.json",
     "posttest": "npm run lint",
-    "lint": "tslint -c tslint.json --project tsconfig.json && tslint -c tslint.json --project spec/tsconfig.json",
-    "examples:update": "npm run examples:update:node && npm run examples:update:protractor && npm run examples:update:typescript",
+    "lint":
+      "tslint -c tslint.json --project tsconfig.json && tslint -c tslint.json --project spec/tsconfig.json",
+    "examples:update":
+      "npm run examples:update:node && npm run examples:update:protractor && npm run examples:update:typescript",
     "examples:update:node": "cd examples/node && npm install --no-package-lock",
-    "examples:update:protractor": "cd examples/protractor && npm install --no-package-lock",
-    "examples:update:typescript": "cd examples/typescript && npm install --no-package-lock",
+    "examples:update:protractor":
+      "cd examples/protractor && npm install --no-package-lock",
+    "examples:update:typescript":
+      "cd examples/typescript && npm install --no-package-lock",
     "examples:test:node": "cd examples/node && npm test",
     "examples:test:protractor": "cd examples/protractor && npm test",
     "examples:test:typescript": "cd examples/typescript && npm test",
     "coverage": "nyc npm test",
-    "coverage:codecov": "npm run coverage && nyc report --reporter=json && codecov -f coverage/*.json"
+    "coverage:codecov":
+      "npm run coverage && nyc report --reporter=json && codecov -f coverage/*.json"
   },
   "nyc": {
-    "exclude": [
-      "spec"
-    ]
+    "exclude": ["spec"]
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/bcaudan/jasmine-spec-reporter"
   },
-  "keywords": [
-    "jasmine",
-    "reporter",
-    "bdd",
-    "spec",
-    "protractor"
-  ],
+  "keywords": ["jasmine", "reporter", "bdd", "spec", "protractor"],
   "author": "Bastien Caudan",
   "license": "Apache-2.0",
   "bugs": {

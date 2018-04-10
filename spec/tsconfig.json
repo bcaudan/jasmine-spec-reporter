@@ -3,8 +3,5 @@
     "module": "CommonJS",
     "target": "es5"
   },
-  "include": [
-    "./**/*.ts",
-    "../node_modules/colors/**/*.ts"
-  ]
+  "include": ["./**/*.ts", "../node_modules/colors/**/*.ts"]
 }
