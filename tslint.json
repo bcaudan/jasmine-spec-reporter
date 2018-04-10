@@ -1,7 +1,8 @@
 {
     "extends": [
         "tslint:latest",
-        "tslint-eslint-rules"
+        "tslint-eslint-rules",
+        "tslint-config-prettier"
     ],
     "jsRules": {
         "class-name": true,
