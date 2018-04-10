@@ -1,5 +1,4 @@
-Examples
-========
+# Examples
 
 To launch one of this examples:
 

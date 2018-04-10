@@ -1,5 +1,5 @@
-Use jasmine-spec-reporter with Node
-===================================
+# Use jasmine-spec-reporter with Node
+
 The `jasmine-spec-reporter` can be used to enhance your
 [jasmine node](https://github.com/jasmine/jasmine-npm) tests execution report.
 
@@ -8,14 +8,17 @@ The `jasmine-spec-reporter` can be used to enhance your
 Create a `spec/helpers/reporter.js` file with the following content:
 
 ```javascript
-const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
+const SpecReporter = require("jasmine-spec-reporter").SpecReporter;
 
-jasmine.getEnv().clearReporters();               // remove default reporter logs
-jasmine.getEnv().addReporter(new SpecReporter({  // add jasmine-spec-reporter
-  spec: {
-    displayPending: true
-  }
-}));
+jasmine.getEnv().clearReporters(); // remove default reporter logs
+jasmine.getEnv().addReporter(
+  new SpecReporter({
+    // add jasmine-spec-reporter
+    spec: {
+      displayPending: true
+    }
+  })
+);
 ```
 
 Then run your tests!

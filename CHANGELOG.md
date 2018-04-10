@@ -141,14 +141,15 @@ Ensure that colors are always enabled. [#36](https://github.com/bcaudan/jasmine-
 ## Feature
 
 * **stacktrace**: `displayStacktrace` option has now 4 modes available [#26](https://github.com/bcaudan/jasmine-spec-reporter/issues/26):
-    * all: display stacktraces for failed specs and in failures summary.
-    * specs: display stacktraces for failed specs only.
-    * summary: display stacktraces in failures summary only.
-    * none: do not display stacktraces.
+
+  * all: display stacktraces for failed specs and in failures summary.
+  * specs: display stacktraces for failed specs only.
+  * summary: display stacktraces in failures summary only.
+  * none: do not display stacktraces.
 
 * **processor**:
-    * add `displayJasmineStarted` hook
-    * add `displaySpecStarted` hook [#23](https://github.com/bcaudan/jasmine-spec-reporter/issues/23)
+  * add `displayJasmineStarted` hook
+  * add `displaySpecStarted` hook [#23](https://github.com/bcaudan/jasmine-spec-reporter/issues/23)
 
 ## Breaking change
 
@@ -171,19 +172,20 @@ Add support for jasmine 2.x [#10](https://github.com/bcaudan/jasmine-spec-report
 
 ## Breaking change
 
-- Jasmine 1.x is not supported by this version
+* Jasmine 1.x is not supported by this version
 
-- Skipped specs are not displayable in favour of pending specs.
+* Skipped specs are not displayable in favour of pending specs.
 
 # 1.2.0
 
 ## Feature
 
 * **stacktrace**: `displayStacktrace` option has now 4 modes available:
-    * all: display stacktraces for failed specs and in failures summary.
-    * specs: display stacktraces for failed specs only.
-    * summary: display stacktraces in failures summary only.
-    * none: do not display stacktraces.
+
+  * all: display stacktraces for failed specs and in failures summary.
+  * specs: display stacktraces for failed specs only.
+  * summary: display stacktraces in failures summary only.
+  * none: do not display stacktraces.
 
 * **processor**: add `displayJasmineStarted` hook
 
@@ -220,9 +222,9 @@ Jasmine spec reporter is no more added to the jasmine object. So, make sure to u
 
 # 0.6.0
 
-- Add option to configure spec prefixes [#14](https://github.com/bcaudan/jasmine-spec-reporter/issues/14)
+* Add option to configure spec prefixes [#14](https://github.com/bcaudan/jasmine-spec-reporter/issues/14)
 
-- Filter jasmine stacktrace [#12](https://github.com/bcaudan/jasmine-spec-reporter/issues/12)
+* Filter jasmine stacktrace [#12](https://github.com/bcaudan/jasmine-spec-reporter/issues/12)
 
 # 0.5.0
 
@@ -230,11 +232,11 @@ Display failures summary [#13](https://github.com/bcaudan/jasmine-spec-reporter/
 
 # 0.4.0
 
-- Add option to disable colors [#4](https://github.com/bcaudan/jasmine-spec-reporter/issues/4)
+* Add option to disable colors [#4](https://github.com/bcaudan/jasmine-spec-reporter/issues/4)
 
-- Add option to overwrite color theme [#5](https://github.com/bcaudan/jasmine-spec-reporter/issues/5)
+* Add option to overwrite color theme [#5](https://github.com/bcaudan/jasmine-spec-reporter/issues/5)
 
-- Add option to include skipped specs [#2](https://github.com/bcaudan/jasmine-spec-reporter/issues/2)
+* Add option to include skipped specs [#2](https://github.com/bcaudan/jasmine-spec-reporter/issues/2)
 
 # 0.3.3
 

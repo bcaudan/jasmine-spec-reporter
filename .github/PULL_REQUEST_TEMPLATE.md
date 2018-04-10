@@ -8,10 +8,9 @@ Please fill in this template, delete this intro and any unrelated text :smile:
 
 Check with "x":
 
-- [ ] Tests for the changes have been added (for bug fixes / features)
-- [ ] Docs have been added / updated (for bug fixes / features)
+* [ ] Tests for the changes have been added (for bug fixes / features)
+* [ ] Docs have been added / updated (for bug fixes / features)
 
 **What is the current behavior?**
 
 **What is the new behavior?**
-

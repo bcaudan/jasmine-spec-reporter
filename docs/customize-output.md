@@ -1,5 +1,4 @@
-Output customization
-====================
+# Output customization
 
 If you want to add extra information to the reporter output, you can build your own display processor and add it to options in the customProcessors array.
 
@@ -15,7 +14,6 @@ Let's say that you want to add the current time before each output of the report
           - Expected true to be false.
         10:40:35 - ✓ should be ok
 
-
 ## Build your display processor
 
 You need to require the display processor:
@@ -25,6 +23,7 @@ var DisplayProcessor = require('jasmine-spec-reporter').DisplayProcessor;
 ```
 
 You can then customize the following methods:
+
 * displayJasmineStarted(runner, log)
 * displaySuite(suite, log)
 * displaySpecStarted(spec, log)
