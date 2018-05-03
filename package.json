@@ -47,7 +47,7 @@
     "colors": "1.2.1"
   },
   "devDependencies": {
-    "@types/jasmine": "2.8.6",
+    "@types/jasmine": "2.8.7",
     "@types/node": "9.6.6",
     "codecov": "3.0.1",
     "diff": "3.5.0",
