@@ -3,6 +3,7 @@
     "pretty": true,
     "module": "CommonJS",
     "target": "es5",
+    "lib": ["es6"],
     "noImplicitAny": true,
     "noImplicitReturns": true
   }

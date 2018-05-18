@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "es5"
+    "target": "es5",
+    "lib": ["es6"],
+    "pretty": true
   },
   "include": [
     "./**/*.ts",
