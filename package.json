@@ -57,6 +57,6 @@
     "protractor": "5.4.0",
     "tslint": "5.11.0",
     "tslint-eslint-rules": "5.4.0",
-    "typescript": "2.8.1"
+    "typescript": "3.0.1"
   }
 }
