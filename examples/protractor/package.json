@@ -9,7 +9,10 @@
   "author": "Bastien Caudan",
   "license": "Apache-2.0",
   "dependencies": {
-    "jasmine-spec-reporter": "file:../../",
-    "protractor": "file:../../node_modules/protractor"
+    "jasmine-spec-reporter": "file:../../"
+  },
+  "devDependencies": {
+    "protractor": "^5.4.2",
+    "webdriver-manager": "^12.1.5"
   }
 }
