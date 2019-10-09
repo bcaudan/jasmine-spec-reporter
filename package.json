@@ -45,7 +45,7 @@
   "homepage": "https://github.com/bcaudan/jasmine-spec-reporter",
   "dependencies": {},
   "devDependencies": {
-    "@types/jasmine": "3.4.2",
+    "@types/jasmine": "3.4.3",
     "@types/node": "12.7.4",
     "codecov": "3.6.1",
     "colors": "1.4.0",
