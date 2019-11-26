@@ -50,7 +50,7 @@
     "codecov": "3.6.1",
     "colors": "1.4.0",
     "diff": "4.0.1",
-    "jasmine": "3.4.0",
+    "jasmine": "3.5.0",
     "jasmine-core": "3.5.0",
     "nyc": "14.1.1",
     "protractor": "5.4.2",
