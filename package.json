@@ -46,7 +46,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/jasmine": "3.5.0",
-    "@types/node": "12.12.19",
+    "@types/node": "12.12.20",
     "codecov": "3.6.1",
     "colors": "1.4.0",
     "diff": "4.0.1",
