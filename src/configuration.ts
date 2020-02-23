@@ -120,7 +120,7 @@ export class Configuration {
      * list of display processor to customize output
      * see https://github.com/bcaudan/jasmine-spec-reporter/blob/master/docs/customize-output.md
      */
-    public customProcessors?: Array<typeof DisplayProcessor>;
+    public customProcessors?: (typeof DisplayProcessor)[];
     /**
      * options for custom processors
      */
