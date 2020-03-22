@@ -1,3 +1,13 @@
+# 5.0.0
+
+## Feature
+
+* New option to display pretty stacktraces [#467](https://github.com/bcaudan/jasmine-spec-reporter/pull/467)
+
+## Breaking change
+
+`displayStacktrace` options now take a value among `none`, `raw` and `pretty`.
+
 # 4.2.1
 
 ## Bugfix
