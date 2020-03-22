@@ -11,6 +11,10 @@ const defaultConfiguration: Configuration = {
             failed: "red",
             pending: "yellow",
             successful: "green",
+            prettyStacktraceFilename: "cyan",
+            prettyStacktraceLineNumber: "yellow",
+            prettyStacktraceColumnNumber: "yellow",
+            prettyStacktraceError: "red",
         },
         customProcessors: [],
         prefixes: {

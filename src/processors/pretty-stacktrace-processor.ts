@@ -33,14 +33,14 @@ export class PrettyStacktraceProcessor extends DisplayProcessor {
         const stackRegExp = new RegExp(STACK_REG_EXP);
         filteredStack.split("\n").forEach(stackLine => {
             if (stackRegExp.test(stackLine)) {
-                const [, filename, lineNb, columnNb] = stackLine.match(stackRegExp);
+                const [, filename, lineNumber, columnNumber] = stackLine.match(stackRegExp);
                 const errorContext = this.retrieveErrorContext(
                     filename,
-                    parseInt(lineNb, 10),
-                    parseInt(columnNb, 10)
+                    parseInt(lineNumber, 10),
+                    parseInt(columnNumber, 10)
                 );
 
-                logs.push(`${filename.cyan}:${lineNb.yellow}:${columnNb.yellow}`);
+                logs.push(`${filename.prettyStacktraceFilename}:${lineNumber.prettyStacktraceLineNumber}:${columnNumber.prettyStacktraceColumnNumber}`);
                 logs.push(errorContext);
             }
         });

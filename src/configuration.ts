@@ -99,6 +99,26 @@ export class Configuration {
          * color for pending spec
          */
         pending?: string
+
+        /**
+         * color for pretty stacktrace filename
+         */
+        prettyStacktraceFilename?: string
+
+        /**
+         * color for pretty stacktrace line number
+         */
+        prettyStacktraceLineNumber?: string
+
+        /**
+         * color for pretty stacktrace column number
+         */
+        prettyStacktraceColumnNumber?: string
+
+        /**
+         * color for pretty stacktrace error
+         */
+        prettyStacktraceError?: string
     };
     public prefixes?: {
         /**
