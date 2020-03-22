@@ -6,7 +6,7 @@ import {CustomReporterResult} from "../spec-reporter";
 const STACK_REG_EXP = /\((.*):(\d+):(\d+)\)/;
 const CONTEXT = 2;
 
-export class PrettyErrorsProcessor extends DisplayProcessor {
+export class PrettyStacktraceProcessor extends DisplayProcessor {
 
     public displaySpecErrorMessages(spec: CustomReporterResult, log: string): string {
         return this.configuration.spec.displayStacktrace === StacktraceOption.PRETTY ? this.displayErrorMessages(spec) : log;

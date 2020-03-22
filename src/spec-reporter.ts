@@ -6,7 +6,7 @@ import {Logger} from "./display/logger";
 import {SummaryDisplay} from "./display/summary-display";
 import {ExecutionMetrics} from "./execution-metrics";
 import {DefaultProcessor} from "./processors/default-processor";
-import {PrettyErrorsProcessor} from "./processors/pretty-errors-processor";
+import {PrettyStacktraceProcessor} from "./processors/pretty-stacktrace-processor";
 import {SpecColorsProcessor} from "./processors/spec-colors-processor";
 import {SpecDurationsProcessor} from "./processors/spec-durations-processor";
 import {SpecPrefixesProcessor} from "./processors/spec-prefixes-processor";
@@ -32,7 +32,7 @@ export class SpecReporter implements CustomReporter {
             new DefaultProcessor(configuration),
             new SpecPrefixesProcessor(configuration),
             new SpecColorsProcessor(configuration),
-            new PrettyErrorsProcessor(configuration)
+            new PrettyStacktraceProcessor(configuration)
         ];
 
         if (configuration.spec.displayDuration) {
