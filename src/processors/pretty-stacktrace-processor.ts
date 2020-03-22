@@ -41,10 +41,10 @@ export class PrettyStacktraceProcessor extends DisplayProcessor {
                 );
 
                 logs.push(`${filename.prettyStacktraceFilename}:${lineNumber.prettyStacktraceLineNumber}:${columnNumber.prettyStacktraceColumnNumber}`);
-                logs.push(errorContext);
+                logs.push(`${errorContext}\n`);
             }
         });
-        return `\n${logs.join("\n")}\n`;
+        return `\n${logs.join("\n")}`;
     }
 
     private retrieveErrorContext(filename: string, lineNb: number, columnNb: number) {

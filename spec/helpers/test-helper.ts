@@ -49,6 +49,7 @@ let addMatchers = () => {
                     }
                     return {
                         pass: false,
+                        message: `Expect\n${actual.join("\n")}\nto contains\n${sequence.join("\n")}`
                     };
                 },
             };
@@ -89,6 +90,18 @@ const JasmineEnv = {
         };
         env.failed = () => {
             env.expect(true).toBe(false);
+        };
+        env.failedWithFakeStack = () => {
+            env.addMatchers({
+                throw: () => {
+                    return {
+                        compare: () => {
+                            throw new Error("oops");
+                        }
+                    };
+                }
+            });
+            env.expect().throw();
         };
         testFn(env);
         env.addReporter(reporter);

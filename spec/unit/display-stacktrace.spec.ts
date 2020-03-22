@@ -1,14 +1,14 @@
-describe("With spec display stacktrace enabled", () => {
+describe("With spec display stacktrace 'raw' enabled", () => {
     beforeEach(() => {
         this.reporter = new global.SpecReporter({
             spec: {
-                displayStacktrace: true
+                displayStacktrace: "raw"
             }
         });
     });
 
     describe("when failed spec", () => {
-        it("should display with error messages with stacktraces", done => {
+        it("should display with error messages with raw stacktraces", done => {
             JasmineEnv.execute(
                 this.reporter,
                 env => {
@@ -36,7 +36,7 @@ describe("With spec display stacktrace enabled", () => {
     });
 
     describe("when summary", () => {
-        it("should not report stacktraces in failures summary", done => {
+        it("should not report raw stacktraces in failures summary", done => {
             JasmineEnv.execute(
                 this.reporter,
                 env => {
@@ -70,17 +70,17 @@ describe("With spec display stacktrace enabled", () => {
     });
 });
 
-describe("With summary display stacktrace enabled", () => {
+describe("With summary display stacktrace 'raw' enabled", () => {
     beforeEach(() => {
         this.reporter = new global.SpecReporter({
             summary: {
-                displayStacktrace: true
+                displayStacktrace: "raw"
             }
         });
     });
 
     describe("when failed spec", () => {
-        it("should not display stacktraces with error messages", done => {
+        it("should not display raw stacktraces with error messages", done => {
             JasmineEnv.execute(
                 this.reporter,
                 env => {
@@ -100,7 +100,7 @@ describe("With summary display stacktrace enabled", () => {
     });
 
     describe("when summary", () => {
-        it("should report failures summary with stacktraces", done => {
+        it("should report failures summary with raw stacktraces", done => {
             JasmineEnv.execute(
                 this.reporter,
                 env => {
@@ -141,11 +141,218 @@ describe("With summary display stacktrace enabled", () => {
     });
 });
 
+describe("With spec display stacktrace 'pretty' enabled", () => {
+    beforeEach(() => {
+        this.reporter = new global.SpecReporter({
+            spec: {
+                displayStacktrace: "pretty"
+            }
+        });
+    });
+
+    describe("when failed spec", () => {
+        it("should display with error messages with pretty stacktraces", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.it("failed spec", () => {
+                            env.failedWithFakeStack();
+                        });
+                    });
+                },
+                outputs => {
+                    expect(outputs).not.contains(/passed assertion/);
+                    expect(outputs).contains([
+                         "    ✗ failed spec",
+                         "      - Error: oops",
+                         "",
+                         /test-helper.js:\d+:\d+/,
+                         "                          return {",
+                         "                              compare: function () {",
+                         "                                  throw new Error(\"oops\");",
+                         "                                        ~",
+                         "                              }",
+                         "                          };",
+                         "",
+                         /test-helper.js:\d+:\d+/,
+                         "                      }",
+                         "                  });",
+                         "                  env.expect().throw();",
+                         "                                    ~",
+                         "              };",
+                         "              testFn(env);",
+                         "",
+                         /display-stacktrace.spec.js:\d+:\d+/,
+                         "                      env.describe(\"suite\", function () {",
+                         "                          env.it(\"failed spec\", function () {",
+                         "                              env.failedWithFakeStack();",
+                         "                                  ~",
+                         "                          });",
+                         "                      });",
+                         ""
+                     ]);
+                    done();
+                }
+            );
+        });
+    });
+
+    describe("when summary", () => {
+        it("should not report pretty stacktraces in failures summary", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite 1", () => {
+                        env.it("spec 1", () => {
+                            env.failedWithFakeStack();
+                        });
+                        env.describe("suite 2", () => {
+                            env.it("spec 2", () => {
+                                env.failedWithFakeStack();
+                            });
+                        });
+                    });
+                },
+                (outputs, summary) => {
+                    expect(summary).contains([
+                         /.*/,
+                         /Failures/,
+                         /.*/,
+                         "",
+                         "1) suite 1 spec 1",
+                         "  - Error: oops",
+                         "", "2) suite 1 suite 2 spec 2",
+                         "  - Error: oops",
+                         ""
+                     ]);
+                    done();
+                }
+            );
+        });
+    });
+});
+
+describe("With summary display stacktrace 'pretty' enabled", () => {
+    beforeEach(() => {
+        this.reporter = new global.SpecReporter({
+            summary: {
+                displayStacktrace: "pretty"
+            }
+        });
+    });
+
+    describe("when failed spec", () => {
+        it("should not display pretty stacktraces with error messages", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite", () => {
+                        env.it("failed spec", () => {
+                            env.failedWithFakeStack();
+                        });
+                    });
+                },
+                outputs => {
+                    expect(outputs).not.contains(/passed assertion/);
+                    expect(outputs).contains([ "    ✗ failed spec", "      - Error: oops", "" ]);
+                    done();
+                }
+            );
+        });
+    });
+
+    describe("when summary", () => {
+        it("should report failures summary with pretty stacktraces", done => {
+            JasmineEnv.execute(
+                this.reporter,
+                env => {
+                    env.describe("suite 1", () => {
+                        env.it("spec 1", () => {
+                            env.failedWithFakeStack();
+                        });
+                        env.describe("suite 2", () => {
+                            env.it("spec 2", () => {
+                                env.failedWithFakeStack();
+                            });
+                        });
+                    });
+                },
+                (outputs, summary) => {
+                    expect(summary).contains([
+                         /.*/,
+                         /Failures/,
+                         /.*/,
+                         "",
+                         "1) suite 1 spec 1",
+                         "  - Error: oops",
+                         "",
+                         /test-helper.js:\d+:\d+/,
+                         "                      return {",
+                         "                          compare: function () {",
+                         "                              throw new Error(\"oops\");",
+                         "                                    ~",
+                         "                          }",
+                         "                      };",
+                         "",
+                         /test-helper.js:\d+:\d+/,
+                         "                  }",
+                         "              });",
+                         "              env.expect().throw();",
+                         "                                ~",
+                         "          };",
+                         "          testFn(env);",
+                         "",
+                         /display-stacktrace.spec.js:\d+:\d+/,
+                         "                  env.describe(\"suite 1\", function () {",
+                         "                      env.it(\"spec 1\", function () {",
+                         "                          env.failedWithFakeStack();",
+                         "                              ~",
+                         "                      });",
+                         "                      env.describe(\"suite 2\", function () {",
+                         "",
+                         "",
+                         "2) suite 1 suite 2 spec 2",
+                         "  - Error: oops",
+                         "",
+                         /test-helper.js:\d+:\d+/,
+                         "                      return {",
+                         "                          compare: function () {",
+                         "                              throw new Error(\"oops\");",
+                         "                                    ~",
+                         "                          }",
+                         "                      };",
+                         "",
+                         /test-helper.js:\d+:\d+/,
+                         "                  }",
+                         "              });",
+                         "              env.expect().throw();",
+                         "                                ~",
+                         "          };",
+                         "          testFn(env);",
+                         "",
+                         /display-stacktrace.spec.js:\d+:\d+/,
+                         "                      env.describe(\"suite 2\", function () {",
+                         "                          env.it(\"spec 2\", function () {",
+                         "                              env.failedWithFakeStack();",
+                         "                                  ~",
+                         "                          });",
+                         "                      });",
+                         "",
+                         ""
+                     ]);
+                    done();
+                }
+            );
+        });
+    });
+});
+
 describe("With custom stacktrace filter function", () => {
     beforeEach(() => {
         this.reporter = new global.SpecReporter({
             spec: {
-                displayStacktrace: true
+                displayStacktrace: "raw"
             },
             stacktrace: {
                 filter: stacktrace => {
@@ -153,7 +360,7 @@ describe("With custom stacktrace filter function", () => {
                 }
             },
             summary: {
-                displayStacktrace: true
+                displayStacktrace: "raw"
             },
         });
     });
