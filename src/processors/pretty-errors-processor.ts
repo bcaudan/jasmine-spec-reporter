@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import {StacktraceOption} from "../configuration";
 import {DisplayProcessor} from "../display-processor";
 import {CustomReporterResult} from "../spec-reporter";
 
@@ -7,7 +8,15 @@ const CONTEXT = 2;
 
 export class PrettyErrorsProcessor extends DisplayProcessor {
 
-    public displaySpecErrorMessages(spec: CustomReporterResult): string {
+    public displaySpecErrorMessages(spec: CustomReporterResult, log: string): string {
+        return this.configuration.spec.displayStacktrace === StacktraceOption.PRETTY ? this.displayErrorMessages(spec) : log;
+    }
+
+    public displaySummaryErrorMessages(spec: CustomReporterResult, log: string): string {
+        return this.configuration.summary.displayStacktrace === StacktraceOption.PRETTY ? this.displayErrorMessages(spec) : log;
+    }
+
+    private displayErrorMessages(spec: CustomReporterResult) {
         const logs: string[] = [];
         for (const failedExpectation of spec.failedExpectations) {
             logs.push("- ".failed + failedExpectation.message.failed);

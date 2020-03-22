@@ -1,4 +1,4 @@
-import {Configuration} from "./configuration";
+import {Configuration, StacktraceOption} from "./configuration";
 
 export function parse(conf?: Configuration): Configuration {
     return merge(defaultConfiguration, conf);
@@ -24,7 +24,7 @@ const defaultConfiguration: Configuration = {
             displayErrorMessages: true,
             displayFailed: true,
             displayPending: false,
-            displayStacktrace: false,
+            displayStacktrace: StacktraceOption.NONE,
             displaySuccessful: true,
         },
         stacktrace: {
@@ -47,7 +47,7 @@ const defaultConfiguration: Configuration = {
             displayErrorMessages: true,
             displayFailed: true,
             displayPending: true,
-            displayStacktrace: false,
+            displayStacktrace: StacktraceOption.NONE,
             displaySuccessful: false,
         },
     };
@@ -66,6 +66,10 @@ function merge(template: any, override: any): Configuration {
         } else if (override instanceof Object
             && Object.keys(override).indexOf(key) !== -1) {
             result[key] = override[key];
+            if (key === "displayStacktrace" && typeof override[key] === "boolean") {
+                console.warn("WARN: jasmine-spec-reporter 'displayStacktrace' option supports value ('none', 'raw', 'pretty'), default to 'none'\n".yellow);
+                result[key] = StacktraceOption.NONE;
+            }
         } else {
             result[key] = template[key];
         }

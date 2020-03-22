@@ -1,5 +1,11 @@
 import {DisplayProcessor} from "./display-processor";
 
+export enum StacktraceOption {
+    NONE = "none",
+    RAW = "raw",
+    PRETTY = "pretty",
+}
+
 export class Configuration {
     public suite?: {
         /**
@@ -16,7 +22,7 @@ export class Configuration {
         /**
          * display stacktrace for each failed assertion
          */
-        displayStacktrace?: boolean;
+        displayStacktrace?: StacktraceOption;
 
         /**
          * display each successful spec
@@ -47,7 +53,7 @@ export class Configuration {
         /**
          * display stacktrace for each failed assertion
          */
-        displayStacktrace?: boolean;
+        displayStacktrace?: StacktraceOption;
 
         /**
          * display summary of all successes after execution

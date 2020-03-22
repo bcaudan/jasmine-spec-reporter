@@ -1,3 +1,4 @@
+import {StacktraceOption} from "../../built/configuration";
 import * as ConfigurationParser from "../../built/configuration-parser";
 import {TestProcessor} from "../helpers/test-processor";
 
@@ -18,5 +19,12 @@ describe("Configuration parser", () => {
 
     it("should add custom options", () => {
         expect(ConfigurationParser.parse({customOptions: {test: "foo"}}).customOptions).toEqual({test: "foo"});
+    });
+
+    it("should warn if outdated `displayStacktrace` boolean value is used", () => {
+        spyOn(console, "warn");
+        expect(ConfigurationParser.parse({spec: {displayStacktrace: true as any}}).spec.displayStacktrace).toEqual(StacktraceOption.NONE);
+        // tslint:disable-next-line:no-unbound-method
+        expect(console.warn).toHaveBeenCalled();
     });
 });
