@@ -1,3 +1,4 @@
+import {StacktraceOption} from "../configuration";
 import {DisplayProcessor} from "../display-processor";
 import {CustomReporterResult} from "../spec-reporter";
 
@@ -34,11 +35,11 @@ export class DefaultProcessor extends DisplayProcessor {
         return DefaultProcessor.displaySpecDescription(spec);
     }
 
-    private displayErrorMessages(spec: CustomReporterResult, withStacktrace: boolean): string {
+    private displayErrorMessages(spec: CustomReporterResult, stacktraceOption: StacktraceOption): string {
         const logs: string[] = [];
         for (const failedExpectation of spec.failedExpectations) {
             logs.push("- ".failed + failedExpectation.message.failed);
-            if (withStacktrace && failedExpectation.stack) {
+            if (stacktraceOption === StacktraceOption.RAW && failedExpectation.stack) {
                 logs.push(this.configuration.stacktrace.filter(failedExpectation.stack));
             }
         }

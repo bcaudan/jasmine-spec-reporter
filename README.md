@@ -27,7 +27,7 @@ See full configuration and features: [configuration.ts](src/configuration.ts)
 ## Custom output
 You can customize the output of the reporter yourself: [see how](docs/customize-output.md).
 
-# Developement
+# Development
 
 ## Requirements
 

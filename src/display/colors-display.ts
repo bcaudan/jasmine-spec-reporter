@@ -7,5 +7,9 @@ export function init(configuration: Configuration): void {
         failed: configuration.colors.failed,
         pending: configuration.colors.pending,
         successful: configuration.colors.successful,
+        prettyStacktraceFilename: configuration.colors.prettyStacktraceFilename,
+        prettyStacktraceLineNumber: configuration.colors.prettyStacktraceLineNumber,
+        prettyStacktraceColumnNumber: configuration.colors.prettyStacktraceColumnNumber,
+        prettyStacktraceError: configuration.colors.prettyStacktraceError,
     });
 }

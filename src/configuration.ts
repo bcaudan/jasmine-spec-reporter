@@ -1,5 +1,11 @@
 import {DisplayProcessor} from "./display-processor";
 
+export enum StacktraceOption {
+    NONE = "none",
+    RAW = "raw",
+    PRETTY = "pretty",
+}
+
 export class Configuration {
     public suite?: {
         /**
@@ -16,7 +22,7 @@ export class Configuration {
         /**
          * display stacktrace for each failed assertion
          */
-        displayStacktrace?: boolean;
+        displayStacktrace?: StacktraceOption;
 
         /**
          * display each successful spec
@@ -47,7 +53,7 @@ export class Configuration {
         /**
          * display stacktrace for each failed assertion
          */
-        displayStacktrace?: boolean;
+        displayStacktrace?: StacktraceOption;
 
         /**
          * display summary of all successes after execution
@@ -93,6 +99,26 @@ export class Configuration {
          * color for pending spec
          */
         pending?: string
+
+        /**
+         * color for pretty stacktrace filename
+         */
+        prettyStacktraceFilename?: string
+
+        /**
+         * color for pretty stacktrace line number
+         */
+        prettyStacktraceLineNumber?: string
+
+        /**
+         * color for pretty stacktrace column number
+         */
+        prettyStacktraceColumnNumber?: string
+
+        /**
+         * color for pretty stacktrace error
+         */
+        prettyStacktraceError?: string
     };
     public prefixes?: {
         /**
