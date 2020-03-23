@@ -1,3 +1,9 @@
+# 5.0.1
+
+## Bugfix
+
+* Promote colors as a dependency [#472](https://github.com/bcaudan/jasmine-spec-reporter/pull/472)
+
 # 5.0.0
 
 ## Feature
