@@ -49,8 +49,13 @@ export class PrettyStacktraceProcessor extends DisplayProcessor {
 
     private retrieveErrorContext(filename: string, lineNb: number, columnNb: number) {
         const logs = [];
-        const fileLines = fs.readFileSync(filename, "utf-8")
-            .split("\n");
+        let fileLines;
+        try {
+            fileLines = fs.readFileSync(filename, "utf-8")
+                .split("\n");
+        } catch (error) {
+            return `jasmine-spec-reporter: unable to open '${filename}'\n${error}`;
+        }
         for (let i = 0; i < fileLines.length; i++) {
             const errorLine = lineNb - 1;
 
