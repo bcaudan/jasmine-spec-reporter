@@ -1,3 +1,9 @@
+# 5.0.2
+
+## Bugfix
+
+* pretty stacktrace: catch uncaught exception on node internal files [#479](https://github.com/bcaudan/jasmine-spec-reporter/pull/479)
+
 # 5.0.1
 
 ## Bugfix
