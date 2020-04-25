@@ -48,15 +48,15 @@
   },
   "devDependencies": {
     "@types/jasmine": "3.5.10",
-    "@types/node": "13.9.4",
+    "@types/node": "13.13.2",
     "codecov": "3.6.5",
     "diff": "4.0.2",
     "jasmine": "3.5.0",
     "jasmine-core": "3.5.0",
-    "nyc": "15.0.0",
-    "protractor": "5.4.3",
-    "tslint": "6.1.0",
+    "nyc": "15.0.1",
+    "protractor": "5.4.4",
+    "tslint": "6.1.1",
     "tslint-eslint-rules": "5.4.0",
-    "typescript": "3.8.2"
+    "typescript": "3.8.3"
   }
 }
