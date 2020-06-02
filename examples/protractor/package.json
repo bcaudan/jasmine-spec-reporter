@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "a protractor example",
   "scripts": {
-    "postinstall": "webdriver-manager update --gecko false",
+    "postinstall": "webdriver-manager update --gecko false --versions.chrome=83.0.4103.39",
     "test": "protractor protractor.conf.js"
   },
   "author": "Bastien Caudan",
