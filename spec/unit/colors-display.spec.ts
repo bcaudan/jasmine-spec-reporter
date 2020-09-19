@@ -21,7 +21,7 @@ describe("with colors", () => {
                     },
                     outputs => {
                         expect(outputs).not.contains("    ✓ successful spec");
-                        expect(outputs).contains("    " + "✓ successful spec".green);
+                        expect(outputs).contains("    " + global.colors.green("✓ successful spec"));
                         done();
                     },
                     { withColor: true }
@@ -40,7 +40,7 @@ describe("with colors", () => {
                     },
                     outputs => {
                         expect(outputs).not.contains("    ✗ failed spec");
-                        expect(outputs).contains("    " + "✗ failed spec".red);
+                        expect(outputs).contains("    " + global.colors.red("✗ failed spec"));
                         done();
                     },
                     { withColor: true }
@@ -59,7 +59,7 @@ describe("with colors", () => {
                     },
                     outputs => {
                         expect(outputs).not.contains("    * pending spec");
-                        expect(outputs).contains("    " + "* pending spec".yellow);
+                        expect(outputs).contains("    " + global.colors.yellow("* pending spec"));
                         done();
                     },
                     { withColor: true }
@@ -94,7 +94,7 @@ describe("with colors", () => {
                         });
                     },
                     outputs => {
-                        expect(outputs).contains("    " + "✓ successful spec".magenta);
+                        expect(outputs).contains("    " + global.colors.magenta("✓ successful spec"));
                         done();
                     },
                     { withColor: true }
@@ -112,7 +112,7 @@ describe("with colors", () => {
                         });
                     },
                     outputs => {
-                        expect(outputs).contains("    " + "✗ failed spec".white);
+                        expect(outputs).contains("    " + global.colors.white("✗ failed spec"));
                         done();
                     },
                     { withColor: true }
@@ -130,7 +130,7 @@ describe("with colors", () => {
                         });
                     },
                     outputs => {
-                        expect(outputs).contains("    " + "* pending spec".blue);
+                        expect(outputs).contains("    " + global.colors.blue("* pending spec"));
                         done();
                     },
                     { withColor: true }
