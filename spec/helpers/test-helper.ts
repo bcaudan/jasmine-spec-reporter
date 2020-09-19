@@ -1,14 +1,6 @@
-require("colors");
-
-interface String {
-    stripTime(): string;
-}
-
-// tslint:disable-next-line:no-unbound-method
-String.prototype.stripTime = function(): string {
-    return this.replace(/in (\d+\.?\d*|\.\d+) secs?/, "in {time}") // replace time in summary
+let stripTime = (str: string) =>
+    str.replace(/in (\d+\.?\d*|\.\d+) secs?/, "in {time}") // replace time in summary
         .replace(/\((\d+\.?\d*|\.\d+) secs?\)/, "({time})"); // replace time in specs
-};
 
 let isArray = value => value.toString() === "[object Array]";
 
@@ -69,7 +61,7 @@ const JasmineEnv = {
         logInSummary = false;
         console.log = stuff => {
             if (!options.withColor) {
-                stuff = stuff.stripColors.stripTime();
+                stuff = global.colors.stripColors(stripTime(stuff));
             }
             if (/^(Executed|\*\*\*\*\*\*\*)/.test(stuff)) {
                 logInSummary = true;
