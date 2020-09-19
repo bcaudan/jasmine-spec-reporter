@@ -1,7 +1,6 @@
 import {Configuration} from "../configuration";
 import {DisplayProcessor} from "../display-processor";
 import {CustomReporterResult, ExecutedSpecs} from "../spec-reporter";
-import * as ColorsDisplay from "./colors-display";
 import {Logger} from "./logger";
 
 import SuiteInfo = jasmine.SuiteInfo;
@@ -23,7 +22,6 @@ export class ExecutionDisplay {
 
     constructor(private configuration: Configuration, private logger: Logger, private specs: ExecutedSpecs,
                 displayProcessors: DisplayProcessor[]) {
-        ColorsDisplay.init(this.configuration);
         this.hasCustomDisplaySpecStarted = ExecutionDisplay.hasCustomDisplaySpecStarted(displayProcessors);
     }
 
