@@ -19,7 +19,7 @@ export class PrettyStacktraceProcessor extends DisplayProcessor {
     private displayErrorMessages(spec: CustomReporterResult) {
         const logs: string[] = [];
         for (const failedExpectation of spec.failedExpectations) {
-            logs.push("- ".failed + failedExpectation.message.failed);
+            logs.push(this.theme.failed("- ") + this.theme.failed(failedExpectation.message));
             if (failedExpectation.stack) {
                 logs.push(this.prettifyStack(failedExpectation.stack));
             }
@@ -40,7 +40,7 @@ export class PrettyStacktraceProcessor extends DisplayProcessor {
                     parseInt(columnNumber, 10)
                 );
 
-                logs.push(`${filename.prettyStacktraceFilename}:${lineNumber.prettyStacktraceLineNumber}:${columnNumber.prettyStacktraceColumnNumber}`);
+                logs.push(`${this.theme.prettyStacktraceFilename(filename)}:${this.theme.prettyStacktraceLineNumber(lineNumber)}:${this.theme.prettyStacktraceColumnNumber(columnNumber)}`);
                 logs.push(`${errorContext}\n`);
             }
         });
@@ -63,7 +63,7 @@ export class PrettyStacktraceProcessor extends DisplayProcessor {
                 logs.push(fileLines[i]);
             }
             if (i === errorLine) {
-                logs.push(" ".repeat(columnNb - 1) + "~".red);
+                logs.push(" ".repeat(columnNb - 1) + this.theme.prettyStacktraceError("~"));
             }
         }
         return logs.join("\n");

@@ -1,12 +1,15 @@
 import {Configuration} from "./configuration";
 import {CustomReporterResult} from "./spec-reporter";
+import {Theme} from "./theme";
 import SuiteInfo = jasmine.SuiteInfo;
 
 export class DisplayProcessor {
     protected configuration: Configuration;
+    protected theme: Theme;
 
-    constructor(configuration: Configuration) {
+    constructor(configuration: Configuration, theme: Theme) {
         this.configuration = configuration;
+        this.theme = theme;
     }
 
     public displayJasmineStarted(info: SuiteInfo, log: string): string {

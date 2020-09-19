@@ -11,6 +11,7 @@ import {SpecColorsProcessor} from "./processors/spec-colors-processor";
 import {SpecDurationsProcessor} from "./processors/spec-durations-processor";
 import {SpecPrefixesProcessor} from "./processors/spec-prefixes-processor";
 import {SuiteNumberingProcessor} from "./processors/suite-numbering-processor";
+import {Theme} from "./theme";
 
 import CustomReporter = jasmine.CustomReporter;
 import SuiteInfo = jasmine.SuiteInfo;
@@ -27,25 +28,25 @@ export interface ExecutedSpecs {
 }
 
 export class SpecReporter implements CustomReporter {
-    private static initProcessors(configuration: Configuration): DisplayProcessor[] {
+    private static initProcessors(configuration: Configuration, theme: Theme): DisplayProcessor[] {
         const displayProcessors: DisplayProcessor[] = [
-            new DefaultProcessor(configuration),
-            new SpecPrefixesProcessor(configuration),
-            new SpecColorsProcessor(configuration),
-            new PrettyStacktraceProcessor(configuration)
+            new DefaultProcessor(configuration, theme),
+            new SpecPrefixesProcessor(configuration, theme),
+            new SpecColorsProcessor(configuration, theme),
+            new PrettyStacktraceProcessor(configuration, theme)
         ];
 
         if (configuration.spec.displayDuration) {
-            displayProcessors.push(new SpecDurationsProcessor(configuration));
+            displayProcessors.push(new SpecDurationsProcessor(configuration, theme));
         }
 
         if (configuration.suite.displayNumber) {
-            displayProcessors.push(new SuiteNumberingProcessor(configuration));
+            displayProcessors.push(new SuiteNumberingProcessor(configuration, theme));
         }
 
         if (configuration.customProcessors) {
             configuration.customProcessors.forEach((Processor: typeof DisplayProcessor) => {
-                displayProcessors.push(new Processor(configuration));
+                displayProcessors.push(new Processor(configuration, theme));
             });
         }
 
@@ -62,14 +63,16 @@ export class SpecReporter implements CustomReporter {
     private summary: SummaryDisplay;
     private metrics: ExecutionMetrics;
     private configuration: Configuration;
+    private theme: Theme;
 
     constructor(configuration?: Configuration) {
         this.configuration = ConfigurationParser.parse(configuration);
-        const displayProcessors = SpecReporter.initProcessors(this.configuration);
+        this.theme = new Theme(this.configuration);
+        const displayProcessors = SpecReporter.initProcessors(this.configuration, this.theme);
         const print = this.configuration.print;
         this.logger = new Logger(displayProcessors, print);
         this.display = new ExecutionDisplay(this.configuration, this.logger, this.specs, displayProcessors);
-        this.summary = new SummaryDisplay(this.logger, this.configuration, this.specs);
+        this.summary = new SummaryDisplay(this.configuration, this.theme, this.logger, this.specs);
         this.metrics = new ExecutionMetrics();
     }
 

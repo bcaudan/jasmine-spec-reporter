@@ -1,11 +1,12 @@
 import {Configuration} from "../../built/configuration";
 import {DisplayProcessor} from "../../built/main";
+import {Theme} from "../../src/theme";
 
 export class TestProcessor extends DisplayProcessor {
     private test: string;
 
-    constructor(configuration: Configuration) {
-        super(configuration);
+    constructor(configuration: Configuration, theme: Theme) {
+        super(configuration, theme);
         this.test = configuration.customOptions.test;
     }
 

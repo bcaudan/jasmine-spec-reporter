@@ -2,10 +2,11 @@ import {Configuration} from "../configuration";
 import {DisplayProcessor} from "../display-processor";
 import {ExecutionMetrics} from "../execution-metrics";
 import {CustomReporterResult, ExecutedSpecs} from "../spec-reporter";
+import {Theme} from "../theme";
 import {Logger} from "./logger";
 
 export class SummaryDisplay {
-    constructor(private logger: Logger, private configuration: Configuration, private specs: ExecutedSpecs) {
+    constructor(private configuration: Configuration, private theme: Theme, private logger: Logger, private specs: ExecutedSpecs) {
     }
 
     public display(metrics: ExecutionMetrics) {
@@ -14,7 +15,7 @@ export class SummaryDisplay {
         let status = "";
         if (metrics.failedSpecs === 0 && metrics.globalErrors.length === 0) {
             status = (metrics.totalSpecsDefined === metrics.executedSpecs) ?
-                " SUCCESS".successful : " INCOMPLETE".pending;
+                this.theme.successful(" SUCCESS") : this.theme.pending(" INCOMPLETE");
         }
         const failed = (metrics.failedSpecs > 0) ? ` (${metrics.failedSpecs} FAILED)` : "";
         const pending = (metrics.pendingSpecs > 0) ? ` (${metrics.pendingSpecs} PENDING)` : "";
@@ -37,8 +38,8 @@ export class SummaryDisplay {
         if (this.configuration.summary.displayPending && metrics.pendingSpecs > 0) {
             this.pendingsSummary();
         }
-        this.logger.log(execution + status + errors.failed + failed.failed
-            + pending.pending + skipped.pending + duration + ".");
+        this.logger.log(execution + status + this.theme.failed(errors) + this.theme.failed(failed)
+            + this.theme.pending(pending) + this.theme.pending(skipped) + duration + ".");
 
         if (metrics.random) {
             this.logger.log(`Randomized with seed ${metrics.seed}.`);
@@ -106,7 +107,7 @@ export class SummaryDisplay {
         this.logger.log(`${index}) ${spec.fullName}`);
         this.logger.increaseIndent();
         const pendingReason = spec.pendingReason ? spec.pendingReason : "No reason given";
-        this.logger.log(pendingReason.pending);
+        this.logger.log(this.theme.pending(pendingReason));
         this.logger.resetIndent();
     }
 

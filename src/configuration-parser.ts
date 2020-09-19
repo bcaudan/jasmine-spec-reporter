@@ -71,7 +71,7 @@ function merge(template: any, override: any): Configuration {
             && Object.keys(override).indexOf(key) !== -1) {
             result[key] = override[key];
             if (key === "displayStacktrace" && typeof override[key] === "boolean") {
-                console.warn("WARN: jasmine-spec-reporter 'displayStacktrace' option supports value ('none', 'raw', 'pretty'), default to 'none'\n".yellow);
+                console.warn("WARN: jasmine-spec-reporter 'displayStacktrace' option supports value ('none', 'raw', 'pretty'), default to 'none'\n");
                 result[key] = StacktraceOption.NONE;
             }
         } else {
