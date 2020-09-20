@@ -1,7 +1,6 @@
 jasmine-spec-reporter
 =====================
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/bcaudan/jasmine-spec-reporter.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/bcaudan/jasmine-spec-reporter.svg?branch=master)](https://travis-ci.org/bcaudan/jasmine-spec-reporter)
 [![codecov](https://codecov.io/gh/bcaudan/jasmine-spec-reporter/branch/master/graph/badge.svg)](https://codecov.io/gh/bcaudan/jasmine-spec-reporter)
 
