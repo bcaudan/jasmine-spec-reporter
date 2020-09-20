@@ -1,3 +1,31 @@
+# 6.0.0
+
+## Feature
+
+* Use colors/safe [#538](https://github.com/bcaudan/jasmine-spec-reporter/pull/538)
+
+## Breaking change
+
+String prototype does not contain color properties anymore, colors must now be applied with the new `theme` component available as a field in [custom display processors](docs/customize-output.md).
+
+**Before:**
+```ts
+class MyProcessor extends DisplayProcessor {
+    public displaySuccessfulSpec(spec: CustomReporterResult, log: string): string {
+        return "OK ".successful + log;
+    }
+}
+```
+
+**Now:**
+```ts
+class MyProcessor extends DisplayProcessor {
+    public displaySuccessfulSpec(spec: CustomReporterResult, log: string): string {
+        return this.theme.successful("OK ") + log;
+    }
+}
+```
+
 # 5.0.2
 
 ## Bugfix
