@@ -38,7 +38,7 @@ export class DefaultProcessor extends DisplayProcessor {
     private displayErrorMessages(spec: CustomReporterResult, stacktraceOption: StacktraceOption): string {
         const logs: string[] = [];
         for (const failedExpectation of spec.failedExpectations) {
-            logs.push("- ".failed + failedExpectation.message.failed);
+            logs.push(this.theme.failed("- ") + this.theme.failed(failedExpectation.message));
             if (stacktraceOption === StacktraceOption.RAW && failedExpectation.stack) {
                 logs.push(this.configuration.stacktrace.filter(failedExpectation.stack));
             }

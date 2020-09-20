@@ -41,7 +41,7 @@ For our example:
 ```node
 var DisplayProcessor = require('jasmine-spec-reporter').DisplayProcessor;
 
-function TimeProcessor(configuration) {
+function TimeProcessor(configuration, theme) {
 }
 
 function getTime() {

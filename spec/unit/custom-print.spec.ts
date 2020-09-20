@@ -73,7 +73,7 @@ describe("spec reporter", () => {
                         expect(outputs.length).toEqual(0);
                         expect(customOutpouts).contains([
                             "  suite",
-                            "    " + "✓ spec to be started".green
+                            "    " + global.colors.green("✓ spec to be started")
                         ]);
                         done();
                     }
