@@ -1,3 +1,29 @@
+# 7.0.0
+
+## Bugfix
+
+* 'SpecReporter' is not assignable to type 'Reporter | CustomReporter' [#588](https://github.com/bcaudan/jasmine-spec-reporter/pull/588)
+
+## Breaking change
+
+Update signature of `CustomReporterResult` to fix collision with new jasmine properties
+
+**Before:**
+```ts
+export interface CustomReporterResult extends jasmine.CustomReporterResult {
+  duration?: string;
+}
+```
+
+**Now:**
+```ts
+export interface CustomReporterResult extends jasmine.CustomReporterResult {
+  _jsr?: {
+    formattedDuration?: string;
+  };
+}
+```
+
 # 6.0.0
 
 ## Feature

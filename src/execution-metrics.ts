@@ -42,7 +42,9 @@ export class ExecutionMetrics {
     }
 
     public stopSpec(result: CustomReporterResult): void {
-        result.duration = this.formatDuration((new Date()).getTime() - this.specStartTime);
+        result._jsr = {
+            formattedDuration: this.formatDuration((new Date()).getTime() - this.specStartTime)
+        };
     }
 
     private formatDuration(durationInMs: number): string {

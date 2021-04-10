@@ -18,7 +18,9 @@ import SuiteInfo = jasmine.SuiteInfo;
 import RunDetails = jasmine.RunDetails;
 
 export interface CustomReporterResult extends jasmine.CustomReporterResult {
-    duration?: string;
+    _jsr?: {
+        formattedDuration?: string;
+    };
 }
 
 export interface ExecutedSpecs {
@@ -136,6 +138,8 @@ export class SpecReporter implements CustomReporter {
             }),
             fullName: "Non-spec failure",
             id: "Non-spec failure",
+            duration: null,
+            properties: null
         };
     }
 
