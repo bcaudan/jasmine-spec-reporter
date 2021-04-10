@@ -5,8 +5,5 @@
     "lib": ["es6"],
     "pretty": true
   },
-  "include": [
-    "./**/*.ts",
-    "../node_modules/colors/**/*.ts"
-  ]
+  "include": ["./**/*.ts", "../node_modules/colors/**/*.ts"]
 }

@@ -8,8 +8,8 @@ Please fill in this template, delete this intro and any unrelated text :smile:
 
 Check with "x":
 
-- [ ] I have this issue with the latest release of [jasmine-spec-reporter](https://github.com/bcaudan/jasmine-spec-reporter/releases) 
-- [ ] I have this issue with the latest release of [jasmine](https://github.com/jasmine/jasmine/releases) 
+- [ ] I have this issue with the latest release of [jasmine-spec-reporter](https://github.com/bcaudan/jasmine-spec-reporter/releases)
+- [ ] I have this issue with the latest release of [jasmine](https://github.com/jasmine/jasmine/releases)
 - [ ] I can reproduce this issue with one of the [examples](https://github.com/bcaudan/jasmine-spec-reporter/tree/master/examples)
 
 **Current behavior**
@@ -18,8 +18,7 @@ Check with "x":
 
 **Minimal reproduction of the problem with instructions**
 
-
-## Feature request 
+## Feature request
 
 **Current behavior**
 

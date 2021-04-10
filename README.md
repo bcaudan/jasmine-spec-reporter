@@ -1,5 +1,4 @@
-jasmine-spec-reporter
-=====================
+# jasmine-spec-reporter
 
 [![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=bcaudan/jasmine-spec-reporter)](https://api.dependabot.com/badges/status?host=github&repo=bcaudan/jasmine-spec-reporter)
 [![Build Status](https://travis-ci.org/bcaudan/jasmine-spec-reporter.svg?branch=master)](https://travis-ci.org/bcaudan/jasmine-spec-reporter)
@@ -12,32 +11,36 @@ Real time console spec reporter for jasmine testing framework.
 # Usage
 
 ## Installation
+
 Install `jasmine-spec-reporter` via npm:
 
     npm install jasmine-spec-reporter --save-dev
 
 ## Examples
-* [Jasmine node tests](examples/node)
-* [Protractor tests](examples/protractor)
-* [TypeScript support](examples/typescript)
+
+- [Jasmine node tests](examples/node)
+- [Protractor tests](examples/protractor)
+- [TypeScript support](examples/typescript)
 
 ## Configuration
+
 See full configuration and features: [configuration.ts](src/configuration.ts)
 
 ## Custom output
+
 You can customize the output of the reporter yourself: [see how](docs/customize-output.md).
 
 # Development
 
 ## Requirements
 
-* npm >= 5
+- npm >= 5
 
 ## Commands
 
-* install dependencies: `npm install`
-* launch unit tests: `npm test`
-* launch integration tests: `npm run test:integration`
+- install dependencies: `npm install`
+- launch unit tests: `npm test`
+- launch integration tests: `npm run test:integration`
 
 ## Debugging
 

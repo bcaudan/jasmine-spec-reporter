@@ -1,11 +1,11 @@
 describe('angularjs homepage', () => {
   it('should greet the named user', () => {
-    browser.get('http://www.angularjs.org');
+    browser.get('http://www.angularjs.org')
 
-    element(by.model('yourName')).sendKeys('Julie');
+    element(by.model('yourName')).sendKeys('Julie')
 
-    const greeting = element(by.binding('yourName'));
+    const greeting = element(by.binding('yourName'))
 
-    expect(greeting.getText()).toEqual('Hello Julie!');
+    expect(greeting.getText()).toEqual('Hello Julie!')
   })
-});
+})
