@@ -1,4 +1,4 @@
-let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
+const SpecReporter = require('jasmine-spec-reporter').SpecReporter
 
 exports.config = {
   framework: 'jasmine2',
@@ -6,27 +6,26 @@ exports.config = {
     showColors: true,
     silent: true,
     defaultTimeoutInterval: 360000,
-    print: function () {
-    }
+    print () {},
   },
-  specs: [
-    './spec/protractor-spec.js'
-  ],
+  specs: ['./spec/protractor-spec.js'],
   capabilities: {
     browserName: 'chrome',
-    'chromeOptions': {
-      args: ['--test-type']
-    }
+    chromeOptions: {
+      args: ['--test-type'],
+    },
   },
   logLevel: 'WARN',
-  onPrepare: function () {
-    jasmine.getEnv().addReporter(new SpecReporter({
-      spec: {
-        displayStacktrace: true
-      },
-      summary: {
-        displayDuration: false
-      }
-    }));
-  }
-};
+  onPrepare () {
+    jasmine.getEnv().addReporter(
+      new SpecReporter({
+        spec: {
+          displayStacktrace: true,
+        },
+        summary: {
+          displayDuration: false,
+        },
+      })
+    )
+  },
+}

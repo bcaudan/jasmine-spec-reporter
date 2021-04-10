@@ -13,7 +13,6 @@ jasmine-spec-reporter.iml
 npm-debug.log
 screenshot.png
 tsconfig.json
-tslint.json
 
 *.map
 *~

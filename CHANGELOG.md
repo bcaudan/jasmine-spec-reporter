@@ -2,25 +2,27 @@
 
 ## Bugfix
 
-* 'SpecReporter' is not assignable to type 'Reporter | CustomReporter' [#588](https://github.com/bcaudan/jasmine-spec-reporter/pull/588)
+- 'SpecReporter' is not assignable to type 'Reporter | CustomReporter' [#588](https://github.com/bcaudan/jasmine-spec-reporter/pull/588)
 
 ## Breaking change
 
 Update signature of `CustomReporterResult` to fix collision with new jasmine properties
 
 **Before:**
+
 ```ts
 export interface CustomReporterResult extends jasmine.CustomReporterResult {
-  duration?: string;
+  duration?: string
 }
 ```
 
 **Now:**
+
 ```ts
 export interface CustomReporterResult extends jasmine.CustomReporterResult {
   _jsr?: {
-    formattedDuration?: string;
-  };
+    formattedDuration?: string
+  }
 }
 ```
 
@@ -28,27 +30,29 @@ export interface CustomReporterResult extends jasmine.CustomReporterResult {
 
 ## Feature
 
-* Use colors/safe [#538](https://github.com/bcaudan/jasmine-spec-reporter/pull/538)
+- Use colors/safe [#538](https://github.com/bcaudan/jasmine-spec-reporter/pull/538)
 
 ## Breaking change
 
 String prototype does not contain color properties anymore, colors must now be applied with the new `theme` component available as a field in [custom display processors](docs/customize-output.md).
 
 **Before:**
+
 ```ts
 class MyProcessor extends DisplayProcessor {
-    public displaySuccessfulSpec(spec: CustomReporterResult, log: string): string {
-        return "OK ".successful + log;
-    }
+  public displaySuccessfulSpec(spec: CustomReporterResult, log: string): string {
+    return 'OK '.successful + log
+  }
 }
 ```
 
 **Now:**
+
 ```ts
 class MyProcessor extends DisplayProcessor {
-    public displaySuccessfulSpec(spec: CustomReporterResult, log: string): string {
-        return this.theme.successful("OK ") + log;
-    }
+  public displaySuccessfulSpec(spec: CustomReporterResult, log: string): string {
+    return this.theme.successful('OK ') + log
+  }
 }
 ```
 
@@ -56,19 +60,19 @@ class MyProcessor extends DisplayProcessor {
 
 ## Bugfix
 
-* pretty stacktrace: catch uncaught exception on node internal files [#479](https://github.com/bcaudan/jasmine-spec-reporter/pull/479)
+- pretty stacktrace: catch uncaught exception on node internal files [#479](https://github.com/bcaudan/jasmine-spec-reporter/pull/479)
 
 # 5.0.1
 
 ## Bugfix
 
-* Promote colors as a dependency [#472](https://github.com/bcaudan/jasmine-spec-reporter/pull/472)
+- Promote colors as a dependency [#472](https://github.com/bcaudan/jasmine-spec-reporter/pull/472)
 
 # 5.0.0
 
 ## Feature
 
-* New option to display pretty stacktraces [#467](https://github.com/bcaudan/jasmine-spec-reporter/pull/467)
+- New option to display pretty stacktraces [#467](https://github.com/bcaudan/jasmine-spec-reporter/pull/467)
 
 ## Breaking change
 
@@ -78,35 +82,35 @@ class MyProcessor extends DisplayProcessor {
 
 ## Bugfix
 
-* Restore compatibility with jasmine < 2.5.0 [#222](https://github.com/bcaudan/jasmine-spec-reporter/pull/222), [#223](https://github.com/bcaudan/jasmine-spec-reporter/pull/223)
+- Restore compatibility with jasmine < 2.5.0 [#222](https://github.com/bcaudan/jasmine-spec-reporter/pull/222), [#223](https://github.com/bcaudan/jasmine-spec-reporter/pull/223)
 
 # 4.2.0
 
 ## Feature
 
-* Support reporting errors in afterAll [#210](https://github.com/bcaudan/jasmine-spec-reporter/issues/210), [#214](https://github.com/bcaudan/jasmine-spec-reporter/issues/214)
+- Support reporting errors in afterAll [#210](https://github.com/bcaudan/jasmine-spec-reporter/issues/210), [#214](https://github.com/bcaudan/jasmine-spec-reporter/issues/214)
 
 # 4.1.1
 
 ## Bugfix
 
-* Correct report from jasmineStarted event [#185](https://github.com/bcaudan/jasmine-spec-reporter/issues/185)
+- Correct report from jasmineStarted event [#185](https://github.com/bcaudan/jasmine-spec-reporter/issues/185)
 
 # 4.1.0
 
 ## Feature
 
-* If any defined spec is not executed, report INCOMPLETE rather than SUCCESS [#142](https://github.com/bcaudan/jasmine-spec-reporter/issues/142), [#145](https://github.com/bcaudan/jasmine-spec-reporter/issues/145)
+- If any defined spec is not executed, report INCOMPLETE rather than SUCCESS [#142](https://github.com/bcaudan/jasmine-spec-reporter/issues/142), [#145](https://github.com/bcaudan/jasmine-spec-reporter/issues/145)
 
 ## Other
 
-* Rewrite unit tests by bumping jasmine-core to 2.6.x [#155](https://github.com/bcaudan/jasmine-spec-reporter/issues/155)
-* Use yarn for development [#98](https://github.com/bcaudan/jasmine-spec-reporter/issues/98), [#138](https://github.com/bcaudan/jasmine-spec-reporter/issues/138)
-* Add `greenkeeper-yarn.sh` to automatically updates yarn.lock on greenkeeper PR
+- Rewrite unit tests by bumping jasmine-core to 2.6.x [#155](https://github.com/bcaudan/jasmine-spec-reporter/issues/155)
+- Use yarn for development [#98](https://github.com/bcaudan/jasmine-spec-reporter/issues/98), [#138](https://github.com/bcaudan/jasmine-spec-reporter/issues/138)
+- Add `greenkeeper-yarn.sh` to automatically updates yarn.lock on greenkeeper PR
 
 # 4.0.0
 
-* Use string primitive instead of String wrapper object [#134](https://github.com/bcaudan/jasmine-spec-reporter/issues/134), [#137](https://github.com/bcaudan/jasmine-spec-reporter/issues/137)
+- Use string primitive instead of String wrapper object [#134](https://github.com/bcaudan/jasmine-spec-reporter/issues/134), [#137](https://github.com/bcaudan/jasmine-spec-reporter/issues/137)
 
 ## Breaking change
 
@@ -122,27 +126,27 @@ Now:
 
 # 3.3.0
 
-* Add low-level print configuration option [#129](https://github.com/bcaudan/jasmine-spec-reporter/issues/129), [#130](https://github.com/bcaudan/jasmine-spec-reporter/issues/130)
+- Add low-level print configuration option [#129](https://github.com/bcaudan/jasmine-spec-reporter/issues/129), [#130](https://github.com/bcaudan/jasmine-spec-reporter/issues/130)
 
 # 3.2.0
 
-* Add an option to remove duration from execution summary.
-* Add jasmine & protractor integration tests [#82](https://github.com/bcaudan/jasmine-spec-reporter/issues/82)
+- Add an option to remove duration from execution summary.
+- Add jasmine & protractor integration tests [#82](https://github.com/bcaudan/jasmine-spec-reporter/issues/82)
 
 # 3.1.0
 
-* Add `displaySpecErrorMessages` and `displaySummaryErrorMessages` to DisplayProcessor [#85](https://github.com/bcaudan/jasmine-spec-reporter/issues/85)
-* Add an option to remove error messages [#62](https://github.com/bcaudan/jasmine-spec-reporter/issues/62)
-* Add an option to customize stacktrace filtering [#72](https://github.com/bcaudan/jasmine-spec-reporter/issues/72)
+- Add `displaySpecErrorMessages` and `displaySummaryErrorMessages` to DisplayProcessor [#85](https://github.com/bcaudan/jasmine-spec-reporter/issues/85)
+- Add an option to remove error messages [#62](https://github.com/bcaudan/jasmine-spec-reporter/issues/62)
+- Add an option to customize stacktrace filtering [#72](https://github.com/bcaudan/jasmine-spec-reporter/issues/72)
 
 # 3.0.0
 
 ## Breaking changes
 
-* Remove support for node 0.10
-* `jasmine-spec-reporter` module exports `SpecReporter` and `DisplayProcessor`, see [SpecReporter](./examples/node) and [DisplayProcessor](./docs/customize-output.md) usages.
-* Extract groups in configuration and rationalize property names, [see new structure](./src/configuration.ts). [#57](https://github.com/bcaudan/jasmine-spec-reporter/issues/57)
-* Colors deactivation is now achieved with this configuration:
+- Remove support for node 0.10
+- `jasmine-spec-reporter` module exports `SpecReporter` and `DisplayProcessor`, see [SpecReporter](./examples/node) and [DisplayProcessor](./docs/customize-output.md) usages.
+- Extract groups in configuration and rationalize property names, [see new structure](./src/configuration.ts). [#57](https://github.com/bcaudan/jasmine-spec-reporter/issues/57)
+- Colors deactivation is now achieved with this configuration:
 
       {
         colors: {
@@ -150,7 +154,7 @@ Now:
         }
       }
 
-* Custom options for custom processors must now be stored in this configuration field:
+- Custom options for custom processors must now be stored in this configuration field:
 
       {
         customOptions: {
@@ -160,37 +164,37 @@ Now:
 
 ## Other
 
-* Migrate code base to TypeScript
-* Add example for [TypeScript integration](./examples/typescript)
-* Extract each example in a dedicated node module, [see examples](./examples)
+- Migrate code base to TypeScript
+- Add example for [TypeScript integration](./examples/typescript)
+- Extract each example in a dedicated node module, [see examples](./examples)
 
 # 2.7.0
 
-* Add successes summary. [#49](https://github.com/bcaudan/jasmine-spec-reporter/issues/49)
+- Add successes summary. [#49](https://github.com/bcaudan/jasmine-spec-reporter/issues/49)
 
 # 2.6.0
 
-* Display seed used if specs are randomized. [#55](https://github.com/bcaudan/jasmine-spec-reporter/issues/55)
+- Display seed used if specs are randomized. [#55](https://github.com/bcaudan/jasmine-spec-reporter/issues/55)
 
 # 2.5.0
 
-* Added support for windows platform to show tick mark and cross symbols. [#52](https://github.com/bcaudan/jasmine-spec-reporter/issues/52)
+- Added support for windows platform to show tick mark and cross symbols. [#52](https://github.com/bcaudan/jasmine-spec-reporter/issues/52)
 
 # 2.4.0
 
-* Add singular form of spec metrics. [#41](https://github.com/bcaudan/jasmine-spec-reporter/issues/41)
+- Add singular form of spec metrics. [#41](https://github.com/bcaudan/jasmine-spec-reporter/issues/41)
 
 # 2.3.0
 
 ## Feature
 
-* Add pending summary to display pending reasons. [#33](https://github.com/bcaudan/jasmine-spec-reporter/issues/33)
-* Have same sign/color convention than jasmine default reporter for pending specs.
+- Add pending summary to display pending reasons. [#33](https://github.com/bcaudan/jasmine-spec-reporter/issues/33)
+- Have same sign/color convention than jasmine default reporter for pending specs.
 
 ## Other
 
-* Add tests on colors. [#34](https://github.com/bcaudan/jasmine-spec-reporter/issues/34)
-* Bump dependencies versions
+- Add tests on colors. [#34](https://github.com/bcaudan/jasmine-spec-reporter/issues/34)
+- Bump dependencies versions
 
 # 2.2.3
 
@@ -200,31 +204,32 @@ Ensure that colors are always enabled. [#36](https://github.com/bcaudan/jasmine-
 
 ## Bugfix
 
-* Fixes All specs displayed when using `fdescribe` and `fit`. [#37](https://github.com/bcaudan/jasmine-spec-reporter/issues/37)
+- Fixes All specs displayed when using `fdescribe` and `fit`. [#37](https://github.com/bcaudan/jasmine-spec-reporter/issues/37)
 
 # 2.2.1
 
 ## Bugfix
 
-* Disabled specs was incorrectly reported as failed. [#28](https://github.com/bcaudan/jasmine-spec-reporter/issues/28)
+- Disabled specs was incorrectly reported as failed. [#28](https://github.com/bcaudan/jasmine-spec-reporter/issues/28)
 
 ## Other
 
-* Tests: Use jasmine env instead of fake env [#25](https://github.com/bcaudan/jasmine-spec-reporter/issues/25)
+- Tests: Use jasmine env instead of fake env [#25](https://github.com/bcaudan/jasmine-spec-reporter/issues/25)
 
 # 2.2.0
 
 ## Feature
 
-* **stacktrace**: `displayStacktrace` option has now 4 modes available [#26](https://github.com/bcaudan/jasmine-spec-reporter/issues/26):
-    * all: display stacktraces for failed specs and in failures summary.
-    * specs: display stacktraces for failed specs only.
-    * summary: display stacktraces in failures summary only.
-    * none: do not display stacktraces.
+- **stacktrace**: `displayStacktrace` option has now 4 modes available [#26](https://github.com/bcaudan/jasmine-spec-reporter/issues/26):
 
-* **processor**:
-    * add `displayJasmineStarted` hook
-    * add `displaySpecStarted` hook [#23](https://github.com/bcaudan/jasmine-spec-reporter/issues/23)
+  - all: display stacktraces for failed specs and in failures summary.
+  - specs: display stacktraces for failed specs only.
+  - summary: display stacktraces in failures summary only.
+  - none: do not display stacktraces.
+
+- **processor**:
+  - add `displayJasmineStarted` hook
+  - add `displaySpecStarted` hook [#23](https://github.com/bcaudan/jasmine-spec-reporter/issues/23)
 
 ## Breaking change
 
@@ -232,8 +237,8 @@ Ensure that colors are always enabled. [#36](https://github.com/bcaudan/jasmine-
 
 ## Other
 
-* Bump dependencies versions
-* Rework documentation
+- Bump dependencies versions
+- Rework documentation
 
 # 2.1.0
 
@@ -255,13 +260,14 @@ Add support for jasmine 2.x [#10](https://github.com/bcaudan/jasmine-spec-report
 
 ## Feature
 
-* **stacktrace**: `displayStacktrace` option has now 4 modes available:
-    * all: display stacktraces for failed specs and in failures summary.
-    * specs: display stacktraces for failed specs only.
-    * summary: display stacktraces in failures summary only.
-    * none: do not display stacktraces.
+- **stacktrace**: `displayStacktrace` option has now 4 modes available:
 
-* **processor**: add `displayJasmineStarted` hook
+  - all: display stacktraces for failed specs and in failures summary.
+  - specs: display stacktraces for failed specs only.
+  - summary: display stacktraces in failures summary only.
+  - none: do not display stacktraces.
+
+- **processor**: add `displayJasmineStarted` hook
 
 ## Breaking change
 
@@ -269,8 +275,8 @@ Add support for jasmine 2.x [#10](https://github.com/bcaudan/jasmine-spec-report
 
 ## Other
 
-* Bump colors versions
-* Rework documentation
+- Bump colors versions
+- Rework documentation
 
 # 1.1.2
 
