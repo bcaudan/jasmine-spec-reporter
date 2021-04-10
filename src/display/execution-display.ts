@@ -10,7 +10,7 @@ export class ExecutionDisplay {
         let isDisplayed = false;
         processors.forEach((processor: DisplayProcessor) => {
             const log = "foo";
-            const result = processor.displaySpecStarted({id: "bar", description: "bar", fullName: "bar"}, log);
+            const result = processor.displaySpecStarted({id: "bar", description: "bar", fullName: "bar", duration: null, properties: null}, log);
             isDisplayed = isDisplayed || result !== log;
         });
         return isDisplayed;
@@ -120,6 +120,8 @@ export class ExecutionDisplay {
                 description: name,
                 fullName: name,
                 id: name,
+                properties: null,
+                duration: null
             };
             this.suiteHierarchy.push(topLevelSuite);
             this.suiteHierarchyDisplayed.push(topLevelSuite);
